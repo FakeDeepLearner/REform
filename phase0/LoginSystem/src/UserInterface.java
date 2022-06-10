@@ -29,12 +29,12 @@ public class UserInterface {
 
     }
 
-    public void triggerUserSignUp(){
+    private void triggerUserSignUp(){
         System.out.println("Enter your username: ");
         Scanner sc = new Scanner(System.in);
         String username = sc.next();
         try{
-           String password = manager.get_interface_users().get(username);
+           User user = manager.get_interface_users().get(username);
         }
         catch(UserNotFoundException exception){
             System.out.println(exception.getMessage());
@@ -42,7 +42,7 @@ public class UserInterface {
         }
     }
 
-    public void triggerUserLogIn(){
+    private void triggerUserLogIn(){
         System.out.println("Log in triggered");
 
     }
