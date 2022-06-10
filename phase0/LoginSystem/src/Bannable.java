@@ -1,24 +1,21 @@
 public interface Bannable {
 
     /**
-     * Returns whether the specified user is currently banned.
-     * @param u user to check if banned.
+     * Returns whether the user is currently banned.
      * @return true if the user is banned.
      */
-    boolean checkUserBanStatus(User u);
+    boolean checkUserBanStatus();
 
     /**
-     * Bans specified user temporarily.
-     * @param u user to temporarily ban.
+     * Bans user temporarily.
      * @return true if the user is successfully banned.
      */
-    boolean temporarilyBanUser(User u);
+    boolean temporarilyBanUser();
 
     /**
-     * Unbans specified user.
-     * @param u user to unban.
+     * Unbans user.
      * @return true if the user is successfully unbanned.
      */
-    boolean unbanUser(User u);
+    boolean unbanUser();
 
 }
