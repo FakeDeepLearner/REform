@@ -5,7 +5,12 @@ public class InterfaceManager {
         this.interfaceUsers = interfaceUsers;
     }
 
-    public UserNameAndPasswordContainer<String, User> get_interface_users() {
+//    public UserNameAndPasswordContainer<String, User> get_interface_users() {
+//        return interfaceUsers;
+//    }
+
+
+    public UserNameAndPasswordContainer<String, User> getInterfaceUsers() {
         return interfaceUsers;
     }
 
