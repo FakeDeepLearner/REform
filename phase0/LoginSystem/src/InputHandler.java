@@ -41,4 +41,9 @@ public class InputHandler {
     public String strInput() {
         return sc.next();
     }
+
+    public Scanner getSc() {
+        return sc;
+    }
+
 }
