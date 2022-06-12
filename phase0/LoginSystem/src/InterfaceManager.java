@@ -8,16 +8,12 @@ public class InterfaceManager {
         this.interfaceUsers = interfaceUsers;
     }
 
-//    public UserNameAndPasswordContainer<String, User> get_interface_users() {
-//        return interfaceUsers;
-//    }
-
 
     public UserNameAndPasswordContainer<String, User> getInterfaceUsers() {
         return interfaceUsers;
     }
 
-    private void menuSelector(InputHandler inputHandler) {
+    public void menuSelector(InputHandler inputHandler) {
         ArrayList<Integer> allowedInputs = new ArrayList<Integer>();
         Collections.addAll(allowedInputs, 1, 2, 3, 4);
 
@@ -37,13 +33,29 @@ public class InterfaceManager {
         }
     }
 
-    public static void main(String[] args) {
-        UserNameAndPasswordContainer<String, User> users = new UserNameAndPasswordContainer<String, User>();
-        InterfaceManager manager = new InterfaceManager(users);
-        UserInterface userInterface = new UserInterface();
-        InputHandler inputHandler = new InputHandler();
 
-        userInterface.printWelcomeMessage();
-        manager.menuSelector(inputHandler);
+    /**
+     * Temporary method for testing
+     */
+    public void menuSelector(InputHandler2 handler) {
+        ArrayList<Integer> allowedInputs = new ArrayList<Integer>();
+        Collections.addAll(allowedInputs, 1, 2, 3, 4);
+
+        int menuSelect = handler.getIntInput();
+
+        if (menuSelect == 1) {
+            String username = handler.getStringInput();
+
+        } else if (menuSelect == 2) {
+            String username = handler.getStringInput();
+
+            try {
+                interfaceUsers.get(username);
+            } catch (UserNotFoundException e) {
+                // TODO: Create user
+            }
+        }
     }
+
+
 }
