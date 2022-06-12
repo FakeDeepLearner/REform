@@ -13,7 +13,7 @@ public class NonAdminUser extends User implements Bannable {
         super(username, password);
     }
 
-    public NonAdminUser(String username, String password, ArrayList<Calendar> loginHistory) {
+    public NonAdminUser(String username, String password, ArrayList<String> loginHistory) {
         super(username, password, loginHistory);
     }
 

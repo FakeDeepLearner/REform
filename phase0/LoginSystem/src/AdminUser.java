@@ -7,7 +7,7 @@ public class AdminUser extends User {
         this.isAdmin = true;
     }
 
-    public AdminUser(String username, String password, ArrayList<Calendar> loginHistory) {
+    public AdminUser(String username, String password, ArrayList<String> loginHistory) {
         super(username, password, loginHistory);
         this.isAdmin = true;
     }
