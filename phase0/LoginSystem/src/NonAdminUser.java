@@ -2,10 +2,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class NonAdminUser extends User implements Bannable {
-    private ArrayList<Calendar> loginTimes;
-    private boolean isBanned;
-    private String username;
-    private String password;
+    private boolean isBanned = false;
 
     /**
      * Creates an instance of a non-admin user.
@@ -13,45 +10,11 @@ public class NonAdminUser extends User implements Bannable {
      * @param password this user's password.
      */
     public NonAdminUser(String username, String password) {
-        this.username = username;
-        this.password = password;
-        isBanned = false;
-
-        loginTimes = new ArrayList<>();
-        loginTimes.add(Calendar.getInstance());
+        super(username, password);
     }
 
-    /**
-     * Logs this user in.
-     * @return true if the user has been successfully logged in.
-     */
-    public boolean logIn() {
-        loginTimes.add(Calendar.getInstance());
-        return true;
-    }
-
-    /**
-     * Return this user's login history.
-     * @return an arraylist of Calendar instances.
-     */
-    public ArrayList<Calendar> getLoginHistory() {
-        return loginTimes;
-    }
-
-    /**
-     * Returns this user's username.
-     * @return username.
-     */
-    public String getUsername() {
-        return username;
-    }
-
-    /**
-     * Returns this user's password.
-     * @return password.
-     */
-    public String getPassword() {
-        return password;
+    public NonAdminUser(String username, String password, ArrayList<Calendar> loginHistory) {
+        super(username, password, loginHistory);
     }
 
     /**

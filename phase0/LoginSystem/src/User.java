@@ -2,18 +2,33 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public abstract class User {
-    abstract boolean logIn();
-    abstract ArrayList<Calendar> getLoginHistory();
+    private String username;
+    private String password;
+    private ArrayList<Calendar> loginHistory;
 
-    abstract String getUsername();
+    protected Boolean isAdmin = false;
 
-    abstract String getPassword();
+    protected User(String username, String password) {
+        this.username = username;
+        this.password = password;
+        loginHistory = new ArrayList<>();
+    }
 
-    abstract boolean checkUserBanStatus();
+    protected User(String username, String password, ArrayList<Calendar> loginHistory) {
+        this.username = username;
+        this.password = password;
+        this.loginHistory = loginHistory;
+    }
 
-    abstract boolean temporarilyBanUser();
+    public String getUsername() {
+        return username;
+    }
 
-    abstract boolean unbanUser();
+    public String getPassword() {
+        return password;
+    }
 
-
+    public ArrayList<Calendar> getLoginHistory() {
+        return loginHistory;
+    }
 }
