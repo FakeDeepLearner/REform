@@ -1,10 +1,7 @@
 import java.util.Scanner;
 
 public class UserInterface {
-    private InterfaceManager manager;
-
-    public UserInterface(InterfaceManager manager) {
-        this.manager = manager;
+    public UserInterface() {
     }
 
     public void printWelcomeMessage() {

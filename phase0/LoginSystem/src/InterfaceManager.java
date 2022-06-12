@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Collections;
+
 public class InterfaceManager {
     private UserNameAndPasswordContainer<String, User> interfaceUsers;
 
@@ -15,34 +18,30 @@ public class InterfaceManager {
     }
 
     private void menuSelector(InputHandler inputHandler) {
-        String choice = inputHandler.loginInput();
-        int input;
-        try {
-            input = Integer.parseInt(choice);
-        } catch (NumberFormatException e) {
-            throw new UndefinedInputException();
-        }
+        ArrayList<Integer> allowedInputs = new ArrayList<Integer>();
+        Collections.addAll(allowedInputs, 1, 2, 3, 4);
 
-        if (input == 1) {
-            String username = inputHandler.signUpInput();
+        int menuSelect = inputHandler.intInput(allowedInputs);
+
+        if (menuSelect == 1) {
+            String username = inputHandler.strInput();
+
+        } else if (menuSelect == 2) {
+            String username = inputHandler.strInput();
 
             try {
                 interfaceUsers.get(username);
             } catch (UserNotFoundException e) {
                 // TODO: Create user
             }
-
-        } else if (input == 2) {
-            String username = inputHandler.signUpInput();
-            // TODO: Create user
         }
     }
 
     public static void main(String[] args) {
         UserNameAndPasswordContainer<String, User> users = new UserNameAndPasswordContainer<String, User>();
         InterfaceManager manager = new InterfaceManager(users);
-        UserInterface userInterface = new UserInterface(manager);
-        InputHandler inputHandler = new InputHandler(manager);
+        UserInterface userInterface = new UserInterface();
+        InputHandler inputHandler = new InputHandler();
 
         userInterface.printWelcomeMessage();
         manager.menuSelector(inputHandler);
