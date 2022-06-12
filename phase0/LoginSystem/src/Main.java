@@ -8,5 +8,4 @@ public class Main extends HashMap<String ,String> {
         UserInterface userInterface = new UserInterface(manager);
         userInterface.printWelcomeMessage();
     }
-
 }
