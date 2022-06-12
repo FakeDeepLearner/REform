@@ -18,4 +18,8 @@ public class UserInterface {
     public void printLoginFail() {
 
     }
+
+    public void printUserSignUp() {
+        System.out.println("Enter your username: ");
+    }
 }
