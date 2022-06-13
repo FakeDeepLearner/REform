@@ -7,6 +7,8 @@ public abstract class User {
 
     protected Boolean isAdmin = false;
 
+    private boolean isLoggedIn = false;
+
     protected User(String username, String password) {
         this.username = username;
         this.password = password;
@@ -37,5 +39,9 @@ public abstract class User {
 
     public void addToLoginHistory(String newLogin) {
         loginHistory.add(newLogin);
+    }
+
+    public void setIsLoggedIn(boolean bool) {
+        isLoggedIn = bool;
     }
 }
