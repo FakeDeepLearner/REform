@@ -15,15 +15,11 @@ public class AuthenticateUser {
      * @return true if the user is successfully logged in.
      */
     public boolean loginUser(String username, String password) {
-        try {
-            User u = interface_users.get(username);
-            if (u.getPassword().equals(password)) {
-                u.setIsLoggedIn(true);
-                return true;
-            } else {
-                return false;
-            }
-        } catch (UserNotFoundException e) {
+        User u = interface_users.get(username);
+        if (u.getPassword().equals(password)) {
+            u.setIsLoggedIn(true);
+            return true;
+        } else {
             return false;
         }
     }

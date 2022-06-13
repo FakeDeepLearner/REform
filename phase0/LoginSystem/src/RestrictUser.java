@@ -14,15 +14,11 @@ public class RestrictUser {
      * @return true if the User is successfully banned.
      */
     public boolean banNonAdminUser(String username) {
-        try {
-            User u = interface_users.get(username);
-            if (u instanceof Bannable) {
-                NonAdminUser user = (NonAdminUser) u;
-                return user.temporarilyBanUser();
-            } else {
-                return false;
-            }
-        } catch (UserNotFoundException e) {
+        User u = interface_users.get(username);
+        if (u instanceof Bannable) {
+            NonAdminUser user = (NonAdminUser) u;
+            return user.temporarilyBanUser();
+        } else {
             return false;
         }
     }
@@ -34,15 +30,11 @@ public class RestrictUser {
      * @return true if the User is successfully unbanned.
      */
     public boolean unbanNonAdminUser(String username) {
-        try {
-            User u = interface_users.get(username);
-            if (u instanceof Bannable) {
-                NonAdminUser user = (NonAdminUser) u;
-                return user.unbanUser();
-            } else {
-                return false;
-            }
-        } catch (UserNotFoundException e) {
+        User u = interface_users.get(username);
+        if (u instanceof Bannable) {
+            NonAdminUser user = (NonAdminUser) u;
+            return user.unbanUser();
+        } else {
             return false;
         }
     }
@@ -54,15 +46,11 @@ public class RestrictUser {
      * @return true if the User is successfully deleted.
      */
     public boolean deleteNonAdminUser(String username) {
-        try {
-            User u = interface_users.get(username);
-            if (u instanceof Bannable) {
-                interface_users.remove(username);
-                return true;
-            } else {
-                return false;
-            }
-        } catch (UserNotFoundException e) {
+        User u = interface_users.get(username);
+        if (u instanceof Bannable) {
+            interface_users.remove(username);
+            return true;
+        } else {
             return false;
         }
     }
