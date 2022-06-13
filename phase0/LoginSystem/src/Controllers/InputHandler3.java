@@ -1,5 +1,5 @@
+package Controllers;
 import Exceptions.UndefinedInputException;
-
 import java.util.Scanner;
 
 public class InputHandler3 {
@@ -30,11 +30,11 @@ public class InputHandler3 {
                 if (input == 1) {
                     getUsernameAndPasswordInputForSignUp();
                 }
-                if (input == 2) {
+                else if (input == 2) {
                     getUsernameAndPasswordInputForLogIn();
                 }
                 else{
-                    throw new UndefinedInputException();
+                    throw new  UndefinedInputException();
                 }
             }
             catch (UndefinedInputException exception){
@@ -43,7 +43,7 @@ public class InputHandler3 {
 
         }
         catch (NumberFormatException exception){
-            userInterface.HandleNumberFormatException(exception);
+            userInterface.HandleNumberFormatException();
         }
     }
 
@@ -55,7 +55,7 @@ public class InputHandler3 {
         Scanner passwordScanner = new Scanner(System.in);
         String password = passwordScanner.next();
 
-        //Call the controller's sign up method next to complete sign up action
+        //Call the controller's sign up method next to continue sign up action
 
     }
 
@@ -67,7 +67,7 @@ public class InputHandler3 {
         Scanner passwordScanner = new Scanner(System.in);
         String password = passwordScanner.next();
 
-        //Call the controller's log in method next to complete log in action
+        //Call the controller's log in method next to continue log in action
 
     }
 

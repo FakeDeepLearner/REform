@@ -1,3 +1,10 @@
+package Controllers;
+
+import Controllers.InputHandler;
+import Controllers.InputHandler2;
+import Controllers.InputHandler3;
+import Entities.User;
+import Entities.UserNameAndPasswordContainer;
 import Exceptions.UserNotFoundException;
 
 import java.util.ArrayList;
@@ -5,9 +12,11 @@ import java.util.Collections;
 
 public class InterfaceManager {
     private UserNameAndPasswordContainer<String, User> interfaceUsers;
+    private InputHandler3 inputHandler3;
 
-    public InterfaceManager(UserNameAndPasswordContainer<String, User> interfaceUsers) {
+    public InterfaceManager(UserNameAndPasswordContainer<String, User> interfaceUsers, InputHandler3 inputHandler3) {
         this.interfaceUsers = interfaceUsers;
+        this.inputHandler3 = inputHandler3;
     }
 
 

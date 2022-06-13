@@ -1,5 +1,7 @@
-import Exceptions.UserNotFoundException;
+package useCases;
 
+import Entities.User;
+import Entities.UserNameAndPasswordContainer;
 public class AuthenticateUser {
     private UserNameAndPasswordContainer<String, User> interface_users;
 
@@ -25,9 +27,9 @@ public class AuthenticateUser {
     }
 
     /**
-     * Logs specified User u out.
+     * Logs specified Entities.User u out.
      *
-     * @param u the User to log out.
+     * @param u the Entities.User to log out.
      * @return true when the user is successfully logged out.
      */
     public boolean logoutUser(User u) {

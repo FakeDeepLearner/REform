@@ -1,3 +1,6 @@
+package Controllers;
+
+import Controllers.InputHandler3;
 import Exceptions.UndefinedInputException;
 
 public class UserInterface {
@@ -11,8 +14,8 @@ public class UserInterface {
         inputHandler3.takeLoginOrSignUpInput();
 
     }
-    public void HandleNumberFormatException(NumberFormatException exception) throws InterruptedException {
-        System.out.println(exception.getMessage());
+    public void HandleNumberFormatException() throws InterruptedException {
+        System.out.println("Please enter a number, you will be returned to the main menu shortly.");
         Thread.sleep(3000);
         printWelcomeMessage();
     }

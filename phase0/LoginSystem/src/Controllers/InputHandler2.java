@@ -1,8 +1,7 @@
-import java.util.List;
-import java.util.Scanner;
+package Controllers;
 
 /**
- * This is a temporary class to test out alternative implementation of the InputHandler.
+ * This is a temporary class to test out alternative implementation of the Controllers.InputHandler.
  **/
 
 public class InputHandler2 {

@@ -1,5 +1,8 @@
+package Entities;
+
+import Entities.User;
+
 import java.util.ArrayList;
-import java.util.Calendar;
 
 public class AdminUser extends User {
     public AdminUser(String username, String password) {

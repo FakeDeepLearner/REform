@@ -1,3 +1,5 @@
+package Entities;
+
 import Exceptions.UserNotFoundException;
 
 import java.util.HashMap;

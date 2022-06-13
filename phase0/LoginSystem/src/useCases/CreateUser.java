@@ -1,3 +1,10 @@
+package useCases;
+
+import Entities.AdminUser;
+import Entities.NonAdminUser;
+import Entities.User;
+import Entities.UserNameAndPasswordContainer;
+
 public class CreateUser {
     private UserNameAndPasswordContainer<String, User> interface_users;
     public CreateUser(UserNameAndPasswordContainer<String, User> interface_users) {

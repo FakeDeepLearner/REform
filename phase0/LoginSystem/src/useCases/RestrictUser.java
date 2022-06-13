@@ -1,4 +1,9 @@
-import Exceptions.UserNotFoundException;
+package useCases;
+
+import Entities.Bannable;
+import Entities.NonAdminUser;
+import Entities.User;
+import Entities.UserNameAndPasswordContainer;
 
 public class RestrictUser {
     private UserNameAndPasswordContainer<String, User> interface_users;
@@ -8,10 +13,10 @@ public class RestrictUser {
     }
 
     /**
-     * Temporarily bans User if they are a NonAdminUser.
+     * Temporarily bans Entities.User if they are a Entities.NonAdminUser.
      *
-     * @param username of the User to be banned.
-     * @return true if the User is successfully banned.
+     * @param username of the Entities.User to be banned.
+     * @return true if the Entities.User is successfully banned.
      */
     public boolean banNonAdminUser(String username) {
         User u = interface_users.get(username);
@@ -24,10 +29,10 @@ public class RestrictUser {
     }
 
     /**
-     * Unbans User if they are a NonAdminUser.
+     * Unbans Entities.User if they are a Entities.NonAdminUser.
      *
-     * @param username of the User to be unbanned.
-     * @return true if the User is successfully unbanned.
+     * @param username of the Entities.User to be unbanned.
+     * @return true if the Entities.User is successfully unbanned.
      */
     public boolean unbanNonAdminUser(String username) {
         User u = interface_users.get(username);
@@ -40,10 +45,10 @@ public class RestrictUser {
     }
 
     /**
-     * Deletes the User if they are a NonAdminUser.
+     * Deletes the Entities.User if they are a Entities.NonAdminUser.
      *
-     * @param username of the User to be deleted.
-     * @return true if the User is successfully deleted.
+     * @param username of the Entities.User to be deleted.
+     * @return true if the Entities.User is successfully deleted.
      */
     public boolean deleteNonAdminUser(String username) {
         User u = interface_users.get(username);

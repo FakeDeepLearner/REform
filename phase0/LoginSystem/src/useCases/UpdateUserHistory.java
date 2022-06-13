@@ -1,3 +1,8 @@
+package useCases;
+
+import Entities.User;
+import Entities.UserNameAndPasswordContainer;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Date;
