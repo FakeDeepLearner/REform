@@ -1,8 +1,9 @@
 package Controllers;
+import Exceptions.ReturnToMainMenuException;
 import Exceptions.UndefinedInputException;
 import java.util.Scanner;
 
-public class InputHandler3 {
+public class InputHandler3{
     private UserInterface userInterface;
     private InterfaceManager interfaceManager;
 
@@ -47,23 +48,48 @@ public class InputHandler3 {
         }
     }
 
-    public void getUsernameAndPasswordInputForSignUp(){
-        userInterface.printUsernameInput();
+    public void getUsernameAndPasswordInputForSignUp() throws InterruptedException {
+        userInterface.printUsernameInputForSignUp();
         Scanner usernameScanner = new Scanner(System.in);
         String username = usernameScanner.next();
-        userInterface.printPasswordInput();
+
+        userInterface.printPasswordInputForSignUp();
         Scanner passwordScanner = new Scanner(System.in);
         String password = passwordScanner.next();
 
+        userInterface.askForAdminStatus();
+        Scanner adminStatusScanner = new Scanner(System.in);
+        String adminStatus = adminStatusScanner.next();
+        try{
+            switch (adminStatus) {
+                case "Y":
+                    // Create admin user
+                    break;
+                case "N":
+                    //Create regular user
+                    break;
+                case "M":
+                    throw new ReturnToMainMenuException();
+                default:
+                    throw new UndefinedInputException();
+            }
+        }
+        catch (UndefinedInputException exception){
+            userInterface.HandleUndefinedInoutForAdminStatus(exception);
+
+        }
+        catch (ReturnToMainMenuException exception){
+            userInterface.HandleReturnToMainMenuException(exception);
+        }
         //Call the controller's sign up method next to continue sign up action
 
     }
 
     public void getUsernameAndPasswordInputForLogIn(){
-        userInterface.printUsernameInput();
+        userInterface.printUsernameInputForLogin();
         Scanner usernameScanner = new Scanner(System.in);
         String username = usernameScanner.next();
-        userInterface.printPasswordInput();
+        userInterface.printPasswordInputForLogin();
         Scanner passwordScanner = new Scanner(System.in);
         String password = passwordScanner.next();
 
