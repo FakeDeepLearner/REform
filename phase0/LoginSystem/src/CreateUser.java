@@ -1,11 +1,14 @@
 public class CreateUser {
-    public CreateUser(UserNameAndPasswordContainer<String, User> interface_users, String username, String password, Boolean isAdmin) {
-        User user;
-        if (isAdmin){
-            user = new AdminUser(username, password);
-        }else{
-            user = new NonAdminUser(username, password);
-        }
+    private UserNameAndPasswordContainer<String, User> interface_users;
+    public CreateUser(UserNameAndPasswordContainer<String, User> interface_users) {
+        this.interface_users=interface_users;
+    }
+    public void createNonAdminUser(String username, String password){
+        User user = new NonAdminUser(username, password);
+        interface_users.put(username,user);
+    }
+    public void createAdminUser(String username, String password){
+        User user = new AdminUser(username, password);
         interface_users.put(username,user);
     }
 }
