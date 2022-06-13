@@ -1,11 +1,11 @@
 import java.util.Scanner;  //  import the Scanner class
 public class Main{
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         // Initiate the classes
         UserNameAndPasswordContainer<String, User> users = new UserNameAndPasswordContainer<String, User>();
         // TODO: Load the database to <users>
         InterfaceManager manager = new InterfaceManager(users);
-        UserInterface userInterface = new UserInterface();
+        UserInterface userInterface = new UserInterface(new InputHandler3());
 
         InputHandler2 inputHandler = new InputHandler2();
 

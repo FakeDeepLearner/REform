@@ -1,3 +1,5 @@
+import Exceptions.UserNotFoundException;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
