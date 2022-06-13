@@ -1,4 +1,9 @@
 import java.util.Scanner;  //  import the Scanner class
+import Controllers.*;
+import Entities.*;
+import Exceptions.*;
+import useCases.*;
+
 public class Main{
     public static void main(String[] args) throws InterruptedException {
         // Initiate the classes
