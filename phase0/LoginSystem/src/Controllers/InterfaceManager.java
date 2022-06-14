@@ -47,7 +47,7 @@ public class InterfaceManager {
 
     /**
      * Temporary method for testing
-     */
+
     public void menuSelector(InputHandler2 handler) {
         ArrayList<Integer> allowedInputs = new ArrayList<Integer>();
         Collections.addAll(allowedInputs, 1, 2, 3, 4);
@@ -66,7 +66,7 @@ public class InterfaceManager {
                 // TODO: Create user
             }
         }
-    }
+     */
 
 
 }
