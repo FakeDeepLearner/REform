@@ -2,7 +2,7 @@ package Entities;
 
 import java.util.ArrayList;
 
-public class NonAdminUser extends User implements Bannable {
+public class NonAdminUser extends User implements Bannable{
     private boolean isBanned = false;
 
     /**

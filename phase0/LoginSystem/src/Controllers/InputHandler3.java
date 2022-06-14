@@ -32,7 +32,10 @@ public class InputHandler3{
                     getUsernameAndPasswordInputForSignUp();
                 }
                 else if (input == 2) {
-                    getUsernameAndPasswordInputForLogIn();
+                    getUsernameAndPasswordInputForNonAdminLogIn();
+                }
+                else if (input == 3){
+                    getUsernameAndPasswordInputForAdminLogIn();
                 }
                 else{
                     throw new  UndefinedInputException();
@@ -75,17 +78,32 @@ public class InputHandler3{
             }
         }
         catch (UndefinedInputException exception){
-            userInterface.HandleUndefinedInoutForAdminStatus(exception);
+            userInterface.HandleUndefinedInputForAdminStatus(exception);
 
         }
         catch (ReturnToMainMenuException exception){
             userInterface.HandleReturnToMainMenuException(exception);
         }
         //Call the controller's sign up method next to continue sign up action
+        userInterface.printSignUpSuccess();
+        userInterface.HandleReturnToMainMenuException(new ReturnToMainMenuException());
 
     }
 
-    public void getUsernameAndPasswordInputForLogIn(){
+    public void createAdminUserViaAnotherAdmin() throws InterruptedException {
+        userInterface.printUsernameInputForSignUp();
+        Scanner usernameScanner = new Scanner(System.in);
+        String username = usernameScanner.next();
+
+        userInterface.printPasswordInputForSignUp();
+        Scanner passwordScanner = new Scanner(System.in);
+        String password = passwordScanner.next();
+        // Create an admin user with the controller.
+        userInterface.printSignUpSuccess();
+        userInterface.HandleReturnToMainMenuException(new ReturnToMainMenuException());
+    }
+
+    public void getUsernameAndPasswordInputForNonAdminLogIn() throws InterruptedException {
         userInterface.printUsernameInputForLogin();
         Scanner usernameScanner = new Scanner(System.in);
         String username = usernameScanner.next();
@@ -94,8 +112,72 @@ public class InputHandler3{
         String password = passwordScanner.next();
 
         //Call the controller's log in method next to continue log in action
-
+        userInterface.printLoginSuccess();
+        userInterface.printNonAdminLogInMenu();
     }
+
+    public void getUsernameAndPasswordInputForAdminLogIn() throws InterruptedException{
+        userInterface.printUsernameInputForLogin();
+        Scanner usernameScanner = new Scanner(System.in);
+        String username = usernameScanner.next();
+        userInterface.printPasswordInputForLogin();
+        Scanner passwordScanner = new Scanner(System.in);
+        String password = passwordScanner.next();
+
+        //Call the controller's log in method next to continue log in action
+        userInterface.printLoginSuccess();
+        userInterface.printAdminLoginMenu();
+    }
+
+    public void getInputInNonAdminLoginMenu() throws InterruptedException {
+
+        Scanner sc = new Scanner(System.in);
+        String strInput = sc.next();
+        try{
+            int input = Integer.parseInt(strInput);
+            try{
+                if (input == 1){
+                    // Controller will print log in history
+                }
+                else{
+                    throw new UndefinedInputException();
+                }
+            }
+            catch (UndefinedInputException exception){
+                userInterface.HandleUndefinedInputInNonAdminLogIn(exception);
+            }
+        }
+        catch (NumberFormatException exception){
+            userInterface.HandleNumberFormatExceptionForNonAdminLogin();
+        }
+    }
+
+    public void getInputInAdminLoginMenu() throws InterruptedException {
+
+        Scanner sc = new Scanner(System.in);
+        String strInput = sc.next();
+        try{
+            int input = Integer.parseInt(strInput);
+            try{
+                if(input == 1){
+                    // Controller will take care of the rest.
+                }
+                else if (input == 2){
+                    createAdminUserViaAnotherAdmin();
+                }
+                else{
+                    throw new UndefinedInputException();
+                }
+            }
+            catch (UndefinedInputException exception){
+                userInterface.HandleUndefinedInputInAdminLogIn(exception);
+            }
+        }
+        catch (NumberFormatException exception){
+            userInterface.HandleNumberFormatExceptionForAdminLogin();
+        }
+    }
+
 
 
 }

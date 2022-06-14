@@ -1,6 +1,5 @@
 package Controllers;
 
-import Controllers.InputHandler3;
 import Exceptions.ReturnToMainMenuException;
 import Exceptions.UndefinedInputException;
 
@@ -11,7 +10,8 @@ public class UserInterface {
     }
 
     public void printWelcomeMessage() throws InterruptedException {
-        System.out.println("Hello, please press 1 to sign up, or 2 to log in to your account: ");
+        System.out.println("Hello, please press 1 to sign up, or 2 to log in to your account." +
+                " If you are an admin user, please press 3 to log in to your account: ");
         inputHandler3.takeLoginOrSignUpInput();
 
     }
@@ -21,13 +21,37 @@ public class UserInterface {
         printWelcomeMessage();
     }
 
+    public void HandleNumberFormatExceptionForNonAdminLogin() throws InterruptedException{
+        System.out.println("Please enter a number, you can try again in a moment");
+        Thread.sleep(3000);
+        inputHandler3.getInputInNonAdminLoginMenu();
+    }
+
+    public void HandleNumberFormatExceptionForAdminLogin() throws InterruptedException{
+        System.out.println("Please enter a number, you can try again in a moment");
+        Thread.sleep(3000);
+        inputHandler3.getInputInAdminLoginMenu();
+    }
+
+    public void HandleUndefinedInputInNonAdminLogIn(UndefinedInputException exception) throws InterruptedException{
+        System.out.println(exception.getMessage());
+        Thread.sleep(3000);
+        inputHandler3.getInputInNonAdminLoginMenu();
+    }
+
+    public void HandleUndefinedInputInAdminLogIn(UndefinedInputException exception) throws InterruptedException{
+        System.out.println(exception.getMessage());
+        Thread.sleep(3000);
+        inputHandler3.getInputInAdminLoginMenu();
+    }
+
     public void HandleInitialUndefinedInput(UndefinedInputException exception) throws InterruptedException {
         System.out.println(exception.getMessage());
         Thread.sleep(3000);
         printWelcomeMessage();
     }
 
-    public void HandleUndefinedInoutForAdminStatus(UndefinedInputException exception) throws InterruptedException{
+    public void HandleUndefinedInputForAdminStatus(UndefinedInputException exception) throws InterruptedException{
         System.out.println(exception.getMessage());
         Thread.sleep(3000);
         inputHandler3.getUsernameAndPasswordInputForSignUp();
@@ -41,11 +65,11 @@ public class UserInterface {
     }
 
     public void printUsernameInputForSignUp(){
-        System.out.println("Create your username: ");
+        System.out.println("Create a username: ");
     }
 
     public void printPasswordInputForSignUp(){
-        System.out.println("Create your password: ");
+        System.out.println("Create a password: ");
     }
 
     public void printUsernameInputForLogin(){
@@ -61,11 +85,27 @@ public class UserInterface {
                 "Returning to the main menu will not create the user.");
     }
 
-    public void printLoginSuccess() {
+    public void printSignUpSuccess(){
+        System.out.println("User successfully created.");
+    }
 
+    public void printLoginSuccess(){
+        System.out.println("Successfully logged in.");
     }
 
     public void printLoginFail() {
+
+    }
+
+    public void printNonAdminLogInMenu() throws InterruptedException {
+        System.out.println("Press 1 to see your login history");
+        inputHandler3.getInputInNonAdminLoginMenu();
+    }
+
+    public void printAdminLoginMenu() throws InterruptedException {
+        System.out.println("Press 1 to see your login history");
+        System.out.println("Press 2 to create a user (this new user will be an admin)");
+        inputHandler3.getInputInAdminLoginMenu();
 
     }
 
