@@ -1,5 +1,6 @@
 package Controllers;
 
+import Exceptions.LogOutException;
 import Exceptions.ReturnToMainMenuException;
 import Exceptions.UndefinedInputException;
 
@@ -65,6 +66,15 @@ public class UserInterface {
         printWelcomeMessage();
     }
 
+    public void HandleLogOutException(LogOutException exception) throws InterruptedException {
+        System.out.println(exception.getMessage());
+        Thread.sleep(3000);
+        printLogOutSuccess();
+        Thread.sleep(3000);
+        printWelcomeMessage();
+
+    }
+
     public void printUsernameInputForSignUp() {
         System.out.println("Create a username: ");
     }
@@ -98,14 +108,20 @@ public class UserInterface {
 
     }
 
+    public void printLogOutSuccess(){
+        System.out.println("Successfully logged out, returning to main menu. Please wait.");
+    }
+
     public void printNonAdminLogInMenu() throws InterruptedException {
         System.out.println("Press 1 to see your login history");
+        System.out.println("Press 2 to log out.");
         inputHandler3.getInputInNonAdminLoginMenu();
     }
 
     public void printAdminLoginMenu() throws InterruptedException {
         System.out.println("Press 1 to see your login history");
         System.out.println("Press 2 to create a user (this new user will be an admin)");
+        System.out.println("Press 3 to log out.");
         inputHandler3.getInputInAdminLoginMenu();
 
     }

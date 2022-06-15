@@ -1,5 +1,6 @@
 package Controllers;
 
+import Exceptions.LogOutException;
 import Exceptions.ReturnToMainMenuException;
 import Exceptions.UndefinedInputException;
 
@@ -133,11 +134,19 @@ public class InputHandler3 {
             try {
                 if (input == 1) {
                     // Controller will print log in history
-                } else {
+                }
+                else if (input == 2){
+                    throw new LogOutException();
+                }
+                else {
                     throw new UndefinedInputException();
                 }
-            } catch (UndefinedInputException exception) {
+            }
+            catch (UndefinedInputException exception) {
                 userInterface.HandleUndefinedInputInNonAdminLogIn(exception);
+            }
+            catch (LogOutException exception){
+                userInterface.HandleLogOutException(exception);
             }
         } catch (NumberFormatException exception) {
             userInterface.HandleNumberFormatExceptionForNonAdminLogin();
@@ -155,11 +164,18 @@ public class InputHandler3 {
                     // Controller will take care of the rest.
                 } else if (input == 2) {
                     createAdminUserViaAnotherAdmin();
-                } else {
+                } else if (input == 3){
+                    throw new LogOutException();
+                }
+                else {
                     throw new UndefinedInputException();
                 }
-            } catch (UndefinedInputException exception) {
+            }
+            catch (UndefinedInputException exception) {
                 userInterface.HandleUndefinedInputInAdminLogIn(exception);
+            }
+            catch (LogOutException exception){
+                userInterface.HandleLogOutException(exception);
             }
         } catch (NumberFormatException exception) {
             userInterface.HandleNumberFormatExceptionForAdminLogin();

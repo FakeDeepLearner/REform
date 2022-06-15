@@ -24,7 +24,6 @@ public class InterfaceManager {
         auth = new AuthenticateUser(interfaceUsers);
         createUser = new CreateUser(interfaceUsers);
     }
-
     private ArrayList<String> getUsernameAndPassword() {
         ArrayList<String> username_password = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
@@ -88,4 +87,6 @@ public class InterfaceManager {
             System.out.println("Interrupted");
         }
     }
+
+
 }
