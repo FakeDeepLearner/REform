@@ -1,14 +1,16 @@
 package Controllers;
+
 import Exceptions.ReturnToMainMenuException;
 import Exceptions.UndefinedInputException;
+
 import java.util.Scanner;
 
-public class InputHandler3{
+public class InputHandler3 {
     private UserInterface userInterface;
     private InterfaceManager interfaceManager;
 
     // The reason we are instantiating the class like this is to get around circular dependencies
-    public InputHandler3(){
+    public InputHandler3() {
         this.userInterface = null;
         this.interfaceManager = null;
     }
@@ -25,28 +27,23 @@ public class InputHandler3{
     public void takeLoginOrSignUpInput() throws InterruptedException {
         Scanner sc = new Scanner(System.in);
         String str_input = sc.next();
-        try{
+        try {
             int input = Integer.parseInt(str_input);
             try {
                 if (input == 1) {
                     getUsernameAndPasswordInputForSignUp();
-                }
-                else if (input == 2) {
+                } else if (input == 2) {
                     getUsernameAndPasswordInputForNonAdminLogIn();
-                }
-                else if (input == 3){
+                } else if (input == 3) {
                     getUsernameAndPasswordInputForAdminLogIn();
+                } else {
+                    throw new UndefinedInputException();
                 }
-                else{
-                    throw new  UndefinedInputException();
-                }
-            }
-            catch (UndefinedInputException exception){
+            } catch (UndefinedInputException exception) {
                 userInterface.HandleInitialUndefinedInput(exception);
             }
 
-        }
-        catch (NumberFormatException exception){
+        } catch (NumberFormatException exception) {
             userInterface.HandleNumberFormatException();
         }
     }
@@ -63,7 +60,7 @@ public class InputHandler3{
         userInterface.askForAdminStatus();
         Scanner adminStatusScanner = new Scanner(System.in);
         String adminStatus = adminStatusScanner.next();
-        try{
+        try {
             switch (adminStatus) {
                 case "Y":
                     // Create admin user
@@ -76,12 +73,10 @@ public class InputHandler3{
                 default:
                     throw new UndefinedInputException();
             }
-        }
-        catch (UndefinedInputException exception){
+        } catch (UndefinedInputException exception) {
             userInterface.HandleUndefinedInputForAdminStatus(exception);
 
-        }
-        catch (ReturnToMainMenuException exception){
+        } catch (ReturnToMainMenuException exception) {
             userInterface.HandleReturnToMainMenuException(exception);
         }
         //Call the controller's sign up method next to continue sign up action
@@ -116,7 +111,7 @@ public class InputHandler3{
         userInterface.printNonAdminLogInMenu();
     }
 
-    public void getUsernameAndPasswordInputForAdminLogIn() throws InterruptedException{
+    public void getUsernameAndPasswordInputForAdminLogIn() throws InterruptedException {
         userInterface.printUsernameInputForLogin();
         Scanner usernameScanner = new Scanner(System.in);
         String username = usernameScanner.next();
@@ -133,21 +128,18 @@ public class InputHandler3{
 
         Scanner sc = new Scanner(System.in);
         String strInput = sc.next();
-        try{
+        try {
             int input = Integer.parseInt(strInput);
-            try{
-                if (input == 1){
+            try {
+                if (input == 1) {
                     // Controller will print log in history
-                }
-                else{
+                } else {
                     throw new UndefinedInputException();
                 }
-            }
-            catch (UndefinedInputException exception){
+            } catch (UndefinedInputException exception) {
                 userInterface.HandleUndefinedInputInNonAdminLogIn(exception);
             }
-        }
-        catch (NumberFormatException exception){
+        } catch (NumberFormatException exception) {
             userInterface.HandleNumberFormatExceptionForNonAdminLogin();
         }
     }
@@ -156,28 +148,23 @@ public class InputHandler3{
 
         Scanner sc = new Scanner(System.in);
         String strInput = sc.next();
-        try{
+        try {
             int input = Integer.parseInt(strInput);
-            try{
-                if(input == 1){
+            try {
+                if (input == 1) {
                     // Controller will take care of the rest.
-                }
-                else if (input == 2){
+                } else if (input == 2) {
                     createAdminUserViaAnotherAdmin();
-                }
-                else{
+                } else {
                     throw new UndefinedInputException();
                 }
-            }
-            catch (UndefinedInputException exception){
+            } catch (UndefinedInputException exception) {
                 userInterface.HandleUndefinedInputInAdminLogIn(exception);
             }
-        }
-        catch (NumberFormatException exception){
+        } catch (NumberFormatException exception) {
             userInterface.HandleNumberFormatExceptionForAdminLogin();
         }
     }
-
 
 
 }
