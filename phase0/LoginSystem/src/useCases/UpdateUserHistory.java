@@ -47,10 +47,11 @@ public class UpdateUserHistory {
     /**
      * Write a new login for this user to csv file.
      * @param u this user.
+     * @param overwrite signals whether to overwrite csv file.
      */
-    public void writeUserHistory(User u) {
+    public void writeUserHistory(User u, boolean overwrite) {
         try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter("UserHistories.csv", true));
+            BufferedWriter bw = new BufferedWriter(new FileWriter("UserHistories.csv", overwrite));
             Scanner sc = new Scanner("UserHistories.csv");
             Date newLogin = new Date();
 
