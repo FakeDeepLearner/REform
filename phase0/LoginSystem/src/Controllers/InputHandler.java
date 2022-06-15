@@ -9,7 +9,7 @@ public class InputHandler {
     private Scanner sc;
 
     public InputHandler() {
-        Scanner sc = new Scanner(System.in);
+        sc = new Scanner(System.in);
     }
 
     public int intInput() {

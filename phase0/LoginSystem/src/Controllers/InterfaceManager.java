@@ -1,72 +1,91 @@
 package Controllers;
 
-import Controllers.InputHandler;
-import Controllers.InputHandler2;
-import Controllers.InputHandler3;
 import Entities.User;
 import Entities.UserNameAndPasswordContainer;
-import Exceptions.UserNotFoundException;
+import useCases.AuthenticateUser;
+import useCases.CreateUser;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Scanner;
 
 public class InterfaceManager {
     private UserNameAndPasswordContainer<String, User> interfaceUsers;
-    private InputHandler3 inputHandler3;
+    private InputHandler inputHandler;
+    private UserInterface ui;
+    private AuthenticateUser auth;
+    private CreateUser createUser;
 
-    public InterfaceManager(UserNameAndPasswordContainer<String, User> interfaceUsers, InputHandler3 inputHandler3) {
+    public InterfaceManager(UserNameAndPasswordContainer<String, User> interfaceUsers) {
         this.interfaceUsers = interfaceUsers;
-        this.inputHandler3 = inputHandler3;
+
+        inputHandler = new InputHandler();
+        ui = new UserInterface(new InputHandler3());
+        auth = new AuthenticateUser(interfaceUsers);
+        createUser = new CreateUser(interfaceUsers);
     }
 
+    private ArrayList<String> getUsernameAndPassword() {
+        ArrayList<String> username_password = new ArrayList<>();
+        Scanner sc = new Scanner(System.in);
 
-    public UserNameAndPasswordContainer<String, User> getInterfaceUsers() {
-        return interfaceUsers;
+        ui.printUsernameInputForSignUp();
+        username_password.add(sc.next());
+
+        ui.printPasswordInputForSignUp();
+        username_password.add(sc.next());
+
+        return username_password;
     }
 
-    public void menuSelector(InputHandler inputHandler) {
+    public void menuSelector() {
         ArrayList<Integer> allowedInputs = new ArrayList<Integer>();
-        Collections.addAll(allowedInputs, 1, 2, 3, 4);
+        Collections.addAll(allowedInputs, 1, 2);
 
         int menuSelect = inputHandler.intInput(allowedInputs);
 
         if (menuSelect == 1) {
-            String username = inputHandler.strInput();
+            // User selected to create a new user
+            ArrayList<String> username_password = getUsernameAndPassword();
 
+            // Assume the new user is not an admin b/c only admins can create new admin users
+            createUser.createNonAdminUser(username_password.get(0), username_password.get(1));
+
+            ui.printSignUpSuccess();
+
+            NonAdminScreen(interfaceUsers.get(username_password.get(0)));
         } else if (menuSelect == 2) {
-            String username = inputHandler.strInput();
+            // User selected to create a new user
+            ArrayList<String> username_password = getUsernameAndPassword();
 
-            try {
-                interfaceUsers.get(username);
-            } catch (UserNotFoundException e) {
-                // TODO: Create user
+            if (auth.loginUser(username_password.get(0), username_password.get(1))) {
+                ui.printLoginSuccess();
+
+                User u = interfaceUsers.get(username_password.get(0));
+                if (!u.getAdmin()) {
+                    NonAdminScreen(u);
+                } else {
+                    AdminScreen(u);
+                }
+            } else {
+                ui.printLoginFail();
             }
         }
     }
 
-
-    /**
-     * Temporary method for testing
-     */
-    public void menuSelector(InputHandler2 handler) {
-        ArrayList<Integer> allowedInputs = new ArrayList<Integer>();
-        Collections.addAll(allowedInputs, 1, 2, 3, 4);
-
-        int menuSelect = handler.getIntInput();
-
-        if (menuSelect == 1) {
-            String username = handler.getStringInput();
-
-        } else if (menuSelect == 2) {
-            String username = handler.getStringInput();
-
-            try {
-                interfaceUsers.get(username);
-            } catch (UserNotFoundException e) {
-                // TODO: Create user
-            }
+    public void NonAdminScreen(User u) {
+        try {
+            ui.printNonAdminLogInMenu();
+        } catch (InterruptedException e) {
+            System.out.println("Interrupted");
         }
     }
 
-
+    public void AdminScreen(User u) {
+        try {
+            ui.printAdminLoginMenu();
+        } catch (InterruptedException e) {
+            System.out.println("Interrupted");
+        }
+    }
 }
