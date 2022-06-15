@@ -1,11 +1,16 @@
+import java.io.IOException;
 import java.util.Scanner;  //  import the Scanner class
 import Controllers.*;
 import Entities.*;
 import Exceptions.*;
+import databaseManagers.*;
 import useCases.*;
 
 public class Main{
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, IOException {
+        /**
+         * Temporarily commented out to test the UsernamePasswordFileManager class
+         *
         // Initiate the classes
         UserNameAndPasswordContainer<String, User> users = new UserNameAndPasswordContainer<String, User>();
         // TODO: Load the database to <users>
@@ -31,6 +36,27 @@ public class Main{
                 // TODO: <manager> preforms appropriate action based on the input
             }
         }
+         */
+
+        UsernamePasswordFileManager manager = new UsernamePasswordFileManager();
+
+        manager.createUsernamePasswordFile();
+
+        NonAdminUser u1 = new NonAdminUser("u1", "pw1");
+        NonAdminUser u2 = new NonAdminUser("u2", "pw2");
+        NonAdminUser u3 = new NonAdminUser("u3", "pw3");
+
+        UserNameAndPasswordContainer c = new UserNameAndPasswordContainer();
+
+        c.put("u1", u1);
+        c.put("u2", u1);
+        c.put("u3", u1);
+
+        manager.createUsernamePasswordFile("UsernamePassword.csv", c);
+
+        NonAdminUser u4 = new NonAdminUser("AddedUser", "pw4");
+
+        manager.addUserInfo(u4);
 
 
 
