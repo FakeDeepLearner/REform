@@ -2,6 +2,8 @@ package useCases;
 
 import Entities.User;
 import Entities.UserNameAndPasswordContainer;
+import Exceptions.UserNotFoundException;
+
 public class AuthenticateUser {
     private UserNameAndPasswordContainer<String, User> interface_users;
 
@@ -17,7 +19,13 @@ public class AuthenticateUser {
      * @return true if the user is successfully logged in.
      */
     public boolean loginUser(String username, String password) {
-        User u = interface_users.get(username);
+        User u;
+        try {
+            u = interface_users.get(username);
+        } catch (UserNotFoundException e) {
+            return false;
+        }
+
         if (u.getPassword().equals(password)) {
             u.setIsLoggedIn(true);
             return true;
