@@ -1,5 +1,6 @@
 package Controllers;
 
+import Entities.User;
 import Exceptions.UndefinedInputException;
 
 import java.util.List;
@@ -7,36 +8,27 @@ import java.util.Scanner;
 
 public class InputHandler {
     private Scanner sc;
+    private UserInterface ui;
 
-    public InputHandler() {
+    public InputHandler(UserInterface ui) {
+        this.ui = ui;
+
         sc = new Scanner(System.in);
     }
 
-    public int intInput() {
-        String choice = sc.next();
-
-        int input;
-        try {
-            input = Integer.parseInt(choice);
-        } catch (NumberFormatException e) {
-            throw new UndefinedInputException();
-        }
-
-        return input;
-    }
-
     public int intInput(List<Integer> allowedInputs) {
-        String choice = sc.next();
-
-        int input;
-        try {
-            input = Integer.parseInt(choice);
+        int input = -1;
+        while (!allowedInputs.contains(input)) {
+            String choice = sc.next();
+            try {
+                input = Integer.parseInt(choice);
+            } catch (NumberFormatException e) {
+                ui.HandleNumberFormatException();
+            }
 
             if (!allowedInputs.contains(input)) {
-                throw new UndefinedInputException();
+                System.out.println("Please enter a valid number.");
             }
-        } catch (NumberFormatException e) {
-            throw new UndefinedInputException();
         }
 
         return input;
@@ -45,9 +37,4 @@ public class InputHandler {
     public String strInput() {
         return sc.next();
     }
-
-    public Scanner getSc() {
-        return sc;
-    }
-
 }

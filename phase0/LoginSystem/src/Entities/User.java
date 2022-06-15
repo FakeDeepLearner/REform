@@ -39,6 +39,10 @@ public abstract class User {
         return isAdmin;
     }
 
+    public boolean isLoggedIn() {
+        return isLoggedIn;
+    }
+
     public void setLoginHistory(ArrayList<String> arr) {
         loginHistory = arr;
     }
