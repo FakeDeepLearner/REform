@@ -16,10 +16,11 @@ public class UsernamePasswordFileManager extends CSVmanager {
     private String filename;
 
     // Constructors
-    public UsernamePasswordFileManager(String directory, String filename){
+    public UsernamePasswordFileManager(String directory, String filename) {
         super(directory, filename);
     }
-    public UsernamePasswordFileManager(){
+
+    public UsernamePasswordFileManager() {
         super("phase0/LoginSystem/src/databaseManagers", "UsernamePassword.csv");
     }
 
@@ -71,7 +72,6 @@ public class UsernamePasswordFileManager extends CSVmanager {
             super.addLine("phase0/LoginSystem/src/databaseManagers/UsernamePassword.csv", line);
         }
     }
-
 
 
     /**
