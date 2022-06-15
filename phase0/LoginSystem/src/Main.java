@@ -40,8 +40,6 @@ public class Main{
 
         UsernamePasswordFileManager manager = new UsernamePasswordFileManager();
 
-        manager.createUsernamePasswordFile();
-
         NonAdminUser u1 = new NonAdminUser("u1", "pw1");
         NonAdminUser u2 = new NonAdminUser("u2", "pw2");
         NonAdminUser u3 = new NonAdminUser("u3", "pw3");
@@ -52,7 +50,7 @@ public class Main{
         c.put("u2", u1);
         c.put("u3", u1);
 
-        manager.createUsernamePasswordFile("UsernamePassword.csv", c);
+        manager.createUsernamePasswordFile(c);
 
         NonAdminUser u4 = new NonAdminUser("AddedUser", "pw4");
 

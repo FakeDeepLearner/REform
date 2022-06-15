@@ -12,13 +12,21 @@ import java.util.Map;
 
 public class UsernamePasswordFileManager extends CSVmanager {
 
+    private String directory;
+    private String filename;
+
+    // Constructors
+    public UsernamePasswordFileManager(String directory, String filename){
+        super(directory, filename);
+    }
     public UsernamePasswordFileManager(){
+        super("phase0/LoginSystem/src/databaseManagers", "UsernamePassword.csv");
     }
 
 
     // Static methods to add the first line as "Username","Password"
     private static void addFirstLine() throws IOException {
-        FileWriter fw = new FileWriter(new File("UsernamePassword.csv"));
+        FileWriter fw = new FileWriter(new File("phase0/LoginSystem/src/databaseManagers/UsernamePassword.csv"));
         BufferedWriter output = new BufferedWriter(fw);
         output.write("Username,Password");
         output.close();
@@ -33,7 +41,7 @@ public class UsernamePasswordFileManager extends CSVmanager {
 
     // Methods to create (initialize) the csv file
     public void createUsernamePasswordFile() throws IOException {
-        super.createCSVfile("UsernamePassword.csv");
+        super.createCSVfile();
         UsernamePasswordFileManager.addFirstLine();
     }
 
@@ -52,6 +60,18 @@ public class UsernamePasswordFileManager extends CSVmanager {
             super.addLine(filename, line);
         }
     }
+
+    public void createUsernamePasswordFile(UserNameAndPasswordContainer content) throws IOException {
+        super.createCSVfile();
+        UsernamePasswordFileManager.addFirstLine();
+
+        ArrayList<String> array = UsernamePasswordFileManager.reformatContainer(content);
+
+        for (String line : array) {
+            super.addLine("phase0/LoginSystem/src/databaseManagers/UsernamePassword.csv", line);
+        }
+    }
+
 
 
     /**
@@ -116,7 +136,7 @@ public class UsernamePasswordFileManager extends CSVmanager {
 
     public void addUserInfo(User u) throws IOException {
         String info = u.getUsername() + "," + u.getPassword();
-        addLine("UsernamePassword.csv", info);
+        addLine("phase0/LoginSystem/src/databaseManagers/UsernamePassword.csv", info);
     }
 
 
