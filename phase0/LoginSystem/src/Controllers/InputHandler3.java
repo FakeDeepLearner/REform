@@ -125,6 +125,11 @@ public class InputHandler3 {
         userInterface.printAdminLoginMenu();
     }
 
+    public void getUsernameInputForUserRestriction() {
+        Scanner sc = new Scanner(System.in);
+        String username = sc.next();
+    }
+
     public void getInputInNonAdminLoginMenu() throws InterruptedException {
 
         Scanner sc = new Scanner(System.in);
@@ -153,6 +158,36 @@ public class InputHandler3 {
         }
     }
 
+    public void getInputInUsernameDisplayMenu() throws InterruptedException {
+        Scanner sc = new Scanner(System.in);
+        String strInput = sc.next();
+        try{
+            int input = Integer.parseInt(strInput);
+            if(input == 1){
+                userInterface.printUsernameInputForUserRestriction();
+                takeUsernameInputForUserRestriction();
+
+            }else if (input == 2){
+                userInterface.printAdminLoginMenu();
+                getInputInAdminLoginMenu();
+            }
+            else{
+                throw new UndefinedInputException();
+            }
+        }
+        catch (NumberFormatException exception){
+            userInterface.handleNumberFormatExceptionForUsernameDisplayMenu();
+        }
+        catch (UndefinedInputException exception){
+            userInterface.handleUndefinedInputInUsernameDisplayMenu(exception);
+        }
+
+    }
+    public void takeUsernameInputForUserRestriction(){
+        Scanner sc = new Scanner(System.in);
+        String username = sc.next();
+        // Carry out the restriction action.
+    }
     public void getInputInAdminLoginMenu() throws InterruptedException {
 
         Scanner sc = new Scanner(System.in);
@@ -165,6 +200,11 @@ public class InputHandler3 {
                 } else if (input == 2) {
                     createAdminUserViaAnotherAdmin();
                 } else if (input == 3){
+                    userInterface.printUserNameDisplayMenu();
+                    getInputInUsernameDisplayMenu();
+                    userInterface.returnToAdminLoginMenu();
+                }
+                else if (input == 4){
                     throw new LogOutException();
                 }
                 else {

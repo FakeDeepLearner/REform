@@ -75,6 +75,19 @@ public class UserInterface {
 
     }
 
+    public void handleNumberFormatExceptionForUsernameDisplayMenu() throws InterruptedException{
+        System.out.println("Please enter a number, you will be returned to this menu.");
+        Thread.sleep(3000);
+
+    }
+
+    public void handleUndefinedInputInUsernameDisplayMenu(UndefinedInputException exception) throws InterruptedException{
+        System.out.println(exception.getMessage());
+        Thread.sleep(3000);
+        printUserNameDisplayMenu();
+        inputHandler3.getInputInUsernameDisplayMenu();
+    }
+
     public void printUsernameInputForSignUp() {
         System.out.println("Create a username: ");
     }
@@ -121,9 +134,26 @@ public class UserInterface {
     public void printAdminLoginMenu() throws InterruptedException {
         System.out.println("Press 1 to see your login history");
         System.out.println("Press 2 to create a user (this new user will be an admin)");
-        System.out.println("Press 3 to log out.");
+        System.out.println("Press 3 to display all usernames");
+        System.out.println("Press 4 to log out.");
         inputHandler3.getInputInAdminLoginMenu();
 
+    }
+
+    public void printUserNameDisplayMenu(){
+        System.out.println("Press 1 to restrict a user");
+        System.out.println("Press 2 to return to the previous menu");
+    }
+
+    public void printUsernameInputForUserRestriction(){
+        System.out.println("Enter the username of the user you wish to restrict: ");
+    }
+
+
+    public void returnToAdminLoginMenu() throws InterruptedException{
+        System.out.println("Please wait, returning to the previous menu.");
+        Thread.sleep(3000);
+        printAdminLoginMenu();
     }
 
 
