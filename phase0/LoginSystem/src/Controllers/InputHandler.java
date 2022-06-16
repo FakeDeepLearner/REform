@@ -17,19 +17,19 @@ public class InputHandler {
     }
 
     public int intInput(List<Integer> allowedInputs) {
-        int input = -1;
-        while (!allowedInputs.contains(input)) {
+        int input = 0;
+        do {
             String choice = sc.next();
             try {
                 input = Integer.parseInt(choice);
+
+                if (!allowedInputs.contains(input)) {
+                    System.out.println("Please enter a valid number.");
+                }
             } catch (NumberFormatException e) {
                 ui.HandleNumberFormatException();
             }
-
-            if (!allowedInputs.contains(input)) {
-                System.out.println("Please enter a valid number.");
-            }
-        }
+        } while (input == 0 || !allowedInputs.contains(input));
 
         return input;
     }

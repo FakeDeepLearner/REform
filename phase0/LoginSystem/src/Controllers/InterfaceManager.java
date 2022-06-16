@@ -1,21 +1,26 @@
 package Controllers;
 
+import Entities.Bannable;
+import Entities.NonAdminUser;
 import Entities.User;
 import Entities.UserNameAndPasswordContainer;
+import Exceptions.UserNotFoundException;
 import useCases.AuthenticateUser;
 import useCases.CreateUser;
+import useCases.RestrictUser;
 import useCases.UpdateUserHistory;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class InterfaceManager {
-    private UserNameAndPasswordContainer<String, User> interfaceUsers;
-    private InputHandler inputHandler;
-    private UserInterface ui;
-    private AuthenticateUser auth;
-    private CreateUser createUser;
-    private UpdateUserHistory history;
+    private final UserNameAndPasswordContainer<String, User> interfaceUsers;
+    private final InputHandler inputHandler;
+    private final UserInterface ui;
+    private final AuthenticateUser auth;
+    private final CreateUser createUser;
+    private final UpdateUserHistory history;
+    private final RestrictUser restrict;
 
     public InterfaceManager(UserNameAndPasswordContainer<String, User> interfaceUsers) {
         this.interfaceUsers = interfaceUsers;
@@ -25,6 +30,7 @@ public class InterfaceManager {
         auth = new AuthenticateUser(interfaceUsers);
         createUser = new CreateUser(interfaceUsers);
         history = new UpdateUserHistory(interfaceUsers);
+        restrict = new RestrictUser(interfaceUsers);
     }
 
     private ArrayList<String> getUsernameAndPassword() {
@@ -97,6 +103,7 @@ public class InterfaceManager {
                 ArrayList<String> userHistory = u.getLoginHistory();
                 System.out.println(userHistory);
                 break;
+
             case 2:
                 // Logout user
                 auth.logoutUser(u);
@@ -109,21 +116,63 @@ public class InterfaceManager {
         ui.printAdminLoginMenu();
 
         ArrayList<Integer> allowedInputs = new ArrayList<>();
-        Collections.addAll(allowedInputs, 1, 2, 3);
+        Collections.addAll(allowedInputs, 1, 2, 3, 4, 5);
 
         int select = inputHandler.intInput(allowedInputs);
+        String username;
         switch (select) {
             case 1:
                 // View login history
                 ArrayList<String> userHistory = u.getLoginHistory();
                 System.out.println(userHistory);
                 break;
+
             case 2:
                 // Create admin user
                 ArrayList<String> username_password = getUsernameAndPassword();
                 createUser.createAdminUser(username_password.get(0), username_password.get(1));
                 break;
+
             case 3:
+                // Ban or unban user
+                ui.printUsernameInput();
+                username = inputHandler.strInput();
+
+                User v;
+                try {
+                    v = interfaceUsers.get(username);
+                } catch (UserNotFoundException e) {
+                    // TODO: print error message to UI
+                    break;
+                }
+
+                if (v instanceof Bannable) {
+                    if (!((Bannable) v).checkUserBanStatus()) {
+                        // TODO: ask for user confirmation
+                        restrict.banNonAdminUser(username);
+                    } else {
+                        // TODO: ask for user confirmation
+                        restrict.unbanNonAdminUser(username);
+                    }
+                } else {
+                    // TODO: print user cannot be banned to UI
+                }
+                break;
+
+            case 4:
+                // Delete user
+                ui.printUsernameInput();
+                username = inputHandler.strInput();
+                boolean deleted = restrict.deleteNonAdminUser(username);
+
+                if (deleted) {
+                    // TODO: provide feedback to UI
+                } else {
+                    // TODO: provide feedback to UI
+                }
+                break;
+
+            case 5:
                 // Logout user
                 auth.logoutUser(u);
                 ui.printLogOutSuccess();
