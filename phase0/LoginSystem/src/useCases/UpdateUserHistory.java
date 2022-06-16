@@ -19,6 +19,7 @@ public class UpdateUserHistory {
     /**
      * Read this user's login history from csv file.
      * @param u this user.
+     * @return an arraylist of timestamps corresponding to this user's logins.
      */
     public ArrayList<String> readUserHistory(User u) {
         ArrayList<String> userHistory = new ArrayList<>();
@@ -28,10 +29,10 @@ public class UpdateUserHistory {
             String line;
 
             while ((line = br.readLine()) != null) {
-                Object[] contents = line.split(",");
+                String[] contents = line.split(",");
 
                 if (u.getUsername().equals(contents[0])) {
-                    userHistory.add(contents[1].toString());
+                    userHistory.add(contents[1]);
                 }
             }
 
@@ -45,13 +46,42 @@ public class UpdateUserHistory {
     }
 
     /**
+     * Read every user's login history from csv file.
+     * @param userArr an Arraylist of usernames.
+     * @return an arraylist of String arrays containing usernames and login times for each user.
+     */
+    public ArrayList<String[]> readUserHistories(ArrayList<String> userArr) {
+        ArrayList<String[]> userHistories = new ArrayList<>();
+
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("UserHistories.csv"));
+            String line;
+
+            while ((line = br.readLine()) != null) {
+                String[] contents = line.split(",");
+
+                if (userArr.contains(contents[0])) {
+                    String[] userInfo = {contents[0], contents[1]};
+                    userHistories.add(userInfo);
+                }
+            }
+
+            br.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return userHistories;
+    }
+
+    /**
      * Write a new login for this user to csv file.
      * @param u this user.
-     * @param overwrite signals whether to overwrite csv file.
+     * @param append signals whether to append to csv file.
      */
-    public void writeUserHistory(User u, boolean overwrite) {
+    public void writeUserHistory(User u, boolean append) {
         try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter("UserHistories.csv", overwrite));
+            BufferedWriter bw = new BufferedWriter(new FileWriter("UserHistories.csv", append));
             Scanner sc = new Scanner("UserHistories.csv");
             Date newLogin = new Date();
 
