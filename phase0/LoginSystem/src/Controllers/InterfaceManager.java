@@ -14,23 +14,29 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class InterfaceManager {
-    private final UserNameAndPasswordContainer<String, User> interfaceUsers;
-    private final InputHandler inputHandler;
-    private final UserInterface ui;
-    private final AuthenticateUser auth;
-    private final CreateUser createUser;
-    private final UpdateUserHistory history;
-    private final RestrictUser restrict;
 
-    public InterfaceManager(UserNameAndPasswordContainer<String, User> interfaceUsers) {
-        this.interfaceUsers = interfaceUsers;
+    private InputHandler inputHandler;
+    private UserInterface ui;
+    private AuthenticateUser auth;
+    private CreateUser createUser;
+    private UpdateUserHistory history;
+    private RestrictUser restrict;
 
-        ui = new UserInterface();
-        inputHandler = new InputHandler(ui);
-        auth = new AuthenticateUser(interfaceUsers);
-        createUser = new CreateUser(interfaceUsers);
-        history = new UpdateUserHistory(interfaceUsers);
-        restrict = new RestrictUser(interfaceUsers);
+    public InterfaceManager(){
+
+    }
+    public InterfaceManager(InputHandler inputHandler,
+                            UserInterface ui,
+                            AuthenticateUser auth,
+                            CreateUser createUser,
+                            UpdateUserHistory history,
+                            RestrictUser restrict) {
+        this.inputHandler = inputHandler;
+        this.ui = ui;
+        this.auth = auth;
+        this.createUser = createUser;
+        this.history = history;
+        this.restrict = restrict;
     }
 
     private ArrayList<String> getUsernameAndPassword() {

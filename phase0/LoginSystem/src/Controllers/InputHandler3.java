@@ -1,10 +1,13 @@
+/*
 package Controllers;
+
 
 import Exceptions.LogOutException;
 import Exceptions.ReturnToMainMenuException;
 import Exceptions.UndefinedInputException;
 
 import java.util.Scanner;
+
 
 public class InputHandler3 {
     private UserInterface userInterface;
@@ -224,3 +227,5 @@ public class InputHandler3 {
 
 
 }
+*/
+

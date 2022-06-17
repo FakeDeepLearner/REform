@@ -1,21 +1,39 @@
 
-import Controllers.InputHandler3;
+import Controllers.InputHandler;
+
 import Controllers.InterfaceManager;
 import Controllers.UserInterface;
 import Entities.User;
 import Entities.UserNameAndPasswordContainer;
 
-public class ErenMain {
+import java.util.Scanner;  //  import the Scanner class
+import Controllers.*;
+import Entities.*;
+import Exceptions.*;
+import useCases.*;
 
-    public static void main(String[] args) throws InterruptedException {
-        UserNameAndPasswordContainer<String, User> container = new UserNameAndPasswordContainer<String, User>();
-        InputHandler3 inputHandler3 = new InputHandler3();
-        UserInterface userInterface = new UserInterface(inputHandler3);
-        InterfaceManager interfaceManager = new InterfaceManager(container);
-        inputHandler3.setInterfaceManager(interfaceManager);
-        inputHandler3.setUserInterface(userInterface);
-        userInterface.printWelcomeMessage();
+public class ErenMain{
+    public static void main(String[] args) {
+        // Initiate the classes
+        UserNameAndPasswordContainer<String, User> users = new UserNameAndPasswordContainer<>();
+        // TODO: Load the database to <users>
+
+        InterfaceManager manager = new InterfaceManager();
+
+        while (true) {
+            User u = manager.menuSelector();
+
+            if (u == null) {
+                continue;
+            }
+
+            while (u.isLoggedIn()) {
+                if (!u.getAdmin()) {
+                    manager.NonAdminScreen(u);
+                } else {
+                    manager.AdminScreen(u);
+                }
+            }
+        }
     }
-
-
 }

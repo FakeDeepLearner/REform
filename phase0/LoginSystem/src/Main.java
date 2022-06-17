@@ -10,7 +10,7 @@ public class Main{
         UserNameAndPasswordContainer<String, User> users = new UserNameAndPasswordContainer<>();
         // TODO: Load the database to <users>
 
-        InterfaceManager manager = new InterfaceManager(users);
+        InterfaceManager manager = new InterfaceManager();
 
         while (true) {
             User u = manager.menuSelector();
