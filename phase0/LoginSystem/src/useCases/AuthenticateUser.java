@@ -4,7 +4,6 @@ import Entities.Bannable;
 import Entities.NonAdminUser;
 import Entities.User;
 import Entities.UserNameAndPasswordContainer;
-import Exceptions.UserBannedException;
 import Exceptions.UserNotFoundException;
 import Exceptions.UserBannedException;
 
@@ -57,6 +56,21 @@ public class AuthenticateUser {
     public boolean logoutUser(User u) {
         u.setIsLoggedIn(false);
         return true;
+    }
+
+    /**
+     * Checks if there is a User with the given username.
+     *
+     * @param username to check.
+     * @return true if a User has the specified username.
+     */
+    public boolean checkUsernameExists(String username) {
+        try {
+            User u = interface_users.get(username);
+            return true;
+        } catch (UserNotFoundException e) {
+            return false;
+        }
     }
 
 }
