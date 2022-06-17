@@ -1,8 +1,12 @@
 package useCases;
 
+import Entities.Bannable;
+import Entities.NonAdminUser;
 import Entities.User;
 import Entities.UserNameAndPasswordContainer;
+import Exceptions.UserBannedException;
 import Exceptions.UserNotFoundException;
+import Exceptions.UserBannedException;
 
 public class AuthenticateUser {
     private UserNameAndPasswordContainer<String, User> interface_users;
@@ -18,7 +22,7 @@ public class AuthenticateUser {
      * @param password of the user to log in.
      * @return true if the user is successfully logged in.
      */
-    public boolean loginUser(String username, String password) {
+    public boolean loginUser(String username, String password) throws UserBannedException {
         User u;
         try {
             u = interface_users.get(username);
@@ -27,8 +31,18 @@ public class AuthenticateUser {
         }
 
         if (u.getPassword().equals(password)) {
-            u.setIsLoggedIn(true);
-            return true;
+            if (u instanceof Bannable) {
+                NonAdminUser user = (NonAdminUser) u;
+                if (!user.checkUserBanStatus()) {
+                    u.setIsLoggedIn(true);
+                    return true;
+                } else {
+                    throw new UserBannedException();
+                }
+            } else {
+                u.setIsLoggedIn(true);
+                return true;
+            }
         } else {
             return false;
         }
