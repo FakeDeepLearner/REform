@@ -5,6 +5,7 @@ import Exceptions.ReturnToMainMenuException;
 import Exceptions.UndefinedInputException;
 
 public class UserInterface {
+
     public void printWelcomeMessage() {
         System.out.println("Hello, please press 1 to sign up, or 2 to log in to your account.");
     }
