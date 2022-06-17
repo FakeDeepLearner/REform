@@ -45,6 +45,8 @@ public class UserInterface {
     public void printAdminLoginMenu() {
         System.out.println("Press 1 to see your login history");
         System.out.println("Press 2 to create a user (this new user will be an admin)");
-        System.out.println("Press 3 to log out.");
+        System.out.println("Press 3 to ban or unban a user.");
+        System.out.println("Press 4 to delete a user.");
+        System.out.println("Press 5 to log out.");
     }
 }
