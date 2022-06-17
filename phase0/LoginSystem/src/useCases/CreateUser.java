@@ -15,7 +15,7 @@ public class CreateUser {
     }
 
     public void createNonAdminUser(String username, String password) {
-        if(checkUsernameExists(username)){
+        if(UsernameuniqueExists(username)){
             User user = new NonAdminUser(username, password);
             interface_users.put(username, user);
         }else{
@@ -24,7 +24,7 @@ public class CreateUser {
     }
 
     public void createAdminUser(String username, String password) {
-        if(checkUsernameExists(username)){
+        if(UsernameuniqueExists(username)){
             User user = new AdminUser(username, password);
             interface_users.put(username, user);
         }else{
@@ -32,12 +32,12 @@ public class CreateUser {
         }
     }
 
-    public boolean checkUsernameExists(String username) {
+    public boolean UsernameuniqueExists(String username) {
         try {
             User u = interface_users.get(username);
-            return true;
-        } catch (UserNotFoundException e) {
             return false;
+        } catch (UserNotFoundException e) {
+            return true;
         }
     }
 }
