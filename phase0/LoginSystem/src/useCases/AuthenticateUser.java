@@ -50,10 +50,17 @@ public class AuthenticateUser {
     /**
      * Logs specified Entities.User u out.
      *
-     * @param u the Entities.User to log out.
+     * @param username the username of the User instance to log out.
      * @return true when the user is successfully logged out.
      */
-    public boolean logoutUser(User u) {
+    public boolean logoutUser(String username) {
+        User u;
+        try {
+            u = interface_users.get(username);
+        } catch (UserNotFoundException e) {
+            return false;
+        }
+
         u.setIsLoggedIn(false);
         return true;
     }

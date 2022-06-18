@@ -60,7 +60,6 @@ public class UserInterface {
         System.out.println("Enter the username of the user you wish to restrict: ");
     }
 
-
     public void returnToAdminLoginMenu() throws InterruptedException {
         System.out.println("Please wait, returning to the previous menu.");
         Thread.sleep(3000);
