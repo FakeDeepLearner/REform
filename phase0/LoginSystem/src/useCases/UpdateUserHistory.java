@@ -18,11 +18,12 @@ public class UpdateUserHistory {
 
     /**
      * Read this user's login history from csv file.
-     * @param u this user.
+     * @param username this user's username.
      * @return an arraylist of timestamps corresponding to this user's logins.
      */
-    public ArrayList<String> readUserHistory(User u) {
+    public ArrayList<String> readUserHistory(String username) {
         ArrayList<String> userHistory = new ArrayList<>();
+        User user = interface_users.get(username);
 
         try {
             BufferedReader br = new BufferedReader(new FileReader("UserHistories.csv"));
@@ -31,7 +32,7 @@ public class UpdateUserHistory {
             while ((line = br.readLine()) != null) {
                 String[] contents = line.split(",");
 
-                if (u.getUsername().equals(contents[0])) {
+                if (username.equals(contents[0])) {
                     userHistory.add(contents[1]);
                 }
             }
@@ -41,7 +42,7 @@ public class UpdateUserHistory {
             e.printStackTrace();
         }
 
-        u.setLoginHistory(userHistory);
+        user.setLoginHistory(userHistory);
         return userHistory;
     }
 
@@ -75,11 +76,35 @@ public class UpdateUserHistory {
     }
 
     /**
+     * Overwrite csv file with provided login history.
+     * @param userHistories an arraylist of String arrays containing usernames and login times for each user.
+     */
+    public void overwriteUserHistories(ArrayList<String[]> userHistories) {
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter("UserHistories.csv", false));
+
+            for (String[] pair : userHistories) {
+                bw.append(pair[0]);
+                bw.append(",");
+                bw.append(pair[1]);
+                bw.append("\n");
+            }
+
+            bw.flush();
+            bw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Write a new login for this user to csv file.
-     * @param u this user.
+     * @param username this user's username.
      * @param append signals whether to append to csv file.
      */
-    public void writeUserHistory(User u, boolean append) {
+    public void writeUserHistory(String username, boolean append) {
+        User user = interface_users.get(username);
+
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter("UserHistories.csv", append));
             Scanner sc = new Scanner("UserHistories.csv");
@@ -89,7 +114,7 @@ public class UpdateUserHistory {
                 sc.next();
             }
 
-            bw.append(u.getUsername());
+            bw.append(username);
             bw.append(",");
             bw.append(newLogin.toString());
             bw.append("\n");
@@ -97,7 +122,7 @@ public class UpdateUserHistory {
             bw.flush();
             bw.close();
 
-            u.addToLoginHistory(newLogin.toString());
+            user.addToLoginHistory(newLogin.toString());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -105,9 +130,10 @@ public class UpdateUserHistory {
 
     /**
      * Get this user's login history locally (without reading from csv file).
-     * @param u this user.
+     * @param username this user's username.
      */
-    public ArrayList<String> getLoginHistory(User u) {
-        return u.getLoginHistory();
+    public ArrayList<String> getLoginHistory(String username) {
+        User user = interface_users.get(username);
+        return user.getLoginHistory();
     }
 }
