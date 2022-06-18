@@ -1,14 +1,12 @@
 package Controllers;
 
-import Entities.User;
-import Exceptions.UndefinedInputException;
 
 import java.util.List;
 import java.util.Scanner;
 
 public class InputHandler {
-    private Scanner sc;
-    private UserInterface ui;
+    private final Scanner sc;
+    private final UserInterface ui;
 
     public InputHandler(UserInterface ui) {
         this.ui = ui;

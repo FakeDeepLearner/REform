@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class UsernamePasswordFileManager extends CSVmanager {
+public class UsernamePasswordFileManager extends CsvManager {
 
     private String directory;
     private String filename;
@@ -51,7 +51,7 @@ public class UsernamePasswordFileManager extends CSVmanager {
         UsernamePasswordFileManager.addFirstLine(filename);
     }
 
-    public void createUsernamePasswordFile(String filename, UserNameAndPasswordContainer content) throws IOException {
+    public void createUsernamePasswordFile(String filename, UserNameAndPasswordContainer<String, User> content) throws IOException {
         super.createCSVfile(filename);
         UsernamePasswordFileManager.addFirstLine(filename);
 
@@ -62,7 +62,7 @@ public class UsernamePasswordFileManager extends CSVmanager {
         }
     }
 
-    public void createUsernamePasswordFile(UserNameAndPasswordContainer content) throws IOException {
+    public void createUsernamePasswordFile(UserNameAndPasswordContainer<String, User> content) throws IOException {
         super.createCSVfile();
         UsernamePasswordFileManager.addFirstLine();
 
@@ -108,7 +108,7 @@ public class UsernamePasswordFileManager extends CSVmanager {
                 out.add(key + "," + value.getPassword());
 
             }
-        } else if (includeType) {
+        } else  {
             for (Map.Entry<String, User> entry : c.entrySet()) {
                 String key = entry.getKey();
                 User value = entry.getValue();

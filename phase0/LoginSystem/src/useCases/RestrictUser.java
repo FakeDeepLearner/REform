@@ -6,7 +6,7 @@ import Entities.User;
 import Entities.UserNameAndPasswordContainer;
 
 public class RestrictUser {
-    private UserNameAndPasswordContainer<String, User> interfaceUsers;
+    private final UserNameAndPasswordContainer<String, User> interfaceUsers;
 
     public RestrictUser(UserNameAndPasswordContainer<String, User> interfaceUsers) {
         this.interfaceUsers = interfaceUsers;
