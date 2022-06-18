@@ -3,6 +3,7 @@ package Controllers;
 import Exceptions.UserBannedException;
 import Exceptions.UserCannotBeBannedException;
 import Exceptions.UserNotFoundException;
+import Exceptions.UsernameAlreadyExistsException;
 import useCases.AuthenticateUser;
 import useCases.CreateUser;
 import useCases.RestrictUser;
@@ -59,7 +60,11 @@ public class InterfaceManager {
                 // User selected to create a new user
                 username_password = getUsernameAndPassword();
                 // Assume the new user is not an admin b/c only admins can create new admin users
-                createUser.createNonAdminUser(username_password.get(0), username_password.get(1));
+                try {
+                    createUser.createNonAdminUser(username_password.get(0), username_password.get(1));
+                } catch (UsernameAlreadyExistsException e) {
+                    ui.printArbitraryException(e);
+                }
                 ui.printSignUpSuccess();
                 break;
 
@@ -71,7 +76,11 @@ public class InterfaceManager {
             case 3:
                 // Secret admin user creator
                 username_password = getUsernameAndPassword();
-                createUser.createAdminUser(username_password.get(0), username_password.get(1));
+                try {
+                    createUser.createAdminUser(username_password.get(0), username_password.get(1));
+                } catch (UsernameAlreadyExistsException e) {
+                    ui.printArbitraryException(e);
+                }
                 ui.printSignUpSuccess();
                 break;
         }
@@ -79,15 +88,12 @@ public class InterfaceManager {
         boolean isLoggedIn = false;
         try {
             isLoggedIn = auth.loginUser(username_password.get(0), username_password.get(1));
-        } catch (UserNotFoundException e) {
-            // TODO: print error
-        } catch (UserBannedException e) {
-            // TODO: print error
+        } catch (UserNotFoundException | UserBannedException e) {
+            ui.printArbitraryException(e);
         }
 
         if (isLoggedIn) {
             ui.printLoginSuccess();
-
             history.writeUserHistory(username_password.get(0), false);
 
             return username_password.get(0);
@@ -137,7 +143,11 @@ public class InterfaceManager {
             case 2:
                 // Create admin user
                 ArrayList<String> username_password = getUsernameAndPassword();
-                createUser.createAdminUser(username_password.get(0), username_password.get(1));
+                try {
+                    createUser.createAdminUser(username_password.get(0), username_password.get(1));
+                } catch (UsernameAlreadyExistsException e) {
+                    ui.printArbitraryException(e);
+                }
                 break;
 
             case 3:
@@ -149,15 +159,21 @@ public class InterfaceManager {
                 try {
                     isBanned = restrict.isUserBanned(restrictUser);
                 } catch (UserCannotBeBannedException e) {
-                    // TODO: print error message
+                    ui.printArbitraryException(e);
                 }
 
-                if (!isBanned) {
-                    // TODO: prince user is currently unbanned and ask for confirmation
-                    restrict.unbanNonAdminUser(restrictUser);
-                } else {
-                    // TODO: prince user is currently banned and ask for confirmation
-                    restrict.banNonAdminUser(restrictUser);
+                ui.printRestrictUserConfirmation(username, isBanned);
+
+                ArrayList<String> allowedStrings = new ArrayList<>();
+                Collections.addAll(allowedStrings, "Y", "N");
+
+                String choice = inputHandler.strInput(allowedStrings);
+                if (choice.equals("Y")) {
+                    if (!isBanned) {
+                        restrict.unbanNonAdminUser(restrictUser);
+                    } else {
+                        restrict.banNonAdminUser(restrictUser);
+                    }
                 }
 
                 break;
