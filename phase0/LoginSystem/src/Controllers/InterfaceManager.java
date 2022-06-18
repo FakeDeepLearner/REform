@@ -1,9 +1,7 @@
 package Controllers;
 
-import Entities.Bannable;
-import Entities.NonAdminUser;
-import Entities.User;
-import Entities.UserNameAndPasswordContainer;
+import Exceptions.UserBannedException;
+import Exceptions.UserCannotBeBannedException;
 import Exceptions.UserNotFoundException;
 import useCases.AuthenticateUser;
 import useCases.CreateUser;
@@ -25,12 +23,8 @@ public class InterfaceManager {
     public InterfaceManager(){
 
     }
-    public InterfaceManager(InputHandler inputHandler,
-                            UserInterface ui,
-                            AuthenticateUser auth,
-                            CreateUser createUser,
-                            UpdateUserHistory history,
-                            RestrictUser restrict) {
+    public InterfaceManager(InputHandler inputHandler, UserInterface ui, AuthenticateUser auth, CreateUser createUser,
+                            UpdateUserHistory history, RestrictUser restrict) {
         this.inputHandler = inputHandler;
         this.ui = ui;
         this.auth = auth;
@@ -51,7 +45,7 @@ public class InterfaceManager {
         return username_password;
     }
 
-    public User menuSelector() {
+    public String menuSelector() {
         ui.printWelcomeMessage();
 
         ArrayList<Integer> allowedInputs = new ArrayList<>();
@@ -82,13 +76,21 @@ public class InterfaceManager {
                 break;
         }
 
-        if (auth.loginUser(username_password.get(0), username_password.get(1))) {
+        boolean isLoggedIn = false;
+        try {
+            isLoggedIn = auth.loginUser(username_password.get(0), username_password.get(1));
+        } catch (UserNotFoundException e) {
+            // TODO: print error
+        } catch (UserBannedException e) {
+            // TODO: print error
+        }
+
+        if (isLoggedIn) {
             ui.printLoginSuccess();
 
-            User u = interfaceUsers.get(username_password.get(0));
-            history.writeUserHistory(u, false);
+            history.writeUserHistory(username_password.get(0), false);
 
-            return u;
+            return username_password.get(0);
         } else {
             ui.printLoginFail();
         }
@@ -96,7 +98,7 @@ public class InterfaceManager {
         return null;
     }
 
-    public void NonAdminScreen(User u) {
+    public void NonAdminScreen(String username) {
         ui.printNonAdminLogInMenu();
 
         ArrayList<Integer> allowedInputs = new ArrayList<>();
@@ -106,30 +108,29 @@ public class InterfaceManager {
         switch (select) {
             case 1:
                 // View login history
-                ArrayList<String> userHistory = u.getLoginHistory();
+                ArrayList<String> userHistory = history.getLoginHistory(username);
                 System.out.println(userHistory);
                 break;
 
             case 2:
                 // Logout user
-                auth.logoutUser(u);
+                auth.logoutUser(username);
                 ui.printLogOutSuccess();
                 break;
         }
     }
 
-    public void AdminScreen(User u) {
+    public void AdminScreen(String username) {
         ui.printAdminLoginMenu();
 
         ArrayList<Integer> allowedInputs = new ArrayList<>();
         Collections.addAll(allowedInputs, 1, 2, 3, 4, 5);
 
         int select = inputHandler.intInput(allowedInputs);
-        String username;
         switch (select) {
             case 1:
                 // View login history
-                ArrayList<String> userHistory = u.getLoginHistory();
+                ArrayList<String> userHistory = history.getLoginHistory(username);
                 System.out.println(userHistory);
                 break;
 
@@ -141,35 +142,31 @@ public class InterfaceManager {
 
             case 3:
                 // Ban or unban user
-                ui.printUsernameInput();
-                username = inputHandler.strInput();
+                ui.printUsernameInputForUserRestriction();
+                String restrictUser = inputHandler.strInput();
 
-                User v;
+                boolean isBanned = false;
                 try {
-                    v = interfaceUsers.get(username);
-                } catch (UserNotFoundException e) {
-                    // TODO: print error message to UI
-                    break;
+                    isBanned = restrict.isUserBanned(restrictUser);
+                } catch (UserCannotBeBannedException e) {
+                    // TODO: print error message
                 }
 
-                if (v instanceof Bannable) {
-                    if (!((Bannable) v).checkUserBanStatus()) {
-                        // TODO: ask for user confirmation
-                        restrict.banNonAdminUser(username);
-                    } else {
-                        // TODO: ask for user confirmation
-                        restrict.unbanNonAdminUser(username);
-                    }
+                if (!isBanned) {
+                    // TODO: prince user is currently unbanned and ask for confirmation
+                    restrict.unbanNonAdminUser(restrictUser);
                 } else {
-                    // TODO: print user cannot be banned to UI
+                    // TODO: prince user is currently banned and ask for confirmation
+                    restrict.banNonAdminUser(restrictUser);
                 }
+
                 break;
 
             case 4:
                 // Delete user
                 ui.printUsernameInput();
-                username = inputHandler.strInput();
-                boolean deleted = restrict.deleteNonAdminUser(username);
+                String deleteUser = inputHandler.strInput();
+                boolean deleted = restrict.deleteNonAdminUser(deleteUser);
 
                 if (deleted) {
                     // TODO: provide feedback to UI
@@ -180,7 +177,7 @@ public class InterfaceManager {
 
             case 5:
                 // Logout user
-                auth.logoutUser(u);
+                auth.logoutUser(username);
                 ui.printLogOutSuccess();
                 break;
         }

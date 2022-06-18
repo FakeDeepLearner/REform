@@ -4,6 +4,7 @@ import Entities.Bannable;
 import Entities.NonAdminUser;
 import Entities.User;
 import Entities.UserNameAndPasswordContainer;
+import Exceptions.UserCannotBeBannedException;
 
 public class RestrictUser {
     private final UserNameAndPasswordContainer<String, User> interfaceUsers;
@@ -57,6 +58,15 @@ public class RestrictUser {
             return true;
         } else {
             return false;
+        }
+    }
+
+    public boolean isUserBanned(String username) {
+        User u = interfaceUsers.get(username);
+        if (u instanceof Bannable) {
+            return ((Bannable) u).checkUserBanStatus();
+        } else {
+            throw new UserCannotBeBannedException();
         }
     }
 }
