@@ -26,6 +26,9 @@ public class UserInterface {
         System.out.println("User successfully created.");
     }
 
+    public void printArbitraryException (Exception e) {
+        System.out.println(e.getMessage());
+    }
     public void printLoginSuccess() {
         System.out.println("Successfully logged in.");
     }
@@ -51,11 +54,6 @@ public class UserInterface {
         System.out.println("Press 5 to log out.");
     }
 
-    public void printUserNameDisplayMenu() {
-        System.out.println("Press 1 to restrict a user");
-        System.out.println("Press 2 to return to the previous menu");
-    }
-
     public void printUsernameInputForUserRestriction() {
         System.out.println("Enter the username of the user you wish to restrict: ");
     }
@@ -64,5 +62,15 @@ public class UserInterface {
         System.out.println("Please wait, returning to the previous menu.");
         Thread.sleep(3000);
         printAdminLoginMenu();
+    }
+
+    public void printRestrictUserConfirmation(String username, boolean isBanned) {
+        if (isBanned) {
+            System.out.println(username + " is currently banned.");
+            System.out.println("Would you like to unban them? (Y/N)");
+        } else {
+            System.out.println(username + " is currently not banned.");
+            System.out.println("Would you like to ban them? (Y/N)");
+        }
     }
 }
