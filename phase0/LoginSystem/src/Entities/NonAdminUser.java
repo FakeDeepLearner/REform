@@ -18,6 +18,11 @@ public class NonAdminUser extends User implements Bannable{
         super(username, password, loginHistory);
     }
 
+    @Override
+    public boolean isAdmin() {
+        return false;
+    }
+
     /**
      * Returns whether the user is currently banned.
      * @return true if the user is banned and false if not.
