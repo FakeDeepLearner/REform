@@ -24,19 +24,23 @@ public class UsernamePasswordFileManager extends CSVmanager {
         super("phase0/LoginSystem/src/databaseManagers", "UsernamePassword.csv");
     }
 
-
-    // Static methods to add the first line as "Username","Password"
-    private static void addFirstLine() throws IOException {
+    /**
+     * Static method to add a custom first line
+     * @param content String to add as the first line
+     * @throws IOException
+     */
+    private static void addFirstLine(String content) throws IOException {
         FileWriter fw = new FileWriter(new File("phase0/LoginSystem/src/databaseManagers/UsernamePassword.csv"));
         BufferedWriter output = new BufferedWriter(fw);
-        output.write("Username,Password");
+        output.write(content);
         output.close();
     }
 
-    private static void addFirstLine(String filename) throws IOException {
-        FileWriter fw = new FileWriter(new File(formatFilename(filename)));
+    // Static method to add the first line as "Username","Password,IsAdmin"
+    private static void addFirstLine() throws IOException {
+        FileWriter fw = new FileWriter(new File("phase0/LoginSystem/src/databaseManagers/UsernamePassword.csv"));
         BufferedWriter output = new BufferedWriter(fw);
-        output.write("Username,Password");
+        output.write("Username,Password,IsAdmin");
         output.close();
     }
 
@@ -78,7 +82,7 @@ public class UsernamePasswordFileManager extends CSVmanager {
      * Static method to reformat the UserNameAndPasswordContainer into an ArrayList of String
      *
      * @param c UserNameAndPasswordContainer
-     * @return [user1, psw1, "\n"+user2,psw2]
+     * @return [user1, psw1,IsAdmin1 "\n" user2,psw2, IsAdmin2]
      */
 
     public static ArrayList<String> reformatContainer(UserNameAndPasswordContainer<String, User> c) {
@@ -89,7 +93,7 @@ public class UsernamePasswordFileManager extends CSVmanager {
             String key = entry.getKey();
             User value = entry.getValue();
 
-            out.add(key + "," + value.getPassword());
+            out.add(key + "," + value.getPassword() + String.valueOf(value.isAdmin()));
 
         }
 
@@ -108,12 +112,12 @@ public class UsernamePasswordFileManager extends CSVmanager {
                 out.add(key + "," + value.getPassword());
 
             }
-        } else if (includeType) {
+        } else {
             for (Map.Entry<String, User> entry : c.entrySet()) {
                 String key = entry.getKey();
                 User value = entry.getValue();
 
-                // TODO: make a getIsadmin() in User.java
+                // TODO: make a isAdmin() in User.java
 //                out.add(key + "," + value.getPassword() + value.isAdmin);
 
             }
@@ -130,12 +134,12 @@ public class UsernamePasswordFileManager extends CSVmanager {
      * @throws IOException
      */
     public void addUserInfo(String file, User u) throws IOException {
-        String info = u.getUsername() + "," + u.getPassword();
+        String info = u.getUsername() + "," + u.getPassword() + String.valueOf(u.isAdmin());
         addLine(file, info);
     }
 
     public void addUserInfo(User u) throws IOException {
-        String info = u.getUsername() + "," + u.getPassword();
+        String info = u.getUsername() + "," + u.getPassword() + String.valueOf(u.isAdmin());
         addLine("phase0/LoginSystem/src/databaseManagers/UsernamePassword.csv", info);
     }
 
