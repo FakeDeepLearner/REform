@@ -112,6 +112,7 @@ public class LoggedInManager {
                 String deleteUser = input.strInput();
                 boolean deleted = restrict.deleteNonAdminUser(deleteUser);
                 if (deleted) {
+                    history.overwriteUserHistories();
                     ui.printDeleteUserSuccess(deleteUser);
                 } else {
                     ui.printDeleteUserFail(deleteUser);
