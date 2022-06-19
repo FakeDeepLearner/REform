@@ -1,13 +1,8 @@
 package Controllers;
 
-import Entities.User;
 import Exceptions.UserBannedException;
-import Exceptions.UserCannotBeBannedException;
 import Exceptions.UserNotFoundException;
-import Exceptions.UsernameAlreadyExistsException;
 import useCases.AuthenticateUser;
-import useCases.CreateUser;
-import useCases.RestrictUser;
 import useCases.UpdateUserHistory;
 
 import java.util.ArrayList;
