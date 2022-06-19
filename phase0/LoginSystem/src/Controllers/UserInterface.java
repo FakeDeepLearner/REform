@@ -68,8 +68,20 @@ public class UserInterface {
         System.out.println("Enter the username of the user whose ban status you wish to change: ");
     }
 
+    public void printDeleteUsernameInput() {
+        System.out.println("Enter the username of the user who you wish to delete: ");
+    }
+
     public void printLoginHistory(ArrayList<String> userHistory) {
         System.out.println(userHistory);
+    }
+
+    public void printDeleteUserSuccess(String username) {
+        System.out.println(username + "'s account was successfully deleted.");
+    }
+
+    public void printDeleteUserFail(String username) {
+        System.out.println(username + "'s account could not be deleted.");
     }
 
     public void printInvalidInput() {

@@ -43,12 +43,14 @@ public class LoggedInManager {
 
         int select = input.intInput(allowedInputs);
         switch (select) {
-            case 1 -> {
+            case 1: {
                 // View login history
                 ArrayList<String> userHistory = history.getLoginHistory(username);
                 ui.printLoginHistory(userHistory);
+                break;
             }
-            case 2 -> {
+
+            case 2: {
                 // Logout user
                 auth.logoutUser(username);
                 ui.printLogOutSuccess();
@@ -67,15 +69,20 @@ public class LoggedInManager {
 
         int select = input.intInput(allowedInputs);
         switch (select) {
-            case 1 -> {
+            case 1: {
                 // View login history
                 ArrayList<String> userHistory = history.getLoginHistory(username);
                 ui.printLoginHistory(userHistory);
+                break;
             }
-            case 2 ->
+
+            case 2: {
                 // Create new admin user
-                    userManager.createNewUser(true);
-            case 3 -> {
+                userManager.createNewUser(true);
+                break;
+            }
+
+            case 3: {
                 // Ban or unban user
                 ui.printRestrictUsernameInput();
                 String restrictUser = input.strInput();
@@ -85,30 +92,34 @@ public class LoggedInManager {
                 } catch (UserCannotBeBannedException e) {
                     ui.printArbitraryException(e);
                 }
-                ui.printRestrictUserConfirmation(username, isBanned);
+                ui.printRestrictUserConfirmation(restrictUser, isBanned);
                 ArrayList<String> allowedStrings = new ArrayList<>();
                 Collections.addAll(allowedStrings, "Y", "N");
                 String choice = input.strInput(allowedStrings);
                 if (choice.equals("Y")) {
                     if (!isBanned) {
-                        restrict.unbanNonAdminUser(restrictUser);
-                    } else {
                         restrict.banNonAdminUser(restrictUser);
+                    } else {
+                        restrict.unbanNonAdminUser(restrictUser);
                     }
                 }
+                break;
             }
-            case 4 -> {
+
+            case 4: {
                 // Delete user
-                ui.printCreateUsernameInput();
+                ui.printDeleteUsernameInput();
                 String deleteUser = input.strInput();
                 boolean deleted = restrict.deleteNonAdminUser(deleteUser);
                 if (deleted) {
-                    // TODO: provide feedback to UI
+                    ui.printDeleteUserSuccess(deleteUser);
                 } else {
-                    // TODO: provide feedback to UI
+                    ui.printDeleteUserFail(deleteUser);
                 }
+                break;
             }
-            case 5 -> {
+
+            case 5: {
                 // Logout user
                 auth.logoutUser(username);
                 ui.printLogOutSuccess();
