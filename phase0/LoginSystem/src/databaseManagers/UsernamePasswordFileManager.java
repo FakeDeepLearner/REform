@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Map;
 
-public class UsernamePasswordFileManager extends CSVmanager {
+public class UsernamePasswordFileManager extends CsvManager {
     private String directory;
     private String filename;
     private final AuthenticateUser auth;
@@ -168,7 +168,7 @@ public class UsernamePasswordFileManager extends CSVmanager {
 
         String line = null;
 
-        FileReader fw = new FileReader(CSVmanager.formatFilename(filename));
+        FileReader fw = new FileReader(CsvManager.formatFilename(filename));
         return getArrayLists(outside, fw);
     }
 
