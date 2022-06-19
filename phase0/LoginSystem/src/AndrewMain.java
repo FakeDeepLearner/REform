@@ -1,9 +1,11 @@
 import Entities.AdminUser;
 import Entities.NonAdminUser;
-import Entities.UserNameAndPasswordContainer;
+import Entities.UserContainer;
 import databaseManagers.UsernamePasswordFileManager;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 public class AndrewMain {
 
@@ -11,22 +13,16 @@ public class AndrewMain {
 
         UsernamePasswordFileManager manager = new UsernamePasswordFileManager();
 
-        NonAdminUser u1 = new NonAdminUser("u1", "pw1");
-        NonAdminUser u2 = new NonAdminUser("u2", "pw2");
-        NonAdminUser u3 = new NonAdminUser("u3", "pw3");
+        ArrayList<ArrayList<String>> s = new ArrayList<>();
 
-        UserNameAndPasswordContainer c = new UserNameAndPasswordContainer();
+        s = manager.getUsersFromCSV("phase0/LoginSystem/src/databaseManagers/UsernamePassword.csv");
 
-        c.put("u1", u1);
-        c.put("u2", u1);
-        c.put("u3", u1);
+        System.out.println(s);
 
-        manager.createUsernamePasswordFile(c);
+//        for (ArrayList<String> a : s){
+//
+//        }
 
-        AdminUser u4 = new AdminUser("u3", "pw3");
-
-
-        manager.addUserInfo(u4);
 
     }
 }

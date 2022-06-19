@@ -3,10 +3,7 @@ package databaseManagers;
 import Entities.User;
 import Entities.UserContainer;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -26,6 +23,7 @@ public class UsernamePasswordFileManager extends CSVmanager {
 
     /**
      * Static method to add a custom first line
+     *
      * @param content String to add as the first line
      * @throws IOException
      */
@@ -140,6 +138,31 @@ public class UsernamePasswordFileManager extends CSVmanager {
     public void addUserInfo(User u) throws IOException {
         String info = u.getUsername() + "," + u.getPassword() + "," + String.valueOf(u.isAdmin());
         addLine("phase0/LoginSystem/src/databaseManagers/UsernamePassword.csv", info);
+    }
+
+    /**
+     * @param filename e.g. "phase0/LoginSystem/src/databaseManagers/UsernamePassword.csv"
+     * @return 2-D arrayList [ [u1,pw2,Admin1], [u2,pw2,Admin2], ... ]
+     * @throws IOException
+     */
+    public ArrayList<ArrayList<String>> getUsersFromCSV(String filename) throws IOException {
+        ArrayList<ArrayList<String>> outside = new ArrayList<>();
+
+        String line = null;
+
+        FileReader fw = new FileReader(CSVmanager.formatFilename(filename));
+        BufferedReader br = new BufferedReader(fw);
+
+        br.readLine();
+
+        while ((line = br.readLine()) != null) {
+            ArrayList<String> inside = new ArrayList<String>();
+            inside.add(line + "\n");
+            outside.add(inside);
+        }
+
+        return outside;
+
     }
 
 
