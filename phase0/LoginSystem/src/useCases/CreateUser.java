@@ -7,6 +7,8 @@ import Entities.UserContainer;
 import Exceptions.UserNotFoundException;
 import Exceptions.UsernameAlreadyExistsException;
 
+import java.util.ArrayList;
+
 public class CreateUser {
     private final UserContainer<String, User> interfaceUsers;
 
@@ -23,9 +25,27 @@ public class CreateUser {
         }
     }
 
+    public void createNonAdminUser(String username, String password, ArrayList<String> loginHistory) {
+        if (uniqueUsernameExists(username)) {
+            User user = new NonAdminUser(username, password, loginHistory);
+            interfaceUsers.put(username, user);
+        } else {
+            throw new UsernameAlreadyExistsException();
+        }
+    }
+
     public void createAdminUser(String username, String password) {
         if (uniqueUsernameExists(username)) {
             User user = new AdminUser(username, password);
+            interfaceUsers.put(username, user);
+        } else {
+            throw new UsernameAlreadyExistsException();
+        }
+    }
+
+    public void createAdminUser(String username, String password, ArrayList<String> loginHistory) {
+        if (uniqueUsernameExists(username)) {
+            User user = new AdminUser(username, password, loginHistory);
             interfaceUsers.put(username, user);
         } else {
             throw new UsernameAlreadyExistsException();

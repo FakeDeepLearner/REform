@@ -18,7 +18,7 @@ public class Main {
         UserInterface ui = new UserInterface();
         InputHandler inputHandler = new InputHandler(ui);
 
-        UserManager userManager = new UserManager(inputHandler, ui, createUser);
+        UserManager userManager = new UserManager(inputHandler, ui, createUser, history);
         LoggedOutManager loggedOutManager = new LoggedOutManager(inputHandler, ui, auth, history, userManager);
         LoggedInManager loggedInManager = new LoggedInManager(inputHandler, ui, auth, history, restrict, userManager);
 

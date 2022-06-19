@@ -21,8 +21,7 @@ public class LoggedOutManager {
     private final UpdateUserHistory history;
     private final UserManager userManager;
 
-    public LoggedOutManager(InputHandler input, UserInterface ui, AuthenticateUser auth, UpdateUserHistory history,
-                            UserManager userManager) {
+    public LoggedOutManager(InputHandler input, UserInterface ui, AuthenticateUser auth, UpdateUserHistory history, UserManager userManager) {
         this.input = input;
         this.ui = ui;
         this.auth = auth;
@@ -74,7 +73,7 @@ public class LoggedOutManager {
 
         if (isLoggedIn) {
             ui.printLoginSuccess();
-            history.writeUserHistory(usernamePassword.get(0), false);
+            history.writeUserHistory(usernamePassword.get(0), true);
 
             return usernamePassword.get(0);
         } else {

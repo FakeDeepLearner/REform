@@ -3,6 +3,7 @@ package Controllers;
 import Exceptions.UsernameAlreadyExistsException;
 import databaseManagers.UsernamePasswordFileManager;
 import useCases.CreateUser;
+import useCases.UpdateUserHistory;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,11 +12,13 @@ public class UserManager {
     private final InputHandler inputHandler;
     private final UserInterface ui;
     private final CreateUser createUser;
+    private final UpdateUserHistory history;
 
-    public UserManager(InputHandler inputHandler, UserInterface ui, CreateUser createUser) {
+    public UserManager(InputHandler inputHandler, UserInterface ui, CreateUser createUser, UpdateUserHistory history) {
         this.inputHandler = inputHandler;
         this.ui = ui;
         this.createUser = createUser;
+        this.history = history;
     }
 
     public void loadUsersFromCSV() {
@@ -30,10 +33,12 @@ public class UserManager {
         }
 
         for (ArrayList<String> user : users) {
+            ArrayList<String> loginHistory = history.readUserHistory(user.get(0));
+
             if (Boolean.parseBoolean(user.get(2))) {
-                createUser.createAdminUser(user.get(0), user.get(1));
+                createUser.createAdminUser(user.get(0), user.get(1), loginHistory);
             } else {
-                createUser.createNonAdminUser(user.get(0), user.get(1));
+                createUser.createNonAdminUser(user.get(0), user.get(1), loginHistory);
             }
         }
     }
