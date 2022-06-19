@@ -178,7 +178,7 @@ public class UsernamePasswordFileEditor extends CsvEditor {
 
         while ((line = br.readLine()) != null) {
             ArrayList<String> inside = new ArrayList<>();
-            Collections.addAll(inside, line.split("[,]", 0));
+            Collections.addAll(inside, line.split(",", 0));
             outside.add(inside);
         }
 
