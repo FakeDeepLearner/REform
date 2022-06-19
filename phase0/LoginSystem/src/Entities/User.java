@@ -3,8 +3,8 @@ package Entities;
 import java.util.ArrayList;
 
 public abstract class User {
-    private String username;
-    private String password;
+    private final String username;
+    private final String password;
     private ArrayList<String> loginHistory;
 
     protected Boolean isAdmin = false;
