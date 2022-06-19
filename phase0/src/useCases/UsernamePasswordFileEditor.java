@@ -1,8 +1,7 @@
-package databaseManagers;
+package useCases;
 
 import Entities.User;
 import Entities.UserContainer;
-import useCases.AuthenticateUser;
 
 import java.io.*;
 import java.util.ArrayList;

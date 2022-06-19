@@ -1,7 +1,7 @@
 package Controllers;
 
 import Exceptions.UsernameAlreadyExistsException;
-import databaseManagers.UsernamePasswordFileEditor;
+import useCases.UsernamePasswordFileEditor;
 import useCases.CreateUser;
 import useCases.UpdateUserHistory;
 
