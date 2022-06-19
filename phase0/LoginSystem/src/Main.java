@@ -19,10 +19,12 @@ public class Main{
         UserInterface ui = new UserInterface();
         InputHandler inputHandler = new InputHandler(ui);
 
-        InterfaceManager manager = new InterfaceManager(inputHandler, ui, auth, createUser, history, restrict);
+        UserManager userManager = new UserManager(inputHandler, ui, createUser);
+        LoggedOutManager loggedOutManager = new LoggedOutManager(inputHandler, ui, auth, history, userManager);
+        LoggedInManager loggedInManager = new LoggedInManager(inputHandler, ui, auth, history, restrict, userManager);
 
         while (true) {
-            String username = manager.menuSelector();
+            String username = loggedOutManager.menuSelector();
 
             if (username == null) {
                 continue;
@@ -30,7 +32,7 @@ public class Main{
 
             boolean isLoggedIn = true;
             while (isLoggedIn) {
-                isLoggedIn = manager.userScreen(username);
+                isLoggedIn = loggedInManager.userScreen(username);
             }
         }
     }
