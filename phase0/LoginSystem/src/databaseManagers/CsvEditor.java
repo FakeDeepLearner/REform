@@ -88,7 +88,6 @@ public class CsvEditor {
      *
      * @param filename name of the .csv file to add the line
      * @param content  content of the line to add
-     * @throws IOException
      */
     public void addLine(String filename, String content) throws IOException {
         FileWriter fw = new FileWriter(CsvEditor.formatFilename(filename), true);
@@ -109,7 +108,6 @@ public class CsvEditor {
      *
      * @param filename name of the .csc file to read
      * @return ArrayList of String
-     * @throws IOException
      */
     public ArrayList<String> readLines(String filename) throws IOException {
         ArrayList<String> out = new ArrayList<>();
