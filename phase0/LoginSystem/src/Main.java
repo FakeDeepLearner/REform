@@ -1,29 +1,32 @@
 import Controllers.*;
 import Entities.*;
+import databaseManagers.UsernamePasswordFileManager;
 import useCases.AuthenticateUser;
 import useCases.CreateUser;
 import useCases.RestrictUser;
 import useCases.UpdateUserHistory;
 
-public class Main{
+public class Main {
     public static void main(String[] args) {
         // Initiate the classes
-        UserNameAndPasswordContainer<String, User> users = new UserNameAndPasswordContainer<>();
-        // TODO: Load the database to <users>
-
+        UserContainer<String, User> users = new UserContainer<>();
 
         AuthenticateUser auth = new AuthenticateUser(users);
         CreateUser createUser = new CreateUser(users);
         UpdateUserHistory history = new UpdateUserHistory(users);
         RestrictUser restrict = new RestrictUser(users);
+        UsernamePasswordFileManager file = new UsernamePasswordFileManager(auth, users);
 
         UserInterface ui = new UserInterface();
         InputHandler inputHandler = new InputHandler(ui);
+        UserManager userManager = new UserManager(inputHandler, ui, createUser, history, file);
+        LoggedOutManager loggedOutManager = new LoggedOutManager(inputHandler, ui, auth, history, userManager);
+        LoggedInManager loggedInManager = new LoggedInManager(inputHandler, ui, auth, history, restrict, userManager, file);
 
-        InterfaceManager manager = new InterfaceManager(inputHandler, ui, auth, createUser, history, restrict);
+        userManager.loadUsersFromCSV();
 
         while (true) {
-            String username = manager.menuSelector();
+            String username = loggedOutManager.menuSelector();
 
             if (username == null) {
                 continue;
@@ -31,7 +34,7 @@ public class Main{
 
             boolean isLoggedIn = true;
             while (isLoggedIn) {
-                isLoggedIn = manager.userScreen(username);
+                isLoggedIn = loggedInManager.userScreen(username);
             }
         }
     }

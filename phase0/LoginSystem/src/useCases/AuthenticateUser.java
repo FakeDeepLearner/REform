@@ -3,14 +3,14 @@ package useCases;
 import Entities.Bannable;
 import Entities.NonAdminUser;
 import Entities.User;
-import Entities.UserNameAndPasswordContainer;
+import Entities.UserContainer;
 import Exceptions.UserNotFoundException;
 import Exceptions.UserBannedException;
 
 public class AuthenticateUser {
-    private final UserNameAndPasswordContainer<String, User> interface_users;
+    private UserContainer<String, User> interface_users;
 
-    public AuthenticateUser(UserNameAndPasswordContainer<String, User> interface_users) {
+    public AuthenticateUser(UserContainer<String, User> interface_users) {
         this.interface_users = interface_users;
     }
 

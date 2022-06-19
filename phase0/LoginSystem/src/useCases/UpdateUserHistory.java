@@ -1,7 +1,7 @@
 package useCases;
 
 import Entities.User;
-import Entities.UserNameAndPasswordContainer;
+import Entities.UserContainer;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -10,23 +10,23 @@ import java.util.Scanner;
 
 
 public class UpdateUserHistory {
-    private final UserNameAndPasswordContainer<String, User> interface_users;
+    private final UserContainer<String, User> interfaceUsers;
 
-    public UpdateUserHistory(UserNameAndPasswordContainer<String, User> interface_users) {
-        this.interface_users = interface_users;
+    public UpdateUserHistory(UserContainer<String, User> interfaceUsers) {
+        this.interfaceUsers = interfaceUsers;
     }
 
     /**
      * Read this user's login history from csv file.
+     *
      * @param username this user's username.
      * @return an arraylist of timestamps corresponding to this user's logins.
      */
     public ArrayList<String> readUserHistory(String username) {
         ArrayList<String> userHistory = new ArrayList<>();
-        User user = interface_users.get(username);
 
         try {
-            BufferedReader br = new BufferedReader(new FileReader("UserHistories.csv"));
+            BufferedReader br = new BufferedReader(new FileReader("src/useCases/UserHistories.csv"));
             String line;
 
             while ((line = br.readLine()) != null) {
@@ -42,12 +42,12 @@ public class UpdateUserHistory {
             e.printStackTrace();
         }
 
-        user.setLoginHistory(userHistory);
         return userHistory;
     }
 
     /**
      * Read every user's login history from csv file.
+     *
      * @param userArr an Arraylist of usernames.
      * @return an arraylist of String arrays containing usernames and login times for each user.
      */
@@ -55,7 +55,7 @@ public class UpdateUserHistory {
         ArrayList<String[]> userHistories = new ArrayList<>();
 
         try {
-            BufferedReader br = new BufferedReader(new FileReader("UserHistories.csv"));
+            BufferedReader br = new BufferedReader(new FileReader("src/useCases/UserHistories.csv"));
             String line;
 
             while ((line = br.readLine()) != null) {
@@ -75,13 +75,34 @@ public class UpdateUserHistory {
         return userHistories;
     }
 
+    public void overwriteUserHistories() {
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter("src/useCases/UserHistories.csv", false));
+
+            for (String username : interfaceUsers.keySet()) {
+                for (String loginHistory : getLoginHistory(username)) {
+                    bw.append(username);
+                    bw.append(",");
+                    bw.append(loginHistory);
+                    bw.append("\n");
+                }
+            }
+
+            bw.flush();
+            bw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * Overwrite csv file with provided login history.
+     *
      * @param userHistories an arraylist of String arrays containing usernames and login times for each user.
      */
     public void overwriteUserHistories(ArrayList<String[]> userHistories) {
         try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter("UserHistories.csv", false));
+            BufferedWriter bw = new BufferedWriter(new FileWriter("src/useCases/UserHistories.csv", false));
 
             for (String[] pair : userHistories) {
                 bw.append(pair[0]);
@@ -99,15 +120,16 @@ public class UpdateUserHistory {
 
     /**
      * Write a new login for this user to csv file.
+     *
      * @param username this user's username.
-     * @param append signals whether to append to csv file.
+     * @param append   signals whether to append to csv file.
      */
     public void writeUserHistory(String username, boolean append) {
-        User user = interface_users.get(username);
+        User user = interfaceUsers.get(username);
 
         try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter("UserHistories.csv", append));
-            Scanner sc = new Scanner("UserHistories.csv");
+            BufferedWriter bw = new BufferedWriter(new FileWriter("src/useCases/UserHistories.csv", append));
+            Scanner sc = new Scanner("src/useCases/UserHistories.csv");
             Date newLogin = new Date();
 
             while (sc.hasNext()) {
@@ -130,10 +152,11 @@ public class UpdateUserHistory {
 
     /**
      * Get this user's login history locally (without reading from csv file).
+     *
      * @param username this user's username.
      */
     public ArrayList<String> getLoginHistory(String username) {
-        User user = interface_users.get(username);
+        User user = interfaceUsers.get(username);
         return user.getLoginHistory();
     }
 }

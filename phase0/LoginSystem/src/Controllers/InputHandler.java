@@ -1,6 +1,5 @@
 package Controllers;
 
-
 import java.util.List;
 import java.util.Scanner;
 
@@ -22,10 +21,10 @@ public class InputHandler {
                 input = Integer.parseInt(choice);
 
                 if (!allowedInputs.contains(input)) {
-                    System.out.println("Please enter a valid number.");
+                    ui.printInvalidInput();
                 }
             } catch (NumberFormatException e) {
-                ui.HandleNumberFormatException();
+                ui.printInvalidInput();
             }
         } while (input == 0 || !allowedInputs.contains(input));
 
@@ -42,7 +41,7 @@ public class InputHandler {
             input = sc.next();
 
             if (!allowedInputs.contains(input)) {
-                System.out.println("Please enter a valid number.");
+                ui.printInvalidInput();
             }
         } while (!allowedInputs.contains(input));
 
