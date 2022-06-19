@@ -1,8 +1,9 @@
-import java.util.Scanner;  //  import the Scanner class
 import Controllers.*;
 import Entities.*;
-import Exceptions.*;
-import useCases.*;
+import useCases.AuthenticateUser;
+import useCases.CreateUser;
+import useCases.RestrictUser;
+import useCases.UpdateUserHistory;
 
 public class Main{
     public static void main(String[] args) {
@@ -10,21 +11,27 @@ public class Main{
         UserNameAndPasswordContainer<String, User> users = new UserNameAndPasswordContainer<>();
         // TODO: Load the database to <users>
 
-        InterfaceManager manager = new InterfaceManager();
+
+        AuthenticateUser auth = new AuthenticateUser(users);
+        CreateUser createUser = new CreateUser(users);
+        UpdateUserHistory history = new UpdateUserHistory(users);
+        RestrictUser restrict = new RestrictUser(users);
+
+        UserInterface ui = new UserInterface();
+        InputHandler inputHandler = new InputHandler(ui);
+
+        InterfaceManager manager = new InterfaceManager(inputHandler, ui, auth, createUser, history, restrict);
 
         while (true) {
-            User u = manager.menuSelector();
+            String username = manager.menuSelector();
 
-            if (u == null) {
+            if (username == null) {
                 continue;
             }
 
-            while (u.isLoggedIn()) {
-                if (!u.getAdmin()) {
-                    manager.NonAdminScreen(u);
-                } else {
-                    manager.AdminScreen(u);
-                }
+            boolean isLoggedIn = true;
+            while (isLoggedIn) {
+                isLoggedIn = manager.userScreen(username);
             }
         }
     }

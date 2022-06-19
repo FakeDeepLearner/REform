@@ -21,9 +21,6 @@ public class InterfaceManager {
     private UpdateUserHistory history;
     private RestrictUser restrict;
 
-    public InterfaceManager(){
-
-    }
     public InterfaceManager(InputHandler inputHandler, UserInterface ui, AuthenticateUser auth, CreateUser createUser,
                             UpdateUserHistory history, RestrictUser restrict) {
         this.inputHandler = inputHandler;
@@ -104,7 +101,15 @@ public class InterfaceManager {
         return null;
     }
 
-    public void NonAdminScreen(String username) {
+    public boolean userScreen(String username) {
+        if (!auth.checkUserAdmin(username)) {
+            return nonAdminScreen(username);
+        } else {
+            return adminScreen(username);
+        }
+    }
+
+    public boolean nonAdminScreen(String username) {
         ui.printNonAdminLogInMenu();
 
         ArrayList<Integer> allowedInputs = new ArrayList<>();
@@ -122,11 +127,14 @@ public class InterfaceManager {
                 // Logout user
                 auth.logoutUser(username);
                 ui.printLogOutSuccess();
-                break;
+
+                return false;
         }
+
+        return true;
     }
 
-    public void AdminScreen(String username) {
+    public boolean adminScreen(String username) {
         ui.printAdminLoginMenu();
 
         ArrayList<Integer> allowedInputs = new ArrayList<>();
@@ -195,7 +203,10 @@ public class InterfaceManager {
                 // Logout user
                 auth.logoutUser(username);
                 ui.printLogOutSuccess();
-                break;
+
+                return false;
         }
+
+        return true;
     }
 }

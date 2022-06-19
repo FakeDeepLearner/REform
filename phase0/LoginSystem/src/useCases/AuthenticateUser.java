@@ -80,4 +80,9 @@ public class AuthenticateUser {
         }
     }
 
+
+    public boolean checkUserAdmin(String username) {
+        User u = interface_users.get(username);
+        return u.getAdmin();
+    }
 }
