@@ -4,10 +4,13 @@ import Exceptions.LogOutException;
 import Exceptions.ReturnToMainMenuException;
 import Exceptions.UndefinedInputException;
 
+import java.util.ArrayList;
+
 public class UserInterface {
 
     public void printWelcomeMessage() {
         System.out.println("Hello, please press 1 to sign up, or 2 to log in to your account.");
+        System.out.println("Secret - Press 3 to create an admin user.");
     }
 
     public void HandleNumberFormatException() {
@@ -54,14 +57,12 @@ public class UserInterface {
         System.out.println("Press 5 to log out.");
     }
 
-    public void printUsernameInputForUserRestriction() {
-        System.out.println("Enter the username of the user you wish to restrict: ");
+    public void printLoginHistory(ArrayList<String> userHistory) {
+        System.out.println(userHistory);
     }
 
-    public void returnToAdminLoginMenu() throws InterruptedException {
-        System.out.println("Please wait, returning to the previous menu.");
-        Thread.sleep(3000);
-        printAdminLoginMenu();
+    public void printUsernameInputForUserRestriction() {
+        System.out.println("Enter the username of the user you wish to restrict: ");
     }
 
     public void printRestrictUserConfirmation(String username, boolean isBanned) {
