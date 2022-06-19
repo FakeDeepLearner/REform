@@ -1,9 +1,8 @@
 import Entities.User;
 import Entities.UserContainer;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import useCases.CreateUser;
-
-import static org.junit.Assert.assertTrue;
 
 public class CreateUserTest {
     @Test
@@ -16,7 +15,7 @@ public class CreateUserTest {
         create.createNonAdminUser("user1","u1");
 
         User user=container.get("user1");
-        assertTrue(user.getPassword()=="u1");
+        Assertions.assertEquals("u1", user.getPassword());
     }
     @Test
     public void testcreateAdminUser() {
@@ -28,6 +27,6 @@ public class CreateUserTest {
         create.createAdminUser("user2","u2");
 
         User user=container.get("user2");
-        assertTrue(user.getPassword()=="u2");
+        Assertions.assertEquals("u2", user.getPassword());
     }
 }
