@@ -21,25 +21,6 @@ public class UsernamePasswordFileEditor extends CsvEditor {
         this.interfaceUsers = interfaceUsers;
     }
 
-    public UsernamePasswordFileEditor(AuthenticateUser auth, UserContainer<String, User> interfaceUsers,
-                                      String directory, String filename) {
-        super(directory, filename);
-        this.auth = auth;
-        this.interfaceUsers = interfaceUsers;
-    }
-
-    /**
-     * Static method to add a custom first line
-     *
-     * @param content String to add as the first line
-     * @throws IOException when file cannot be found
-     */
-    private static void addFirstLine(String content) throws IOException {
-        FileWriter fw = new FileWriter("src/UsernamePassword.csv");
-        BufferedWriter output = new BufferedWriter(fw);
-        output.write(content);
-        output.close();
-    }
 
     // Static method to add the first line as "Username","Password,IsAdmin"
     private static void addFirstLine() throws IOException {
@@ -58,28 +39,6 @@ public class UsernamePasswordFileEditor extends CsvEditor {
 
         for (String line : array) {
             super.addLine("src/UsernamePassword.csv", line);
-        }
-    }
-
-    public void createUsernamePasswordFile(String filename) throws IOException {
-        super.createCSVfile(filename);
-        UsernamePasswordFileEditor.addFirstLine(filename);
-
-        ArrayList<String> array = UsernamePasswordFileEditor.reformatContainer(interfaceUsers);
-
-        for (String line : array) {
-            super.addLine(filename, line);
-        }
-    }
-
-    public void createUsernamePasswordFile(String filename, UserContainer<String, User> content) throws IOException {
-        super.createCSVfile(filename);
-        UsernamePasswordFileEditor.addFirstLine(filename);
-
-        ArrayList<String> array = UsernamePasswordFileEditor.reformatContainer(content);
-
-        for (String line : array) {
-            super.addLine(filename, line);
         }
     }
 
@@ -106,29 +65,6 @@ public class UsernamePasswordFileEditor extends CsvEditor {
         return out;
     }
 
-    public static ArrayList<String> reformatContainer(UserContainer<String, User> c, boolean includeType) {
-
-        ArrayList<String> out = new ArrayList<>();
-
-        if (!includeType) {
-            for (Map.Entry<String, User> entry : c.entrySet()) {
-                String key = entry.getKey();
-                User value = entry.getValue();
-
-                out.add(key + "," + value.getPassword());
-
-            }
-        } else {
-            for (Map.Entry<String, User> entry : c.entrySet()) {
-                String key = entry.getKey();
-                User value = entry.getValue();
-
-                out.add(key + "," + value.getPassword() + "," + value.isAdmin());
-
-            }
-        }
-        return out;
-    }
 
     public void addUserInfo(String username, String password) throws IOException {
         String info = username + "," + password + "," + auth.checkUserAdmin(username);
@@ -143,10 +79,7 @@ public class UsernamePasswordFileEditor extends CsvEditor {
      * @param password of the user to be added to the file
      * @throws IOException when file cannot be found
      */
-    public void addUserInfo(String file, String username, String password) throws IOException {
-        String info = username + "," + password + "," + auth.checkUserAdmin(username);
-        addLine(file, info);
-    }
+
 
     public ArrayList<ArrayList<String>> getUsersFromCSV() throws IOException {
         ArrayList<ArrayList<String>> outside = new ArrayList<>();
@@ -157,19 +90,6 @@ public class UsernamePasswordFileEditor extends CsvEditor {
         return getArrayLists(outside, fw);
     }
 
-    /**
-     * @param filename e.g. "phase0/LoginSystem/src/databaseManagers/UsernamePassword.csv"
-     * @return 2-D arrayList [ [u1,pw2,Admin1], [u2,pw2,Admin2], ... ]
-     * @throws IOException when file cannot be found
-     */
-    public ArrayList<ArrayList<String>> getUsersFromCSV(String filename) throws IOException {
-        ArrayList<ArrayList<String>> outside = new ArrayList<>();
-
-        String line = null;
-
-        FileReader fw = new FileReader(CsvEditor.formatFilename(filename));
-        return getArrayLists(outside, fw);
-    }
 
     private ArrayList<ArrayList<String>> getArrayLists(ArrayList<ArrayList<String>> outside, FileReader fw) throws IOException {
         String line;
