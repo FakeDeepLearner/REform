@@ -8,7 +8,7 @@ import Exceptions.UserNotFoundException;
 import Exceptions.UserBannedException;
 
 public class AuthenticateUser {
-    private UserContainer<String, User> interface_users;
+    private final UserContainer<String, User> interface_users;
 
     public AuthenticateUser(UserContainer<String, User> interface_users) {
         this.interface_users = interface_users;
@@ -64,22 +64,6 @@ public class AuthenticateUser {
         u.setIsLoggedIn(false);
         return true;
     }
-
-    /**
-     * Checks if there is a User with the given username.
-     *
-     * @param username to check.
-     * @return true if a User has the specified username.
-     */
-    public boolean checkUsernameExists(String username) {
-        try {
-            User u = interface_users.get(username);
-            return true;
-        } catch (UserNotFoundException e) {
-            return false;
-        }
-    }
-
 
     public boolean checkUserAdmin(String username) {
         User u = interface_users.get(username);
