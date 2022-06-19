@@ -11,8 +11,6 @@ public class AndrewMain {
 
         UsernamePasswordFileManager manager = new UsernamePasswordFileManager();
 
-        manager.createCSVfile("UsernamePassword.csv");
-
         NonAdminUser u1 = new NonAdminUser("u1", "pw1");
         NonAdminUser u2 = new NonAdminUser("u2", "pw2");
         NonAdminUser u3 = new NonAdminUser("u3", "pw3");
