@@ -151,8 +151,25 @@ public class UsernamePasswordFileManager extends CSVmanager {
         String line = null;
 
         FileReader fw = new FileReader(CSVmanager.formatFilename(filename));
-        BufferedReader br = new BufferedReader(fw);
+        return getArrayLists(outside, fw);
 
+
+    }
+
+    public ArrayList<ArrayList<String>> getUsersFromCSV() throws IOException {
+        ArrayList<ArrayList<String>> outside = new ArrayList<>();
+
+        String line = null;
+
+        FileReader fw = new FileReader("phase0/LoginSystem/src/databaseManagers/UsernamePassword.csv");
+        return getArrayLists(outside, fw);
+
+
+    }
+
+    private ArrayList<ArrayList<String>> getArrayLists(ArrayList<ArrayList<String>> outside, FileReader fw) throws IOException {
+        String line;
+        BufferedReader br = new BufferedReader(fw);
         br.readLine();
 
         while ((line = br.readLine()) != null) {
@@ -162,10 +179,8 @@ public class UsernamePasswordFileManager extends CSVmanager {
         }
 
         return outside;
-
-
     }
 
-
 }
+
 
