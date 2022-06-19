@@ -120,7 +120,7 @@ public class InterfaceManager {
             case 1:
                 // View login history
                 ArrayList<String> userHistory = history.getLoginHistory(username);
-                System.out.println(userHistory);
+                ui.printLoginHistory(userHistory);
                 break;
 
             case 2:
@@ -145,7 +145,7 @@ public class InterfaceManager {
             case 1:
                 // View login history
                 ArrayList<String> userHistory = history.getLoginHistory(username);
-                System.out.println(userHistory);
+                ui.printLoginHistory(userHistory);
                 break;
 
             case 2:
