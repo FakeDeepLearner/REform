@@ -5,11 +5,10 @@ import useCases.CreateUser;
 import useCases.RestrictUser;
 import useCases.UpdateUserHistory;
 
-public class Main{
+public class Main {
     public static void main(String[] args) {
         // Initiate the classes
         UserContainer<String, User> users = new UserContainer<>();
-        // TODO: Load the database to <users>
 
         AuthenticateUser auth = new AuthenticateUser(users);
         CreateUser createUser = new CreateUser(users);
@@ -22,6 +21,8 @@ public class Main{
         UserManager userManager = new UserManager(inputHandler, ui, createUser);
         LoggedOutManager loggedOutManager = new LoggedOutManager(inputHandler, ui, auth, history, userManager);
         LoggedInManager loggedInManager = new LoggedInManager(inputHandler, ui, auth, history, restrict, userManager);
+
+        userManager.loadUsersFromCSV();
 
         while (true) {
             String username = loggedOutManager.menuSelector();

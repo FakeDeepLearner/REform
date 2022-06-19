@@ -5,6 +5,7 @@ import Entities.UserContainer;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Map;
 
 public class UsernamePasswordFileManager extends CSVmanager {
@@ -18,17 +19,17 @@ public class UsernamePasswordFileManager extends CSVmanager {
     }
 
     public UsernamePasswordFileManager() {
-        super("phase0/LoginSystem/src/databaseManagers", "UsernamePassword.csv");
+        super("src/databaseManagers", "UsernamePassword.csv");
     }
 
     /**
      * Static method to add a custom first line
      *
      * @param content String to add as the first line
-     * @throws IOException
+     * @throws IOException when file cannot be found
      */
     private static void addFirstLine(String content) throws IOException {
-        FileWriter fw = new FileWriter(new File("phase0/LoginSystem/src/databaseManagers/UsernamePassword.csv"));
+        FileWriter fw = new FileWriter("src/databaseManagers/UsernamePassword.csv");
         BufferedWriter output = new BufferedWriter(fw);
         output.write(content);
         output.close();
@@ -36,7 +37,7 @@ public class UsernamePasswordFileManager extends CSVmanager {
 
     // Static method to add the first line as "Username","Password,IsAdmin"
     private static void addFirstLine() throws IOException {
-        FileWriter fw = new FileWriter(new File("phase0/LoginSystem/src/databaseManagers/UsernamePassword.csv"));
+        FileWriter fw = new FileWriter("src/databaseManagers/UsernamePassword.csv");
         BufferedWriter output = new BufferedWriter(fw);
         output.write("Username,Password,IsAdmin");
         output.close();
@@ -53,7 +54,7 @@ public class UsernamePasswordFileManager extends CSVmanager {
         UsernamePasswordFileManager.addFirstLine(filename);
     }
 
-    public void createUsernamePasswordFile(String filename, UserContainer content) throws IOException {
+    public void createUsernamePasswordFile(String filename, UserContainer<String, User> content) throws IOException {
         super.createCSVfile(filename);
         UsernamePasswordFileManager.addFirstLine(filename);
 
@@ -64,14 +65,14 @@ public class UsernamePasswordFileManager extends CSVmanager {
         }
     }
 
-    public void createUsernamePasswordFile(UserContainer content) throws IOException {
+    public void createUsernamePasswordFile(UserContainer<String, User> content) throws IOException {
         super.createCSVfile();
         UsernamePasswordFileManager.addFirstLine();
 
         ArrayList<String> array = UsernamePasswordFileManager.reformatContainer(content);
 
         for (String line : array) {
-            super.addLine("phase0/LoginSystem/src/databaseManagers/UsernamePassword.csv", line);
+            super.addLine("src/databaseManagers/UsernamePassword.csv", line);
         }
     }
 
@@ -91,7 +92,7 @@ public class UsernamePasswordFileManager extends CSVmanager {
             String key = entry.getKey();
             User value = entry.getValue();
 
-            out.add(key + "," + value.getPassword() + "," + String.valueOf(value.isAdmin()));
+            out.add(key + "," + value.getPassword() + "," + value.isAdmin());
 
         }
 
@@ -115,7 +116,7 @@ public class UsernamePasswordFileManager extends CSVmanager {
                 String key = entry.getKey();
                 User value = entry.getValue();
 
-                out.add(key + "," + value.getPassword() + "," + String.valueOf(value.isAdmin()));
+                out.add(key + "," + value.getPassword() + "," + value.isAdmin());
 
             }
         }
@@ -128,22 +129,31 @@ public class UsernamePasswordFileManager extends CSVmanager {
      *
      * @param file name of the file to add the user info
      * @param u    user to be added to the file
-     * @throws IOException
+     * @throws IOException when file cannot be found
      */
     public void addUserInfo(String file, User u) throws IOException {
-        String info = u.getUsername() + "," + u.getPassword() + "," + String.valueOf(u.isAdmin());
+        String info = u.getUsername() + "," + u.getPassword() + "," + u.isAdmin();
         addLine(file, info);
     }
 
     public void addUserInfo(User u) throws IOException {
-        String info = u.getUsername() + "," + u.getPassword() + "," + String.valueOf(u.isAdmin());
-        addLine("phase0/LoginSystem/src/databaseManagers/UsernamePassword.csv", info);
+        String info = u.getUsername() + "," + u.getPassword() + "," + u.isAdmin();
+        addLine("src/databaseManagers/UsernamePassword.csv", info);
+    }
+
+    public ArrayList<ArrayList<String>> getUsersFromCSV() throws IOException {
+        ArrayList<ArrayList<String>> outside = new ArrayList<>();
+
+        String line = null;
+
+        FileReader fw = new FileReader("src/databaseManagers/UsernamePassword.csv");
+        return getArrayLists(outside, fw);
     }
 
     /**
      * @param filename e.g. "phase0/LoginSystem/src/databaseManagers/UsernamePassword.csv"
      * @return 2-D arrayList [ [u1,pw2,Admin1], [u2,pw2,Admin2], ... ]
-     * @throws IOException
+     * @throws IOException when file cannot be found
      */
     public ArrayList<ArrayList<String>> getUsersFromCSV(String filename) throws IOException {
         ArrayList<ArrayList<String>> outside = new ArrayList<>();
@@ -152,19 +162,6 @@ public class UsernamePasswordFileManager extends CSVmanager {
 
         FileReader fw = new FileReader(CSVmanager.formatFilename(filename));
         return getArrayLists(outside, fw);
-
-
-    }
-
-    public ArrayList<ArrayList<String>> getUsersFromCSV() throws IOException {
-        ArrayList<ArrayList<String>> outside = new ArrayList<>();
-
-        String line = null;
-
-        FileReader fw = new FileReader("phase0/LoginSystem/src/databaseManagers/UsernamePassword.csv");
-        return getArrayLists(outside, fw);
-
-
     }
 
     private ArrayList<ArrayList<String>> getArrayLists(ArrayList<ArrayList<String>> outside, FileReader fw) throws IOException {
@@ -173,14 +170,11 @@ public class UsernamePasswordFileManager extends CSVmanager {
         br.readLine();
 
         while ((line = br.readLine()) != null) {
-            ArrayList<String> inside = new ArrayList<String>();
-            inside.add(line + "\n");
+            ArrayList<String> inside = new ArrayList<>();
+            Collections.addAll(inside, line.split("[,]", 0));
             outside.add(inside);
         }
 
         return outside;
     }
-
 }
-
-
