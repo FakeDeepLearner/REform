@@ -3,8 +3,6 @@ import org.junit.*;
 import static org.junit.Assert.*;
 
 public class CsvEditorTest {
-
-
     // test methods
     @Test(timeout = 50)
     public void testFormatFilename() {
@@ -13,8 +11,5 @@ public class CsvEditorTest {
         assertEquals(CsvEditor.formatFilename("csv"), "csv.csv");
         assertEquals(CsvEditor.formatFilename("abcsv"), "abcsv.csv");
         assertEquals(CsvEditor.formatFilename("abc.csv"), "abc.csv");
-
     }
-
-
 }

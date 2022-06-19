@@ -18,6 +18,7 @@ public class UpdateUserHistory {
 
     /**
      * Read this user's login history from csv file.
+     *
      * @param username this user's username.
      * @return an arraylist of timestamps corresponding to this user's logins.
      */
@@ -25,7 +26,7 @@ public class UpdateUserHistory {
         ArrayList<String> userHistory = new ArrayList<>();
 
         try {
-            BufferedReader br = new BufferedReader(new FileReader("UserHistories.csv"));
+            BufferedReader br = new BufferedReader(new FileReader("src/UserHistories.csv"));
             String line;
 
             while ((line = br.readLine()) != null) {
@@ -49,7 +50,7 @@ public class UpdateUserHistory {
      */
     public void overwriteUserHistories() {
         try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter("UserHistories.csv", false));
+            BufferedWriter bw = new BufferedWriter(new FileWriter("src/UserHistories.csv", false));
 
             for (String username : interfaceUsers.keySet()) {
                 for (String loginHistory : getLoginHistory(username)) {
@@ -69,6 +70,7 @@ public class UpdateUserHistory {
 
     /**
      * Write a new login for this user to csv file.
+     *
      * @param username this user's username.
      * @param append   signals whether to append to csv file.
      */
@@ -76,8 +78,8 @@ public class UpdateUserHistory {
         User user = interfaceUsers.get(username);
 
         try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter("UserHistories.csv", append));
-            Scanner sc = new Scanner("UserHistories.csv");
+            BufferedWriter bw = new BufferedWriter(new FileWriter("src/UserHistories.csv", append));
+            Scanner sc = new Scanner("src/UserHistories.csv");
             Date newLogin = new Date();
 
             while (sc.hasNext()) {
@@ -100,6 +102,7 @@ public class UpdateUserHistory {
 
     /**
      * Get this user's login history locally (without reading from csv file).
+     *
      * @param username this user's username.
      */
     public ArrayList<String> getLoginHistory(String username) {
