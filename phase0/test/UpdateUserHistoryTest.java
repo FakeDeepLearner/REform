@@ -3,7 +3,7 @@ import Entities.*;
 import useCases.UpdateUserHistory;
 
 import static org.junit.Assert.*;
-import java.util.ArrayList;
+import java.util.*;
 
 public class UpdateUserHistoryTest {
 

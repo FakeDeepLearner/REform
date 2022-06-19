@@ -18,7 +18,6 @@ public class UpdateUserHistory {
 
     /**
      * Read this user's login history from csv file.
-     *
      * @param username this user's username.
      * @return an arraylist of timestamps corresponding to this user's logins.
      */
@@ -47,7 +46,6 @@ public class UpdateUserHistory {
 
     /**
      * Read every user's login history from csv file.
-     *
      * @param userArr an Arraylist of usernames.
      * @return an arraylist of String arrays containing usernames and login times for each user.
      */
@@ -97,7 +95,6 @@ public class UpdateUserHistory {
 
     /**
      * Overwrite csv file with provided login history.
-     *
      * @param userHistories an arraylist of String arrays containing usernames and login times for each user.
      */
     public void overwriteUserHistories(ArrayList<String[]> userHistories) {
@@ -120,7 +117,6 @@ public class UpdateUserHistory {
 
     /**
      * Write a new login for this user to csv file.
-     *
      * @param username this user's username.
      * @param append   signals whether to append to csv file.
      */
