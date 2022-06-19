@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public abstract class User {
     private final String username;
     private final String password;
-    private ArrayList<String> loginHistory;
+    private final ArrayList<String> loginHistory;
 
     protected Boolean isAdmin = false;
 
@@ -41,10 +41,6 @@ public abstract class User {
 
     public boolean isLoggedIn() {
         return isLoggedIn;
-    }
-
-    public void setLoginHistory(ArrayList<String> arr) {
-        loginHistory = arr;
     }
 
     public void addToLoginHistory(String newLogin) {
