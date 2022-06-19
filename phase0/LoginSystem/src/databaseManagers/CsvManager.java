@@ -22,8 +22,8 @@ public class CsvManager {
     /**
      * Static method to format the filename as filename.csv
      *
-     * @param filename
-     * @return
+     * @param filename : the name of the file to be formatted
+     * @return the formatted file name
      */
     public static String formatFilename(String filename) {
         String out = "";
@@ -51,7 +51,6 @@ public class CsvManager {
      * @param directory the directory at which the .csv file will be saved
      * @param filename  name of the .csv file to be saved
      * @param content   content of the .csv file to be saved
-     * @throws IOException
      */
     public void createCSVfile(String directory, String filename, String content) throws IOException {
         FileWriter fw = new FileWriter(new File(directory, CsvManager.formatFilename(filename)));
