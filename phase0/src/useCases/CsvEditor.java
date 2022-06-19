@@ -26,7 +26,7 @@ public class CsvEditor {
      * @return the formatted file name
      */
     public static String formatFilename(String filename) {
-        String out = "";
+        String out;
 
         // filename can't end with .csv
         if (filename.length() < 5) {
@@ -111,7 +111,7 @@ public class CsvEditor {
      */
     public ArrayList<String> readLines(String filename) throws IOException {
         ArrayList<String> out = new ArrayList<>();
-        String line = null;
+        String line;
 
         FileReader fw = new FileReader(CsvEditor.formatFilename(filename));
         BufferedReader br = new BufferedReader(fw);
