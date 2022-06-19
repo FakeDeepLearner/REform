@@ -29,6 +29,27 @@ public class LoggedOutManager {
         this.userManager = userManager;
     }
 
+    private String loginUser(ArrayList<String> usernamePassword) {
+        boolean isLoggedIn;
+        try {
+            isLoggedIn = auth.loginUser(usernamePassword.get(0), usernamePassword.get(1));
+        } catch (UserNotFoundException | UserBannedException e) {
+            ui.printArbitraryException(e);
+            return null;
+        }
+
+        if (isLoggedIn) {
+            ui.printLoginSuccess();
+            history.writeUserHistory(usernamePassword.get(0), true);
+
+            return usernamePassword.get(0);
+        } else {
+            ui.printLoginFail();
+        }
+
+        return null;
+    }
+
     public String menuSelector() {
         ui.printWelcomeMessage();
 
@@ -63,23 +84,6 @@ public class LoggedOutManager {
             return null;
         }
 
-        boolean isLoggedIn;
-        try {
-            isLoggedIn = auth.loginUser(usernamePassword.get(0), usernamePassword.get(1));
-        } catch (UserNotFoundException | UserBannedException e) {
-            ui.printArbitraryException(e);
-            return null;
-        }
-
-        if (isLoggedIn) {
-            ui.printLoginSuccess();
-            history.writeUserHistory(usernamePassword.get(0), true);
-
-            return usernamePassword.get(0);
-        } else {
-            ui.printLoginFail();
-        }
-
-        return null;
+        return loginUser(usernamePassword);
     }
 }

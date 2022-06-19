@@ -1,6 +1,6 @@
 import Controllers.*;
 import Entities.*;
-import databaseManagers.UsernamePasswordFileManager;
+import databaseManagers.UsernamePasswordFileEditor;
 import useCases.AuthenticateUser;
 import useCases.CreateUser;
 import useCases.RestrictUser;
@@ -15,7 +15,7 @@ public class Main {
         CreateUser createUser = new CreateUser(users);
         UpdateUserHistory history = new UpdateUserHistory(users);
         RestrictUser restrict = new RestrictUser(users);
-        UsernamePasswordFileManager file = new UsernamePasswordFileManager(auth, users);
+        UsernamePasswordFileEditor file = new UsernamePasswordFileEditor(auth, users);
 
         UserInterface ui = new UserInterface();
         InputHandler inputHandler = new InputHandler(ui);
