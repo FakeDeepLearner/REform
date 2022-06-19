@@ -2,7 +2,7 @@ import databaseManagers.CsvEditor;
 import org.junit.*;
 import static org.junit.Assert.*;
 
-public class CSVmanagerTest {
+public class CsvEditorTest {
 
 
     // test methods
