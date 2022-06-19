@@ -1,7 +1,7 @@
 package Controllers;
 
 import Exceptions.UserCannotBeBannedException;
-import databaseManagers.UsernamePasswordFileManager;
+import databaseManagers.UsernamePasswordFileEditor;
 import useCases.AuthenticateUser;
 import useCases.RestrictUser;
 import useCases.UpdateUserHistory;
@@ -18,9 +18,9 @@ public class LoggedInManager {
     private final UpdateUserHistory history;
     private final RestrictUser restrict;
     private final UserManager userManager;
-    private final UsernamePasswordFileManager file;
+    private final UsernamePasswordFileEditor file;
 
-    public LoggedInManager(InputHandler input, UserInterface ui, AuthenticateUser auth, UpdateUserHistory history, RestrictUser restrict, UserManager userManager, UsernamePasswordFileManager file) {
+    public LoggedInManager(InputHandler input, UserInterface ui, AuthenticateUser auth, UpdateUserHistory history, RestrictUser restrict, UserManager userManager, UsernamePasswordFileEditor file) {
         this.input = input;
         this.ui = ui;
         this.auth = auth;

@@ -9,21 +9,21 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Map;
 
-public class UsernamePasswordFileManager extends CsvManager {
+public class UsernamePasswordFileEditor extends CsvEditor {
     private String directory;
     private String filename;
     private final AuthenticateUser auth;
     private final UserContainer<String, User> interfaceUsers;
 
     // Constructors
-    public UsernamePasswordFileManager(AuthenticateUser auth, UserContainer<String, User> interfaceUsers) {
+    public UsernamePasswordFileEditor(AuthenticateUser auth, UserContainer<String, User> interfaceUsers) {
         super("src/databaseManagers", "UsernamePassword.csv");
         this.auth = auth;
         this.interfaceUsers = interfaceUsers;
     }
 
-    public UsernamePasswordFileManager(AuthenticateUser auth, UserContainer<String, User> interfaceUsers,
-                                       String directory, String filename) {
+    public UsernamePasswordFileEditor(AuthenticateUser auth, UserContainer<String, User> interfaceUsers,
+                                      String directory, String filename) {
         super(directory, filename);
         this.auth = auth;
         this.interfaceUsers = interfaceUsers;
@@ -53,9 +53,9 @@ public class UsernamePasswordFileManager extends CsvManager {
     // Methods to create (initialize) the csv file
     public void createUsernamePasswordFile() throws IOException {
         super.createCSVfile();
-        UsernamePasswordFileManager.addFirstLine();
+        UsernamePasswordFileEditor.addFirstLine();
 
-        ArrayList<String> array = UsernamePasswordFileManager.reformatContainer(interfaceUsers);
+        ArrayList<String> array = UsernamePasswordFileEditor.reformatContainer(interfaceUsers);
 
         for (String line : array) {
             super.addLine("src/databaseManagers/UsernamePassword.csv", line);
@@ -64,9 +64,9 @@ public class UsernamePasswordFileManager extends CsvManager {
 
     public void createUsernamePasswordFile(String filename) throws IOException {
         super.createCSVfile(filename);
-        UsernamePasswordFileManager.addFirstLine(filename);
+        UsernamePasswordFileEditor.addFirstLine(filename);
 
-        ArrayList<String> array = UsernamePasswordFileManager.reformatContainer(interfaceUsers);
+        ArrayList<String> array = UsernamePasswordFileEditor.reformatContainer(interfaceUsers);
 
         for (String line : array) {
             super.addLine(filename, line);
@@ -75,9 +75,9 @@ public class UsernamePasswordFileManager extends CsvManager {
 
     public void createUsernamePasswordFile(String filename, UserContainer<String, User> content) throws IOException {
         super.createCSVfile(filename);
-        UsernamePasswordFileManager.addFirstLine(filename);
+        UsernamePasswordFileEditor.addFirstLine(filename);
 
-        ArrayList<String> array = UsernamePasswordFileManager.reformatContainer(content);
+        ArrayList<String> array = UsernamePasswordFileEditor.reformatContainer(content);
 
         for (String line : array) {
             super.addLine(filename, line);
@@ -168,7 +168,7 @@ public class UsernamePasswordFileManager extends CsvManager {
 
         String line = null;
 
-        FileReader fw = new FileReader(CsvManager.formatFilename(filename));
+        FileReader fw = new FileReader(CsvEditor.formatFilename(filename));
         return getArrayLists(outside, fw);
     }
 

@@ -1,7 +1,7 @@
 package Controllers;
 
 import Exceptions.UsernameAlreadyExistsException;
-import databaseManagers.UsernamePasswordFileManager;
+import databaseManagers.UsernamePasswordFileEditor;
 import useCases.CreateUser;
 import useCases.UpdateUserHistory;
 
@@ -13,10 +13,10 @@ public class UserManager {
     private final UserInterface ui;
     private final CreateUser createUser;
     private final UpdateUserHistory history;
-    private final UsernamePasswordFileManager file;
+    private final UsernamePasswordFileEditor file;
 
     public UserManager(InputHandler inputHandler, UserInterface ui, CreateUser createUser, UpdateUserHistory history,
-                       UsernamePasswordFileManager file) {
+                       UsernamePasswordFileEditor file) {
         this.inputHandler = inputHandler;
         this.ui = ui;
         this.createUser = createUser;

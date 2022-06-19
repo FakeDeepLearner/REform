@@ -3,19 +3,19 @@ package databaseManagers;
 import java.io.*;
 import java.util.ArrayList;
 
-public class CsvManager {
+public class CsvEditor {
 
     private String directory;
     private String filename;
 
 
     // Constructors
-    public CsvManager(String directory, String filename) {
+    public CsvEditor(String directory, String filename) {
         this.directory = directory;
-        this.filename = CsvManager.formatFilename(filename);
+        this.filename = CsvEditor.formatFilename(filename);
     }
 
-    public CsvManager() {
+    public CsvEditor() {
     }
 
 
@@ -54,21 +54,21 @@ public class CsvManager {
      * @throws IOException
      */
     public void createCSVfile(String directory, String filename, String content) throws IOException {
-        FileWriter fw = new FileWriter(new File(directory, CsvManager.formatFilename(filename)));
+        FileWriter fw = new FileWriter(new File(directory, CsvEditor.formatFilename(filename)));
         BufferedWriter output = new BufferedWriter(fw);
         output.write(content);
         output.close();
     }
 
     public void createCSVfile(String filename, String content) throws IOException {
-        FileWriter fw = new FileWriter(CsvManager.formatFilename(filename));
+        FileWriter fw = new FileWriter(CsvEditor.formatFilename(filename));
         BufferedWriter output = new BufferedWriter(fw);
         output.write(content);
         output.close();
     }
 
     public void createCSVfile(String filename) throws IOException {
-        FileWriter fw = new FileWriter(CsvManager.formatFilename(filename));
+        FileWriter fw = new FileWriter(CsvEditor.formatFilename(filename));
         BufferedWriter output = new BufferedWriter(fw);
 //        output.write("");
         output.close();
@@ -92,14 +92,14 @@ public class CsvManager {
      * @throws IOException
      */
     public void addLine(String filename, String content) throws IOException {
-        FileWriter fw = new FileWriter(CsvManager.formatFilename(filename), true);
+        FileWriter fw = new FileWriter(CsvEditor.formatFilename(filename), true);
         BufferedWriter output = new BufferedWriter(fw);
         output.append("\n" + content);
         output.close();
     }
 
     public void addLine(String content) throws IOException {
-        FileWriter fw = new FileWriter(CsvManager.formatFilename(this.filename), true);
+        FileWriter fw = new FileWriter(CsvEditor.formatFilename(this.filename), true);
         BufferedWriter output = new BufferedWriter(fw);
         output.append("\n" + content);
         output.close();
@@ -116,7 +116,7 @@ public class CsvManager {
         ArrayList<String> out = new ArrayList<>();
         String line = null;
 
-        FileReader fw = new FileReader(CsvManager.formatFilename(filename));
+        FileReader fw = new FileReader(CsvEditor.formatFilename(filename));
         BufferedReader br = new BufferedReader(fw);
 
         while ((line = br.readLine()) != null) {
