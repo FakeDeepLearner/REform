@@ -16,7 +16,7 @@ public class UsernamePasswordFileEditor extends CsvEditor {
 
     // Constructors
     public UsernamePasswordFileEditor(AuthenticateUser auth, UserContainer<String, User> interfaceUsers) {
-        super("", "UsernamePassword.csv");
+        super("src", "UsernamePassword.csv");
         this.auth = auth;
         this.interfaceUsers = interfaceUsers;
     }
@@ -35,7 +35,7 @@ public class UsernamePasswordFileEditor extends CsvEditor {
      * @throws IOException when file cannot be found
      */
     private static void addFirstLine(String content) throws IOException {
-        FileWriter fw = new FileWriter("UsernamePassword.csv");
+        FileWriter fw = new FileWriter("src/UsernamePassword.csv");
         BufferedWriter output = new BufferedWriter(fw);
         output.write(content);
         output.close();
@@ -43,7 +43,7 @@ public class UsernamePasswordFileEditor extends CsvEditor {
 
     // Static method to add the first line as "Username","Password,IsAdmin"
     private static void addFirstLine() throws IOException {
-        FileWriter fw = new FileWriter("UsernamePassword.csv");
+        FileWriter fw = new FileWriter("src/UsernamePassword.csv");
         BufferedWriter output = new BufferedWriter(fw);
         output.write("Username,Password,IsAdmin");
         output.close();
@@ -57,7 +57,7 @@ public class UsernamePasswordFileEditor extends CsvEditor {
         ArrayList<String> array = UsernamePasswordFileEditor.reformatContainer(interfaceUsers);
 
         for (String line : array) {
-            super.addLine("UsernamePassword.csv", line);
+            super.addLine("src/UsernamePassword.csv", line);
         }
     }
 
@@ -132,7 +132,7 @@ public class UsernamePasswordFileEditor extends CsvEditor {
 
     public void addUserInfo(String username, String password) throws IOException {
         String info = username + "," + password + "," + auth.checkUserAdmin(username);
-        addLine("UsernamePassword.csv", info);
+        addLine("src/UsernamePassword.csv", info);
     }
 
     /**
@@ -153,12 +153,12 @@ public class UsernamePasswordFileEditor extends CsvEditor {
 
         String line = null;
 
-        FileReader fw = new FileReader("UsernamePassword.csv");
+        FileReader fw = new FileReader("src/UsernamePassword.csv");
         return getArrayLists(outside, fw);
     }
 
     /**
-     * @param filename e.g. "phase0/src/databaseManagers/UsernamePassword.csv"
+     * @param filename e.g. "phase0/LoginSystem/src/databaseManagers/UsernamePassword.csv"
      * @return 2-D arrayList [ [u1,pw2,Admin1], [u2,pw2,Admin2], ... ]
      * @throws IOException when file cannot be found
      */
