@@ -20,8 +20,7 @@ public class LoggedInManager {
     private final UserManager userManager;
     private final UsernamePasswordFileManager file;
 
-    public LoggedInManager(InputHandler input, UserInterface ui, AuthenticateUser auth, UpdateUserHistory history,
-                           RestrictUser restrict, UserManager userManager, UsernamePasswordFileManager file) {
+    public LoggedInManager(InputHandler input, UserInterface ui, AuthenticateUser auth, UpdateUserHistory history, RestrictUser restrict, UserManager userManager, UsernamePasswordFileManager file) {
         this.input = input;
         this.ui = ui;
         this.auth = auth;
@@ -65,6 +64,46 @@ public class LoggedInManager {
         return true;
     }
 
+    private void updateUserBanStatus() {
+        ui.printRestrictUsernameInput();
+        String restrictUser = input.strInput();
+        boolean isBanned = false;
+        try {
+            isBanned = restrict.isUserBanned(restrictUser);
+        } catch (UserCannotBeBannedException e) {
+            ui.printArbitraryException(e);
+        }
+        ui.printRestrictUserConfirmation(restrictUser, isBanned);
+        ArrayList<String> allowedStrings = new ArrayList<>();
+        Collections.addAll(allowedStrings, "Y", "N");
+        String choice = input.strInput(allowedStrings);
+        if (choice.equals("Y")) {
+            if (!isBanned) {
+                restrict.banNonAdminUser(restrictUser);
+            } else {
+                restrict.unbanNonAdminUser(restrictUser);
+            }
+        }
+    }
+
+    private void deleteUser() {
+        ui.printDeleteUsernameInput();
+        String deleteUser = input.strInput();
+        boolean deleted = restrict.deleteNonAdminUser(deleteUser);
+        if (deleted) {
+            try {
+                file.createUsernamePasswordFile();
+            } catch (IOException e) {
+                ui.printArbitraryException(e);
+            }
+
+            history.overwriteUserHistories();
+            ui.printDeleteUserSuccess(deleteUser);
+        } else {
+            ui.printDeleteUserFail(deleteUser);
+        }
+    }
+
     public boolean adminScreen(String username) {
         ui.printAdminLoginMenu();
 
@@ -88,45 +127,13 @@ public class LoggedInManager {
 
             case 3: {
                 // Ban or unban user
-                ui.printRestrictUsernameInput();
-                String restrictUser = input.strInput();
-                boolean isBanned = false;
-                try {
-                    isBanned = restrict.isUserBanned(restrictUser);
-                } catch (UserCannotBeBannedException e) {
-                    ui.printArbitraryException(e);
-                }
-                ui.printRestrictUserConfirmation(restrictUser, isBanned);
-                ArrayList<String> allowedStrings = new ArrayList<>();
-                Collections.addAll(allowedStrings, "Y", "N");
-                String choice = input.strInput(allowedStrings);
-                if (choice.equals("Y")) {
-                    if (!isBanned) {
-                        restrict.banNonAdminUser(restrictUser);
-                    } else {
-                        restrict.unbanNonAdminUser(restrictUser);
-                    }
-                }
+                updateUserBanStatus();
                 break;
             }
 
             case 4: {
                 // Delete user
-                ui.printDeleteUsernameInput();
-                String deleteUser = input.strInput();
-                boolean deleted = restrict.deleteNonAdminUser(deleteUser);
-                if (deleted) {
-                    try {
-                        file.createUsernamePasswordFile();
-                    } catch (IOException e) {
-                        ui.printArbitraryException(e);
-                    }
-
-                    history.overwriteUserHistories();
-                    ui.printDeleteUserSuccess(deleteUser);
-                } else {
-                    ui.printDeleteUserFail(deleteUser);
-                }
+                deleteUser();
                 break;
             }
 
