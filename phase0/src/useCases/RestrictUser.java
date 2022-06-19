@@ -7,14 +7,14 @@ import Entities.UserContainer;
 import Exceptions.UserCannotBeBannedException;
 
 public class RestrictUser {
-    private UserContainer<String, User> interfaceUsers;
+    private final UserContainer<String, User> interfaceUsers;
 
     public RestrictUser(UserContainer<String, User> interfaceUsers) {
         this.interfaceUsers = interfaceUsers;
     }
 
     /**
-     * Temporarily bans Entities.User if they are a Entities.NonAdminUser.
+     * Temporarily bans Entities.User if they are an Entities.NonAdminUser.
      *
      * @param username of the Entities.User to be banned.
      * @return true if the Entities.User is successfully banned.
@@ -30,7 +30,7 @@ public class RestrictUser {
     }
 
     /**
-     * Unbans Entities.User if they are a Entities.NonAdminUser.
+     * Unbans Entities.User if they are an Entities.NonAdminUser.
      *
      * @param username of the Entities.User to be unbanned.
      * @return true if the Entities.User is successfully unbanned.
@@ -46,7 +46,7 @@ public class RestrictUser {
     }
 
     /**
-     * Deletes the Entities.User if they are a Entities.NonAdminUser.
+     * Deletes the Entities.User if they are an Entities.NonAdminUser.
      *
      * @param username of the Entities.User to be deleted.
      * @return true if the Entities.User is successfully deleted.
