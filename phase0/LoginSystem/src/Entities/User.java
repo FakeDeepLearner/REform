@@ -54,4 +54,6 @@ public abstract class User {
     public void setIsLoggedIn(boolean bool) {
         isLoggedIn = bool;
     }
+
+    public abstract boolean isAdmin();
 }

@@ -35,4 +35,17 @@ public class InputHandler {
     public String strInput() {
         return sc.next();
     }
+
+    public String strInput(List<String> allowedInputs) {
+        String input;
+        do {
+            input = sc.next();
+
+            if (!allowedInputs.contains(input)) {
+                System.out.println("Please enter a valid number.");
+            }
+        } while (!allowedInputs.contains(input));
+
+        return input;
+    }
 }
