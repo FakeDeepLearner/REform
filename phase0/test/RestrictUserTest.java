@@ -1,7 +1,5 @@
-import Exceptions.UserBannedException;
 import org.junit.*;
 import Entities.*;
-import useCases.AuthenticateUser;
 import useCases.RestrictUser;
 
 import static org.junit.Assert.*;
