@@ -1,4 +1,4 @@
-import databaseManagers.CsvEditor;
+import useCases.CsvEditor;
 import org.junit.*;
 import static org.junit.Assert.*;
 

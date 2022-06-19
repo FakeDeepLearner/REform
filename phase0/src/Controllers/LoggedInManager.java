@@ -1,7 +1,7 @@
 package Controllers;
 
 import Exceptions.UserCannotBeBannedException;
-import databaseManagers.UsernamePasswordFileEditor;
+import useCases.UsernamePasswordFileEditor;
 import useCases.AuthenticateUser;
 import useCases.RestrictUser;
 import useCases.UpdateUserHistory;

@@ -1,6 +1,6 @@
 import Controllers.*;
 import Entities.*;
-import databaseManagers.UsernamePasswordFileEditor;
+import useCases.UsernamePasswordFileEditor;
 import useCases.AuthenticateUser;
 import useCases.CreateUser;
 import useCases.RestrictUser;

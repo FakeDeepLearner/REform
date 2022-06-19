@@ -1,8 +1,7 @@
-package databaseManagers;
+package useCases;
 
 import Entities.User;
 import Entities.UserContainer;
-import useCases.AuthenticateUser;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -17,7 +16,7 @@ public class UsernamePasswordFileEditor extends CsvEditor {
 
     // Constructors
     public UsernamePasswordFileEditor(AuthenticateUser auth, UserContainer<String, User> interfaceUsers) {
-        super("src/databaseManagers", "UsernamePassword.csv");
+        super("", "UsernamePassword.csv");
         this.auth = auth;
         this.interfaceUsers = interfaceUsers;
     }
@@ -159,7 +158,7 @@ public class UsernamePasswordFileEditor extends CsvEditor {
     }
 
     /**
-     * @param filename e.g. "phase0/LoginSystem/src/databaseManagers/UsernamePassword.csv"
+     * @param filename e.g. "phase0/src/databaseManagers/UsernamePassword.csv"
      * @return 2-D arrayList [ [u1,pw2,Admin1], [u2,pw2,Admin2], ... ]
      * @throws IOException when file cannot be found
      */

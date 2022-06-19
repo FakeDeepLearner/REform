@@ -1,4 +1,4 @@
-package databaseManagers;
+package useCases;
 
 import java.io.*;
 import java.util.ArrayList;
