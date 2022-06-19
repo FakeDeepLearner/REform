@@ -2,6 +2,7 @@ package databaseManagers;
 
 import Entities.User;
 import Entities.UserContainer;
+import useCases.AuthenticateUser;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -9,17 +10,23 @@ import java.util.Collections;
 import java.util.Map;
 
 public class UsernamePasswordFileManager extends CSVmanager {
-
     private String directory;
     private String filename;
+    private final AuthenticateUser auth;
+    private final UserContainer<String, User> interfaceUsers;
 
     // Constructors
-    public UsernamePasswordFileManager(String directory, String filename) {
-        super(directory, filename);
+    public UsernamePasswordFileManager(AuthenticateUser auth, UserContainer<String, User> interfaceUsers) {
+        super("src/databaseManagers", "UsernamePassword.csv");
+        this.auth = auth;
+        this.interfaceUsers = interfaceUsers;
     }
 
-    public UsernamePasswordFileManager() {
-        super("src/databaseManagers", "UsernamePassword.csv");
+    public UsernamePasswordFileManager(AuthenticateUser auth, UserContainer<String, User> interfaceUsers,
+                                       String directory, String filename) {
+        super(directory, filename);
+        this.auth = auth;
+        this.interfaceUsers = interfaceUsers;
     }
 
     /**
@@ -47,11 +54,23 @@ public class UsernamePasswordFileManager extends CSVmanager {
     public void createUsernamePasswordFile() throws IOException {
         super.createCSVfile();
         UsernamePasswordFileManager.addFirstLine();
+
+        ArrayList<String> array = UsernamePasswordFileManager.reformatContainer(interfaceUsers);
+
+        for (String line : array) {
+            super.addLine("src/databaseManagers/UsernamePassword.csv", line);
+        }
     }
 
     public void createUsernamePasswordFile(String filename) throws IOException {
         super.createCSVfile(filename);
         UsernamePasswordFileManager.addFirstLine(filename);
+
+        ArrayList<String> array = UsernamePasswordFileManager.reformatContainer(interfaceUsers);
+
+        for (String line : array) {
+            super.addLine(filename, line);
+        }
     }
 
     public void createUsernamePasswordFile(String filename, UserContainer<String, User> content) throws IOException {
@@ -62,17 +81,6 @@ public class UsernamePasswordFileManager extends CSVmanager {
 
         for (String line : array) {
             super.addLine(filename, line);
-        }
-    }
-
-    public void createUsernamePasswordFile(UserContainer<String, User> content) throws IOException {
-        super.createCSVfile();
-        UsernamePasswordFileManager.addFirstLine();
-
-        ArrayList<String> array = UsernamePasswordFileManager.reformatContainer(content);
-
-        for (String line : array) {
-            super.addLine("src/databaseManagers/UsernamePassword.csv", line);
         }
     }
 
@@ -123,22 +131,22 @@ public class UsernamePasswordFileManager extends CSVmanager {
         return out;
     }
 
+    public void addUserInfo(String username, String password) throws IOException {
+        String info = username + "," + password + "," + auth.checkUserAdmin(username);
+        addLine("src/databaseManagers/UsernamePassword.csv", info);
+    }
 
     /**
      * Methods to add User information to the CSV file
      *
-     * @param file name of the file to add the user info
-     * @param u    user to be added to the file
+     * @param file     name of the file to add the user info
+     * @param username to be added to the file
+     * @param password of the user to be added to the file
      * @throws IOException when file cannot be found
      */
-    public void addUserInfo(String file, User u) throws IOException {
-        String info = u.getUsername() + "," + u.getPassword() + "," + u.isAdmin();
+    public void addUserInfo(String file, String username, String password) throws IOException {
+        String info = username + "," + password + "," + auth.checkUserAdmin(username);
         addLine(file, info);
-    }
-
-    public void addUserInfo(User u) throws IOException {
-        String info = u.getUsername() + "," + u.getPassword() + "," + u.isAdmin();
-        addLine("src/databaseManagers/UsernamePassword.csv", info);
     }
 
     public ArrayList<ArrayList<String>> getUsersFromCSV() throws IOException {

@@ -13,17 +13,18 @@ public class UserManager {
     private final UserInterface ui;
     private final CreateUser createUser;
     private final UpdateUserHistory history;
+    private final UsernamePasswordFileManager file;
 
-    public UserManager(InputHandler inputHandler, UserInterface ui, CreateUser createUser, UpdateUserHistory history) {
+    public UserManager(InputHandler inputHandler, UserInterface ui, CreateUser createUser, UpdateUserHistory history,
+                       UsernamePasswordFileManager file) {
         this.inputHandler = inputHandler;
         this.ui = ui;
         this.createUser = createUser;
         this.history = history;
+        this.file = file;
     }
 
     public void loadUsersFromCSV() {
-        UsernamePasswordFileManager file = new UsernamePasswordFileManager();
-
         ArrayList<ArrayList<String>> users;
         try {
             users = file.getUsersFromCSV();
@@ -69,6 +70,13 @@ public class UserManager {
             ui.printArbitraryException(e);
             return null;
         }
+
+        try {
+            file.addUserInfo(username_password.get(0), username_password.get(1));
+        } catch (IOException e) {
+            ui.printArbitraryException(e);
+        }
+
         ui.printSignUpSuccess();
 
         return username_password;

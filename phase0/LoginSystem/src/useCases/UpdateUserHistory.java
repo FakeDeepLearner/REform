@@ -12,8 +12,8 @@ import java.util.Scanner;
 public class UpdateUserHistory {
     private final UserContainer<String, User> interfaceUsers;
 
-    public UpdateUserHistory(UserContainer<String, User> interface_users) {
-        this.interfaceUsers = interface_users;
+    public UpdateUserHistory(UserContainer<String, User> interfaceUsers) {
+        this.interfaceUsers = interfaceUsers;
     }
 
     /**

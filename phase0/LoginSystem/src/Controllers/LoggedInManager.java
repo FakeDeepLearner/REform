@@ -1,10 +1,12 @@
 package Controllers;
 
 import Exceptions.UserCannotBeBannedException;
+import databaseManagers.UsernamePasswordFileManager;
 import useCases.AuthenticateUser;
 import useCases.RestrictUser;
 import useCases.UpdateUserHistory;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -16,15 +18,17 @@ public class LoggedInManager {
     private final UpdateUserHistory history;
     private final RestrictUser restrict;
     private final UserManager userManager;
+    private final UsernamePasswordFileManager file;
 
     public LoggedInManager(InputHandler input, UserInterface ui, AuthenticateUser auth, UpdateUserHistory history,
-                           RestrictUser restrict, UserManager userManager) {
+                           RestrictUser restrict, UserManager userManager, UsernamePasswordFileManager file) {
         this.input = input;
         this.ui = ui;
         this.auth = auth;
         this.history = history;
         this.restrict = restrict;
         this.userManager = userManager;
+        this.file = file;
     }
 
     public boolean userScreen(String username) {
@@ -112,6 +116,12 @@ public class LoggedInManager {
                 String deleteUser = input.strInput();
                 boolean deleted = restrict.deleteNonAdminUser(deleteUser);
                 if (deleted) {
+                    try {
+                        file.createUsernamePasswordFile();
+                    } catch (IOException e) {
+                        ui.printArbitraryException(e);
+                    }
+
                     history.overwriteUserHistories();
                     ui.printDeleteUserSuccess(deleteUser);
                 } else {
