@@ -36,7 +36,7 @@ public class UsernamePasswordFileEditor extends CsvEditor {
      * @throws IOException when file cannot be found
      */
     private static void addFirstLine(String content) throws IOException {
-        FileWriter fw = new FileWriter("src/databaseManagers/UsernamePassword.csv");
+        FileWriter fw = new FileWriter("UsernamePassword.csv");
         BufferedWriter output = new BufferedWriter(fw);
         output.write(content);
         output.close();
@@ -44,7 +44,7 @@ public class UsernamePasswordFileEditor extends CsvEditor {
 
     // Static method to add the first line as "Username","Password,IsAdmin"
     private static void addFirstLine() throws IOException {
-        FileWriter fw = new FileWriter("src/databaseManagers/UsernamePassword.csv");
+        FileWriter fw = new FileWriter("UsernamePassword.csv");
         BufferedWriter output = new BufferedWriter(fw);
         output.write("Username,Password,IsAdmin");
         output.close();
@@ -58,7 +58,7 @@ public class UsernamePasswordFileEditor extends CsvEditor {
         ArrayList<String> array = UsernamePasswordFileEditor.reformatContainer(interfaceUsers);
 
         for (String line : array) {
-            super.addLine("src/databaseManagers/UsernamePassword.csv", line);
+            super.addLine("UsernamePassword.csv", line);
         }
     }
 
@@ -133,7 +133,7 @@ public class UsernamePasswordFileEditor extends CsvEditor {
 
     public void addUserInfo(String username, String password) throws IOException {
         String info = username + "," + password + "," + auth.checkUserAdmin(username);
-        addLine("src/databaseManagers/UsernamePassword.csv", info);
+        addLine("UsernamePassword.csv", info);
     }
 
     /**
@@ -154,7 +154,7 @@ public class UsernamePasswordFileEditor extends CsvEditor {
 
         String line = null;
 
-        FileReader fw = new FileReader("src/databaseManagers/UsernamePassword.csv");
+        FileReader fw = new FileReader("UsernamePassword.csv");
         return getArrayLists(outside, fw);
     }
 

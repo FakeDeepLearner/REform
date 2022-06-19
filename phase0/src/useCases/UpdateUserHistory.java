@@ -45,34 +45,8 @@ public class UpdateUserHistory {
     }
 
     /**
-     * Read every user's login history from csv file.
-     * @param userArr an Arraylist of usernames.
-     * @return an arraylist of String arrays containing usernames and login times for each user.
+     * Overwrite csv file with new login history for each user.
      */
-    public ArrayList<String[]> readUserHistories(ArrayList<String> userArr) {
-        ArrayList<String[]> userHistories = new ArrayList<>();
-
-        try {
-            BufferedReader br = new BufferedReader(new FileReader("UserHistories.csv"));
-            String line;
-
-            while ((line = br.readLine()) != null) {
-                String[] contents = line.split(",");
-
-                if (userArr.contains(contents[0])) {
-                    String[] userInfo = {contents[0], contents[1]};
-                    userHistories.add(userInfo);
-                }
-            }
-
-            br.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return userHistories;
-    }
-
     public void overwriteUserHistories() {
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter("UserHistories.csv", false));
@@ -84,28 +58,6 @@ public class UpdateUserHistory {
                     bw.append(loginHistory);
                     bw.append("\n");
                 }
-            }
-
-            bw.flush();
-            bw.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Overwrite csv file with provided login history.
-     * @param userHistories an arraylist of String arrays containing usernames and login times for each user.
-     */
-    public void overwriteUserHistories(ArrayList<String[]> userHistories) {
-        try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter("UserHistories.csv", false));
-
-            for (String[] pair : userHistories) {
-                bw.append(pair[0]);
-                bw.append(",");
-                bw.append(pair[1]);
-                bw.append("\n");
             }
 
             bw.flush();
