@@ -93,7 +93,7 @@ public class UsernamePasswordFileManager extends CSVmanager {
             String key = entry.getKey();
             User value = entry.getValue();
 
-            out.add(key + "," + value.getPassword() + String.valueOf(value.isAdmin()));
+            out.add(key + "," + value.getPassword() + "," + String.valueOf(value.isAdmin()));
 
         }
 
@@ -117,8 +117,7 @@ public class UsernamePasswordFileManager extends CSVmanager {
                 String key = entry.getKey();
                 User value = entry.getValue();
 
-                // TODO: make a isAdmin() in User.java
-//                out.add(key + "," + value.getPassword() + value.isAdmin);
+                out.add(key + "," + value.getPassword() + "," + String.valueOf(value.isAdmin()));
 
             }
         }
@@ -134,12 +133,12 @@ public class UsernamePasswordFileManager extends CSVmanager {
      * @throws IOException
      */
     public void addUserInfo(String file, User u) throws IOException {
-        String info = u.getUsername() + "," + u.getPassword() + String.valueOf(u.isAdmin());
+        String info = u.getUsername() + "," + u.getPassword() + "," + String.valueOf(u.isAdmin());
         addLine(file, info);
     }
 
     public void addUserInfo(User u) throws IOException {
-        String info = u.getUsername() + "," + u.getPassword() + String.valueOf(u.isAdmin());
+        String info = u.getUsername() + "," + u.getPassword() + "," + String.valueOf(u.isAdmin());
         addLine("phase0/LoginSystem/src/databaseManagers/UsernamePassword.csv", info);
     }
 
