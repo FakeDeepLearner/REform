@@ -8,9 +8,8 @@ import useCases.UpdateUserHistory;
 public class Main{
     public static void main(String[] args) {
         // Initiate the classes
-        UserNameAndPasswordContainer<String, User> users = new UserNameAndPasswordContainer<>();
+        UserContainer<String, User> users = new UserContainer<>();
         // TODO: Load the database to <users>
-
 
         AuthenticateUser auth = new AuthenticateUser(users);
         CreateUser createUser = new CreateUser(users);

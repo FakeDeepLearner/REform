@@ -3,13 +3,13 @@ package useCases;
 import Entities.Bannable;
 import Entities.NonAdminUser;
 import Entities.User;
-import Entities.UserNameAndPasswordContainer;
+import Entities.UserContainer;
 import Exceptions.UserCannotBeBannedException;
 
 public class RestrictUser {
-    private UserNameAndPasswordContainer<String, User> interfaceUsers;
+    private UserContainer<String, User> interfaceUsers;
 
-    public RestrictUser(UserNameAndPasswordContainer<String, User> interfaceUsers) {
+    public RestrictUser(UserContainer<String, User> interfaceUsers) {
         this.interfaceUsers = interfaceUsers;
     }
 

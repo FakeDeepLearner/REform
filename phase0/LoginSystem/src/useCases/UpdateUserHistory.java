@@ -1,7 +1,7 @@
 package useCases;
 
 import Entities.User;
-import Entities.UserNameAndPasswordContainer;
+import Entities.UserContainer;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -10,9 +10,9 @@ import java.util.Scanner;
 
 
 public class UpdateUserHistory {
-    private UserNameAndPasswordContainer<String, User> interface_users;
+    private UserContainer<String, User> interface_users;
 
-    public UpdateUserHistory(UserNameAndPasswordContainer<String, User> interface_users) {
+    public UpdateUserHistory(UserContainer<String, User> interface_users) {
         this.interface_users = interface_users;
     }
 

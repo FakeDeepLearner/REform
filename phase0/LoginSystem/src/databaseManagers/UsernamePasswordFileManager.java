@@ -1,7 +1,7 @@
 package databaseManagers;
 
 import Entities.User;
-import Entities.UserNameAndPasswordContainer;
+import Entities.UserContainer;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -55,7 +55,7 @@ public class UsernamePasswordFileManager extends CSVmanager {
         UsernamePasswordFileManager.addFirstLine(filename);
     }
 
-    public void createUsernamePasswordFile(String filename, UserNameAndPasswordContainer content) throws IOException {
+    public void createUsernamePasswordFile(String filename, UserContainer content) throws IOException {
         super.createCSVfile(filename);
         UsernamePasswordFileManager.addFirstLine(filename);
 
@@ -66,7 +66,7 @@ public class UsernamePasswordFileManager extends CSVmanager {
         }
     }
 
-    public void createUsernamePasswordFile(UserNameAndPasswordContainer content) throws IOException {
+    public void createUsernamePasswordFile(UserContainer content) throws IOException {
         super.createCSVfile();
         UsernamePasswordFileManager.addFirstLine();
 
@@ -85,7 +85,7 @@ public class UsernamePasswordFileManager extends CSVmanager {
      * @return [user1, psw1,IsAdmin1 "\n" user2,psw2, IsAdmin2]
      */
 
-    public static ArrayList<String> reformatContainer(UserNameAndPasswordContainer<String, User> c) {
+    public static ArrayList<String> reformatContainer(UserContainer<String, User> c) {
 
         ArrayList<String> out = new ArrayList<>();
 
@@ -100,7 +100,7 @@ public class UsernamePasswordFileManager extends CSVmanager {
         return out;
     }
 
-    public static ArrayList<String> reformatContainer(UserNameAndPasswordContainer<String, User> c, boolean includeType) {
+    public static ArrayList<String> reformatContainer(UserContainer<String, User> c, boolean includeType) {
 
         ArrayList<String> out = new ArrayList<>();
 

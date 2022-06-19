@@ -4,7 +4,7 @@ import Exceptions.UserNotFoundException;
 
 import java.util.HashMap;
 
-public class UserNameAndPasswordContainer<String, User> extends HashMap<String, User>{
+public class UserContainer<String, User> extends HashMap<String, User>{
     @Override
     public User get(Object key) throws UserNotFoundException {
         if(this.containsKey(key)){
