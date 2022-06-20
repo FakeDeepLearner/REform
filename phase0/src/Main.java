@@ -1,5 +1,6 @@
 import Controllers.*;
 import Entities.*;
+import Exceptions.ExitProgramException;
 import useCases.UsernamePasswordFileEditor;
 import useCases.AuthenticateUser;
 import useCases.CreateUser;
@@ -7,7 +8,7 @@ import useCases.RestrictUser;
 import useCases.UpdateUserHistory;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args){
         // Initiate the classes
         UserContainer<String, User> users = new UserContainer<>();
 
@@ -26,7 +27,13 @@ public class Main {
         userManager.loadUsersFromCSV();
 
         while (true) {
-            String username = loggedOutManager.menuSelector();
+            String username = null;
+            try {
+                username = loggedOutManager.menuSelector();
+            } catch (ExitProgramException e) {
+                System.exit(0);
+            }
+
 
             if (username == null) {
                 continue;
@@ -37,5 +44,6 @@ public class Main {
                 isLoggedIn = loggedInManager.userScreen(username);
             }
         }
+
     }
 }

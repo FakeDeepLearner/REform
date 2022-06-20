@@ -1,5 +1,6 @@
 package Controllers;
 
+import Exceptions.ExitProgramException;
 import Exceptions.UserBannedException;
 import Exceptions.UserNotFoundException;
 import useCases.AuthenticateUser;
@@ -45,35 +46,42 @@ public class LoggedOutManager {
         return null;
     }
 
-    public String menuSelector() {
+    public String menuSelector() throws ExitProgramException {
         ui.printWelcomeMessage();
 
         ArrayList<Integer> allowedInputs = new ArrayList<>();
-        Collections.addAll(allowedInputs, 1, 2, 3);
+        Collections.addAll(allowedInputs, 1, 2, 3, 4);
 
         int menuSelect = input.intInput(allowedInputs);
 
         ArrayList<String> usernamePassword = new ArrayList<>();
-        switch (menuSelect) {
-            case 1: {
-                usernamePassword = userManager.createNewUser(false);
-                break;
+
+            switch (menuSelect) {
+                case 1: {
+                    usernamePassword = userManager.createNewUser(false);
+                    break;
+                }
+
+                case 2: {
+                    // User selected to log in
+                    ui.printExistingUsernameInput();
+                    usernamePassword.add(input.strInput());
+                    ui.printExistingPasswordInput();
+                    usernamePassword.add(input.strInput());
+                    break;
+                }
+
+                case 3: {
+                    usernamePassword = userManager.createNewUser(true);
+                    break;
+                }
+
+                case 4: {
+                    throw new ExitProgramException();
+                }
             }
 
-            case 2: {
-                // User selected to log in
-                ui.printExistingUsernameInput();
-                usernamePassword.add(input.strInput());
-                ui.printExistingPasswordInput();
-                usernamePassword.add(input.strInput());
-                break;
-            }
 
-            case 3: {
-                usernamePassword = userManager.createNewUser(true);
-                break;
-            }
-        }
 
         if (usernamePassword == null) {
             return null;

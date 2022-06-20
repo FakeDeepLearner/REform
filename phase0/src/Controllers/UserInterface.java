@@ -1,5 +1,7 @@
 package Controllers;
 
+import Exceptions.ExitProgramException;
+
 import java.util.ArrayList;
 
 public class UserInterface {
@@ -7,6 +9,7 @@ public class UserInterface {
     public void printWelcomeMessage() {
         System.out.println("Hello, please press 1 to sign up, or 2 to log in to your account.");
         System.out.println("(Secret) Press 3 to create an admin user.");
+        System.out.println("Press 4 to exit the program safely.");
     }
 
     public void printNonAdminLogInMenu() {
@@ -91,4 +94,5 @@ public class UserInterface {
     public void printArbitraryException (Exception e) {
         System.out.println(e.getMessage());
     }
+
 }
