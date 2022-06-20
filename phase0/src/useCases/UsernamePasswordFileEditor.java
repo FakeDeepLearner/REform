@@ -9,8 +9,8 @@ import java.util.Collections;
 import java.util.Map;
 
 public class UsernamePasswordFileEditor extends CsvEditor {
-    private String directory;
-    private String filename;
+    //    private String directory;
+//    private String filename;
     private final AuthenticateUser auth;
     private final UserContainer<String, User> interfaceUsers;
 
@@ -71,20 +71,11 @@ public class UsernamePasswordFileEditor extends CsvEditor {
         addLine("src/UsernamePassword.csv", info);
     }
 
-    /**
-     * Methods to add User information to the CSV file
-     *
-     * @param file     name of the file to add the user info
-     * @param username to be added to the file
-     * @param password of the user to be added to the file
-     * @throws IOException when file cannot be found
-     */
-
 
     public ArrayList<ArrayList<String>> getUsersFromCSV() throws IOException {
         ArrayList<ArrayList<String>> outside = new ArrayList<>();
 
-        String line = null;
+//        String line = null;
 
         FileReader fw = new FileReader("src/UsernamePassword.csv");
         return getArrayLists(outside, fw);
