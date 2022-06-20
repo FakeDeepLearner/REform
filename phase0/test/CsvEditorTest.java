@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 public class CsvEditorTest {
     // test methods
-    @Test(timeout = 50)
+    @Test
     public void testFormatFilename() {
         assertEquals(CsvEditor.formatFilename("123"), "123.csv");
         assertEquals(CsvEditor.formatFilename("12345"), "12345.csv");

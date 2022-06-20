@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class UpdateUserHistoryTest {
 
-    @Test(timeout = 50)
+    @Test
     public void testReadWriteHistory() {
         NonAdminUser u = new NonAdminUser("u1", "p1");
         UserContainer<String, User> container = new UserContainer<>();
