@@ -9,8 +9,6 @@ import java.util.Collections;
 import java.util.Map;
 
 public class UsernamePasswordFileEditor extends CsvEditor {
-    //    private String directory;
-//    private String filename;
     private final AuthenticateUser auth;
     private final UserContainer<String, User> interfaceUsers;
 
