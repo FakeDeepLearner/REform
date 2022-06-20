@@ -1,6 +1,7 @@
 package Controllers;
 
 import Exceptions.UserCannotBeBannedException;
+import Exceptions.UserNotFoundException;
 import useCases.UsernamePasswordFileEditor;
 import useCases.AuthenticateUser;
 import useCases.RestrictUser;
@@ -67,15 +68,19 @@ public class LoggedInManager {
     private void updateUserBanStatus() {
         ui.printRestrictUsernameInput();
         String restrictUser = input.strInput();
+
         boolean isBanned = false;
         try {
             isBanned = restrict.isUserBanned(restrictUser);
-        } catch (UserCannotBeBannedException e) {
+        } catch (UserCannotBeBannedException | UserNotFoundException e) {
             ui.printArbitraryException(e);
         }
+
         ui.printRestrictUserConfirmation(restrictUser, isBanned);
+
         ArrayList<String> allowedStrings = new ArrayList<>();
         Collections.addAll(allowedStrings, "Y", "N");
+
         String choice = input.strInput(allowedStrings);
         if (choice.equals("Y")) {
             if (!isBanned) {
