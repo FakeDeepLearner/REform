@@ -69,7 +69,7 @@ public class LoggedInManager {
         ui.printRestrictUsernameInput();
         String restrictUser = input.strInput();
 
-        boolean isBanned = false;
+        boolean isBanned;
         try {
             isBanned = restrict.isUserBanned(restrictUser);
         } catch (UserCannotBeBannedException | UserNotFoundException e) {
