@@ -73,8 +73,6 @@ public class UsernamePasswordFileEditor extends CsvEditor {
     public ArrayList<ArrayList<String>> getUsersFromCSV() throws IOException {
         ArrayList<ArrayList<String>> outside = new ArrayList<>();
 
-//        String line = null;
-
         FileReader fw = new FileReader("src/UsernamePassword.csv");
         return getArrayLists(outside, fw);
     }
