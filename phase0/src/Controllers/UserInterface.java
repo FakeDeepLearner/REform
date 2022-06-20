@@ -1,7 +1,5 @@
 package Controllers;
 
-import Exceptions.ExitProgramException;
-
 import java.util.ArrayList;
 
 public class UserInterface {
