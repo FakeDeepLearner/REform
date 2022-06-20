@@ -54,7 +54,7 @@ public class CreateUser {
 
     public boolean uniqueUsernameExists(String username) {
         try {
-            User u = interfaceUsers.get(username);
+            interfaceUsers.get(username);
             return false;
         } catch (UserNotFoundException e) {
             return true;
