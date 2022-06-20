@@ -1,12 +1,11 @@
 package useCases;
 
 import java.io.*;
-import java.util.ArrayList;
 
 public class CsvEditor {
 
-    private String directory;
-    private String filename;
+    private final String directory;
+    private final String filename;
 
 
     // Constructors
@@ -28,7 +27,7 @@ public class CsvEditor {
         if (filename.length() < 5) {
             out = filename + ".csv";
         } else {
-            if ((filename.substring(filename.length() - 4).equals(".csv"))) {    // filename ends with .csv
+            if ((filename.endsWith(".csv"))) {    // filename ends with .csv
                 out = filename;
             } else {
                 out = filename + ".csv";
@@ -50,7 +49,7 @@ public class CsvEditor {
     public void addLine(String filename, String content) throws IOException {
         FileWriter fw = new FileWriter(CsvEditor.formatFilename(filename), true);
         BufferedWriter output = new BufferedWriter(fw);
-        output.append("\n" + content);
+        output.append("\n").append(content);
         output.close();
     }
 
