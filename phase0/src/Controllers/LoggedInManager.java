@@ -74,6 +74,7 @@ public class LoggedInManager {
             isBanned = restrict.isUserBanned(restrictUser);
         } catch (UserCannotBeBannedException | UserNotFoundException e) {
             ui.printArbitraryException(e);
+            return;
         }
 
         ui.printRestrictUserConfirmation(restrictUser, isBanned);
