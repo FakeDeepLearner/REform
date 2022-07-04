@@ -58,6 +58,10 @@ public class Buyer extends User {
         this.favList = favList;
     }
 
+    public void addListingToFavList(Listing l){
+        this.favList.add(l);
+    }
+
     @Override
     public boolean isAdmin() {
         return this.isAadmin;
