@@ -1,4 +1,4 @@
-package exceptions;
+package LoginSystem.exceptions;
 
 public class UserNotFoundException extends IllegalArgumentException{
     public UserNotFoundException(){
