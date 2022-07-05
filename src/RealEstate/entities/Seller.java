@@ -5,29 +5,35 @@ import java.util.ArrayList;
 
 public class Seller extends User {
 
-    // TODO: decide how to implement the Admin satus
-    private boolean isAadmin = false;
-    private Listing listing;
-    private boolean listingIsSold = false;
+    // TODO: decide how to implement the Admin status
+    private boolean isAdmin = false;
+    private ArrayList<Listing> listings;
+    private final MessageContainer<Integer, Message> inbox;
+    private final MessageContainer<Integer, Message> outbox;
 
     public Seller(String username, String password) {
         super(username, password);
-    }
-
-    public Seller(String username, String password, Listing l) {
-        super(username, password);
-        this.listing = l;
+        listings = new ArrayList<>();
+        inbox = new MessageContainer<>();
+        outbox = new MessageContainer<>();
     }
 
     public Seller(String username, String password, ArrayList<String> loginHistory) {
         super(username, password, loginHistory);
+        inbox = new MessageContainer<>();
+        outbox = new MessageContainer<>();
     }
-    public Seller(String username, String password, ArrayList<String> loginHistory, Listing l) {
+
+    public Seller(String username, String password, ArrayList<String> loginHistory,
+                  MessageContainer<Integer, Message> inbox,
+                  MessageContainer<Integer, Message> outbox) {
         super(username, password, loginHistory);
-        this.listing = l;
+        this.inbox = inbox;
+        this.outbox = outbox;
     }
 
     // TODO: move to use case?
+
     public void createListing(Listing l){
         this.listing = l;
     }
@@ -36,27 +42,35 @@ public class Seller extends User {
     }
     public void changeListingPrice(){}
 
-    public void acceptOffer(Offer o){
-        this.listingIsSold = true;
+    public ArrayList<Listing> getListings() {
+        return listings;
     }
 
+    public MessageContainer<Integer, Message> getInbox() {
+        return inbox;
+    }
 
-    // Getters and setters
-    public Listing getListing() {
-        return listing;
+    public MessageContainer<Integer, Message> getOutbox() {
+        return outbox;
     }
-    public boolean isListingIsSold() {
-        return listingIsSold;
+
+    public void printInbox() {
+        System.out.println(inbox);
     }
-    public void setListing(Listing listing) {
-        this.listing = listing;
+
+    public void printOutbox() {
+        System.out.println(outbox);
     }
-    public void setListingIsSold(boolean listingIsSold) {
-        this.listingIsSold = listingIsSold;
+    public void addListing(Listing listing) {
+        listings.add(listing);
+    }
+
+    public void removeListing(Listing listing){
+        listings.remove(listing);
     }
 
     @Override
     public boolean isAdmin() {
-        return this.isAadmin;
+        return this.isAdmin;
     }
 }

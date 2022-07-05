@@ -18,6 +18,8 @@ public class Listing {
     private final Integer floors;
     private BigDecimal price;
 
+    private boolean isSold;
+
     enum ListingType {
         APARTMENT,
         HOUSE,
@@ -42,6 +44,7 @@ public class Listing {
 
         unitNumber = null;
         floors = null;
+        isSold = false;
     }
 
     public Listing(int id, int unitNumber, int civicAddress, String streetName, String city, String type, int bedrooms,
@@ -60,6 +63,7 @@ public class Listing {
         this.bathrooms = bathrooms;
         this.floors = floors;
         this.price = price;
+        isSold = false;
     }
 
     private boolean isStringValidEnum(String input){
@@ -115,7 +119,23 @@ public class Listing {
         return price;
     }
 
+    public boolean getIsSold() {
+        return isSold;
+    }
+
+    public void sell() {
+        isSold = true;
+    }
+
     public String toString() {
-        return (unitNumber == null ? "" : unitNumber + " - ") + civicAddress + " " + streetName + ", " + city;
+        String address = (unitNumber == null ? "" : unitNumber + " - ") + civicAddress + " " + streetName + ", " + city;
+        String completeAddress;
+        if(isSold){
+            completeAddress = address + ", SOLD";
+        }
+        else{
+            completeAddress = address + ", AVAILABLE";
+        }
+        return completeAddress;
     }
 }
