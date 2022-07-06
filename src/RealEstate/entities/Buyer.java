@@ -1,34 +1,28 @@
 package RealEstate.entities;
 
+import LoginSystem.entities.NonAdminUser;
 import LoginSystem.entities.User;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Buyer extends User {
+public class Buyer extends NonAdminUser {
     private final ArrayList<Integer> favorites;
-    private final MessageContainer<Integer, Message> inbox;
-    private final MessageContainer<Integer, Message> outbox;
 
     public Buyer(String username, String password) {
         super(username, password);
         this.favorites = new ArrayList<>();
-        inbox = new MessageContainer<>();
-        outbox = new MessageContainer<>();
+
     }
 
     public Buyer(String username, String password, ArrayList<Integer> favorites) {
         super(username, password);
         this.favorites = favorites;
-        inbox = new MessageContainer<>();
-        outbox = new MessageContainer<>();
     }
 
     public Buyer(String username, String password, ArrayList<String> loginHistory,
                  ArrayList<Integer> favorites) {
         super(username, password, loginHistory);
         this.favorites = favorites;
-        inbox = new MessageContainer<>();
-        outbox = new MessageContainer<>();
     }
 
     public HashMap<Seller, String> sendOfferMessage(Seller receiver, String message) {
@@ -50,26 +44,9 @@ public class Buyer extends User {
         return offer;
     }
 
-
     // Getters and setters
     public ArrayList<Integer> getFavList() {
         return favorites;
-    }
-
-    public MessageContainer<Integer, Message> getInbox() {
-        return inbox;
-    }
-
-    public MessageContainer<Integer, Message> getOutbox() {
-        return outbox;
-    }
-
-    public void printInbox() {
-        System.out.println(inbox);
-    }
-
-    public void printOutbox() {
-        System.out.println(outbox);
     }
 
     public void addFavouriteListing(int id){

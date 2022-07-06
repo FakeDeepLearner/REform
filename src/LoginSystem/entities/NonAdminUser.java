@@ -1,10 +1,14 @@
 package LoginSystem.entities;
 
+import RealEstate.entities.Message;
+import RealEstate.entities.MessageContainer;
+
 import java.util.ArrayList;
 
 public class NonAdminUser extends User implements Bannable{
     private boolean isBanned = false;
-
+    protected MessageContainer<Integer, Message> outbox;
+    protected MessageContainer<Integer, Message> inbox;
     /**
      * Creates an instance of a non-admin user.
      * @param username this user's username.
@@ -12,10 +16,16 @@ public class NonAdminUser extends User implements Bannable{
      */
     public NonAdminUser(String username, String password) {
         super(username, password);
+
+        outbox = new MessageContainer<>();
+        inbox = new MessageContainer<>();
     }
 
     public NonAdminUser(String username, String password, ArrayList<String> loginHistory) {
         super(username, password, loginHistory);
+        outbox = new MessageContainer<>();
+        inbox = new MessageContainer<>();
+
     }
 
     /**
@@ -42,5 +52,26 @@ public class NonAdminUser extends User implements Bannable{
     public boolean unbanUser() {
         isBanned = false;
         return true;
+    }
+
+    public MessageContainer<Integer, Message> getOutbox() {
+        return outbox;
+    }
+
+    public MessageContainer<Integer, Message> getInbox() {
+        return inbox;
+    }
+
+    public void sendMessage(NonAdminUser nonAdminUser, Message message) {
+        nonAdminUser.inbox.put(message.getMessageID(), message);
+        this.outbox.put(message.getMessageID(), message);
+    }
+
+    public void printInbox(){
+        System.out.println(inbox);
+    }
+
+    public void printOutbox() {
+        System.out.println(outbox);
     }
 }

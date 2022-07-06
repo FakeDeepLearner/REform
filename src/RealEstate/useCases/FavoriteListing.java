@@ -1,30 +1,31 @@
 package RealEstate.useCases;
 
-import LoginSystem.entities.User;
-import LoginSystem.entities.UserContainer;
+import RealEstate.entities.Buyer;
+import RealEstate.entities.BuyerContainer;
 
 import java.io.*;
 import java.util.ArrayList;
 
 public class FavoriteListing {
-    private final UserContainer<String, User> userContainer;
+    private final static String filePath = "src/LoginSystem/UsersAndFavorites.csv";
+    private final BuyerContainer<String, Buyer> buyerContainer;
 
-    public FavoriteListing(UserContainer<String, User> userContainer) {
-        this.userContainer = userContainer;
+    public FavoriteListing(BuyerContainer<String, Buyer> buyerContainer) {
+        this.buyerContainer = buyerContainer;
     }
 
-    public UserContainer<String, User> getUserContainer() {
-        return userContainer;
+    public BuyerContainer<String, Buyer> getUserContainer() {
+        return buyerContainer;
     }
 
 
-    public void addListingToUserFavorites(String username, int listingID) {
-        User user = userContainer.get(username);
-        // TODO: Modify the User class so that it stores the listing, and then complete this method.
+    public void addListingToBuyerFavorites(String username, int listingID) {
+        Buyer buyer = buyerContainer.get(username);
+        buyer.addFavouriteListing(listingID);
     }
 
     private static ArrayList<String> dumpUsernamesIntoArrayList() throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader("src/UsersAndFavorites.csv"));
+        BufferedReader reader = new BufferedReader(new FileReader(filePath));
         ArrayList<String> returnedArrayList = new ArrayList<>();
         String line;
         while((line = reader.readLine()) != null) {
@@ -34,7 +35,7 @@ public class FavoriteListing {
     }
 
     private static ArrayList<String> dumpFileIntoArrayList() throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader("src/UsersAndFavorites.csv"));
+        BufferedReader reader = new BufferedReader(new FileReader(filePath));
         ArrayList<String> returnedArrayList = new ArrayList<>();
         String line;
         while((line = reader.readLine()) != null) {
@@ -46,20 +47,20 @@ public class FavoriteListing {
     public void updateUserFavoriteEntry(String username, int listingID) {
         ArrayList<String> usernamesInFile =  new ArrayList<>();
         try{
-            BufferedReader reader = new BufferedReader(new FileReader("src/UsersAndFavorites.csv"));
-            BufferedWriter overWriter = new BufferedWriter(new FileWriter("src/UsersAndFavorites.csv", false));
-            BufferedWriter writer = new BufferedWriter(new FileWriter("src/UsersAndFavorites.csv", true));
+            BufferedReader reader = new BufferedReader(new FileReader(filePath));
+            BufferedWriter overWriter = new BufferedWriter(new FileWriter(filePath, false));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true));
             String line;
             while ((line = reader.readLine()) != null) { // Get all the usernames in the file
                 usernamesInFile.add((line.split(","))[0]);
             }
 
             if (usernamesInFile.contains(username)) {
-                addListingToUserFavorites(username, listingID);
+                addListingToBuyerFavorites(username, listingID);
                 ArrayList<String> allUsers = dumpUsernamesIntoArrayList();
                 ArrayList<String> fileContent = dumpFileIntoArrayList();
                 int usernameIndex = allUsers.indexOf(username);
-                fileContent.remove(usernameIndex);
+                String removedLine = fileContent.remove(usernameIndex);
                 for (int i = 0; i < fileContent.size(); i++) {
                     if (i == 0) {
                         overWriter.append(fileContent.get(i));
@@ -68,11 +69,21 @@ public class FavoriteListing {
                         writer.append(fileContent.get((i)));
                     }
                 }
-                // TODO : Append the line that was initially removed, with the new listing ID now added.
+                String newLine = removedLine + " " + listingID;
+                writer.append(newLine);
             }
             else {
-                addListingToUserFavorites(username, listingID);
-                // TODO: Append the line to the file after the User entity has been updated.
+                addListingToBuyerFavorites(username, listingID);
+                usernamesInFile.add(username);
+                StringBuilder stringBuilder = new StringBuilder(" ");
+                stringBuilder.append(username);
+                stringBuilder.append(", ");
+                Buyer buyer = buyerContainer.get(username);
+                ArrayList<Integer> buyerFavorites = buyer.getFavList();
+                for (Integer value : buyerFavorites){
+                    stringBuilder.append(value.toString()).append(", ");
+                }
+                writer.append(stringBuilder.toString());
             }
         } catch (IOException ex) {
             ex.printStackTrace();
