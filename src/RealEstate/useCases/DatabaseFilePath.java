@@ -13,6 +13,12 @@ import java.io.File;
  *         FileWriter fw = new FileWriter(new File(DatabaseFilePath.getDatabasePath(), c.getFileName()));
  *         BufferedWriter output = new BufferedWriter(fw);
  *         output.close();
+ *
+ *         // below will add a line "THis line will be added" to the "EXAMPLE.csv" file
+ *         FileWriter fw2 = new FileWriter(c.getFilePath(), true);
+ *         BufferedWriter output2 = new BufferedWriter(fw2);
+ *         output2.append("\n").append("This line will be added");
+ *         output2.close();
  */
 
 public class DatabaseFilePath {
