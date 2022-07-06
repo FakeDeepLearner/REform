@@ -51,5 +51,7 @@ public abstract class User {
         isLoggedIn = bool;
     }
 
-    public abstract boolean isAdmin();
+    public boolean isAdmin() {
+        return isAdmin;
+    }
 }

@@ -4,10 +4,7 @@ import LoginSystem.entities.User;
 import java.util.ArrayList;
 
 public class Seller extends User {
-
-    // TODO: decide how to implement the Admin status
-    private boolean isAdmin = false;
-    private ArrayList<Listing> listings;
+    private ArrayList<Integer> listings;
     private final MessageContainer<Integer, Message> inbox;
     private final MessageContainer<Integer, Message> outbox;
 
@@ -32,17 +29,15 @@ public class Seller extends User {
         this.outbox = outbox;
     }
 
-    // TODO: move to use case?
-
-    public void createListing(Listing l){
-        this.listing = l;
+    public void addListing(int id){
+        listings.add(id);
     }
-    public void removeListing(){
-        this.listing = null;
+    public void removeListing(int id){
+        // This workaround is to make sure we don't call the overloaded method remove(int index)
+        listings.remove(Integer.valueOf(id));
     }
-    public void changeListingPrice(){}
 
-    public ArrayList<Listing> getListings() {
+    public ArrayList<Integer> getListings() {
         return listings;
     }
 
@@ -60,17 +55,5 @@ public class Seller extends User {
 
     public void printOutbox() {
         System.out.println(outbox);
-    }
-    public void addListing(Listing listing) {
-        listings.add(listing);
-    }
-
-    public void removeListing(Listing listing){
-        listings.remove(listing);
-    }
-
-    @Override
-    public boolean isAdmin() {
-        return this.isAdmin;
     }
 }

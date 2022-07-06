@@ -8,7 +8,7 @@ public class Listing {
     /* Components of an address taken from Canada Post
      * https://www.canadapost-postescanada.ca/cpc/en/support/articles/addressing-guidelines/civic-address.page
      */
-    // Integer class used to allow for it to be assigned null
+    // Integer class used to allow for variable to be assigned a null value
     private final Integer unitNumber;
     private final int civicAddress;
     private final String streetName;
@@ -129,13 +129,6 @@ public class Listing {
 
     public String toString() {
         String address = (unitNumber == null ? "" : unitNumber + " - ") + civicAddress + " " + streetName + ", " + city;
-        String completeAddress;
-        if(isSold){
-            completeAddress = address + ", SOLD";
-        }
-        else{
-            completeAddress = address + ", AVAILABLE";
-        }
-        return completeAddress;
+        return (isSold ? "SOLD" : "AVAILABLE") + " - " + address;
     }
 }

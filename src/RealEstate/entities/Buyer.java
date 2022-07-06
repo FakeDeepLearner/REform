@@ -1,18 +1,11 @@
 package RealEstate.entities;
+
 import LoginSystem.entities.User;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-
-
 public class Buyer extends User {
-
-    private String username;
-    private String password;
-
-    // TODO: decide how to implement the Admin satus
-    private boolean isAdmin = false;
-    private final ArrayList<Listing> favorites;
+    private final ArrayList<Integer> favorites;
     private final MessageContainer<Integer, Message> inbox;
     private final MessageContainer<Integer, Message> outbox;
 
@@ -23,7 +16,7 @@ public class Buyer extends User {
         outbox = new MessageContainer<>();
     }
 
-    public Buyer(String username, String password, ArrayList<Listing> favorites) {
+    public Buyer(String username, String password, ArrayList<Integer> favorites) {
         super(username, password);
         this.favorites = favorites;
         inbox = new MessageContainer<>();
@@ -31,7 +24,7 @@ public class Buyer extends User {
     }
 
     public Buyer(String username, String password, ArrayList<String> loginHistory,
-                 ArrayList<Listing> favorites) {
+                 ArrayList<Integer> favorites) {
         super(username, password, loginHistory);
         this.favorites = favorites;
         inbox = new MessageContainer<>();
@@ -39,14 +32,14 @@ public class Buyer extends User {
     }
 
     public HashMap<Seller, String> sendOfferMessage(Seller receiver, String message) {
-        HashMap<Seller, String> offer = new HashMap<Seller, String>();
+        HashMap<Seller, String> offer = new HashMap<>();
         offer.put(receiver, message);
 
         return offer;
     }
 
     public HashMap<Object, ArrayList<Object>> sendOfferMessageWithPrice(Seller receiver, String message, double price) {
-        HashMap<Object, ArrayList<Object>> offer = new HashMap<Object, ArrayList<Object>>();
+        HashMap<Object, ArrayList<Object>> offer = new HashMap<>();
 
         ArrayList<Object> messageAndPrice = new ArrayList<>();
         messageAndPrice.add(message);
@@ -59,7 +52,7 @@ public class Buyer extends User {
 
 
     // Getters and setters
-    public ArrayList<Listing> getFavList() {
+    public ArrayList<Integer> getFavList() {
         return favorites;
     }
 
@@ -79,18 +72,11 @@ public class Buyer extends User {
         System.out.println(outbox);
     }
 
-    public void addListingToFavList(Listing listing){
-        this.favorites.add(listing);
+    public void addFavouriteListing(int id){
+        favorites.add(id);
     }
 
-    public void removeListingFromFavList(Listing listing) {
-        favorites.remove(listing);
-    }
-
-
-
-    @Override
-    public boolean isAdmin() {
-        return this.isAdmin;
+    public void removeFavouriteListing(int id) {
+        favorites.remove(id);
     }
 }

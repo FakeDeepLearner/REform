@@ -12,9 +12,4 @@ public class AdminUser extends User {
         super(username, password, loginHistory);
         this.isAdmin = true;
     }
-
-    @Override
-    public boolean isAdmin(){
-        return true;
-    }
 }
