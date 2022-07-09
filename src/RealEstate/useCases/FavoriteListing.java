@@ -3,27 +3,30 @@ package RealEstate.useCases;
 import RealEstate.entities.Buyer;
 import RealEstate.entities.BuyerContainer;
 
-import java.io.*;
-import java.util.ArrayList;
-
 public class FavoriteListing {
-    private final static String filePath = "src/LoginSystem/UsersAndFavorites.csv";
+    //private final static String filePath = "src/LoginSystem/UsersAndFavorites.csv";
     private final BuyerContainer<String, Buyer> buyerContainer;
 
     public FavoriteListing(BuyerContainer<String, Buyer> buyerContainer) {
         this.buyerContainer = buyerContainer;
     }
 
-    public BuyerContainer<String, Buyer> getUserContainer() {
+    public BuyerContainer<String, Buyer> getBuyerContainer() {
         return buyerContainer;
     }
-
 
     public void addListingToBuyerFavorites(String username, int listingID) {
         Buyer buyer = buyerContainer.get(username);
         buyer.addFavouriteListing(listingID);
     }
+    public void removeListingFromBuyerFavorites(String username, int listingID) {
+        Buyer buyer = buyerContainer.get(username);
+        buyer.removeFavouriteListing(listingID);
+    }
 
+
+
+    /*
     private static ArrayList<String> dumpUsernamesIntoArrayList() throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(filePath));
         ArrayList<String> returnedArrayList = new ArrayList<>();
@@ -89,4 +92,5 @@ public class FavoriteListing {
             ex.printStackTrace();
         }
     }
+    */
 }

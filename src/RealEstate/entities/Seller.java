@@ -37,4 +37,14 @@ public class Seller extends NonAdminUser {
     public ArrayList<Integer> getListings() {
         return listings;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder("");
+        builder.append(getUsername()).append("\n").append("Listings:\n");
+        for (Integer integer : listings) {
+            builder.append(integer).append(" ");
+        }
+        return builder.toString();
+    }
 }

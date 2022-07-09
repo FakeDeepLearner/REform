@@ -4,9 +4,9 @@ import java.util.HashMap;
 
 import RealEstate.exceptions.ListingNotFoundException;
 
-public class ListingContainer<Integer, Listing> extends HashMap<Integer, Listing>{
+public class ListingContainer<Integer, Listing> extends HashMap<java.lang.Integer, RealEstate.entities.Listing>{
     @Override
-    public Listing get(Object key) throws ListingNotFoundException {
+    public RealEstate.entities.Listing get(Object key) throws ListingNotFoundException {
         if(this.containsKey(key)){
             return super.get(key);
         }
@@ -18,10 +18,15 @@ public class ListingContainer<Integer, Listing> extends HashMap<Integer, Listing
     @Override
     public String toString() {
         StringBuilder returnedString = new StringBuilder();
-        for (Listing listing : this.values()) {
-            returnedString.append(listing.toString());
-            returnedString.append("\n\n");
+        for (RealEstate.entities.Listing listing : this.values()) {
+            returnedString.append(listing.toString()).append("\n");
         }
         return returnedString.toString();
+    }
+
+    public String listingInformationAsString(int listingID) {
+        RealEstate.entities.Listing listing = get(listingID);
+        return listing.toString();
+
     }
 }
