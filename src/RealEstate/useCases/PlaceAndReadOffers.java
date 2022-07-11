@@ -4,16 +4,11 @@ import LoginSystem.entities.Bannable;
 import LoginSystem.entities.NonAdminUser;
 import LoginSystem.entities.User;
 import LoginSystem.entities.UserContainer;
-import RealEstate.entities.Listing;
 import RealEstate.entities.Message;
 import RealEstate.entities.MessageContainer;
 
 import java.io.*;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Arrays;
 
-import java.util.Scanner;
 
 public class PlaceAndReadOffers {
 
@@ -39,7 +34,7 @@ public class PlaceAndReadOffers {
 
             messageContainer.put(0, message); //change id to call id generating use case
 
-            ((NonAdminUser)sender).sendMessage((NonAdminUser)recipient, message);
+            ((NonAdminUser) sender).sendMessage((NonAdminUser) recipient, message);
         }
     }
 
@@ -55,8 +50,8 @@ public class PlaceAndReadOffers {
                 User sender = userContainer.get(contents[0]);
                 User recipient = userContainer.get(contents[1]);
 
-                Message m = new Message(sender,recipient,Integer.parseInt(contents[2]),contents[3]);
-                messageContainer.put(Integer.parseInt(contents[2]),m);
+                Message m = new Message(sender, recipient, Integer.parseInt(contents[2]), contents[3]);
+                messageContainer.put(Integer.parseInt(contents[2]), m);
             }
 
             br.close();
@@ -65,11 +60,11 @@ public class PlaceAndReadOffers {
         }
     }
 
-    public void writeMessages(){
+    public void writeMessages() {
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter(file.getFilePath(), true));
 
-            for(Message m : messageContainer.values()){
+            for (Message m : messageContainer.values()) {
 
                 bw.append(m.getSender().getUsername());
                 bw.append(",");
