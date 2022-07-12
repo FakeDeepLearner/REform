@@ -24,4 +24,8 @@ public class MessageContainer<Integer, Message> extends HashMap<java.lang.Intege
         return returnedString.toString();
     }
 
+    public String getMessageInfo(int messageID) {
+        RealEstate.entities.Message message = get(messageID);
+        return message.toString();
+    }
 }
