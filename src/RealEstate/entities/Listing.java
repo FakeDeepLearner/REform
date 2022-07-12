@@ -27,6 +27,18 @@ public class Listing {
     }
     private final ListingType type;
 
+    /**
+     * Creates a listing without a unit number
+     *
+     * @param id the unique id associated with the listing
+     * @param civicAddress the civic address of the listing
+     * @param streetName the street name of the listing
+     * @param city the city the listing is located
+     * @param type the type of housing of the listing
+     * @param bedrooms the number of bedrooms in the listing
+     * @param bathrooms the number of bathrooms in the listing
+     * @param price the price of the listing
+     */
     public Listing(int id, int civicAddress, String streetName, String city, String type, int bedrooms, int bathrooms,
                    BigDecimal price) {
         this.id = id;
@@ -47,6 +59,19 @@ public class Listing {
         isSold = false;
     }
 
+    /**
+     * Creates a listing with a unit number
+     *
+     * @param id the unique id associated with the listing
+     * @param unitNumber the unit number of the listing
+     * @param civicAddress the civic address of the listing
+     * @param streetName the street name of the listing
+     * @param city the city the listing is located
+     * @param type the type of housing of the listing
+     * @param bedrooms the number of bedrooms in the listing
+     * @param bathrooms the number of bathrooms in the listing
+     * @param price the price of the listing
+     */
     public Listing(int id, int unitNumber, int civicAddress, String streetName, String city, String type, int bedrooms,
                    int bathrooms, int floors, BigDecimal price) {
         this.id = id;
@@ -66,6 +91,12 @@ public class Listing {
         isSold = false;
     }
 
+    /**
+     * Checks whether a string is a valid value in ListingType
+     *
+     * @param input the string to be checked
+     * @return whether input is a valid value in ListingType
+     */
     private boolean isStringValidEnum(String input){
         try {
             Enum.valueOf(ListingType.class, input);
@@ -75,58 +106,103 @@ public class Listing {
         }
     }
 
+    /**
+     * @return the id of the listing
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * @return the unit number of the listing
+     */
     public Integer getUnitNumber() {
         return unitNumber;
     }
 
+    /**
+     * @return the civic address of the listing
+     */
     public int getCivicAddress() {
         return civicAddress;
     }
 
+    /**
+     * @return the street name of the listing
+     */
     public String getStreetName() {
         return streetName;
     }
 
+    /**
+     * @return the city where the listing is located
+     */
     public String getCity() {
         return city;
     }
 
+    /**
+     * @return the type of housing of the listing
+     */
     public String getType() {
         return type.toString();
     }
 
+    /**
+     * Returns the number of bedrooms in a listing
+     *
+     * @return number of bedrooms in the listing
+     */
     public int getBedrooms() {
         return bedrooms;
     }
 
+    /**
+     * @return number of bathrooms in the listing
+     */
     public int getBathrooms() {
         return bathrooms;
     }
 
+    /**
+     * @return number of floors in the listing
+     */
     public Integer getFloors() {
         return floors;
     }
 
+    /**
+     * @param price the new price to be set
+     */
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
+    /**
+     * @return the price of the listing
+     */
     public BigDecimal getPrice() {
         return price;
     }
 
+    /**
+     * @return the status of the listing
+     */
     public boolean getIsSold() {
         return isSold;
     }
 
+
+    /**
+     * Sells a listing by updating its isSold status
+     */
     public void sell() {
         isSold = true;
     }
 
+    /**
+     * @return the full address of the listing
+     */
     public String toString() {
         String address = (unitNumber == null ? "" : unitNumber + " - ") + civicAddress + " " + streetName + ", " + city;
         return (isSold ? "SOLD" : "AVAILABLE") + " - " + address;
