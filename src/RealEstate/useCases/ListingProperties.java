@@ -4,6 +4,7 @@ import RealEstate.entities.ListingContainer;
 import RealEstate.entities.Listing;
 import java.util.ArrayList;
 import java.math.BigDecimal;
+import java.util.function.Predicate;
 
 
 public class ListingProperties {
@@ -14,83 +15,54 @@ public class ListingProperties {
         this.listingContainer = listingContainer;
     }
 
-    public ArrayList<Listing> SearchByStreetName(String streetName){
+    private ArrayList<Listing> SearchByProperty(Predicate<Listing> property){
         ArrayList<Listing> listings = new ArrayList<>();
+
         for (Listing listing : listingContainer.values()) {
-            if (listing.getStreetName().equals(streetName) && !listing.getIsSold()){
+            if (property.test(listing) && !listing.getIsSold()){
                 listings.add(listing);
             }
         }
         return listings;
+    }
+
+    public ArrayList<Listing> SearchByStreetName(String streetName){
+        Predicate<Listing> property = (listing) -> listing.getStreetName().equals(streetName);
+        return SearchByProperty(property);
     }
 
     public ArrayList<Listing> SearchByCivicAddress(int civicAdress){
-        ArrayList<Listing> listings = new ArrayList<>();
-        for (Listing listing : listingContainer.values()) {
-            if (listing.getCivicAddress()==civicAdress && !listing.getIsSold()){
-                listings.add(listing);
-            }
-        }
-        return listings;
+        Predicate<Listing> property = (listing) -> listing.getCivicAddress() == civicAdress;
+        return SearchByProperty(property);
     }
 
     public ArrayList<Listing> SearchByCity(String city){
-        ArrayList<Listing> listings = new ArrayList<>();
-        for (Listing listing : listingContainer.values()) {
-            if (listing.getCity().equals(city) && !listing.getIsSold()){
-                listings.add(listing);
-            }
-        }
-        return listings;
+        Predicate<Listing> property = (listing) -> listing.getCity().equals(city);
+        return SearchByProperty(property);
     }
 
-    public ArrayList<Listing> SearchByBedrooms(int bedrooms){
-        ArrayList<Listing> listings = new ArrayList<>();
-        for (Listing listing : listingContainer.values()) {
-            if (listing.getBedrooms()==bedrooms && !listing.getIsSold()){
-                listings.add(listing);
-            }
-        }
-        return listings;
+    public ArrayList<Listing> SearchByBedrooms(int bedrooms) {
+        Predicate<Listing> property = (listing) -> listing.getBedrooms() == bedrooms;
+        return SearchByProperty(property);
     }
 
-    public ArrayList<Listing> SearchByBathrooms(int bathrooms){
-        ArrayList<Listing> listings = new ArrayList<>();
-        for (Listing listing : listingContainer.values()) {
-            if (listing.getBathrooms()==bathrooms && !listing.getIsSold()){
-                listings.add(listing);
-            }
-        }
-        return listings;
+    public ArrayList<Listing> SearchByBathrooms(int bathrooms) {
+        Predicate<Listing> property = (listing) -> listing.getBathrooms() == bathrooms;
+        return SearchByProperty(property);
     }
 
-    public ArrayList<Listing> SearchByFloors(int floors){
-        ArrayList<Listing> listings = new ArrayList<>();
-        for (Listing listing : listingContainer.values()) {
-            if (listing.getFloors()==floors && !listing.getIsSold()){
-                listings.add(listing);
-            }
-        }
-        return listings;
+    public ArrayList<Listing> SearchByFloors(int floors) {
+        Predicate<Listing> property = (listing) -> listing.getFloors() == floors;
+        return SearchByProperty(property);
     }
 
-    public ArrayList<Listing> SearchByPrice(BigDecimal upperLimit, BigDecimal lowerLimit){
-        ArrayList<Listing> listings = new ArrayList<>();
-        for (Listing listing : listingContainer.values()) {
-            if (upperLimit.compareTo(listing.getPrice())>=0 && lowerLimit.compareTo(listing.getPrice())<=0 && !listing.getIsSold()){
-                listings.add(listing);
-            }
-        }
-        return listings;
+    public ArrayList<Listing> SearchByPrice(BigDecimal upperLimit, BigDecimal lowerLimit) {
+        Predicate<Listing> property = (listing) -> upperLimit.compareTo(listing.getPrice()) >= 0 && lowerLimit.compareTo(listing.getPrice()) <= 0;
+        return SearchByProperty(property);
     }
 
     public ArrayList<Listing> SearchByListingType(String type){
-        ArrayList<Listing> listings = new ArrayList<>();
-        for (Listing listing : listingContainer.values()) {
-            if (listing.getType().equals(type) && !listing.getIsSold()){
-                listings.add(listing);
-            }
-        }
-        return listings;
+        Predicate<Listing> property = (listing) -> listing.getType().equals(type);
+        return SearchByProperty(property);
     }
 }
