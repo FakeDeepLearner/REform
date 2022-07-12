@@ -23,17 +23,17 @@ public class GenerateUniqueID {
         return returned_id;
     }
 
-    /*
 
+    /**
     private ArrayList<Integer> existingListingIDs;
-    private ArrayList<Integer> getExistingMessageIDs;
+    private ArrayList<Integer> existingMessageIDs;
 
     public GenerateUniqueID(ListingContainer<Integer, Listing> l) {
         this.existingListingIDs = this.getIDsFromListingContainer(l);
     }
 
     public GenerateUniqueID(MessageContainer<Integer, Listing> l) {
-        this.getExistingMessageIDs = this.getIDsFromMessageContainer(l);
+        this.existingMessageIDs = this.getIDsFromMessageContainer(l);
     }
 
     public int getUniqueID(ListingContainer<Integer, Listing> l) {
@@ -47,7 +47,7 @@ public class GenerateUniqueID {
 
     public int getUniqueID(MessageContainer<Integer, Listing> l) {
         int out = -1;
-        while (this.getExistingMessageIDs.contains(out) | out == -1) {
+        while (this.existingMessageIDs.contains(out) | out == -1) {
             out = ThreadLocalRandom.current().nextInt(minID, maxID + 1);
         }
 
@@ -56,7 +56,7 @@ public class GenerateUniqueID {
 
     public int getUniqueID() {
         int out = -1;
-        while (this.existingListingIDs.contains(out) | this.existingListingIDs.contains(out) | out == -1) {
+        while (this.existingListingIDs.contains(out) | this.existingMessageIDs.contains(out) | out == -1) {
             out = ThreadLocalRandom.current().nextInt(minID, maxID + 1);
         }
         return out;
@@ -85,8 +85,8 @@ public class GenerateUniqueID {
         return existingListingIDs;
     }
 
-    public ArrayList<Integer> getGetExistingMessageIDs() {
-        return getExistingMessageIDs;
+    public ArrayList<Integer> getExistingMessageIDs() {
+        return existingMessageIDs;
     }
 
     public void setMaxID(int maxID) {
@@ -101,8 +101,9 @@ public class GenerateUniqueID {
         this.existingListingIDs = existingListingIDs;
     }
 
-    public void setGetExistingMessageIDs(ArrayList<Integer> getExistingMessageIDs) {
-        this.getExistingMessageIDs = getExistingMessageIDs;
+    public void setExistingMessageIDs(ArrayList<Integer> existingMessageIDs) {
+        this.existingMessageIDs = existingMessageIDs;
     }
-    */
+     */
+
 }
