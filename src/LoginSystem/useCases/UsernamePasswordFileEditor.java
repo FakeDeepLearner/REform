@@ -14,7 +14,7 @@ public class UsernamePasswordFileEditor extends CsvEditor {
 
     // Constructors
     public UsernamePasswordFileEditor(AuthenticateUser auth, UserContainer<String, User> interfaceUsers) {
-        super("src", "UsernamePassword.csv");
+        super(csvFilePath.getDatabasePath(), "UsernamePassword.csv");
         this.auth = auth;
         this.interfaceUsers = interfaceUsers;
     }
@@ -22,7 +22,7 @@ public class UsernamePasswordFileEditor extends CsvEditor {
 
     // Static method to add the first line as "Username","Password,IsAdmin"
     private static void addFirstLine() throws IOException {
-        FileWriter fw = new FileWriter("src/UsernamePassword.csv");
+        FileWriter fw = new FileWriter(csvFilePath.getDatabasePath() + "UsernamePassword.csv");
         BufferedWriter output = new BufferedWriter(fw);
         output.write("Username,Password,IsAdmin");
         output.close();
@@ -36,7 +36,7 @@ public class UsernamePasswordFileEditor extends CsvEditor {
         ArrayList<String> array = UsernamePasswordFileEditor.reformatContainer(interfaceUsers);
 
         for (String line : array) {
-            super.addLine("src/UsernamePassword.csv", line);
+            super.addLine(csvFilePath.getDatabasePath() + "UsernamePassword.csv", line);
         }
     }
 
@@ -66,14 +66,14 @@ public class UsernamePasswordFileEditor extends CsvEditor {
 
     public void addUserInfo(String username, String password) throws IOException {
         String info = username + "," + password + "," + auth.checkUserAdmin(username);
-        addLine("src/UsernamePassword.csv", info);
+        addLine(csvFilePath.getDatabasePath() + "UsernamePassword.csv", info);
     }
 
 
     public ArrayList<ArrayList<String>> getUsersFromCSV() throws IOException {
         ArrayList<ArrayList<String>> outside = new ArrayList<>();
 
-        FileReader fw = new FileReader("src/UsernamePassword.csv");
+        FileReader fw = new FileReader(csvFilePath.getDatabasePath() + "UsernamePassword.csv");
         return getArrayLists(outside, fw);
     }
 

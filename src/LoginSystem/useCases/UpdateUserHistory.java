@@ -26,7 +26,7 @@ public class UpdateUserHistory {
         ArrayList<String> userHistory = new ArrayList<>();
 
         try {
-            BufferedReader br = new BufferedReader(new FileReader("src/UserHistories.csv"));
+            BufferedReader br = new BufferedReader(new FileReader(csvFilePath.getDatabasePath() + "UserHistories.csv"));
             String line;
 
             while ((line = br.readLine()) != null) {
@@ -50,7 +50,7 @@ public class UpdateUserHistory {
      */
     public void overwriteUserHistories() {
         try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter("src/UserHistories.csv", false));
+            BufferedWriter bw = new BufferedWriter(new FileWriter(csvFilePath.getDatabasePath() + "UserHistories.csv", false));
 
             for (String username : interfaceUsers.keySet()) {
                 for (String loginHistory : getLoginHistory(username)) {
@@ -78,8 +78,8 @@ public class UpdateUserHistory {
         User user = interfaceUsers.get(username);
 
         try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter("src/UserHistories.csv", append));
-            Scanner sc = new Scanner("src/UserHistories.csv");
+            BufferedWriter bw = new BufferedWriter(new FileWriter(csvFilePath.getDatabasePath() + "UserHistories.csv", append));
+            Scanner sc = new Scanner(csvFilePath.getDatabasePath() +"UserHistories.csv");
             Date newLogin = new Date();
 
             while (sc.hasNext()) {
