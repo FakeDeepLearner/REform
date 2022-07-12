@@ -16,7 +16,7 @@ public class CreateListing {
     public void addListing(int id, int civicAddress, String streetName, String city, String type, int bedrooms,
                               int bathrooms, BigDecimal price) {
         Listing listing = new Listing(id, civicAddress, streetName, city, type, bedrooms, bathrooms, price);
-        listings.put(0, listing); //TODO: need to generate this number randomly and have it not already be in the container
+        listings.put(GenerateUniqueID.getUniqueId(), listing); 
     }
 
     public void readListings() {

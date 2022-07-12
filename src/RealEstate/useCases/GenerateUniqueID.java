@@ -8,14 +8,25 @@ import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class GenerateUniqueID {
+    private final static ArrayList<Integer> existingIDs = new ArrayList<>();
+
+    // 9-digits integer from 100000000 to 999999999
+    private final static int minID = 100000000;
+    private final static int maxID = 999999999;
+
+    public static int getUniqueId() {
+        int returned_id = -1;
+        while (existingIDs.contains(returned_id) || returned_id == -1 ) {
+            returned_id = ThreadLocalRandom.current().nextInt(minID, maxID + 1);
+        }
+        existingIDs.add(returned_id);
+        return returned_id;
+    }
+
+    /*
 
     private ArrayList<Integer> existingListingIDs;
     private ArrayList<Integer> getExistingMessageIDs;
-
-    // 9-digits integer from 100000000 to 999999999
-    private int minID = 100000000;
-    private int maxID = 999999999;
-
 
     public GenerateUniqueID(ListingContainer<Integer, Listing> l) {
         this.existingListingIDs = this.getIDsFromListingContainer(l);
@@ -54,22 +65,12 @@ public class GenerateUniqueID {
 
     private ArrayList<Integer> getIDsFromListingContainer(ListingContainer<Integer, Listing> l) {
 
-        ArrayList<Integer> out = new ArrayList<Integer>();
-        for (Integer id : l.keySet()) {
-            out.add(id);
-        }
-
-        return out;
+        return new ArrayList<Integer>(l.keySet());
     }
 
     private ArrayList<Integer> getIDsFromMessageContainer(MessageContainer<Integer, Listing> l) {
 
-        ArrayList<Integer> out = new ArrayList<Integer>();
-        for (Integer id : l.keySet()) {
-            out.add(id);
-        }
-
-        return out;
+        return new ArrayList<Integer>(l.keySet());
     }
 
     public int getMaxID() {
@@ -103,6 +104,5 @@ public class GenerateUniqueID {
     public void setGetExistingMessageIDs(ArrayList<Integer> getExistingMessageIDs) {
         this.getExistingMessageIDs = getExistingMessageIDs;
     }
-
-
+    */
 }

@@ -4,7 +4,6 @@ import RealEstate.entities.Buyer;
 import RealEstate.entities.BuyerContainer;
 
 public class FavoriteListing {
-    //private final static String filePath = "src/LoginSystem/UsersAndFavorites.csv";
     private final BuyerContainer<String, Buyer> buyerContainer;
 
     public FavoriteListing(BuyerContainer<String, Buyer> buyerContainer) {
@@ -19,6 +18,7 @@ public class FavoriteListing {
         Buyer buyer = buyerContainer.get(username);
         buyer.addFavouriteListing(listingID);
     }
+
     public void removeListingFromBuyerFavorites(String username, int listingID) {
         Buyer buyer = buyerContainer.get(username);
         buyer.removeFavouriteListing(listingID);
