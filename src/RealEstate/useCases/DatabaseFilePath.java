@@ -40,7 +40,7 @@ public class DatabaseFilePath {
         this.filePath = filePath;
     }
 
-    public static String getDatabasePath(){
+    public static String getDatabasePath() {
         return System.getProperty("user.dir") + File.separator +
                 "src" + File.separator + "RealEstate" + File.separator + "database" + File.separator;
     }

@@ -45,7 +45,7 @@ public class Buyer extends NonAdminUser {
     }
 
     // Getters and setters
-    public ArrayList<Integer> getFavList() {
+    public ArrayList<Integer> getFavorites() {
         return favorites;
     }
 

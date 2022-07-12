@@ -13,7 +13,7 @@ public class BuyerContainer<String, Buyer> extends HashMap<String, RealEstate.en
         }
     }
 
-    public java.lang.String buyerInformationAsString(String username) {
+    public java.lang.String getBuyerInfo(String username) {
         RealEstate.entities.Buyer buyer = get(username);
         return buyer.toString();
     }

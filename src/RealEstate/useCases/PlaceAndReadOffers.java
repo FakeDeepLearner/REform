@@ -25,7 +25,6 @@ public class PlaceAndReadOffers {
     }
 
     public void sendMessage(String senderUsername, String recipientUsername, String content) {
-
         User sender = userContainer.get(senderUsername);
         User recipient = userContainer.get(recipientUsername);
 
@@ -40,7 +39,6 @@ public class PlaceAndReadOffers {
 
 
     public void readMessageHistory() {
-
         try {
             BufferedReader br = new BufferedReader(new FileReader(file.getFilePath()));
             String line;

@@ -24,9 +24,8 @@ public class ListingContainer<Integer, Listing> extends HashMap<java.lang.Intege
         return returnedString.toString();
     }
 
-    public String listingInformationAsString(int listingID) {
+    public String getListingInfo(int listingID) {
         RealEstate.entities.Listing listing = get(listingID);
         return listing.toString();
-
     }
 }
