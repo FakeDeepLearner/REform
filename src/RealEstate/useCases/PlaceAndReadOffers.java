@@ -1,6 +1,5 @@
 package RealEstate.useCases;
 
-import LoginSystem.entities.Bannable;
 import LoginSystem.entities.NonAdminUser;
 import LoginSystem.entities.User;
 import LoginSystem.entities.UserContainer;
@@ -12,9 +11,9 @@ import java.io.*;
 
 public class PlaceAndReadOffers {
 
-    public final MessageContainer<Integer, Message> messageContainer;
-    public final UserContainer<String, User> userContainer;
-    public final DatabaseFilePath file;
+    private final MessageContainer<Integer, Message> messageContainer;
+    private final UserContainer<String, User> userContainer;
+    private final DatabaseFilePath file;
 
 
     public PlaceAndReadOffers(MessageContainer<Integer, Message> messageContainer,
@@ -28,7 +27,7 @@ public class PlaceAndReadOffers {
         User sender = userContainer.get(senderUsername);
         User recipient = userContainer.get(recipientUsername);
 
-        if (sender instanceof Bannable && recipient instanceof Bannable) {
+        if (!sender.getAdmin() && !recipient.getAdmin()) {
             Message message = new Message(sender, recipient, 0, content); //change id to call id generating use case
 
             messageContainer.put(0, message); //change id to call id generating use case
