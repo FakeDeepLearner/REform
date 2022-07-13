@@ -3,6 +3,11 @@ package RealEstate.entities;
 import RealEstate.exceptions.BuyerNotFoundException;
 
 public class BuyerContainer<String, Buyer> extends Container<String, Buyer> {
+    /**
+     * @param key the key whose associated value is to be returned
+     * @return the value associated with key
+     * @throws BuyerNotFoundException if no Buyer is associated with key in the hashmap
+     */
     @Override
     public Buyer get(Object key) throws BuyerNotFoundException {
         try {
