@@ -1,12 +1,10 @@
 package RealEstate.gateways;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
+import java.io.IOException;
 
 public interface CsvInterface {
-    void read(BufferedReader br);
 
-    void write(BufferedWriter bw);
+    void read() throws IOException;
+    void write() throws IOException;
 
 
 }

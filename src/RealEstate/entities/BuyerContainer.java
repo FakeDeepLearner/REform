@@ -2,7 +2,7 @@ package RealEstate.entities;
 import RealEstate.exceptions.BuyerNotFoundException;
 import java.util.HashMap;
 
-public class BuyerContainer<String, Buyer> extends HashMap<String, RealEstate.entities.Buyer> {
+public class BuyerContainer<String, Buyer> extends HashMap<java.lang.String, RealEstate.entities.Buyer> {
     @Override
     public RealEstate.entities.Buyer get(Object key) {
         if (this.containsKey(key)) {
@@ -13,7 +13,7 @@ public class BuyerContainer<String, Buyer> extends HashMap<String, RealEstate.en
         }
     }
 
-    public java.lang.String getBuyerInfo(String username) {
+    public java.lang.String getBuyerInfo(java.lang.String username) {
         RealEstate.entities.Buyer buyer = get(username);
         return buyer.toString();
     }
