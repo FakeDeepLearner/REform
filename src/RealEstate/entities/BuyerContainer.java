@@ -1,14 +1,18 @@
 package RealEstate.entities;
-import RealEstate.exceptions.BuyerNotFoundException;
-import java.util.HashMap;
 
-public class BuyerContainer<String, Buyer> extends HashMap<java.lang.String, RealEstate.entities.Buyer> {
+import RealEstate.exceptions.BuyerNotFoundException;
+
+public class BuyerContainer<String, Buyer> extends Container<String, Buyer> {
+    /**
+     * @param key the key whose associated value is to be returned
+     * @return the value associated with key
+     * @throws BuyerNotFoundException if no Buyer is associated with key in the hashmap
+     */
     @Override
-    public RealEstate.entities.Buyer get(Object key) {
-        if (this.containsKey(key)) {
+    public Buyer get(Object key) throws BuyerNotFoundException {
+        try {
             return super.get(key);
-        }
-        else{
+        } catch(IllegalArgumentException e) {
             throw new BuyerNotFoundException();
         }
     }
