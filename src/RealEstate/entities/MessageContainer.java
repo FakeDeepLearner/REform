@@ -2,30 +2,13 @@ package RealEstate.entities;
 
 import RealEstate.exceptions.MessageNotFoundException;
 
-import java.util.HashMap;
-
-public class MessageContainer<Integer, Message> extends HashMap<java.lang.Integer, RealEstate.entities.Message> {
+public class MessageContainer<Integer, Message> extends Container<Integer, Message> {
     @Override
-    public RealEstate.entities.Message get(Object key) {
-        if (this.containsKey(key)) {
+    public Message get(Object key) throws MessageNotFoundException {
+        try {
             return super.get(key);
-        }
-        else{
+        } catch(IllegalArgumentException e) {
             throw new MessageNotFoundException();
         }
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder returnedString = new StringBuilder(" ");
-        for (RealEstate.entities.Message message : this.values()){
-            returnedString.append(message.toString()).append("\n");
-        }
-        return returnedString.toString();
-    }
-
-    public String getMessageInfo(int messageID) {
-        RealEstate.entities.Message message = get(messageID);
-        return message.toString();
     }
 }

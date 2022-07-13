@@ -1,31 +1,14 @@
 package RealEstate.entities;
 
-import java.util.HashMap;
-
 import RealEstate.exceptions.ListingNotFoundException;
 
-public class ListingContainer<Integer, Listing> extends HashMap<java.lang.Integer, RealEstate.entities.Listing>{
+public class ListingContainer<Integer, Listing> extends Container<Integer, Listing>{
     @Override
-    public RealEstate.entities.Listing get(Object key) throws ListingNotFoundException {
-        if(this.containsKey(key)){
+    public Listing get(Object key) throws ListingNotFoundException {
+        try {
             return super.get(key);
-        }
-        else{
+        } catch(IllegalArgumentException e) {
             throw new ListingNotFoundException();
         }
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder returnedString = new StringBuilder();
-        for (RealEstate.entities.Listing listing : this.values()) {
-            returnedString.append(listing.toString()).append("\n");
-        }
-        return returnedString.toString();
-    }
-
-    public String getListingInfo(int listingID) {
-        RealEstate.entities.Listing listing = get(listingID);
-        return listing.toString();
     }
 }
