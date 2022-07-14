@@ -15,11 +15,13 @@ public class FavAndUnFavManager{
 
     public void addToBuyerFavorites(String username, int listingID) {
         favoriteListing.addListingToBuyerFavorites(username, listingID);
+        favoriteListing.addCreationToGeneratedFavorites(username, listingID);
 
     }
 
     public void removeFromBuyerFavorites(String username, int listingID) {
         favoriteListing.removeListingFromBuyerFavorites(username, listingID);
+        favoriteListing.removeFromGeneratedFavorites(username, listingID);
     }
 
 }

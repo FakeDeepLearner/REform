@@ -26,16 +26,20 @@ public class FavoriteListing {
 
     public void addListingToBuyerFavorites(String username, int listingID) {
         Buyer buyer = buyerContainer.get(username);
-        buyer.addFavouriteListing(listingID);
+        if (!buyer.getFavorites().contains(listingID)) {
+            buyer.addFavouriteListing(listingID);
+        }
 
     }
 
     public void addCreationToGeneratedFavorites(String username, int listingID){
         if (generatedFavorites.containsKey(username)){
-            generatedFavorites.get(username).add(listingID);
+            if (!generatedFavorites.get(username).contains(listingID)){
+                generatedFavorites.get(username).add(listingID);
+            }
         }
         else{
-            ArrayList<Integer> value = new ArrayList<Integer>();
+            ArrayList<Integer> value = new ArrayList<>();
             value.add(listingID);
             generatedFavorites.put(username, value);
         }
