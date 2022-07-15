@@ -24,7 +24,7 @@ public class GenerateUniqueID {
     }
 
 
-    /**
+    /*
     private ArrayList<Integer> existingListingIDs;
     private ArrayList<Integer> existingMessageIDs;
 
