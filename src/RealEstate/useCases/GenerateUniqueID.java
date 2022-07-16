@@ -1,9 +1,5 @@
 package RealEstate.useCases;
 
-import RealEstate.entities.Listing;
-import RealEstate.entities.ListingContainer;
-import RealEstate.entities.MessageContainer;
-
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -14,7 +10,7 @@ public class GenerateUniqueID {
     private final static int minID = 100000000;
     private final static int maxID = 999999999;
 
-    public static int getUniqueId() {
+    public static int getUniqueID() {
         int returned_id = -1;
         while (existingIDs.contains(returned_id) || returned_id == -1 ) {
             returned_id = ThreadLocalRandom.current().nextInt(minID, maxID + 1);
@@ -22,7 +18,6 @@ public class GenerateUniqueID {
         existingIDs.add(returned_id);
         return returned_id;
     }
-
 
     /*
     private ArrayList<Integer> existingListingIDs;

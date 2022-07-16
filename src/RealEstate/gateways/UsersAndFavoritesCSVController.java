@@ -1,5 +1,6 @@
 package RealEstate.gateways;
 
+import RealEstate.useCases.DatabaseFilePath;
 import RealEstate.useCases.FavoriteListing;
 
 import java.io.*;
@@ -7,7 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class UsersAndFavoritesCSVController implements CsvInterface{
-    final private static String filepath = "src/RealEstate/database/UsersAndFavorites.csv";
+    final private static DatabaseFilePath filepath = new DatabaseFilePath("UsersAndFavorites.csv");
     final private FavoriteListing favoriteListing;
 
     public UsersAndFavoritesCSVController(FavoriteListing favoriteListing){
@@ -22,7 +23,7 @@ public class UsersAndFavoritesCSVController implements CsvInterface{
 
     static {
         try {
-            reader = new BufferedReader(new FileReader(filepath));
+            reader = new BufferedReader(new FileReader(filepath.getFilePath()));
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -32,7 +33,7 @@ public class UsersAndFavoritesCSVController implements CsvInterface{
 
     static {
         try {
-            writer = new BufferedWriter(new FileWriter(filepath, true));
+            writer = new BufferedWriter(new FileWriter(filepath.getFilePath(), true));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -42,7 +43,7 @@ public class UsersAndFavoritesCSVController implements CsvInterface{
 
     static {
         try {
-            overWriter = new BufferedWriter(new FileWriter(filepath, false));
+            overWriter = new BufferedWriter(new FileWriter(filepath.getFilePath(), false));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

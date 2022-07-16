@@ -13,10 +13,11 @@ public class CreateListing {
         listings = listingsInterface;
     }
 
-    public void addListing(int id, int civicAddress, String streetName, String city, String type, int bedrooms,
+    public void addListing(int civicAddress, String streetName, String city, String type, int bedrooms,
                               int bathrooms, BigDecimal price) {
-        Listing listing = new Listing(id, civicAddress, streetName, city, type, bedrooms, bathrooms, price);
-        listings.put(GenerateUniqueID.getUniqueId(), listing); 
+        int uniqueID = GenerateUniqueID.getUniqueID();
+        Listing listing = new Listing(uniqueID, civicAddress, streetName, city, type, bedrooms, bathrooms, price);
+        listings.put(uniqueID, listing);
     }
 
     public void readListings() {

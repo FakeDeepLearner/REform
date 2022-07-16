@@ -1,4 +1,4 @@
-package RealEstate.gateways;
+package RealEstate.controllers;
 import RealEstate.useCases.FavoriteListing;
 
 public class FavAndUnFavManager{

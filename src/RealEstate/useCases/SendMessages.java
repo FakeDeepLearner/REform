@@ -29,7 +29,7 @@ public class SendMessages {
      * @param content           the content of the message
      */
     public void sendMessage(String senderUsername, String recipientUsername, String content) {
-        int id = GenerateUniqueID.getUniqueId();
+        int id = GenerateUniqueID.getUniqueID();
         addMessage(senderUsername, recipientUsername, id, content);
     }
 

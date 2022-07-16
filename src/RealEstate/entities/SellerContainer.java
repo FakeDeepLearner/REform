@@ -1,9 +1,7 @@
 package RealEstate.entities;
-
-import RealEstate.exceptions.MessageNotFoundException;
 import RealEstate.exceptions.SellerNotFoundException;
 
-public class SellerContainer<Integer, Seller> extends Container<java.lang.Integer, RealEstate.entities.Seller> {
+public class SellerContainer<Integer, Seller> extends Container<java.lang.String, RealEstate.entities.Seller> {
     /**
      * @param key the key whose associated value is to be returned
      * @return the value associated with key
