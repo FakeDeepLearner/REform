@@ -25,19 +25,20 @@ public class Listing {
         HOUSE,
         TOWNHOUSE
     }
+
     private final ListingType type;
 
     /**
      * Creates a listing without a unit number
      *
-     * @param id the unique id associated with the listing
+     * @param id           the unique id associated with the listing
      * @param civicAddress the civic address of the listing
-     * @param streetName the street name of the listing
-     * @param city the city the listing is located
-     * @param type the type of housing of the listing
-     * @param bedrooms the number of bedrooms in the listing
-     * @param bathrooms the number of bathrooms in the listing
-     * @param price the price of the listing
+     * @param streetName   the street name of the listing
+     * @param city         the city the listing is located
+     * @param type         the type of housing of the listing
+     * @param bedrooms     the number of bedrooms in the listing
+     * @param bathrooms    the number of bathrooms in the listing
+     * @param price        the price of the listing
      */
     public Listing(int id, int civicAddress, String streetName, String city, String type, int bedrooms, int bathrooms,
                    BigDecimal price) {
@@ -62,15 +63,15 @@ public class Listing {
     /**
      * Creates a listing with a unit number
      *
-     * @param id the unique id associated with the listing
-     * @param unitNumber the unit number of the listing
+     * @param id           the unique id associated with the listing
+     * @param unitNumber   the unit number of the listing
      * @param civicAddress the civic address of the listing
-     * @param streetName the street name of the listing
-     * @param city the city the listing is located
-     * @param type the type of housing of the listing
-     * @param bedrooms the number of bedrooms in the listing
-     * @param bathrooms the number of bathrooms in the listing
-     * @param price the price of the listing
+     * @param streetName   the street name of the listing
+     * @param city         the city the listing is located
+     * @param type         the type of housing of the listing
+     * @param bedrooms     the number of bedrooms in the listing
+     * @param bathrooms    the number of bathrooms in the listing
+     * @param price        the price of the listing
      */
     public Listing(int id, int unitNumber, int civicAddress, String streetName, String city, String type, int bedrooms,
                    int bathrooms, int floors, BigDecimal price) {
@@ -97,11 +98,11 @@ public class Listing {
      * @param input the string to be checked
      * @return whether input is a valid value in ListingType
      */
-    private boolean isStringValidEnum(String input){
+    private boolean isStringValidEnum(String input) {
         try {
             Enum.valueOf(ListingType.class, input);
             return true;
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             return false;
         }
     }
@@ -210,13 +211,14 @@ public class Listing {
 
     /**
      * Public method to return a String of relevant information suited for CSV files.
+     *
      * @return comma-separated string of the info
      */
-    public String getListingInfos(){
+    public String getListingInfos() {
 
-        String info = this.getUnitNumber() + "," + this.getCivicAddress() + "," + this.getStreetName()+ "," +
-                this.getCity() + "," + this.getBedrooms()+ "," +this.getBathrooms() + "," +
-                this.getFloors()+ "," +this.getPrice() + "," + this.getIsSold();
+        String info = this.getId() + "," + this.getUnitNumber() + "," + this.getCivicAddress() + "," + this.getStreetName() + "," +
+                this.getCity() + "," + this.getBedrooms() + "," + this.getBathrooms() + "," +
+                this.getFloors() + "," + this.getPrice() + "," + this.getIsSold();
 
         return info;
     }
