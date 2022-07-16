@@ -207,4 +207,17 @@ public class Listing {
         String address = (unitNumber == null ? "" : unitNumber + " - ") + civicAddress + " " + streetName + ", " + city;
         return (isSold ? "SOLD" : "AVAILABLE") + " - " + address;
     }
+
+    /**
+     * Public method to return a String of relevant information suited for CSV files.
+     * @return comma-separated string of the info
+     */
+    public String getListingInfos(){
+
+        String info = this.getUnitNumber() + "," + this.getCivicAddress() + "," + this.getStreetName()+ "," +
+                this.getCity() + "," + this.getBedrooms()+ "," +this.getBathrooms() + "," +
+                this.getFloors()+ "," +this.getPrice() + "," + this.getIsSold();
+
+        return info;
+    }
 }
