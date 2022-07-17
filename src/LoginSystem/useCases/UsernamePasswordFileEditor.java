@@ -56,7 +56,7 @@ public class UsernamePasswordFileEditor extends CsvEditor {
             String key = entry.getKey();
             User value = entry.getValue();
 
-            out.add(key + "," + value.getPassword() + "," + value.isAdmin());
+            out.add(key + "," + value.getPassword() + "," + value.getAdmin());
 
         }
 
