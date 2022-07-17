@@ -3,11 +3,15 @@ package LoginSystem.controllers;
 import java.util.ArrayList;
 
 public class UserInterface {
-
     public void printWelcomeMessage() {
         System.out.println("Hello, please press 1 to sign up, or 2 to log in to your account.");
         System.out.println("(Secret) Press 3 to create an admin user.");
         System.out.println("Press 4 to exit the program safely.");
+    }
+
+    public void printCreateUserMenu() {
+        System.out.println("Press 1 to create a new buyer.");
+        System.out.println("Press 2 to create a new seller.");
     }
 
     public void printNonAdminLogInMenu() {

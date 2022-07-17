@@ -1,92 +1,82 @@
 package LoginSystem.controllers;
 
 import LoginSystem.exceptions.ExitProgramException;
-import LoginSystem.exceptions.UserBannedException;
-import LoginSystem.exceptions.UserNotFoundException;
-import LoginSystem.useCases.AuthenticateUser;
-import LoginSystem.useCases.UpdateUserHistory;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
 
 public class LoggedOutManager {
 
     private final InputHandler input;
     private final UserInterface ui;
-    private final AuthenticateUser auth;
-    private final UpdateUserHistory history;
     private final UserManager userManager;
 
-    public LoggedOutManager(InputHandler input, UserInterface ui, AuthenticateUser auth, UpdateUserHistory history, UserManager userManager) {
+    /**
+     * @param input is the class responsible to get input from the user
+     * @param ui is the class responsible for providing feedback to the user
+     * @param userManager is the controller responsible for handling user-related tasks
+     */
+    public LoggedOutManager(InputHandler input, UserInterface ui, UserManager userManager) {
         this.input = input;
         this.ui = ui;
-        this.auth = auth;
-        this.history = history;
         this.userManager = userManager;
     }
 
-    private String loginUser(ArrayList<String> usernamePassword) {
-        boolean isLoggedIn;
-        try {
-            isLoggedIn = auth.loginUser(usernamePassword.get(0), usernamePassword.get(1));
-        } catch (UserNotFoundException | UserBannedException e) {
-            ui.printArbitraryException(e);
-            return null;
-        }
-
-        if (isLoggedIn) {
-            ui.printLoginSuccess();
-            history.writeUserHistory(usernamePassword.get(0), true);
-
-            return usernamePassword.get(0);
-        } else {
-            ui.printLoginFail();
-        }
-
-        return null;
-    }
-
+    /**
+     * Implements the menu for a user that is logged out
+     *
+     * @return the username and password associated with a logged-in user
+     * @throws ExitProgramException when the user wants to quit the progran
+     */
     public String menuSelector() throws ExitProgramException {
         ui.printWelcomeMessage();
 
-        ArrayList<Integer> allowedInputs = new ArrayList<>();
-        Collections.addAll(allowedInputs, 1, 2, 3, 4);
-
+        ArrayList<Integer> allowedInputs = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5));
         int menuSelect = input.intInput(allowedInputs);
 
         ArrayList<String> usernamePassword = new ArrayList<>();
 
-            switch (menuSelect) {
-                case 1: {
-                    usernamePassword = userManager.createNewUser(false);
-                    break;
-                }
-
-                case 2: {
-                    // User selected to log in
-                    ui.printExistingUsernameInput();
-                    usernamePassword.add(input.strInput());
-                    ui.printExistingPasswordInput();
-                    usernamePassword.add(input.strInput());
-                    break;
-                }
-
-                case 3: {
-                    usernamePassword = userManager.createNewUser(true);
-                    break;
-                }
-
-                case 4: {
-                    throw new ExitProgramException();
-                }
-            }
-
-
+        switch (menuSelect) {
+            case 1:
+                createMenuSelector();
+                break;
+            case 2:
+                // User selected to log in
+                ui.printExistingUsernameInput();
+                usernamePassword.add(input.strInput());
+                ui.printExistingPasswordInput();
+                usernamePassword.add(input.strInput());
+                break;
+            case 3:
+                usernamePassword = userManager.createNewUser("ADMIN");
+                break;
+            case 4:
+                throw new ExitProgramException();
+        }
 
         if (usernamePassword == null) {
             return null;
         }
 
-        return loginUser(usernamePassword);
+        return userManager.loginUser(usernamePassword);
+    }
+
+    /**
+     * Implements the menu selector when creating a user
+     */
+    private void createMenuSelector() {
+        ui.printCreateUserMenu();
+
+        ArrayList<Integer> allowedInputs = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5));
+        int menuSelect = input.intInput(allowedInputs);
+
+        switch (menuSelect) {
+            case 1:
+                userManager.createNewUser("BUYER");
+                break;
+            case 2:
+                userManager.createNewUser("SELLER");
+                break;
+        }
     }
 }

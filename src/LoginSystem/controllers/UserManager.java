@@ -1,9 +1,12 @@
 package LoginSystem.controllers;
 
+import LoginSystem.exceptions.UserBannedException;
+import LoginSystem.exceptions.UserNotFoundException;
 import LoginSystem.exceptions.UsernameAlreadyExistsException;
-import LoginSystem.useCases.CreateUser;
+import LoginSystem.useCases.AuthenticateUser;
 import LoginSystem.useCases.UpdateUserHistory;
 import LoginSystem.useCases.UsernamePasswordFileEditor;
+import RealEstate.useCases.UserFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,74 +14,110 @@ import java.util.ArrayList;
 public class UserManager {
     private final InputHandler inputHandler;
     private final UserInterface ui;
-    private final CreateUser createUser;
+    private final UserFactory userFactory;
+    private final AuthenticateUser auth;
     private final UpdateUserHistory history;
     private final UsernamePasswordFileEditor file;
 
-    public UserManager(InputHandler inputHandler, UserInterface ui, CreateUser createUser, UpdateUserHistory history,
-                       UsernamePasswordFileEditor file) {
+    public UserManager(InputHandler inputHandler, UserInterface ui, UserFactory userFactory, AuthenticateUser auth,
+                       UpdateUserHistory history, UsernamePasswordFileEditor file) {
         this.inputHandler = inputHandler;
         this.ui = ui;
-        this.createUser = createUser;
+        this.userFactory = userFactory;
+        this.auth = auth;
         this.history = history;
         this.file = file;
     }
 
-    public void loadUsersFromCSV() {
-        ArrayList<ArrayList<String>> users;
-        try {
-            users = file.getUsersFromCSV();
-        } catch (IOException e) {
-            ui.printArbitraryException(e);
-            return;
-        }
+//    public void loadUsersFromCSV() {
+//        ArrayList<ArrayList<String>> users;
+//        try {
+//            users = file.getUsersFromCSV();
+//        } catch (IOException e) {
+//            ui.printArbitraryException(e);
+//            return;
+//        }
+//
+//        for (ArrayList<String> user : users) {
+//            ArrayList<String> loginHistory = history.readUserHistory(user.get(0));
+//
+//            if (Boolean.parseBoolean(user.get(2))) {
+//                userFactory.createAdminUser(user.get(0), user.get(1), loginHistory);
+//            } else {
+//                userFactory.createNonAdminUser(user.get(0), user.get(1), loginHistory);
+//            }
+//        }
+//    }
 
-        for (ArrayList<String> user : users) {
-            ArrayList<String> loginHistory = history.readUserHistory(user.get(0));
-
-            if (Boolean.parseBoolean(user.get(2))) {
-                createUser.createAdminUser(user.get(0), user.get(1), loginHistory);
-            } else {
-                createUser.createNonAdminUser(user.get(0), user.get(1), loginHistory);
-            }
-        }
-    }
-
+    /**
+     * Get a username and password from the console
+     *
+     * @return an array of a username and password
+     */
     private ArrayList<String> getUsernameAndPassword() {
-        ArrayList<String> username_password = new ArrayList<>();
+        ArrayList<String> usernamePassword = new ArrayList<>();
 
         ui.printCreateUsernameInput();
-        username_password.add(inputHandler.strInput());
+        usernamePassword.add(inputHandler.strInput());
 
         ui.printCreatePasswordInput();
-        username_password.add(inputHandler.strInput());
+        usernamePassword.add(inputHandler.strInput());
 
-        return username_password;
+        return usernamePassword;
     }
 
-    public ArrayList<String> createNewUser(boolean isAdmin) {
+    /**
+     * Implements the user creation pipeline
+     *
+     * @param type of user to be created
+     * @return the username and password of the created user
+     */
+    public ArrayList<String> createNewUser(String type) {
         // User selected to create a new user
-        ArrayList<String> username_password = getUsernameAndPassword();
+        ArrayList<String> usernamePassword = getUsernameAndPassword();
         // Assume the new user is not an admin b/c only admins can create new admin users
         try {
-            if (!isAdmin) {
-                createUser.createNonAdminUser(username_password.get(0), username_password.get(1));
-            } else {
-                createUser.createAdminUser(username_password.get(0), username_password.get(1));
-            }
+            userFactory.createUser(type, usernamePassword.get(0), usernamePassword.get(1));
         } catch (UsernameAlreadyExistsException e) {
             ui.printArbitraryException(e);
             return null;
         }
 
         try {
-            file.addUserInfo(username_password.get(0), username_password.get(1));
+            file.addUserInfo(usernamePassword.get(0), usernamePassword.get(1));
         } catch (IOException e) {
             ui.printArbitraryException(e);
         }
 
         ui.printSignUpSuccess();
 
-        return username_password;
+        return usernamePassword;
+    }
+
+    /**
+     * Logs in a User
+     *
+     * @param usernamePassword is the array of the username and password of the User to be logged in
+     * @return the username of the logged-in user
+     */
+    public String loginUser(ArrayList<String> usernamePassword) {
+        boolean isLoggedIn;
+        try {
+            isLoggedIn = auth.loginUser(usernamePassword.get(0), usernamePassword.get(1));
+        } catch (UserNotFoundException | UserBannedException e) {
+            ui.printArbitraryException(e);
+            return null;
+        }
+
+        if (isLoggedIn) {
+            ui.printLoginSuccess();
+            history.writeUserHistory(usernamePassword.get(0), true);
+
+            return usernamePassword.get(0);
+        } else {
+            ui.printLoginFail();
+        }
+
+        return null;
     }
 }
