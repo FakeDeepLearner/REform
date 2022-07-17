@@ -1,9 +1,10 @@
 package RealEstate.useCases;
 
 import LoginSystem.entities.NonAdminUser;
+import LoginSystem.entities.User;
+import LoginSystem.entities.UserContainer;
 import RealEstate.entities.Message;
 import RealEstate.entities.MessageContainer;
-import RealEstate.entities.NonAdminContainer;
 
 import java.util.ArrayList;
 
@@ -11,14 +12,13 @@ import java.util.ArrayList;
 public class SendMessages {
 
     private final MessageContainer<Integer, Message> messageContainer;
-    private final NonAdminContainer<String, NonAdminUser> nonAdminContainer;
+    private final UserContainer<String, User> userContainer;
 
 
     public SendMessages(MessageContainer<Integer, Message> messageContainer,
-                        NonAdminContainer<String, NonAdminUser> nonAdminContainer) {
+                        UserContainer<String, User> userContainer) {
         this.messageContainer = messageContainer;
-        this.nonAdminContainer = nonAdminContainer;
-
+        this.userContainer = userContainer;
     }
 
     /**
@@ -43,8 +43,8 @@ public class SendMessages {
      */
     public void addMessage(String senderUsername, String recipientUsername,
                            int id, String content) {
-        NonAdminUser sender = nonAdminContainer.get(senderUsername);
-        NonAdminUser recipient = nonAdminContainer.get(recipientUsername);
+        NonAdminUser sender = userContainer.getNonAdmin(senderUsername);
+        NonAdminUser recipient = userContainer.getNonAdmin(recipientUsername);
 
         Message message = new Message(sender, recipient, id, content);
         messageContainer.put(id, message);

@@ -1,23 +1,23 @@
 package RealEstate.useCases;
 
+import LoginSystem.entities.User;
+import LoginSystem.entities.UserContainer;
 import RealEstate.entities.Listing;
 import RealEstate.entities.ListingContainer;
 import RealEstate.entities.Seller;
-import RealEstate.entities.SellerContainer;
 
-import java.io.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class CreateListing {
     private final ListingContainer<Integer, Listing> listings;
-    private final SellerContainer<String, Seller> sellers;
+    private final UserContainer<String, User> userContainer;
     private final HashMap<String, ArrayList<Listing>> createdListings;
     public CreateListing(ListingContainer<Integer, Listing> listingsInterface,
-                         SellerContainer<String, Seller> sellers) {
+                         UserContainer<String, User> userContainer) {
         listings = listingsInterface;
-        this.sellers = sellers;
+        this.userContainer = userContainer;
         createdListings = new HashMap<>();
     }
 
@@ -37,7 +37,7 @@ public class CreateListing {
     }
 
     public void addListingToSeller(String username, Listing listing) {
-        Seller seller = sellers.get(username);
+        Seller seller = userContainer.getSeller(username);
         seller.addListing(listing);
     }
 
@@ -45,8 +45,8 @@ public class CreateListing {
         return createdListings;
     }
 
-    public SellerContainer<String, Seller> getSellers() {
-        return sellers;
+    public UserContainer<String, User> getUserContainer() {
+        return userContainer;
     }
 
     public ListingContainer<Integer, Listing> getListings() {

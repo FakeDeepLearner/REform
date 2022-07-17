@@ -9,19 +9,19 @@ public class Buyer extends NonAdminUser {
     private final ArrayList<Integer> favorites;
 
     public Buyer(String username, String password) {
-        super(username, password);
+        super(UserType.BUYER, username, password);
         this.favorites = new ArrayList<>();
 
     }
 
     public Buyer(String username, String password, ArrayList<Integer> favorites) {
-        super(username, password);
+        super(UserType.BUYER, username, password);
         this.favorites = favorites;
     }
 
     public Buyer(String username, String password, ArrayList<String> loginHistory,
                  ArrayList<Integer> favorites) {
-        super(username, password, loginHistory);
+        super(UserType.BUYER, username, password, loginHistory);
         this.favorites = favorites;
     }
 
@@ -59,7 +59,7 @@ public class Buyer extends NonAdminUser {
 
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder("");
+        StringBuilder builder = new StringBuilder();
         builder.append(getUsername()).append("\n").append("Favorite Listings:\n");
         for (Integer integer : favorites) {
             builder.append(integer).append(" ");

@@ -1,41 +1,32 @@
 package RealEstate.useCases;
 
-import LoginSystem.entities.NonAdminUser;
-import RealEstate.entities.NonAdminContainer;
+import LoginSystem.entities.User;
+import LoginSystem.entities.UserContainer;
 import RealEstate.entities.Seller;
-import RealEstate.entities.SellerContainer;
 
 import java.util.HashMap;
 
 public class CreateSeller {
-    private final SellerContainer<String, Seller> sellerContainer;
-    private final NonAdminContainer<String, NonAdminUser> nonAdminContainer;
+    private final UserContainer<String, User> userContainer;
     private final HashMap<String, Seller> createdSellers;
 
-    public CreateSeller(SellerContainer<String, Seller> sellerContainer,
-                        NonAdminContainer<String, NonAdminUser> nonAdminContainer){
-        this.sellerContainer = sellerContainer;
-        this.nonAdminContainer = nonAdminContainer;
+    public CreateSeller(UserContainer<String, User> userContainer){
+        this.userContainer = userContainer;
         createdSellers = new HashMap<>();
     }
 
-    public NonAdminContainer<String, NonAdminUser> getNonAdminContainer() {
-        return nonAdminContainer;
+    public UserContainer<String, User> getUserContainer() {
+        return userContainer;
     }
 
     public HashMap<String, Seller> getCreatedSellers() {
         return createdSellers;
     }
 
-    public SellerContainer<String, Seller> getSellerContainer() {
-        return sellerContainer;
-    }
-
     public void createNewSeller(String username, String password){
-        Seller newSeller = new Seller(username, password);
-        sellerContainer.put(username, newSeller);
-        nonAdminContainer.put(username, new NonAdminUser(username, password));
-        createdSellers.put(username, newSeller);
+        Seller seller = new Seller(username, password);
+        userContainer.put(username, seller);
+        createdSellers.put(username, seller);
     }
 
 }

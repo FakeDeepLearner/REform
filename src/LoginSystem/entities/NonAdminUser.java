@@ -2,30 +2,31 @@ package LoginSystem.entities;
 
 import RealEstate.entities.Message;
 import RealEstate.entities.MessageContainer;
+import RealEstate.entities.UserType;
 
 import java.util.ArrayList;
 
-public class NonAdminUser extends User implements Bannable{
+public abstract class NonAdminUser extends User implements Bannable{
     private boolean isBanned = false;
     protected MessageContainer<Integer, Message> outbox;
     protected MessageContainer<Integer, Message> inbox;
+
     /**
      * Creates an instance of a non-admin user.
      * @param username this user's username.
      * @param password this user's password.
      */
-    public NonAdminUser(String username, String password) {
-        super(username, password);
+    public NonAdminUser(UserType type, String username, String password) {
+        super(type, username, password);
 
         outbox = new MessageContainer<>();
         inbox = new MessageContainer<>();
     }
 
-    public NonAdminUser(String username, String password, ArrayList<String> loginHistory) {
-        super(username, password, loginHistory);
+    public NonAdminUser(UserType type, String username, String password, ArrayList<String> loginHistory) {
+        super(type, username, password, loginHistory);
         outbox = new MessageContainer<>();
         inbox = new MessageContainer<>();
-
     }
 
     /**

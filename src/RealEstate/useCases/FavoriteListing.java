@@ -1,18 +1,19 @@
 package RealEstate.useCases;
 
+import LoginSystem.entities.User;
+import LoginSystem.entities.UserContainer;
 import RealEstate.entities.Buyer;
-import RealEstate.entities.BuyerContainer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class FavoriteListing {
-    private final BuyerContainer<String, Buyer> buyerContainer;
+    private final UserContainer<String, User> userContainer;
 
     private final HashMap<String, ArrayList<Integer>> generatedFavorites;
 
-    public FavoriteListing(BuyerContainer<String, Buyer> buyerContainer) {
-        this.buyerContainer = buyerContainer;
+    public FavoriteListing(UserContainer<String, User> userContainer) {
+        this.userContainer = userContainer;
         this.generatedFavorites = new HashMap<>();
     }
 
@@ -20,12 +21,12 @@ public class FavoriteListing {
         return generatedFavorites;
     }
 
-    public BuyerContainer<String, Buyer> getBuyerContainer() {
-        return buyerContainer;
+    public UserContainer<String, User> getUserContainer() {
+        return userContainer;
     }
 
     public void addListingToBuyerFavorites(String username, int listingID) {
-        Buyer buyer = buyerContainer.get(username);
+        Buyer buyer = userContainer.getBuyer(username);
         if (!buyer.getFavorites().contains(listingID)) {
             buyer.addFavouriteListing(listingID);
         }
@@ -46,7 +47,7 @@ public class FavoriteListing {
     }
 
     public void removeListingFromBuyerFavorites(String username, int listingID) {
-        Buyer buyer = buyerContainer.get(username);
+        Buyer buyer = userContainer.getBuyer(username);
         buyer.removeFavouriteListing(listingID);
     }
 
