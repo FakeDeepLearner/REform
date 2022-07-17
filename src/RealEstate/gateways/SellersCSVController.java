@@ -1,9 +1,11 @@
 package RealEstate.gateways;
 
+import RealEstate.entities.Seller;
 import RealEstate.useCases.CreateSeller;
 import RealEstate.useCases.DatabaseFilePath;
 
 import java.io.*;
+import java.util.HashMap;
 
 public class SellersCSVController implements CsvInterface{
     private final CreateSeller createSeller;
@@ -52,11 +54,20 @@ public class SellersCSVController implements CsvInterface{
 
     @Override
     public void read() throws IOException {
-
+        String line;
+        while((line = reader.readLine()) != null){
+            String[] splitLine = line.split(",");
+            String username = splitLine[0];
+            String password = splitLine[1];
+            createSeller.createNewSeller(username, password);
+        }
     }
 
     @Override
     public void write() throws IOException {
-
+        HashMap<String, Seller> createdSellers = createSeller.getCreatedSellers();
+        for(String username : createdSellers.keySet()){
+            writer.write(username + "," + createdSellers.get(username).getPassword());
+        }
     }
 }

@@ -1,5 +1,6 @@
 package RealEstate.controllers;
 
+import RealEstate.entities.Listing;
 import RealEstate.useCases.CreateBuyer;
 import RealEstate.useCases.CreateListing;
 import RealEstate.useCases.CreateSeller;
@@ -41,7 +42,8 @@ public class Creator {
 
     public void createNewListing(String username, int civicAddress, String streetName, String city, String type, int bedrooms,
                                  int bathrooms, BigDecimal price){
-        createListing.addListing(civicAddress, streetName, city, type, bedrooms, bathrooms, price);
-
+        Listing listing = createListing.addListing(civicAddress, streetName, city, type, bedrooms, bathrooms, price);
+        createListing.addListingToSeller(username, listing);
+        createListing.addListingToCreatedListings(username, listing);
     }
 }

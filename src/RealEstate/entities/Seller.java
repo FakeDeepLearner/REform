@@ -5,7 +5,7 @@ import LoginSystem.entities.User;
 import java.util.ArrayList;
 
 public class Seller extends NonAdminUser {
-    private ArrayList<Integer> listings;
+    private ArrayList<Listing> listings;
 
 
     public Seller(String username, String password) {
@@ -25,26 +25,30 @@ public class Seller extends NonAdminUser {
         this.outbox = outbox;
     }
 
-    public void addListing(int id){
-        listings.add(id);
+    public void addListing(Listing listing){
+        listings.add(listing);
     }
 
-    public void removeListing(int id){
+    public void removeListing(Listing listing){
         // This workaround is to make sure we don't call the overloaded method remove(int index)
-        listings.remove(Integer.valueOf(id));
+        listings.remove(listing);
     }
 
-    public ArrayList<Integer> getListings() {
+    public ArrayList<Listing> getListings() {
         return listings;
     }
 
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder("");
-        builder.append(getUsername()).append("\n").append("Listings:\n");
-        for (Integer integer : listings) {
-            builder.append(integer).append(" ");
+        builder.append("Username: ").append(getUsername()).append("\n").append("Listings:\n\n");
+        for (Listing listing : listings) {
+            builder.append(listing).append("\n");
         }
         return builder.toString();
+    }
+
+    public String listingsAsString(){
+        return listings.toString();
     }
 }

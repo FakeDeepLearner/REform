@@ -1,10 +1,12 @@
 package RealEstate.gateways;
 
+import RealEstate.entities.Buyer;
 import RealEstate.useCases.CreateBuyer;
 import RealEstate.useCases.DatabaseFilePath;
 
 import javax.xml.crypto.Data;
 import java.io.*;
+import java.util.HashMap;
 
 public class BuyersCSVController implements CsvInterface{
     final private CreateBuyer createBuyer;
@@ -50,11 +52,20 @@ public class BuyersCSVController implements CsvInterface{
 
     @Override
     public void read() throws IOException {
-
+        String line;
+        while((line = reader.readLine()) != null){
+            String[] splitLine = line.split(",");
+            String username = splitLine[0];
+            String password = splitLine[1];
+            createBuyer.createNewBuyer(username, password);
+        }
     }
 
     @Override
     public void write() throws IOException {
-
+        HashMap<String, Buyer> createdBuyers = createBuyer.getCreatedBuyers();
+        for(String username : createdBuyers.keySet()){
+           writer.write(username + "," + createdBuyers.get(username).getPassword());
+        }
     }
 }
