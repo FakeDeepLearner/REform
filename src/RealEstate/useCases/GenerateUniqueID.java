@@ -2,6 +2,7 @@ package RealEstate.useCases;
 
 import RealEstate.entities.Listing;
 import RealEstate.entities.ListingContainer;
+import RealEstate.entities.Message;
 import RealEstate.entities.MessageContainer;
 
 import java.util.ArrayList;
@@ -45,7 +46,7 @@ public class GenerateUniqueID {
      *
      * @param l Message Container
      */
-    public GenerateUniqueID(MessageContainer<Integer, Listing> l) {
+    public GenerateUniqueID(MessageContainer<Integer, Message> l) {
         this.existingMessageIDs = this.getIDsFromMessageContainer(l);
     }
 
@@ -110,7 +111,7 @@ public class GenerateUniqueID {
      * @param l MessageContainer
      * @return An arraylist containing the IDs of Listings from MessageContainer
      */
-    private ArrayList<Integer> getIDsFromMessageContainer(MessageContainer<Integer, Listing> l) {
+    private ArrayList<Integer> getIDsFromMessageContainer(MessageContainer<Integer, Message> l) {
 
         return new ArrayList<Integer>(l.keySet());
     }
