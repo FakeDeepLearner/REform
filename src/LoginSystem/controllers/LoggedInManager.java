@@ -9,6 +9,7 @@ import LoginSystem.useCases.UsernamePasswordFileEditor;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 public class LoggedInManager {
@@ -21,7 +22,8 @@ public class LoggedInManager {
     private final UserManager userManager;
     private final UsernamePasswordFileEditor file;
 
-    public LoggedInManager(InputHandler input, UserInterface ui, AuthenticateUser auth, UpdateUserHistory history, RestrictUser restrict, UserManager userManager, UsernamePasswordFileEditor file) {
+    public LoggedInManager(InputHandler input, UserInterface ui, AuthenticateUser auth, UpdateUserHistory history,
+                           RestrictUser restrict, UserManager userManager, UsernamePasswordFileEditor file) {
         this.input = input;
         this.ui = ui;
         this.auth = auth;
@@ -113,11 +115,9 @@ public class LoggedInManager {
     public boolean adminScreen(String username) {
         ui.printAdminLoginMenu();
 
-        ArrayList<Integer> allowedInputs = new ArrayList<>();
-        Collections.addAll(allowedInputs, 1, 2, 3, 4, 5);
-
-        int select = input.intInput(allowedInputs);
-        switch (select) {
+        ArrayList<Integer> allowedInputs = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5));
+        int menuSelect = input.intInput(allowedInputs);
+        switch (menuSelect) {
             case 1: {
                 // View login history
                 ArrayList<String> userHistory = history.getLoginHistory(username);
@@ -127,7 +127,7 @@ public class LoggedInManager {
 
             case 2: {
                 // Create new admin user
-                userManager.createNewUser(true);
+                userManager.createNewUser("ADMIN");
                 break;
             }
 
