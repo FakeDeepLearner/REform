@@ -82,7 +82,7 @@ public class GenerateUniqueID {
     /**
      * Get a unique ID from a ListingIDs and MessageIDs
      *
-     * @return A ID number unique to both Listings and Messages
+     * @return An ID number unique to both Listings and Messages
      */
     public int getUniqueID() {
         int out = -1;
