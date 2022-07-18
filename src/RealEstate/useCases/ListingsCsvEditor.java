@@ -1,7 +1,5 @@
 package RealEstate.useCases;
 
-import LoginSystem.useCases.CsvEditor;
-import LoginSystem.useCases.csvFilePath;
 import RealEstate.entities.Listing;
 
 import java.io.*;
@@ -14,10 +12,19 @@ public class ListingsCsvEditor {
 
     private DatabaseFilePath filePath;
 
+    /**
+     * Create a ListingsCsvEditor class
+     */
     public ListingsCsvEditor() {
         this.filePath = new DatabaseFilePath("Listings.csv");
     }
 
+    /**
+     * Add a Listing to the CSV file
+     *
+     * @param l Listing to be added
+     * @throws IOException
+     */
     public void addListingToCSV(Listing l) throws IOException {
         FileWriter fw = new FileWriter(filePath.getFilePath(), true);
         BufferedWriter output = new BufferedWriter(fw);
@@ -28,8 +35,13 @@ public class ListingsCsvEditor {
         output.close();
     }
 
-    // Static method to add the first line (naming the columns) as
-    // "id","unitNumber","civicAddress","streetName","city","bedrooms","bathroomsfloors","price","isSold"
+    /**
+     * Static method to add the first line (naming the columns) as
+     * "id","unitNumber","civicAddress","streetName","city","bedrooms","bathroomsfloors","price","isSold"
+     *
+     * @throws IOException
+     */
+
     public static void addFirstLine() throws IOException {
         FileWriter fw = new FileWriter(DatabaseFilePath.getDatabasePath() + "Listings.csv");
         BufferedWriter output = new BufferedWriter(fw);
@@ -38,6 +50,12 @@ public class ListingsCsvEditor {
     }
 
 
+    /**
+     * Read the CSV file and get the Listings
+     *
+     * @return Array list of Listings
+     * @throws IOException
+     */
     public ArrayList<Listing> getListingsFromCSV() throws IOException {
         ArrayList<Listing> out = new ArrayList<>();
 
