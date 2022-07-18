@@ -1,22 +1,21 @@
 package RealEstate.gateways;
-
 import RealEstate.entities.Buyer;
-import RealEstate.useCases.CreateBuyer;
 import RealEstate.useCases.DatabaseFilePath;
+import RealEstate.useCases.UserFactory;
 
 import java.io.*;
 import java.util.HashMap;
 
 public class BuyersCSVController implements CsvInterface{
-    final private CreateBuyer createBuyer;
+    final private UserFactory userFactory;
     final private static DatabaseFilePath filepath = new DatabaseFilePath("Buyers.csv");
 
-    public BuyersCSVController(CreateBuyer createBuyer) {
-        this.createBuyer = createBuyer;
+    public BuyersCSVController(UserFactory userFactory) {
+        this.userFactory = userFactory;
     }
 
-    public CreateBuyer getCreateBuyer() {
-        return createBuyer;
+    public UserFactory getCreateBuyer() {
+        return userFactory;
     }
 
     @Override
@@ -27,7 +26,7 @@ public class BuyersCSVController implements CsvInterface{
             String[] splitLine = line.split(",");
             String username = splitLine[0];
             String password = splitLine[1];
-            createBuyer.createNewBuyer(username, password);
+            userFactory.createUser("buyer", username, password);
         }
         reader.close();
     }
@@ -35,7 +34,7 @@ public class BuyersCSVController implements CsvInterface{
     @Override
     public void write() throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(filepath.getFilePath(), true));
-        HashMap<String, Buyer> createdBuyers = createBuyer.getCreatedBuyers();
+        HashMap<String, Buyer> createdBuyers = userFactory.getCreatedBuyers();
         for(String username : createdBuyers.keySet()){
            writer.write(username + "," + createdBuyers.get(username).getPassword());
            writer.write("\n");

@@ -5,7 +5,11 @@ import LoginSystem.entities.UserContainer;
 import LoginSystem.exceptions.UserNotFoundException;
 import LoginSystem.exceptions.UsernameAlreadyExistsException;
 import LoginSystem.useCases.CreateUser;
+import RealEstate.entities.Buyer;
+import RealEstate.entities.Seller;
 import RealEstate.entities.UserType;
+
+import java.util.HashMap;
 
 public class UserFactory {
     private final CreateUser createUser;
@@ -68,4 +72,22 @@ public class UserFactory {
             throw new UsernameAlreadyExistsException();
         }
     }
+
+    /**
+     * Method to get the created buyers of createBuyer
+     * @return created buyers of createBuyer
+     * */
+    public HashMap<String, Buyer> getCreatedBuyers(){
+        return createBuyer.getCreatedBuyers();
+    }
+
+    /**
+     * Method to get the created sellers of createSeller
+     * @return created sellers of createSeller
+     * */
+    public HashMap<String, Seller> getCreatedSellers(){
+        return createSeller.getCreatedSellers();
+    }
+
+
 }

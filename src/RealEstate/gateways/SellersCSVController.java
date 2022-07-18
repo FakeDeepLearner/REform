@@ -3,21 +3,22 @@ package RealEstate.gateways;
 import RealEstate.entities.Seller;
 import RealEstate.useCases.CreateSeller;
 import RealEstate.useCases.DatabaseFilePath;
+import RealEstate.useCases.UserFactory;
 
 import java.io.*;
 import java.util.HashMap;
 
 public class SellersCSVController implements CsvInterface{
-    private final CreateSeller createSeller;
+    private final UserFactory userFactory;
 
     private final static DatabaseFilePath filepath = new DatabaseFilePath("Sellers.csv");
 
-    public SellersCSVController(CreateSeller createSeller){
-        this.createSeller = createSeller;
+    public SellersCSVController(UserFactory userFactory){
+        this.userFactory = userFactory;
     }
 
-    public CreateSeller getCreateSeller() {
-        return createSeller;
+    public UserFactory getCreateSeller() {
+        return userFactory;
     }
 
 
@@ -30,7 +31,7 @@ public class SellersCSVController implements CsvInterface{
             String[] splitLine = line.split(",");
             String username = splitLine[0];
             String password = splitLine[1];
-            createSeller.createNewSeller(username, password);
+            userFactory.createUser("seller", username, password);
         }
         reader.close();
     }
@@ -38,7 +39,7 @@ public class SellersCSVController implements CsvInterface{
     @Override
     public void write() throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(filepath.getFilePath(), true));
-        HashMap<String, Seller> createdSellers = createSeller.getCreatedSellers();
+        HashMap<String, Seller> createdSellers = userFactory.getCreatedSellers();
         for(String username : createdSellers.keySet()){
             writer.write(username + "," + createdSellers.get(username).getPassword());
             writer.write("\n");
