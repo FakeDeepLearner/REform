@@ -6,7 +6,6 @@ import RealEstate.useCases.DatabaseFilePath;
 
 import java.io.*;
 import java.math.BigDecimal;
-import java.text.Bidi;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -15,36 +14,6 @@ public class ListingsCSVController implements CsvInterface{
     private final CreateListing createListing;
 
     private final static DatabaseFilePath filepath = new DatabaseFilePath("Listings.csv");
-
-    final private static BufferedReader reader;
-
-    static {
-        try {
-            reader = new BufferedReader(new FileReader(filepath.getFilePath()));
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    final private static BufferedWriter writer;
-
-    static {
-        try {
-            writer = new BufferedWriter(new FileWriter(filepath.getFilePath(), true));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    final private static BufferedWriter overWriter;
-
-    static {
-        try {
-            overWriter = new BufferedWriter(new FileWriter(filepath.getFilePath(), false));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     public ListingsCSVController(CreateListing createListing) {
         this.createListing = createListing;
@@ -56,6 +25,7 @@ public class ListingsCSVController implements CsvInterface{
 
     @Override
     public void read() throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader(filepath.getFilePath()));
         String line;
         while((line = reader.readLine()) != null){
             String[] splitLine = line.split(",");
@@ -74,11 +44,12 @@ public class ListingsCSVController implements CsvInterface{
                     bathrooms, floors, price);
             createListing.addListingToSeller(username, listing);
         }
-
+        reader.close();
     }
 
     @Override
     public void write() throws IOException {
+        BufferedWriter writer = new BufferedWriter(new FileWriter(filepath.getFilePath(), false));
         HashMap<String, ArrayList<Listing>> createdListings = createListing.getCreatedListings();
         for (String username : createdListings.keySet()){
             for (Listing listing : createdListings.get(username)){
@@ -95,8 +66,10 @@ public class ListingsCSVController implements CsvInterface{
                 String lineToWrite = username + "," + ID + "," + unitNumber + "," + civicAddress + "," + streetName +
                         "," + city + "," + type + "," + bedrooms + "," + bathrooms + "," + floors + "," + price;
                 writer.write(lineToWrite);
+                writer.write("\n");
             }
         }
+        writer.close();
     }
 }
 

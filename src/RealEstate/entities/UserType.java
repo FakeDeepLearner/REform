@@ -1,8 +1,6 @@
 package RealEstate.entities;
 
-import RealEstate.useCases.UserFactory;
-
-public enum UserType {
+public enum UserType{
     ADMIN,
     BUYER,
     SELLER;
