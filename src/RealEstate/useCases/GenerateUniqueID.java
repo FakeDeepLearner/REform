@@ -41,7 +41,7 @@ public class GenerateUniqueID {
     }
 
     /**
-     * Create GenerateUniqueID with a ListingContainer
+     * Create GenerateUniqueID with a MessageContainer
      *
      * @param l Message Container
      */
