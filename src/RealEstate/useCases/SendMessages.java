@@ -29,7 +29,11 @@ public class SendMessages {
      * @param content           the content of the message
      */
     public void sendMessage(String senderUsername, String recipientUsername, String content) {
-        int id = GenerateUniqueID.getUniqueID();
+
+//        int id = GenerateUniqueID.getUniqueID();
+        GenerateUniqueID IDGenerator = new GenerateUniqueID(this.messageContainer);
+        int id = IDGenerator.getUniqueID();
+
         addMessage(senderUsername, recipientUsername, id, content);
     }
 

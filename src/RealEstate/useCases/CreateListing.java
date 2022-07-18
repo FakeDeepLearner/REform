@@ -23,7 +23,12 @@ public class CreateListing {
 
     public Listing addListing(int civicAddress, String streetName, String city, String type, int bedrooms,
                               int bathrooms, BigDecimal price) {
-        int uniqueID = GenerateUniqueID.getUniqueID();
+
+
+//        int uniqueID = GenerateUniqueID.getUniqueID();
+        GenerateUniqueID IDGenerator = new GenerateUniqueID(this.listings);
+        int uniqueID = IDGenerator.getUniqueID();
+
         Listing listing = new Listing(uniqueID, civicAddress, streetName, city, type, bedrooms, bathrooms, price);
         listings.put(uniqueID, listing);
         return listing;
