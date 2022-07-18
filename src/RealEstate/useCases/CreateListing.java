@@ -34,7 +34,8 @@ public class CreateListing {
         return listing;
     }
 
-    public Listing addListing(int ID, int unitNumber ,int civicAddress, String streetName, String city, String type, int bedrooms,
+    public Listing addListing(int ID, int unitNumber ,int civicAddress, String streetName, String city,
+                              String type, int bedrooms,
                               int bathrooms, int floors ,BigDecimal price) {
         Listing listing = new Listing(ID, unitNumber,civicAddress, streetName, city, type, bedrooms, bathrooms, floors, price);
         listings.put(ID, listing);

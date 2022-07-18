@@ -1,4 +1,6 @@
+import LoginSystem.entities.User;
 import LoginSystem.entities.UserContainer;
+import RealEstate.entities.Listing;
 import RealEstate.entities.ListingContainer;
 import RealEstate.useCases.CreateBuyer;
 import RealEstate.useCases.CreateListing;
@@ -14,16 +16,16 @@ public class CreateListingTest {
     @Test
     public void testCreatingABuyer(){
 
-        ListingContainer lc = new ListingContainer();
-        UserContainer uc = new UserContainer();
+        ListingContainer<Integer, Listing> lc = new ListingContainer<>();
+        UserContainer<String, User> uc = new UserContainer<>();
 
         CreateListing createListing = new CreateListing(lc, uc);
 
         createListing.addListing(1, "TestName", "TestCity",
-                "TestType", 2, 3, BigDecimal.valueOf(4.2));
+                "TOWNHOUSE", 2, 3, BigDecimal.valueOf(4.2));
 
         // TODO: Fix Errors
-        assertFalse(createListing.getCreatedListings().isEmpty());
+        assertFalse(createListing.getListings().isEmpty());
 
 
     }

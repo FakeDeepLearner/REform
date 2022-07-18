@@ -1,3 +1,4 @@
+import LoginSystem.entities.User;
 import LoginSystem.entities.UserContainer;
 import RealEstate.useCases.CreateBuyer;
 import org.junit.Test;
@@ -9,7 +10,7 @@ public class CreateBuyerTest {
     @Test
     public void testCreatingABuyer(){
 
-        UserContainer uc = new UserContainer();
+        UserContainer<String, User> uc = new UserContainer<>();
 
         CreateBuyer createBuyer = new CreateBuyer(uc);
         createBuyer.createNewBuyer("TestUserName", "TestPW");

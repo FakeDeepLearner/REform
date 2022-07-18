@@ -39,6 +39,7 @@ public class GenerateUniqueID {
      */
     public GenerateUniqueID(ListingContainer<Integer, Listing> l) {
         this.existingListingIDs = this.getIDsFromListingContainer(l);
+        this.existingMessageIDs = new ArrayList<>();
     }
 
     /**
@@ -48,6 +49,7 @@ public class GenerateUniqueID {
      */
     public GenerateUniqueID(MessageContainer<Integer, Message> l) {
         this.existingMessageIDs = this.getIDsFromMessageContainer(l);
+        this.existingIDs = new ArrayList<>();
     }
 
     /**

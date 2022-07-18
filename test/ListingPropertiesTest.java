@@ -1,4 +1,5 @@
 
+import LoginSystem.entities.User;
 import LoginSystem.entities.UserContainer;
 import RealEstate.entities.Listing;
 import RealEstate.useCases.CreateListing;
@@ -13,8 +14,8 @@ import java.util.ArrayList;
 
 public class ListingPropertiesTest {
     ///Tests fail because of Null pointer Exception. Will Work after Get unique ID is fices
-    ListingContainer lc = new ListingContainer();
-    UserContainer uc = new UserContainer();
+    ListingContainer<Integer, Listing> lc = new ListingContainer<>();
+    UserContainer<String, User> uc = new UserContainer<>();
 
     CreateListing createListing = new CreateListing(lc,uc);
 
