@@ -127,7 +127,7 @@ public class LoggedInManager {
 
             case 2: {
                 // Create new admin user
-                userManager.createNewUser(true);
+                userManager.createNewUser(String.valueOf(true));
                 break;
             }
 
