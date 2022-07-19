@@ -9,7 +9,7 @@ import LoginSystem.useCases.AuthenticateUser;
 import LoginSystem.useCases.RestrictUser;
 import LoginSystem.useCases.UpdateUserHistory;
 import LoginSystem.useCases.UsernamePasswordFileEditor;
-import RealEstate.controllers.RealtyLoggedInManager;
+import RealEstate.controllers.LoggedInManager;
 import RealEstate.entities.Listing;
 import RealEstate.entities.ListingContainer;
 import RealEstate.entities.Message;
@@ -38,7 +38,7 @@ public class Main {
         InputHandler input = new InputHandler(ui);
         UserManager userManager = new UserManager(input, ui, userFactory, auth, history, file);
         LoggedOutManager loggedOutManager = new LoggedOutManager(input, ui, userManager);
-        RealtyLoggedInManager loggedInManager = new RealtyLoggedInManager(
+        LoggedInManager loggedInManager = new LoggedInManager(
                 input, ui, auth, history, restrict, userManager, file, sendMessages, listingProperties, createListing
         );
 

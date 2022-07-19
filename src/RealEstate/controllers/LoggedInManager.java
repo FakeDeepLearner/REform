@@ -20,7 +20,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-public class RealtyLoggedInManager {
+public class LoggedInManager {
     private final InputHandler input;
     private final UserInterface ui;
     private final AuthenticateUser auth;
@@ -33,11 +33,11 @@ public class RealtyLoggedInManager {
     private final CreateListing createListing;
 
 
-    public RealtyLoggedInManager(InputHandler input, UserInterface ui, AuthenticateUser auth,
-                                 UpdateUserHistory history, RestrictUser restrict,
-                                 UserManager userManager, UsernamePasswordFileEditor file,
-                                 SendMessages sendMessages, ListingProperties listingProperties,
-                                 CreateListing createListing) {
+    public LoggedInManager(InputHandler input, UserInterface ui, AuthenticateUser auth,
+                           UpdateUserHistory history, RestrictUser restrict,
+                           UserManager userManager, UsernamePasswordFileEditor file,
+                           SendMessages sendMessages, ListingProperties listingProperties,
+                           CreateListing createListing) {
         this.input = input;
         this.ui = ui;
         this.auth = auth;
