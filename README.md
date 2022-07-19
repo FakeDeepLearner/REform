@@ -18,7 +18,7 @@ To run the program, open `Main.java` which is located inside the `src` folder an
 
 **f.** Below are each person's contributions to phase 1:
 
-Anudev (Github username - anudevgill): Created CreateListing use case, wrote tests for CreateListingTest, added docstrings to use case classes and controllers, created CsvInterface.
+Anudev (Github username - anudevgill): Created CreateListing use case, wrote tests for CreateListingTest, added docstrings to use case classes and controllers, created CsvInterface, wrote README.
 
 Rana:
 
