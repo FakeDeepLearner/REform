@@ -35,10 +35,9 @@ public class LoggedOutManager {
         int menuSelect = input.intInput(allowedInputs);
 
         ArrayList<String> usernamePassword = new ArrayList<>();
-
         switch (menuSelect) {
             case 1:
-                createMenuSelector();
+                usernamePassword = createMenuSelector();
                 break;
             case 2:
                 // User selected to log in
@@ -64,19 +63,22 @@ public class LoggedOutManager {
     /**
      * Implements the menu selector when creating a user
      */
-    private void createMenuSelector() {
+    private ArrayList<String> createMenuSelector() {
         ui.printCreateUserMenu();
 
         ArrayList<Integer> allowedInputs = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5));
         int menuSelect = input.intInput(allowedInputs);
 
+        ArrayList<String> usernamePassword = new ArrayList<>();
         switch (menuSelect) {
             case 1:
-                userManager.createNewUser("BUYER");
+                usernamePassword = userManager.createNewUser("BUYER");
                 break;
             case 2:
-                userManager.createNewUser("SELLER");
+                usernamePassword = userManager.createNewUser("SELLER");
                 break;
         }
+
+        return usernamePassword;
     }
 }
