@@ -63,7 +63,6 @@ public class UsernamePasswordFileEditor extends CsvEditor {
         return out;
     }
 
-
     public void addUserInfo(String username, String password) throws IOException {
         String info = username + "," + password + "," + auth.checkUserAdmin(username);
         addLine(csvFilePath.getDatabasePath() + "UsernamePassword.csv", info);

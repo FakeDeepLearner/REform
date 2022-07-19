@@ -24,15 +24,9 @@ public class CreateBuyer {
         return createdBuyers;
     }
 
-    public void createNewBuyer(String username, String password){
+    public void createNewBuyer(String username, String password) {
         Buyer buyer = new Buyer(username, password);
         userContainer.put(username, buyer);
         createdBuyers.put(username, buyer);
     }
-
-
-
-
-
-
 }

@@ -34,8 +34,6 @@ public class Main {
         ListingProperties listingProperties = new ListingProperties(listings);
         CreateListing createListing = new CreateListing(listings, users);
 
-
-
         UserInterface ui = new UserInterface();
         InputHandler input = new InputHandler(ui);
         UserManager userManager = new UserManager(input, ui, userFactory, auth, history, file);
