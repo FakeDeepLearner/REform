@@ -14,6 +14,7 @@ public class FavoriteListing {
 
     /**
      * Create a FavoriteListing class
+     *
      * @param userContainer UserContainer class
      */
     public FavoriteListing(UserContainer<String, User> userContainer) {
@@ -23,6 +24,7 @@ public class FavoriteListing {
 
     /**
      * Getter for generatedFavorites
+     *
      * @return Generated Favorites
      */
     public HashMap<String, ArrayList<Integer>> getGeneratedFavorites() {
@@ -31,6 +33,7 @@ public class FavoriteListing {
 
     /**
      * Getter for userContainer
+     *
      * @return The UserContainer
      */
     public UserContainer<String, User> getUserContainer() {
@@ -39,8 +42,9 @@ public class FavoriteListing {
 
     /**
      * Add a Listing object to a Buyer's Favorites
-     * @param username      Username of the Buyer
-     * @param listingID     ID of the Listing
+     *
+     * @param username  Username of the Buyer
+     * @param listingID ID of the Listing
      */
     public void addListingToBuyerFavorites(String username, int listingID) {
         Buyer buyer = userContainer.getBuyer(username);
@@ -51,18 +55,17 @@ public class FavoriteListing {
     }
 
     // TODO: Complete the Javadoc for addCreationToGeneratedFavorites()
+
     /**
-     *
      * @param username
      * @param listingID
      */
-    public void addCreationToGeneratedFavorites(String username, int listingID){
-        if (generatedFavorites.containsKey(username)){
-            if (!generatedFavorites.get(username).contains(listingID)){
+    public void addCreationToGeneratedFavorites(String username, int listingID) {
+        if (generatedFavorites.containsKey(username)) {
+            if (!generatedFavorites.get(username).contains(listingID)) {
                 generatedFavorites.get(username).add(listingID);
             }
-        }
-        else{
+        } else {
             ArrayList<Integer> value = new ArrayList<>();
             value.add(listingID);
             generatedFavorites.put(username, value);
@@ -71,8 +74,9 @@ public class FavoriteListing {
 
     /**
      * Remove a Listing object from a Buyer's favorites.
-     * @param username      Username of the Buyer
-     * @param listingID     ID of the Listing to be removed
+     *
+     * @param username  Username of the Buyer
+     * @param listingID ID of the Listing to be removed
      */
     public void removeListingFromBuyerFavorites(String username, int listingID) {
         Buyer buyer = userContainer.getBuyer(username);
@@ -80,13 +84,13 @@ public class FavoriteListing {
     }
 
     // TODO: Complete the Javadoc for removeFromGeneratedFavorites()
+
     /**
-     *
      * @param username
      * @param listingID
      */
     public void removeFromGeneratedFavorites(String username, int listingID) {
-        if (generatedFavorites.containsKey(username)){
+        if (generatedFavorites.containsKey(username)) {
             generatedFavorites.get(username).remove(listingID);
         }
     }

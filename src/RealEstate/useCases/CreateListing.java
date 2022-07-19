@@ -15,6 +15,12 @@ public class CreateListing {
     private final UserContainer<String, User> userContainer;
     private final HashMap<String, ArrayList<Listing>> createdListings;
 
+    /**
+     * Create a CreateListing class
+     *
+     * @param listingsInterface ListingContainer
+     * @param userContainer     UserContainer
+     */
     public CreateListing(ListingContainer<Integer, Listing> listingsInterface,
                          UserContainer<String, User> userContainer) {
         listings = listingsInterface;
@@ -22,6 +28,18 @@ public class CreateListing {
         createdListings = new HashMap<>();
     }
 
+    /**
+     * Create a Listing object and add it to CreateListing.listings
+     *
+     * @param civicAddress Civic Address of the listing
+     * @param streetName   Street name of the listing
+     * @param city         City of the listing
+     * @param type         Type of the listing
+     * @param bedrooms     Number of bedrooms in the listing
+     * @param bathrooms    Number of bathrooms in the listings
+     * @param price        Price the listing
+     * @return Listing object
+     */
     public Listing addListing(int civicAddress, String streetName, String city, String type, int bedrooms,
                               int bathrooms, BigDecimal price) {
 
@@ -35,6 +53,19 @@ public class CreateListing {
         return listing;
     }
 
+    /**
+     * Create a Listing object and add it to CreateListing.listings
+     *
+     * @param unitNumber   Unit number of the listing
+     * @param civicAddress Civic Address of the listing
+     * @param streetName   Street name of the listing
+     * @param city         City of the listing
+     * @param type         Type of the listing
+     * @param bedrooms     Number of bedrooms in the listing
+     * @param bathrooms    Number of bathrooms in the listings
+     * @param price        Price the listing
+     * @return Listing object
+     */
     public Listing addListing(int unitNumber, int civicAddress, String streetName, String city, String type, int bedrooms,
                               int bathrooms, int floors, BigDecimal price) {
 
@@ -46,6 +77,20 @@ public class CreateListing {
         return listing;
     }
 
+    /**
+     * Create a Listing object and add it to CreateListing.listings
+     *
+     * @param ID           ID number of the listing
+     * @param unitNumber   Unit number of the listing
+     * @param civicAddress Civic Address of the listing
+     * @param streetName   Street name of the listing
+     * @param city         City of the listing
+     * @param type         Type of the listing
+     * @param bedrooms     Number of bedrooms in the listing
+     * @param bathrooms    Number of bathrooms in the listings
+     * @param price        Price the listing
+     * @return Listing object
+     */
     public Listing addListing(int ID, int unitNumber, int civicAddress, String streetName, String city,
                               String type, int bedrooms,
                               int bathrooms, int floors, BigDecimal price) {
@@ -54,23 +99,50 @@ public class CreateListing {
         return listing;
     }
 
+    /**
+     * Add a listing to a seller
+     *
+     * @param username Username of the seller
+     * @param listing  Listing object to be added
+     */
     public void addListingToSeller(String username, Listing listing) {
         Seller seller = userContainer.getSeller(username);
         seller.addListing(listing);
     }
 
+    /**
+     * Getter for createdListings
+     *
+     * @return CreateListing.createdListings
+     */
     public HashMap<String, ArrayList<Listing>> getCreatedListings() {
         return createdListings;
     }
 
+    /**
+     * Getter for userContainer
+     *
+     * @return CreateListing.userContainer
+     */
     public UserContainer<String, User> getUserContainer() {
         return userContainer;
     }
 
+    /**
+     * Getter for listings
+     *
+     * @return CreateListing.listings
+     */
     public ListingContainer<Integer, Listing> getListings() {
         return listings;
     }
 
+    /**
+     * Add a Listing to CreateListing.createdListings
+     *
+     * @param username Username of a user
+     * @param listing  Listing object to be added
+     */
     public void addListingToCreatedListings(String username, Listing listing) {
         if (createdListings.containsKey(username)) {
             createdListings.get(username).add(listing);
@@ -81,27 +153,51 @@ public class CreateListing {
         }
     }
 
+    /**
+     * Remove a Listing from a User
+     *
+     * @param username Username of the user
+     * @param listing  Listing object to be removed
+     */
     public void removeFromCreatedListing(String username, Listing listing) {
         if (createdListings.containsKey(username)) {
             createdListings.get(username).remove(listing);
         }
     }
 
-    public ArrayList<String> getSellerListingsStrings(String username){
+    /**
+     * Get an Arraylist of String containing the String representation of the listings from a seller
+     *
+     * @param username Username of the seller
+     * @return Arraylist of String containing the String representation of the listings
+     */
+    public ArrayList<String> getSellerListingsStrings(String username) {
         ArrayList<String> listings = new ArrayList<>();
         Seller u = userContainer.getSeller(username);
-        for (Listing l : u.getListings()){
+        for (Listing l : u.getListings()) {
             listings.add(l.toString());
         }
         return listings;
     }
 
-    public ArrayList<Listing> getSellerListings(String username){
+    /**
+     * Get a Seller's Listings
+     *
+     * @param username Username of the seller
+     * @return ArrayList of Listings from the seller
+     */
+    public ArrayList<Listing> getSellerListings(String username) {
         Seller u = userContainer.getSeller(username);
         return u.getListings();
     }
 
-    public void deleteListing(String username, Listing listing){
+    /**
+     * Delete a Listing from a user
+     *
+     * @param username Username of the user
+     * @param listing  Listing to be removed
+     */
+    public void deleteListing(String username, Listing listing) {
         Seller user = userContainer.getSeller(username);
         int id = listing.getId();
         listings.remove(id);
