@@ -232,7 +232,7 @@ public class LoggedInManager {
         BigDecimal price = input.bigDecimalInput();
         ui.printEnterType("listing type (apartment, house, townhouse)");
         String[] inputsAllowed = {"apartment", "house", "townhouse"};
-        String type = input.strInputCaseInsensitive(List.of(inputsAllowed));
+        String type = input.strInput(List.of(inputsAllowed), true);
 
         if (Objects.equals(choice, "Y")) {
             ui.printEnterType("unit number");
