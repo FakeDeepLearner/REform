@@ -30,29 +30,29 @@ public class ListingPropertiesTest {
 
     @Test()
     public void testSearchbyPrice() {
-        ArrayList<Listing> found1 = listingProperties.SearchByPrice(new BigDecimal(123457), new BigDecimal(123455));
+        ArrayList<String> found1 = listingProperties.SearchByPrice(new BigDecimal(123457), new BigDecimal(123455));
 
-        assertTrue(found1.contains(l1));
+        assertTrue(found1.contains(l1.toString()));
     }
 
     @Test()
     public void testSearchbyCity() {
-        ArrayList<Listing> found2 = listingProperties.SearchByCity("ABCD city");
+        ArrayList<String> found2 = listingProperties.SearchByCity("ABCD city");
 
-        assertTrue(found2.contains(l2));
+        assertTrue(found2.contains(l2.toString()));
     }
     @Test()
     public void testSearchbycivicAdress() {
-        ArrayList<Listing> found3 = listingProperties.SearchByCivicAddress(1);
+        ArrayList<String> found3 = listingProperties.SearchByCivicAddress(1);
 
-        assertTrue(found3.contains(l1));
+        assertTrue(found3.contains(l1.toString()));
     }
     @Test()
     public void testSearchbyType() {
-        ArrayList<Listing> found4 = listingProperties.SearchByListingType("APARTMENT");
+        ArrayList<String> found4 = listingProperties.SearchByListingType("APARTMENT");
 
-        assertTrue(found4.contains(l1));
-        assertTrue(found4.contains(l2));
+        assertTrue(found4.contains(l1.toString()));
+        assertTrue(found4.contains(l2.toString()));
     }
 }
 

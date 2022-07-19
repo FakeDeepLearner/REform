@@ -21,6 +21,6 @@ public class CreateListingTest {
         createListing.addListing(1, "TestName", "TestCity",
                 "TOWNHOUSE", 2, 3, BigDecimal.valueOf(4.2));
 
-        assertFalse(createListing.getCreatedListings().isEmpty());
+        assertFalse(createListing.getListings().isEmpty());
     }
 }
