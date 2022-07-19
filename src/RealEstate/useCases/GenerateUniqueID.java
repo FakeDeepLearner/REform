@@ -17,18 +17,15 @@ public class GenerateUniqueID {
 
 
     // New implementation of the class
-    public int getUniqueID2() {
-        int returned_id = -1;
-        while (existingIDs.contains(returned_id) || returned_id == -1) {
-            returned_id = ThreadLocalRandom.current().nextInt(minID, maxID + 1);
-        }
-        existingIDs.add(returned_id);
-        return returned_id;
-    }
+//    public int getUniqueID2() {
+//        int returned_id = -1;
+//        while (existingIDs.contains(returned_id) || returned_id == -1) {
+//            returned_id = ThreadLocalRandom.current().nextInt(minID, maxID + 1);
+//        }
+//        existingIDs.add(returned_id);
+//        return returned_id;
+//    }
 
-
-    // Original implementation of the class
-    // TODO: Decide which version will be used
     private ArrayList<Integer> existingListingIDs;
     private ArrayList<Integer> existingMessageIDs;
 

@@ -33,9 +33,9 @@ public class UserFactory {
     /**
      * Factory for creating users
      *
-     * @param createUser use case for creating an Admin
-     * @param createBuyer use case for creating a Buyer
-     * @param createSeller use case for creating a Seller
+     * @param createUser    use case for creating an Admin
+     * @param createBuyer   use case for creating a Buyer
+     * @param createSeller  use case for creating a Seller
      * @param userContainer is a hash map that relates usernames to a User objects
      */
     public UserFactory(CreateUser createUser, CreateBuyer createBuyer, CreateSeller createSeller,
@@ -62,7 +62,7 @@ public class UserFactory {
     }
 
     /**
-     * @param type of user to be created
+     * @param type     of user to be created
      * @param username of the user to be created
      * @param password of the user to be created
      */
@@ -88,17 +88,19 @@ public class UserFactory {
 
     /**
      * Method to get the created buyers of createBuyer
+     *
      * @return created buyers of createBuyer
-     * */
-    public HashMap<String, Buyer> getCreatedBuyers(){
+     */
+    public HashMap<String, Buyer> getCreatedBuyers() {
         return createBuyer.getCreatedBuyers();
     }
 
     /**
      * Method to get the created sellers of createSeller
+     *
      * @return created sellers of createSeller
-     * */
-    public HashMap<String, Seller> getCreatedSellers(){
+     */
+    public HashMap<String, Seller> getCreatedSellers() {
         return createSeller.getCreatedSellers();
     }
 }
