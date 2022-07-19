@@ -20,7 +20,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-public class RealtyLoggedInManager {
+public class LoggedInManager {
     private final InputHandler input;
     private final UserInterface ui;
     private final AuthenticateUser auth;
@@ -33,11 +33,11 @@ public class RealtyLoggedInManager {
     private final CreateListing createListing;
 
 
-    public RealtyLoggedInManager(InputHandler input, UserInterface ui, AuthenticateUser auth,
-                                 UpdateUserHistory history, RestrictUser restrict,
-                                 UserManager userManager, UsernamePasswordFileEditor file,
-                                 SendMessages sendMessages, ListingProperties listingProperties,
-                                 CreateListing createListing) {
+    public LoggedInManager(InputHandler input, UserInterface ui, AuthenticateUser auth,
+                           UpdateUserHistory history, RestrictUser restrict,
+                           UserManager userManager, UsernamePasswordFileEditor file,
+                           SendMessages sendMessages, ListingProperties listingProperties,
+                           CreateListing createListing) {
         this.input = input;
         this.ui = ui;
         this.auth = auth;
@@ -70,43 +70,32 @@ public class RealtyLoggedInManager {
 
         int select = input.intInput(allowedInputs);
         switch (select) {
-            case 1: {
+            case 1:
                 // View listings
                 searchProperties();
                 break;
-            }
-
-            case 2: {
+            case 2:
                 // Send message
                 messageUser(username);
                 break;
-            }
-
-            case 3: {
+            case 3:
                 // View inbox
                 viewInbox(username);
                 break;
-            }
-
-            case 4: {
+            case 4:
                 // View outbox
                 viewOutbox(username);
                 break;
-            }
-
-            case 5: {
+            case 5:
                 // View login history
                 ArrayList<String> userHistory = history.getLoginHistory(username);
                 ui.printLoginHistory(userHistory);
                 break;
-            }
-
-            case 6: {
+            case 6:
                 // Logout user
                 auth.logoutUser(username);
                 ui.printLogOutSuccess();
                 return false;
-            }
         }
 
         return true;
@@ -120,55 +109,40 @@ public class RealtyLoggedInManager {
 
         int select = input.intInput(allowedInputs);
         switch (select) {
-            case 1: {
+            case 1:
                 // View posted listings
                 ui.printFilteredListings(createListing.getSellerListingsStrings(username));
                 break;
-            }
-
-            case 2: {
+            case 2:
                 // Message user
                 messageUser(username);
                 break;
-            }
-
-            case 3: {
+            case 3:
                 // View inbox
                 viewInbox(username);
                 break;
-            }
-
-            case 4: {
+            case 4:
                 // View outbox
                 viewOutbox(username);
                 break;
-            }
-
-            case 5: {
+            case 5:
                 // Create listing
                 createNewListing(username);
                 break;
-            }
-
-            case 6: {
+            case 6:
                 // Delete listing
                 deleteListing(username);
                 break;
-            }
-
-            case 7: {
+            case 7:
                 // View login history
                 ArrayList<String> userHistory = history.getLoginHistory(username);
                 ui.printLoginHistory(userHistory);
                 break;
-            }
-
-            case 8: {
+            case 8:
                 // Logout user
                 auth.logoutUser(username);
                 ui.printLogOutSuccess();
                 return false;
-            }
         }
 
         return true;

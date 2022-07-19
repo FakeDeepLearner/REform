@@ -9,10 +9,10 @@ import LoginSystem.exceptions.UserNotFoundException;
 import RealEstate.exceptions.SellerNotFoundException;
 
 public class AuthenticateUser {
-    private final UserContainer<String, User> interface_users;
+    private final UserContainer<String, User> interfaceUsers;
 
-    public AuthenticateUser(UserContainer<String, User> interface_users) {
-        this.interface_users = interface_users;
+    public AuthenticateUser(UserContainer<String, User> interfaceUsers) {
+        this.interfaceUsers = interfaceUsers;
     }
 
     /**
@@ -25,7 +25,7 @@ public class AuthenticateUser {
     public boolean loginUser(String username, String password) throws UserBannedException {
         User u;
         try {
-            u = interface_users.get(username);
+            u = interfaceUsers.get(username);
         } catch (UserNotFoundException e) {
             return false;
         }
@@ -57,7 +57,7 @@ public class AuthenticateUser {
     public boolean logoutUser(String username) {
         User u;
         try {
-            u = interface_users.get(username);
+            u = interfaceUsers.get(username);
         } catch (UserNotFoundException e) {
             return false;
         }
@@ -67,13 +67,13 @@ public class AuthenticateUser {
     }
 
     public boolean checkUserAdmin(String username) {
-        User u = interface_users.get(username);
+        User u = interfaceUsers.get(username);
         return u.getAdmin();
     }
 
     public boolean checkUserSeller(String username) {
         try{
-            interface_users.getSeller(username);
+            interfaceUsers.getSeller(username);
             return true;
         }
         catch (SellerNotFoundException e){
@@ -83,7 +83,7 @@ public class AuthenticateUser {
 
     public boolean checkUserNonAdminExists(String username) {
         try{
-            interface_users.get(username);
+            interfaceUsers.get(username);
             return true;
         }
         catch (UserNotFoundException e){
