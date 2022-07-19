@@ -269,7 +269,7 @@ public class LoggedInManager {
                 // Search by civic address
                 ui.printEnterType("civic address number");
                 int number = input.intInput();
-                ArrayList<String> listings = listingProperties.SearchByCivicAddress(number);
+                ArrayList<String> listings = listingProperties.searchBycivicAddress(number);
                 ui.printFilteredListings(listings);
                 break;
             }
@@ -278,7 +278,7 @@ public class LoggedInManager {
                 // Search by street name
                 ui.printEnterType("street name");
                 String street = input.strInput();
-                ArrayList<String> listings = listingProperties.SearchByStreetName(street);
+                ArrayList<String> listings = listingProperties.searchBystreetName(street);
                 ui.printFilteredListings(listings);
                 break;
             }
@@ -287,7 +287,7 @@ public class LoggedInManager {
                 // Search by city
                 ui.printEnterType("city");
                 String city = input.strInput();
-                ArrayList<String> listings = listingProperties.SearchByCity(city);
+                ArrayList<String> listings = listingProperties.searchBycity(city);
                 ui.printFilteredListings(listings);
                 break;
             }
@@ -296,7 +296,7 @@ public class LoggedInManager {
                 // Search by bedroom number
                 ui.printEnterType("number of bedrooms wanted");
                 int number = input.intInput();
-                ArrayList<String> listings = listingProperties.SearchByBedrooms(number);
+                ArrayList<String> listings = listingProperties.searchBybedrooms(number);
                 ui.printFilteredListings(listings);
                 break;
             }
@@ -305,7 +305,7 @@ public class LoggedInManager {
                 // Search by bathroom number
                 ui.printEnterType("number of bathrooms wanted");
                 int number = input.intInput();
-                ArrayList<String> listings = listingProperties.SearchByBathrooms(number);
+                ArrayList<String> listings = listingProperties.searchBybathrooms(number);
                 ui.printFilteredListings(listings);
                 break;
             }
@@ -314,7 +314,7 @@ public class LoggedInManager {
                 // Search by floor number
                 ui.printEnterType("number of floors wanted");
                 int number = input.intInput();
-                ArrayList<String> listings = listingProperties.SearchByFloors(number);
+                ArrayList<String> listings = listingProperties.searchByfloors(number);
                 ui.printFilteredListings(listings);
                 break;
             }
@@ -325,7 +325,7 @@ public class LoggedInManager {
                 BigDecimal min = input.bigDecimalInput();
                 ui.printEnterType("maximum price");
                 BigDecimal max = input.bigDecimalInput();
-                ArrayList<String> listings = listingProperties.SearchByPrice(min, max);
+                ArrayList<String> listings = listingProperties.searchByprice(min, max);
                 ui.printFilteredListings(listings);
                 break;
             }
@@ -335,7 +335,7 @@ public class LoggedInManager {
                 ui.printEnterType("listing type (apartment, house, townhouse) wanted");
                 String[] inputsAllowed = {"apartment", "house", "townhouse"};
                 String type = input.strInput(List.of(inputsAllowed));
-                ArrayList<String> listings = listingProperties.SearchByListingType(type);
+                ArrayList<String> listings = listingProperties.searchBylistingType(type);
                 ui.printFilteredListings(listings);
                 break;
             }
