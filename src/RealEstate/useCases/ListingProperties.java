@@ -22,7 +22,7 @@ public class ListingProperties {
     }
 
     /**
-     * Searches Listings that by given property Predicate and unsold criteria
+     * Searches Listings that by given property Predicate and unsold criteria.
      *
      * @param property Predicate that indicates specific listing criteria
      * @return ArrayList of String containing the String representation of the Listing
