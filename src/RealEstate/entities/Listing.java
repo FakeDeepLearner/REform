@@ -100,7 +100,7 @@ public class Listing {
      */
     private boolean isStringValidEnum(String input) {
         try {
-            Enum.valueOf(ListingType.class, input);
+            Enum.valueOf(ListingType.class, input.toUpperCase());
             return true;
         } catch (IllegalArgumentException e) {
             return false;
@@ -215,11 +215,8 @@ public class Listing {
      * @return comma-separated string of the info
      */
     public String getListingInfos() {
-
-        String info = this.getId() + "," + this.getUnitNumber() + "," + this.getCivicAddress() + "," + this.getStreetName() + "," +
-                this.getCity() + "," + this.getBedrooms() + "," + this.getBathrooms() + "," +
-                this.getFloors() + "," + this.getPrice() + "," + this.getIsSold();
-
-        return info;
+        return this.getId() + "," + this.getUnitNumber() + "," + this.getCivicAddress() + "," + this.getStreetName() +
+                "," + this.getCity() + "," + this.getBedrooms() + "," + this.getBathrooms() + "," + this.getFloors() +
+                "," + this.getPrice() + "," + this.getIsSold();
     }
 }
