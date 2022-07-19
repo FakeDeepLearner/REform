@@ -96,4 +96,17 @@ public class InputHandler {
 
         return input;
     }
+
+    public String strInputCaseInsensitive(List<String> allowedInputs) {
+        String input;
+        do {
+            input = sc.next().toLowerCase();
+
+            if (!allowedInputs.contains(input)) {
+                ui.printInvalidInput();
+            }
+        } while (!allowedInputs.contains(input));
+
+        return input;
+    }
 }
