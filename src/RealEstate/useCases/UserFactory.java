@@ -18,6 +18,19 @@ public class UserFactory {
     private final UserContainer<String, User> userContainer;
 
     /**
+     * Factory for creating users using default functions
+     *
+     * @param userContainer is a hash map that relates usernames to a User objects
+     */
+    public UserFactory(UserContainer<String, User> userContainer) {
+        this.userContainer = userContainer;
+
+        this.createUser = new CreateUser(userContainer);
+        this.createBuyer = new CreateBuyer(userContainer);
+        this.createSeller = new CreateSeller(userContainer);
+    }
+
+    /**
      * Factory for creating users
      *
      * @param createUser use case for creating an Admin
@@ -88,6 +101,4 @@ public class UserFactory {
     public HashMap<String, Seller> getCreatedSellers(){
         return createSeller.getCreatedSellers();
     }
-
-
 }
