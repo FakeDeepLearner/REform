@@ -1,5 +1,6 @@
 package LoginSystem.controllers;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Scanner;
 
@@ -29,6 +30,54 @@ public class InputHandler {
         } while (input == 0 || !allowedInputs.contains(input));
 
         return input;
+    }
+
+    public int intInput(int min, int max) {
+        int input = 0;
+        do {
+            String choice = sc.next();
+            try {
+                input = Integer.parseInt(choice);
+
+                if (!(input >= min && input <= max)) {
+                    ui.printInvalidInput();
+                }
+            } catch (NumberFormatException e) {
+                ui.printInvalidInput();
+            }
+        } while (input == 0 || !(input >= min && input <= max));
+
+        return input;
+    }
+
+    public int intInput() {
+        int input = 0;
+        do {
+            String choice = sc.next();
+            try {
+                input = Integer.parseInt(choice);
+
+            } catch (NumberFormatException e) {
+                ui.printInvalidInput();
+            }
+        } while (input == 0);
+
+        return input;
+    }
+
+    public BigDecimal bigDecimalInput() {
+        double input = 0.0;
+        do {
+            String choice = sc.next();
+            try {
+                input = Double.parseDouble(choice);
+
+            } catch (NumberFormatException e) {
+                ui.printInvalidInput();
+            }
+        } while (input == 0.0);
+
+        return BigDecimal.valueOf(input);
     }
 
     public String strInput() {

@@ -6,6 +6,7 @@ import LoginSystem.entities.User;
 import LoginSystem.entities.UserContainer;
 import LoginSystem.exceptions.UserBannedException;
 import LoginSystem.exceptions.UserNotFoundException;
+import RealEstate.exceptions.SellerNotFoundException;
 
 public class AuthenticateUser {
     private final UserContainer<String, User> interface_users;
@@ -69,4 +70,25 @@ public class AuthenticateUser {
         User u = interface_users.get(username);
         return u.getAdmin();
     }
+
+    public boolean checkUserSeller(String username) {
+        try{
+            interface_users.getSeller(username);
+            return true;
+        }
+        catch (SellerNotFoundException e){
+            return false;
+        }
+    }
+
+    public boolean checkUserNonAdminExists(String username) {
+        try{
+            interface_users.get(username);
+            return true;
+        }
+        catch (UserNotFoundException e){
+            return false;
+        }
+    }
+
 }

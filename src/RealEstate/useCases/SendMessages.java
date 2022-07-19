@@ -76,4 +76,22 @@ public class SendMessages {
         return messages;
     }
 
+    public ArrayList<String> getMessageInbox(String username){
+        ArrayList<String> messages = new ArrayList<>();
+        NonAdminUser user = userContainer.getNonAdmin(username);
+        for (Message m : user.getInbox().values()){
+            messages.add(m.toString());
+        }
+        return messages;
+    }
+
+    public ArrayList<String> getMessageOutbox(String username){
+        ArrayList<String> messages = new ArrayList<>();
+        NonAdminUser user = userContainer.getNonAdmin(username);
+        for (Message m : user.getOutbox().values()){
+            messages.add(m.toString());
+        }
+        return messages;
+    }
+
 }
