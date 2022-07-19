@@ -279,7 +279,7 @@ public class RealtyLoggedInManager {
         ui.printNumberedListings(listingStrings);
         ui.printEnterType("number of property to delete");
         int number = input.intInput(1, listingStrings.size());
-        createListing.deleteListing(username, createListing.getSellerListings(username).get(number));
+        createListing.deleteListing(username, createListing.getSellerListings(username).get(number - 1));
 
     }
 
