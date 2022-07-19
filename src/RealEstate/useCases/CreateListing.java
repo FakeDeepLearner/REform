@@ -184,7 +184,7 @@ public class CreateListing {
     public void deleteListing(String username, Listing listing){
         Seller user = userContainer.getSeller(username);
         int id = listing.getId();
-        listings.remove(id);
         user.removeListing(listings.get(id));
+        listings.remove(id);
     }
 }
