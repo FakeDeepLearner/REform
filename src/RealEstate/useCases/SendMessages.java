@@ -15,6 +15,12 @@ public class SendMessages {
     private final UserContainer<String, User> userContainer;
 
 
+    /**
+     * Create SendMessages objects
+     *
+     * @param messageContainer MessageContainer
+     * @param userContainer    UserContainer
+     */
     public SendMessages(MessageContainer<Integer, Message> messageContainer,
                         UserContainer<String, User> userContainer) {
         this.messageContainer = messageContainer;
@@ -76,19 +82,31 @@ public class SendMessages {
         return messages;
     }
 
-    public ArrayList<String> getMessageInbox(String username){
+    /**
+     * Get the message inbox of a user
+     *
+     * @param username Username of the user
+     * @return ArrayList of String containing the messages
+     */
+    public ArrayList<String> getMessageInbox(String username) {
         ArrayList<String> messages = new ArrayList<>();
         NonAdminUser user = userContainer.getNonAdmin(username);
-        for (Message m : user.getInbox().values()){
+        for (Message m : user.getInbox().values()) {
             messages.add(m.toString());
         }
         return messages;
     }
 
-    public ArrayList<String> getMessageOutbox(String username){
+    /**
+     * Get the message outbox of a user
+     *
+     * @param username Username of the user
+     * @return ArrayList of String containing the messages
+     */
+    public ArrayList<String> getMessageOutbox(String username) {
         ArrayList<String> messages = new ArrayList<>();
         NonAdminUser user = userContainer.getNonAdmin(username);
-        for (Message m : user.getOutbox().values()){
+        for (Message m : user.getOutbox().values()) {
             messages.add(m.toString());
         }
         return messages;

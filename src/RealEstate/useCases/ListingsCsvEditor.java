@@ -50,32 +50,33 @@ public class ListingsCsvEditor {
     }
 
 
-    /**
-     * Read the CSV file and get the Listings
-     *
-     * @return Array list of Listings
-     * @throws IOException
-     */
-    public ArrayList<Listing> getListingsFromCSV() throws IOException {
-        ArrayList<Listing> out = new ArrayList<>();
+    ///////////////////////////////////////////////////////////////////////////
+    // Reading the CSV file will be done in ListingsCSVController
 
-        FileReader fr = new FileReader(filePath.getFilePath());
-
-        String line;
-        BufferedReader br = new BufferedReader(fr);
-        br.readLine();
-
-        while ((line = br.readLine()) != null) {
-            List<Object> infos = Arrays.asList(line.split(","));
-
-            // TODO: Call CreateListing? Shouldn't this be done in the Controller class?
-
-        }
-
-        return out;
-
-
-    }
-
+//    /**
+//     * Read the CSV file and get the Listings
+//     *
+//     * @return Array list of Listings
+//     * @throws IOException
+//     */
+//    public ArrayList<Listing> getListingsFromCSV() throws IOException {
+//        ArrayList<Listing> out = new ArrayList<>();
+//
+//        FileReader fr = new FileReader(filePath.getFilePath());
+//
+//        String line;
+//        BufferedReader br = new BufferedReader(fr);
+//        br.readLine();
+//
+//        while ((line = br.readLine()) != null) {
+//            List<Object> infos = Arrays.asList(line.split(","));
+//
+//        }
+//
+//        return out;
+//
+//
+//    }
+////////////////////////////////////////////////////////////////////////////////
 
 }
