@@ -21,12 +21,10 @@ public class ListingProperties {
         this.listingContainer = listingContainer;
     }
 
-    // TODO: Finish Javadoc for searchByproperty()
-
     /**
-     * Search Listings that are not sold
+     * Searches Listings that by given property Predicate and unsold criteria.
      *
-     * @param property
+     * @param property Predicate that indicates specific listing criteria
      * @return ArrayList of String containing the String representation of the Listing
      */
     private ArrayList<String> searchByproperty(Predicate<Listing> property) {
