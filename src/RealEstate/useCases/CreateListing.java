@@ -146,7 +146,7 @@ public class CreateListing {
      * @param username the username of the user who made the listing
      * @param listing the listing to be removed from the hashmap
      */
-    public void removeFromCreatedListing(String username, Listing listing) {
+    public void removeFromCreatedListings(String username, Listing listing) {
         if (createdListings.containsKey(username)) {
             createdListings.get(username).remove(listing);
         }

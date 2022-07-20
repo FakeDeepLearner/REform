@@ -9,6 +9,7 @@ import LoginSystem.useCases.AuthenticateUser;
 import LoginSystem.useCases.RestrictUser;
 import LoginSystem.useCases.UpdateUserHistory;
 import LoginSystem.useCases.UsernamePasswordFileEditor;
+import RealEstate.entities.Listing;
 import RealEstate.useCases.CreateListing;
 import RealEstate.useCases.ListingProperties;
 import RealEstate.useCases.SendMessages;
@@ -239,11 +240,15 @@ public class LoggedInManager {
             int unitNumber = input.intInput();
             ui.printEnterType("number of floors");
             int floors = input.intInput();
-            createListing.addListingToSeller(username, createListing.addListing(unitNumber, number, street, city,
-                    type, bedrooms, bathrooms, floors, price));
+            Listing listing = createListing.addListing(unitNumber, number, street, city,
+                    type, bedrooms, bathrooms, floors, price);
+            createListing.addListingToSeller(username, listing);
+            createListing.addListingToCreatedListings(username, listing);
         } else {
-            createListing.addListingToSeller(username, createListing.addListing(number, street, city,
-                    type, bedrooms, bathrooms, price));
+            Listing listing = createListing.addListing(number, street, city,
+                    type, bedrooms, bathrooms, price);
+            createListing.addListingToSeller(username, listing);
+            createListing.addListingToCreatedListings(username, listing);
         }
         ui.printListingCreatedSuccess();
     }
@@ -253,8 +258,9 @@ public class LoggedInManager {
         ui.printNumberedListings(listingStrings);
         ui.printEnterType("number of property to delete");
         int number = input.intInput(1, listingStrings.size());
-        createListing.deleteListing(username, createListing.getSellerListings(username).get(number - 1));
-
+        Listing listingToRemove = createListing.getSellerListings(username).get(number - 1);
+        createListing.deleteListing(username, listingToRemove);
+        createListing.removeFromCreatedListings(username, listingToRemove);
     }
 
     private void searchProperties() {
