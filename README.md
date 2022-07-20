@@ -22,7 +22,10 @@ Anudev (Github username - anudevgill): Created CreateListing use case, wrote tes
 
 Rana:
 
-Eren:
+Eren: (GitHub username - FakeDeepLearner) Created the CSV controllers, helped in creating use cases, particularly 
+CreateBuyer and CreateSeller. Created FavoriteListing. Fixed the issues in the tests. Modified the use cases to keep 
+track of the current session. Refactored the csv controllers to use UserFactory. Wrote JavaDoc for the csv controllers.
+Modified the LoggedInManager to also modify the listings created in the session.
 
 Rohit:
 
