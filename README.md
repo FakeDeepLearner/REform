@@ -32,4 +32,4 @@ Rohit:
 
 Felix:
 
-Andrew:
+Andrew: (Github username - aychun) Created the Buyer and Seller entities, use cases of generating unique IDs of users and messages, accessing database files (CSV file), wrote Javadocs for most use cases, and wrote unit tests. 
