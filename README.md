@@ -20,7 +20,8 @@ To run the program, open `Main.java` which is located inside the `src` folder an
 
 Anudev (Github username - anudevgill): Created CreateListing use case, wrote tests for CreateListingTest, added docstrings to use case classes and controllers, created CsvInterface, wrote README.
 
-Rana:
+Rana: (Github username - rjak03) Created the UserMessagesCSV controller and the SendMessages use case. Also created the
+LoggedInManager controller based on previous version and added docstrings to some classes.
 
 Eren: (GitHub username - FakeDeepLearner) Created the CSV controllers, helped in creating use cases, particularly 
 CreateBuyer and CreateSeller. Created FavoriteListing. Fixed the issues in the tests. Modified the use cases to keep 

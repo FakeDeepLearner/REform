@@ -34,6 +34,20 @@ public class LoggedInManager {
     private final CreateListing createListing;
 
 
+    /**
+     * Constructor for LoggedInManager
+     *
+     * @param input             the input handler
+     * @param ui                the user interface
+     * @param auth              the user authenticator
+     * @param history           the use case that updates the user history
+     * @param restrict          the use case that restricts users
+     * @param userManager       the controller that manages user login
+     * @param file              the use case that edits the user history file
+     * @param sendMessages      the use case that sends messages
+     * @param listingProperties the use case that lists listings based on specific properties
+     * @param createListing     the use case that creates listings
+     */
     public LoggedInManager(InputHandler input, UserInterface ui, AuthenticateUser auth,
                            UpdateUserHistory history, RestrictUser restrict,
                            UserManager userManager, UsernamePasswordFileEditor file,
@@ -51,6 +65,12 @@ public class LoggedInManager {
         this.createListing = createListing;
     }
 
+    /**
+     * Calls the appropriate screen depending on what type of user is logged in
+     *
+     * @param username the logged-in user's username
+     * @return true if the correct user screen successfully appears
+     */
     public boolean userScreen(String username) {
         if (!auth.checkUserAdmin(username)) {
             if (!auth.checkUserSeller(username)) {
@@ -63,6 +83,12 @@ public class LoggedInManager {
         }
     }
 
+    /**
+     * Presents buyer with options to navigate through program
+     *
+     * @param username the logged-in user's username
+     * @return true if the buyer screen successfully appears
+     */
     public boolean buyerScreen(String username) {
         ui.printBuyerLoginMenu();
 
@@ -102,6 +128,12 @@ public class LoggedInManager {
         return true;
     }
 
+    /**
+     * Presents seller with options to navigate through program
+     *
+     * @param username the logged-in user's username
+     * @return true if the seller screen successfully appears
+     */
     public boolean sellerScreen(String username) {
         ui.printSellerLoginMenu();
 
@@ -149,6 +181,9 @@ public class LoggedInManager {
         return true;
     }
 
+    /**
+     * Bans specified user
+     */
     private void updateUserBanStatus() {
         ui.printRestrictUsernameInput();
         String restrictUser = input.strInput();
@@ -176,6 +211,9 @@ public class LoggedInManager {
         }
     }
 
+    /**
+     * Deletes specified user
+     */
     private void deleteUser() {
         ui.printDeleteUsernameInput();
         String deleteUser = input.strInput();
@@ -194,6 +232,11 @@ public class LoggedInManager {
         }
     }
 
+    /**
+     * Sends a message from the logged-in user to a specified recipient
+     *
+     * @param username the username of the logged-in user
+     */
     private void messageUser(String username) {
         ui.printMessageUsernameInput();
         String recipient = input.strInput();
@@ -213,6 +256,11 @@ public class LoggedInManager {
         }
     }
 
+    /**
+     * Creates a new listing with the specified properties
+     *
+     * @param username the username of the logged-in user
+     */
     private void createNewListing(String username) {
         ui.printListingHasUnitNumber();
         ArrayList<String> allowedStrings = new ArrayList<>();
@@ -253,6 +301,11 @@ public class LoggedInManager {
         ui.printListingCreatedSuccess();
     }
 
+    /**
+     * Deletes a specified listing posted by the logged-in user
+     *
+     * @param username the username of the logged-in user
+     */
     private void deleteListing(String username) {
         ArrayList<String> listingStrings = createListing.getSellerListingsStrings(username);
         ui.printNumberedListings(listingStrings);
@@ -263,6 +316,9 @@ public class LoggedInManager {
         createListing.removeFromCreatedListings(username, listingToRemove);
     }
 
+    /**
+     * Displays available listings based on specific properties
+     */
     private void searchProperties() {
         ui.printListingOptionsMenu();
 
@@ -348,14 +404,28 @@ public class LoggedInManager {
         }
     }
 
+    /**
+     * Displays the messages inbox of the logged-in user
+     * @param username the username of the logged-in user
+     */
     public void viewInbox(String username) {
         ui.printMessages(sendMessages.getMessageInbox(username));
     }
 
+    /**
+     * Displays the messages outbox of the logged-in user
+     * @param username the username of the logged-in user
+     */
     public void viewOutbox(String username) {
         ui.printMessages(sendMessages.getMessageOutbox(username));
     }
 
+    /**
+     * Presents admin with options to navigate through program
+     *
+     * @param username the logged-in user's username
+     * @return true if the admin screen successfully appears
+     */
     public boolean adminScreen(String username) {
         ui.printAdminLoginMenu();
 

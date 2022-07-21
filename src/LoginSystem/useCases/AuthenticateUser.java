@@ -66,27 +66,44 @@ public class AuthenticateUser {
         return true;
     }
 
+    /**
+     * Returns whether the user logging in is an admin
+     *
+     * @param username the username of the user trying to log in
+     * @return true is the user is an admin
+     */
     public boolean checkUserAdmin(String username) {
         User u = interfaceUsers.get(username);
         return u.getAdmin();
     }
 
+    /**
+     * Returns whether the user logging in is a seller
+     *
+     * @param username the username of the user trying to log in
+     * @return true is the user is a seller
+     */
     public boolean checkUserSeller(String username) {
-        try{
+        try {
             interfaceUsers.getSeller(username);
             return true;
-        }
-        catch (SellerNotFoundException e){
+        } catch (SellerNotFoundException e) {
             return false;
         }
     }
 
+
+    /**
+     * Checks if the specified user exists and is not an admin
+     *
+     * @param username of the user being checked
+     * @return true if the user exists and is not an admin
+     */
     public boolean checkUserNonAdminExists(String username) {
-        try{
+        try {
             interfaceUsers.get(username);
             return true;
-        }
-        catch (UserNotFoundException e){
+        } catch (UserNotFoundException e) {
             return false;
         }
     }
