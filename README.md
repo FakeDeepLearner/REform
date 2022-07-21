@@ -18,7 +18,7 @@ To run the program, open `Main.java` which is located inside the `src` folder an
 
 **f.** Below are each person's contributions to phase 1:
 
-Anudev (Github username - anudevgill): Created CreateListing use case, wrote tests for CreateListingTest, wrote Javadocs for CreateListing and some controllers, created CsvInterface which was used by gateways classes to invert dependencies, and wrote README.
+Anudev (Github username - anudevgill): Created CreateListing use case with some of the csv code later being adpated and pulled out into the gateway classes, wrote tests for CreateListingTest, wrote Javadocs for CreateListing and some controllers, created CsvInterface which was used by gateways classes to invert dependencies, and wrote README.
 
 Rana: (Github username - rjak03) Created the UserMessagesCSV controller and the SendMessages use case. Also created the
 LoggedInManager controller based on previous version and added docstrings to some classes.
