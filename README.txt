@@ -55,7 +55,9 @@ Modified the LoggedInManager to also modify the listings created in the session.
 
 Rohit:
 
-Felix:
+Felix: (GitHub username - ff-zhang) Created the Listing entity, UserFactory use case, and the Main class. Updated
+LoggedOutManager controller to handle Buyer and Seller users. Refactored and abstracted classes such as Container and
+ListingProperties. Wrote Javadocs for InputHandler, AdminUser, UserContainer, Listing, and others.
 
 Andrew: (Github username - aychun) Created the Buyer and Seller entities, use cases of generating unique IDs of users
 and messages, accessing database files (CSV file), wrote Javadocs for most use cases, and wrote unit tests.
