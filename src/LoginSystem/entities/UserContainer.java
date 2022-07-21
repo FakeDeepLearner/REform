@@ -2,13 +2,14 @@ package LoginSystem.entities;
 
 import LoginSystem.exceptions.UserNotFoundException;
 import RealEstate.entities.Buyer;
+import RealEstate.entities.Container;
 import RealEstate.entities.Seller;
 import RealEstate.exceptions.BuyerNotFoundException;
 import RealEstate.exceptions.SellerNotFoundException;
 
 import java.util.HashMap;
 
-public class UserContainer<String, User> extends HashMap<String, User>{
+public class UserContainer<String, User> extends Container<String, User> {
     /**
      * @param key the key whose associated value is to be returned
      * @return the value associated with key
