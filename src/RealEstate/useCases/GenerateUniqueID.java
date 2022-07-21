@@ -46,7 +46,7 @@ public class GenerateUniqueID {
      */
     public GenerateUniqueID(MessageContainer<Integer, Message> l) {
         this.existingMessageIDs = this.getIDsFromMessageContainer(l);
-        this.existingIDs = new ArrayList<>();
+        this.existingListingIDs = new ArrayList<>();
     }
 
     /**

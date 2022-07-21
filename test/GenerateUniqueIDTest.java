@@ -8,10 +8,10 @@ import static org.junit.Assert.*;
 
 
 public class GenerateUniqueIDTest {
-    /*
+
 
     @Test
-    public void testGenerateUniqueID(){
+    public void testGenerateUniqueID() {
         ListingContainer l = new ListingContainer();
         l.put(2, "key");
         GenerateUniqueID a = new GenerateUniqueID(l);
@@ -29,7 +29,6 @@ public class GenerateUniqueIDTest {
 
         assertTrue(allowedInts.contains(id));
 
-    }
-    */
 
+    }
 }
