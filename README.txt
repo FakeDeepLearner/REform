@@ -4,6 +4,9 @@ Running the Program
 
 To run the program, open `Main.java` which is located inside the `src` folder and run the class's `main` method.
 
+Note: One of the features that we plan on adding for phase 2 is being able to create listings without a number, but for
+now, please enter a listing number when you are creating a listing.
+
 Additional Requirements Answered
 
 a. Our program follows SOLID principles because for one, each class only has a single responsibility. To ensure that we
