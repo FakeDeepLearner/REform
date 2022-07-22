@@ -39,7 +39,7 @@ public class UsersAndFavoritesCSVController implements CsvInterface{
         for (String username : favorites.keySet()){
             ArrayList<Integer> usernameFavorites = favorites.get(username);
             for (Integer integer : usernameFavorites){
-                writer.write("\n" + username + "," + integer);
+                writer.write(username + "," + integer + "\n");
             }
         }
         writer.close();
