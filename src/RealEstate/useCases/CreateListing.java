@@ -28,7 +28,7 @@ public class CreateListing {
     }
 
     /**
-     * Add a listing into the listings container.
+     * Add a listing into the ListingContainer.
      * @param civicAddress the civic address
      * @param streetName the street name
      * @param city the city
@@ -40,9 +40,6 @@ public class CreateListing {
      */
     public Listing addListing(int civicAddress, String streetName, String city, String type, int bedrooms,
                               int bathrooms, BigDecimal price) {
-
-
-//        int uniqueID = GenerateUniqueID.getUniqueID();
         GenerateUniqueID IDGenerator = new GenerateUniqueID(this.listings);
         int uniqueID = IDGenerator.getUniqueID();
 
@@ -52,7 +49,7 @@ public class CreateListing {
     }
 
     /**
-     * Add a listing into the listings container.
+     * Add a listing into the ListingContainer.
      * @param civicAddress the civic address
      * @param streetName the street name
      * @param city the city
@@ -64,17 +61,16 @@ public class CreateListing {
      */
     public Listing addListing(int unitNumber, int civicAddress, String streetName, String city, String type, int bedrooms,
                               int bathrooms, int floors, BigDecimal price) {
-
         GenerateUniqueID IDGenerator = new GenerateUniqueID(this.listings);
         int uniqueID = IDGenerator.getUniqueID();
-        Listing listing = new Listing(uniqueID, unitNumber, civicAddress, streetName, city, type,
-                bedrooms, bathrooms, floors, price);
+        Listing listing = new Listing(uniqueID, unitNumber, civicAddress, streetName, city, type, bedrooms, bathrooms,
+                floors, price);
         listings.put(uniqueID, listing);
         return listing;
     }
 
     /**
-     * Add a listing into the listings container.
+     * Add a listing into the ListingContainer.
      * @param civicAddress the civic address
      * @param streetName the street name
      * @param city the city
@@ -85,8 +81,7 @@ public class CreateListing {
      * @return a listing object for the property
      */
     public Listing addListing(int ID, int unitNumber, int civicAddress, String streetName, String city,
-                              String type, int bedrooms,
-                              int bathrooms, int floors, BigDecimal price) {
+                              String type, int bedrooms, int bathrooms, int floors, BigDecimal price) {
         Listing listing = new Listing(ID, unitNumber, civicAddress, streetName, city, type, bedrooms, bathrooms, floors, price);
         listings.put(ID, listing);
         return listing;
