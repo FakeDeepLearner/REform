@@ -2,7 +2,6 @@ import LoginSystem.controllers.InputHandler;
 import LoginSystem.controllers.LoggedOutManager;
 import LoginSystem.controllers.UserInterface;
 import LoginSystem.controllers.UserManager;
-import LoginSystem.entities.AdminUser;
 import LoginSystem.entities.User;
 import LoginSystem.entities.UserContainer;
 import LoginSystem.exceptions.ExitProgramException;
