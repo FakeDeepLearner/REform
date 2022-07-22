@@ -57,6 +57,8 @@ public class Main {
         userMessagesCSVController.read();
         usersAndFavoritesCSVController.read();
 
+        history.readUserHistories();
+
         while (true) {
             String username = null;
             try {
@@ -67,6 +69,8 @@ public class Main {
                 listingsCSVController.write();
                 userMessagesCSVController.write();
                 usersAndFavoritesCSVController.write();
+                history.overwriteUserHistories();
+
                 System.exit(0);
             }
 
