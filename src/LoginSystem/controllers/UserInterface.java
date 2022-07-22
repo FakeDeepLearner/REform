@@ -133,8 +133,8 @@ public class UserInterface {
     }
 
     public void printNumberedListings(ArrayList<String> listings) {
-        for (int i = 1 ; i <= listings.size() ; i++){
-            System.out.println(i + ") " + listings.get(i));
+        for (int i = 0 ; i < listings.size() ; i++){
+            System.out.println((i + 1) + ") " + listings.get(i));
         }
     }
 

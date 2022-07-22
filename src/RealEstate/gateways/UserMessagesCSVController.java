@@ -47,7 +47,7 @@ public class UserMessagesCSVController implements CsvInterface {
             BufferedWriter bw = new BufferedWriter(new FileWriter(file.getFilePath(), false));
 
             for (String data : sendMessages.getMessageStrings()) {
-                bw.append(data + "\n");
+                bw.append(data);
             }
 
             bw.flush();

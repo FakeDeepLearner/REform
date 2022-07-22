@@ -60,6 +60,6 @@ public class Message {
     @Override
     public String toString() {
         return "Message from: " + sender.getUsername() + " with an ID of " + messageID.toString() + "\n"
-                + contents + "\n\n";
+                + contents + "\n";
     }
 }
