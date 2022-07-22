@@ -38,10 +38,10 @@ public class SellersCSVController implements CsvInterface{
 
     @Override
     public void write() throws IOException {
-        BufferedWriter writer = new BufferedWriter(new FileWriter(filepath.getFilePath(), true));
+        BufferedWriter writer = new BufferedWriter(new FileWriter(filepath.getFilePath(), false));
         HashMap<String, Seller> createdSellers = userFactory.getCreatedSellers();
         for(String username : createdSellers.keySet()){
-            writer.write("\n" + username + "," + createdSellers.get(username).getPassword());
+            writer.write(username + "," + createdSellers.get(username).getPassword() + "\n");
         }
         writer.close();
     }
