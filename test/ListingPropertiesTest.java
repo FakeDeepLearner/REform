@@ -28,7 +28,7 @@ public class ListingPropertiesTest {
     public void testSearchbyPrice() {
         ArrayList<String> found1 = listingProperties.searchByPrice(new BigDecimal(123457), new BigDecimal(123455));
 
-        assertTrue(found1.contains(l1.toString()));
+        assertFalse(found1.contains(l3.toString()));
     }
 
     @Test()
