@@ -33,6 +33,8 @@ public class LoggedInManager {
     private final ListingProperties listingProperties;
     private final CreateListing createListing;
 
+    private final FavAndUnFavManager favAndUnFavManager;
+
 
     /**
      * Constructor for LoggedInManager
@@ -47,12 +49,13 @@ public class LoggedInManager {
      * @param sendMessages      the use case that sends messages
      * @param listingProperties the use case that lists listings based on specific properties
      * @param createListing     the use case that creates listings
+     * @param favAndUnFavManager the controller that controls listing favorites.
      */
     public LoggedInManager(InputHandler input, UserInterface ui, AuthenticateUser auth,
                            UpdateUserHistory history, RestrictUser restrict,
                            UserManager userManager, UsernamePasswordFileEditor file,
                            SendMessages sendMessages, ListingProperties listingProperties,
-                           CreateListing createListing) {
+                           CreateListing createListing, FavAndUnFavManager favAndUnFavManager) {
         this.input = input;
         this.ui = ui;
         this.auth = auth;
@@ -63,6 +66,7 @@ public class LoggedInManager {
         this.sendMessages = sendMessages;
         this.listingProperties = listingProperties;
         this.createListing = createListing;
+        this.favAndUnFavManager = favAndUnFavManager;
     }
 
     /**

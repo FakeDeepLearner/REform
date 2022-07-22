@@ -9,18 +9,19 @@ import LoginSystem.useCases.AuthenticateUser;
 import LoginSystem.useCases.RestrictUser;
 import LoginSystem.useCases.UpdateUserHistory;
 import LoginSystem.useCases.UsernamePasswordFileEditor;
+import RealEstate.controllers.FavAndUnFavManager;
 import RealEstate.controllers.LoggedInManager;
 import RealEstate.entities.Listing;
 import RealEstate.entities.ListingContainer;
 import RealEstate.entities.Message;
 import RealEstate.entities.MessageContainer;
-import RealEstate.useCases.CreateListing;
-import RealEstate.useCases.ListingProperties;
-import RealEstate.useCases.SendMessages;
-import RealEstate.useCases.UserFactory;
+import RealEstate.gateways.*;
+import RealEstate.useCases.*;
+
+import java.io.IOException;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         UserContainer<String, User> users = new UserContainer<>();
         MessageContainer<Integer, Message> messages = new MessageContainer<>();
         ListingContainer<Integer, Listing> listings = new ListingContainer<>();
@@ -33,20 +34,39 @@ public class Main {
         SendMessages sendMessages = new SendMessages(messages, users);
         ListingProperties listingProperties = new ListingProperties(listings);
         CreateListing createListing = new CreateListing(listings, users);
+        FavoriteListing favoriteListing = new FavoriteListing(users);
+        FavAndUnFavManager favAndUnFavManager = new FavAndUnFavManager(favoriteListing);
 
         UserInterface ui = new UserInterface();
         InputHandler input = new InputHandler(ui);
         UserManager userManager = new UserManager(input, ui, userFactory, auth, history, file);
         LoggedOutManager loggedOutManager = new LoggedOutManager(input, ui, userManager);
         LoggedInManager loggedInManager = new LoggedInManager(
-                input, ui, auth, history, restrict, userManager, file, sendMessages, listingProperties, createListing
-        );
+                input, ui, auth, history, restrict, userManager, file, sendMessages, listingProperties, createListing,
+        favAndUnFavManager);
+
+        BuyersCSVController buyersCSVController = new BuyersCSVController(userFactory);
+        SellersCSVController sellersCSVController = new SellersCSVController(userFactory);
+        ListingsCSVController listingsCSVController = new ListingsCSVController(createListing);
+        UserMessagesCSVController userMessagesCSVController = new UserMessagesCSVController(sendMessages);
+        UsersAndFavoritesCSVController usersAndFavoritesCSVController = new UsersAndFavoritesCSVController(favoriteListing);
+
+        buyersCSVController.read();
+        sellersCSVController.read();
+        listingsCSVController.read();
+        userMessagesCSVController.read();
+        usersAndFavoritesCSVController.read();
 
         while (true) {
             String username = null;
             try {
                 username = loggedOutManager.menuSelector();
             } catch (ExitProgramException e) {
+                buyersCSVController.write();
+                sellersCSVController.write();
+                listingsCSVController.write();
+                userMessagesCSVController.write();
+                usersAndFavoritesCSVController.write();
                 System.exit(0);
             }
 
