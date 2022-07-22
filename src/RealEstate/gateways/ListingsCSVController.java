@@ -65,8 +65,7 @@ public class ListingsCSVController implements CsvInterface{
                 BigDecimal price = listing.getPrice();
                 String lineToWrite = username + "," + ID + "," + unitNumber + "," + civicAddress + "," + streetName +
                         "," + city + "," + type + "," + bedrooms + "," + bathrooms + "," + floors + "," + price;
-                writer.write(lineToWrite);
-                writer.write("\n");
+                writer.write("\n" + lineToWrite);
             }
         }
         writer.close();
