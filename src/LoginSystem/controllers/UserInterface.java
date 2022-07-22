@@ -73,11 +73,11 @@ public class UserInterface {
     }
 
     public void printCreateUsernameInput() {
-        System.out.println("Create a username (It cannot include spaces): ");
+        System.out.println("Create a username: ");
     }
 
     public void printCreatePasswordInput() {
-        System.out.println("Create a password (It cannot include spaces): ");
+        System.out.println("Create a password: ");
     }
 
     public void printSignUpSuccess() {
