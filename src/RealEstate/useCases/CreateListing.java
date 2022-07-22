@@ -15,6 +15,7 @@ public class CreateListing {
     private final UserContainer<String, User> userContainer;
     private final HashMap<String, ArrayList<Listing>> createdListings;
 
+
     /**
      * Constructor for CreateListing
      * @param listingsInterface the listing's container hashmap
@@ -134,6 +135,7 @@ public class CreateListing {
      * @param listing the listing to be removed from the hashmap
      */
     public void removeFromCreatedListings(String username, Listing listing) {
+
         if (createdListings.containsKey(username)) {
             createdListings.get(username).remove(listing);
         }

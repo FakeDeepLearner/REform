@@ -39,6 +39,7 @@ public class ListingsCSVController implements CsvInterface{
             Listing listing = createListing.addListing(ID, unitNumber, civicAddress, streetName, city, type, bedrooms,
                     bathrooms, floors, price);
             createListing.addListingToSeller(username, listing);
+            createListing.addListingToCreatedListings(username, listing);
         }
         reader.close();
     }
@@ -61,7 +62,7 @@ public class ListingsCSVController implements CsvInterface{
                 BigDecimal price = listing.getPrice();
                 String lineToWrite = username + "," + ID + "," + unitNumber + "," + civicAddress + "," + streetName +
                         "," + city + "," + type + "," + bedrooms + "," + bathrooms + "," + floors + "," + price;
-                writer.write(lineToWrite + "\n");
+                writer.append(lineToWrite).append("\n");
             }
         }
         writer.close();
