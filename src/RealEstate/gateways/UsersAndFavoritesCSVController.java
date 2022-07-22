@@ -15,10 +15,6 @@ public class UsersAndFavoritesCSVController implements CsvInterface{
         this.favoriteListing = favoriteListing;
     }
 
-    public FavoriteListing getFavoriteListing() {
-        return favoriteListing;
-    }
-
     @Override
     public void read() throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(filepath.getFilePath()));

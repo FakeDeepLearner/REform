@@ -106,14 +106,6 @@ public class CreateListing {
     }
 
     /**
-     * Return the user container
-     * @return the user container hashmap
-     */
-    public UserContainer<String, User> getUserContainer() {
-        return userContainer;
-    }
-
-    /**
      * Return the listings container
      * @return the listings container hashmap
      */

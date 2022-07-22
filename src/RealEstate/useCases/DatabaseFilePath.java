@@ -24,8 +24,7 @@ import java.io.File;
 
 public class DatabaseFilePath {
 
-    private String filePath;
-    private String fileName;
+    private final String filePath;
 
     /**
      * Create a DatabaseFilePath class for a file
@@ -35,7 +34,6 @@ public class DatabaseFilePath {
     public DatabaseFilePath(String filename) {
         this.filePath = System.getProperty("user.dir") + File.separator +
                 "src" + File.separator + "RealEstate" + File.separator + "database" + File.separator + filename;
-        this.fileName = filename;
     }
 
     /**
@@ -48,15 +46,6 @@ public class DatabaseFilePath {
     }
 
     /**
-     * Setter for filePath
-     *
-     * @param filePath New filePath
-     */
-    public void setFilePath(String filePath) {
-        this.filePath = filePath;
-    }
-
-    /**
      * Static method to return the path of the database directory.
      *
      * @return The directory path of the database
@@ -64,23 +53,5 @@ public class DatabaseFilePath {
     public static String getDatabasePath() {
         return System.getProperty("user.dir") + File.separator +
                 "src" + File.separator + "RealEstate" + File.separator + "database" + File.separator;
-    }
-
-    /**
-     * Getter for fileName
-     *
-     * @return name of the file
-     */
-    public String getFileName() {
-        return fileName;
-    }
-
-    /**
-     * Setter for fileName
-     *
-     * @param fileName New fileName
-     */
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
     }
 }

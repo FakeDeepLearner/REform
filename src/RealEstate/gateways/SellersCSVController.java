@@ -1,7 +1,6 @@
 package RealEstate.gateways;
 
 import RealEstate.entities.Seller;
-import RealEstate.useCases.CreateSeller;
 import RealEstate.useCases.DatabaseFilePath;
 import RealEstate.useCases.UserFactory;
 
@@ -16,11 +15,6 @@ public class SellersCSVController implements CsvInterface{
     public SellersCSVController(UserFactory userFactory){
         this.userFactory = userFactory;
     }
-
-    public UserFactory getCreateSeller() {
-        return userFactory;
-    }
-
 
 
     @Override

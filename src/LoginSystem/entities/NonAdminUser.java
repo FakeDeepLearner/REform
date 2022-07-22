@@ -67,12 +67,4 @@ public abstract class NonAdminUser extends User implements Bannable{
         nonAdminUser.inbox.put(message.getMessageID(), message);
         this.outbox.put(message.getMessageID(), message);
     }
-
-    public void printInbox(){
-        System.out.println(inbox);
-    }
-
-    public void printOutbox() {
-        System.out.println(outbox);
-    }
 }

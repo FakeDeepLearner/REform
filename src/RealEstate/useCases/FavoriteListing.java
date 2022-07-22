@@ -32,15 +32,6 @@ public class FavoriteListing {
     }
 
     /**
-     * Getter for userContainer
-     *
-     * @return The UserContainer
-     */
-    public UserContainer<String, User> getUserContainer() {
-        return userContainer;
-    }
-
-    /**
      * Add a Listing object to a Buyer's Favorites
      *
      * @param username  Username of the Buyer

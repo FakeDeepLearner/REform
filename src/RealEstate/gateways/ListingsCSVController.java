@@ -19,10 +19,6 @@ public class ListingsCSVController implements CsvInterface{
         this.createListing = createListing;
     }
 
-    public CreateListing getCreateListing() {
-        return createListing;
-    }
-
     @Override
     public void read() throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(filepath.getFilePath()));

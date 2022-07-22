@@ -7,8 +7,6 @@ import RealEstate.entities.Seller;
 import RealEstate.exceptions.BuyerNotFoundException;
 import RealEstate.exceptions.SellerNotFoundException;
 
-import java.util.HashMap;
-
 public class UserContainer<String, User> extends Container<String, User> {
     /**
      * @param key the key whose associated value is to be returned
@@ -67,17 +65,4 @@ public class UserContainer<String, User> extends Container<String, User> {
     }
 
 
-    /**
-     * @param key the key whose associated value is to be returned
-     * @return the value associated with key
-     * @throws UserNotFoundException if no Admin is associated with key in the hashmap
-     */
-    public AdminUser getAdmin(Object key) throws UserNotFoundException {
-        try{
-            return (AdminUser) super.get(key);
-        }
-        catch (IllegalArgumentException illegalArgumentException){
-            throw new UserNotFoundException();
-        }
-    }
 }

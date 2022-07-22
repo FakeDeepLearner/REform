@@ -14,10 +14,6 @@ public class BuyersCSVController implements CsvInterface{
         this.userFactory = userFactory;
     }
 
-    public UserFactory getCreateBuyer() {
-        return userFactory;
-    }
-
     @Override
     public void read() throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(filepath.getFilePath()));

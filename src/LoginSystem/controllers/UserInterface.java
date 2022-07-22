@@ -14,11 +14,6 @@ public class UserInterface {
         System.out.println("Press 2 to create a new seller.");
     }
 
-    public void printNonAdminLogInMenu() {
-        System.out.println("Press 1 to see your login history");
-        System.out.println("Press 2 to log out.");
-    }
-
     public void printAdminLoginMenu() {
         System.out.println("Press 1 to see your login history");
         System.out.println("Press 2 to create a user (this new user will be an admin)");

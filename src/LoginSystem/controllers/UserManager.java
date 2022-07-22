@@ -29,26 +29,6 @@ public class UserManager {
         this.file = file;
     }
 
-//    public void loadUsersFromCSV() {
-//        ArrayList<ArrayList<String>> users;
-//        try {
-//            users = file.getUsersFromCSV();
-//        } catch (IOException e) {
-//            ui.printArbitraryException(e);
-//            return;
-//        }
-//
-//        for (ArrayList<String> user : users) {
-//            ArrayList<String> loginHistory = history.readUserHistory(user.get(0));
-//
-//            if (Boolean.parseBoolean(user.get(2))) {
-//                userFactory.createAdminUser(user.get(0), user.get(1), loginHistory);
-//            } else {
-//                userFactory.createNonAdminUser(user.get(0), user.get(1), loginHistory);
-//            }
-//        }
-//    }
-
     /**
      * Get a username and password from the console
      *
