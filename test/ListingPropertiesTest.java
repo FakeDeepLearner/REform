@@ -30,26 +30,26 @@ public class ListingPropertiesTest {
 
     @Test()
     public void testSearchbyPrice() {
-        ArrayList<String> found1 = listingProperties.searchByprice(new BigDecimal(123457), new BigDecimal(123455));
+        ArrayList<String> found1 = listingProperties.searchByPrice(new BigDecimal(123457), new BigDecimal(123455));
 
         assertTrue(found1.contains(l1.toString()));
     }
 
     @Test()
     public void testSearchbyCity() {
-        ArrayList<String> found2 = listingProperties.searchBycity("ABCD city");
+        ArrayList<String> found2 = listingProperties.searchByCity("ABCD city");
 
         assertTrue(found2.contains(l2.toString()));
     }
     @Test()
     public void testSearchbycivicAdress() {
-        ArrayList<String> found3 = listingProperties.searchBycivicAddress(1);
+        ArrayList<String> found3 = listingProperties.searchByCivicAddress(1);
 
         assertTrue(found3.contains(l1.toString()));
     }
     @Test()
     public void testSearchbyType() {
-        ArrayList<String> found4 = listingProperties.searchBylistingType("APARTMENT");
+        ArrayList<String> found4 = listingProperties.searchByListingType("APARTMENT");
 
         assertTrue(found4.contains(l1.toString()));
         assertTrue(found4.contains(l2.toString()));

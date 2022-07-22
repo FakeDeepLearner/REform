@@ -82,6 +82,13 @@ public abstract class User {
     }
 
     /**
+     * @param newLogins to be added to the login history of the User
+     */
+    public void addToLoginHistory(ArrayList<String> newLogins) {
+        loginHistory.addAll(newLogins);
+    }
+
+    /**
      * @param bool to set login status to
      */
     public void setIsLoggedIn(boolean bool) {

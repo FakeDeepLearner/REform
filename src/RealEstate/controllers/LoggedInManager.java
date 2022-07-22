@@ -19,7 +19,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 public class LoggedInManager {
     private final InputHandler input;
@@ -345,7 +344,7 @@ public class LoggedInManager {
                 // Search by civic address
                 ui.printEnterType("civic address number");
                 int number = input.intInput();
-                ArrayList<String> listings = listingProperties.searchBycivicAddress(number);
+                ArrayList<String> listings = listingProperties.searchByCivicAddress(number);
                 ui.printFilteredListings(listings);
                 break;
             }
@@ -354,7 +353,7 @@ public class LoggedInManager {
                 // Search by street name
                 ui.printEnterType("street name");
                 String street = input.strInput();
-                ArrayList<String> listings = listingProperties.searchBystreetName(street);
+                ArrayList<String> listings = listingProperties.searchByStreetName(street);
                 ui.printFilteredListings(listings);
                 break;
             }
@@ -363,7 +362,7 @@ public class LoggedInManager {
                 // Search by city
                 ui.printEnterType("city");
                 String city = input.strInput();
-                ArrayList<String> listings = listingProperties.searchBycity(city);
+                ArrayList<String> listings = listingProperties.searchByCity(city);
                 ui.printFilteredListings(listings);
                 break;
             }
@@ -372,7 +371,7 @@ public class LoggedInManager {
                 // Search by bedroom number
                 ui.printEnterType("number of bedrooms wanted");
                 int number = input.intInput();
-                ArrayList<String> listings = listingProperties.searchBybedrooms(number);
+                ArrayList<String> listings = listingProperties.searchByBedrooms(number);
                 ui.printFilteredListings(listings);
                 break;
             }
@@ -381,7 +380,7 @@ public class LoggedInManager {
                 // Search by bathroom number
                 ui.printEnterType("number of bathrooms wanted");
                 int number = input.intInput();
-                ArrayList<String> listings = listingProperties.searchBybathrooms(number);
+                ArrayList<String> listings = listingProperties.searchByBathrooms(number);
                 ui.printFilteredListings(listings);
                 break;
             }
@@ -390,7 +389,7 @@ public class LoggedInManager {
                 // Search by floor number
                 ui.printEnterType("number of floors wanted");
                 int number = input.intInput();
-                ArrayList<String> listings = listingProperties.searchByfloors(number);
+                ArrayList<String> listings = listingProperties.searchByFloors(number);
                 ui.printFilteredListings(listings);
                 break;
             }
@@ -401,7 +400,7 @@ public class LoggedInManager {
                 BigDecimal min = input.bigDecimalInput();
                 ui.printEnterType("maximum price");
                 BigDecimal max = input.bigDecimalInput();
-                ArrayList<String> listings = listingProperties.searchByprice(min, max);
+                ArrayList<String> listings = listingProperties.searchByPrice(min, max);
                 ui.printFilteredListings(listings);
                 break;
             }
@@ -411,7 +410,7 @@ public class LoggedInManager {
                 ui.printEnterType("listing type (apartment, house, townhouse) wanted");
                 String[] inputsAllowed = {"apartment", "house", "townhouse"};
                 String type = input.strInput(List.of(inputsAllowed));
-                ArrayList<String> listings = listingProperties.searchBylistingType(type);
+                ArrayList<String> listings = listingProperties.searchByListingType(type);
                 ui.printFilteredListings(listings);
                 break;
             }

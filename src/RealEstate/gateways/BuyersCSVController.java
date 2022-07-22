@@ -36,8 +36,7 @@ public class BuyersCSVController implements CsvInterface{
         BufferedWriter writer = new BufferedWriter(new FileWriter(filepath.getFilePath(), false));
         HashMap<String, Buyer> createdBuyers = userFactory.getCreatedBuyers();
         for(String username : createdBuyers.keySet()){
-           writer.write(username + "," + createdBuyers.get(username).getPassword());
-           writer.write("\n");
+           writer.write("\n" + username + "," + createdBuyers.get(username).getPassword());
         }
         writer.close();
     }

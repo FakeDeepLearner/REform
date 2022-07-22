@@ -45,6 +45,26 @@ public class UpdateUserHistory {
         return userHistory;
     }
 
+
+    public void readUserHistories() {
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(csvFilePath.getDatabasePath() + "UserHistories.csv"));
+            String line;
+
+            while ((line = br.readLine()) != null) {
+                String[] contents = line.split(",");
+
+                User u = interfaceUsers.get(contents[0]);
+                u.addToLoginHistory(contents[1]);
+            }
+
+            br.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     /**
      * Overwrite csv file with new login history for each user.
      */
