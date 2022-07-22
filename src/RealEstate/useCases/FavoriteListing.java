@@ -15,7 +15,7 @@ public class FavoriteListing {
     /**
      * Create a FavoriteListing class
      *
-     * @param userContainer UserContainer class
+     * @param userContainer UserContainer object to be used
      */
     public FavoriteListing(UserContainer<String, User> userContainer) {
         this.userContainer = userContainer;
@@ -54,11 +54,9 @@ public class FavoriteListing {
 
     }
 
-    // TODO: Complete the Javadoc for addCreationToGeneratedFavorites()
-
     /**
-     * @param username
-     * @param listingID
+     * @param username the username of the buyer.
+     * @param listingID the ID of the listing to be added.
      */
     public void addCreationToGeneratedFavorites(String username, int listingID) {
         if (generatedFavorites.containsKey(username)) {
@@ -75,19 +73,17 @@ public class FavoriteListing {
     /**
      * Remove a Listing object from a Buyer's favorites.
      *
-     * @param username  Username of the Buyer
-     * @param listingID ID of the Listing to be removed
+     * @param username  Username of the Buyer.
+     * @param listingID ID of the Listing to be removed.
      */
     public void removeListingFromBuyerFavorites(String username, int listingID) {
         Buyer buyer = userContainer.getBuyer(username);
         buyer.removeFavouriteListing(listingID);
     }
 
-    // TODO: Complete the Javadoc for removeFromGeneratedFavorites()
-
     /**
-     * @param username
-     * @param listingID
+     * @param username the username that the listing will be removed from.
+     * @param listingID the ID of the listing to be removed.
      */
     public void removeFromGeneratedFavorites(String username, int listingID) {
         if (generatedFavorites.containsKey(username)) {
