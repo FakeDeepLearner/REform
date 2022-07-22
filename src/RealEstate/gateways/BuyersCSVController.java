@@ -33,7 +33,7 @@ public class BuyersCSVController implements CsvInterface{
 
     @Override
     public void write() throws IOException {
-        BufferedWriter writer = new BufferedWriter(new FileWriter(filepath.getFilePath(), true));
+        BufferedWriter writer = new BufferedWriter(new FileWriter(filepath.getFilePath(), false));
         HashMap<String, Buyer> createdBuyers = userFactory.getCreatedBuyers();
         for(String username : createdBuyers.keySet()){
            writer.write("\n" + username + "," + createdBuyers.get(username).getPassword());
