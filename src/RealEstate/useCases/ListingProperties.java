@@ -112,8 +112,8 @@ public class ListingProperties {
      * @return ArrayList of Strings containing the String representation of the Listing
      */
     public ArrayList<String> searchByPrice(BigDecimal upperLimit, BigDecimal lowerLimit) {
-        Predicate<Listing> property = (listing) -> upperLimit.compareTo(listing.getPrice()) <= 0 &&
-                listing.getPrice().compareTo(lowerLimit) >= 0;
+        Predicate<Listing> property = (listing) -> upperLimit.compareTo(listing.getPrice()) >= 0 &&
+                lowerLimit.compareTo(listing.getPrice()) <= 0;
         return searchByProperty(property);
     }
 
