@@ -13,7 +13,6 @@ import java.util.ArrayList;
 
 
 public class ListingPropertiesTest {
-    ///Tests fail because of Null pointer Exception. Will Work after Get unique ID is fices
     ListingContainer<Integer, Listing> lc = new ListingContainer<>();
     UserContainer<String, User> uc = new UserContainer<>();
 
