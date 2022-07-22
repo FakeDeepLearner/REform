@@ -81,7 +81,7 @@ public class Listing {
         this.streetName = streetName;
         this.city = city;
         if (isStringValidEnum(type)) {
-            this.type = Enum.valueOf(ListingType.class, type);
+            this.type = Enum.valueOf(ListingType.class, type.toUpperCase());
         } else {
             throw new IllegalArgumentException();
         }

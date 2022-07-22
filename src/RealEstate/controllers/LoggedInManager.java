@@ -267,37 +267,47 @@ public class LoggedInManager {
         Collections.addAll(allowedStrings, "Y", "N");
         String choice = input.strInput(allowedStrings);
 
+        int unitNumber = 0;
+        if (choice.equals("Y")) {
+            ui.printEnterType("unit number");
+            unitNumber = input.intInput();
+        }
+
         ui.printEnterType("civic address number");
         int number = input.intInput();
+
         ui.printEnterType("street name");
         String street = input.strInput();
+
         ui.printEnterType("city");
         String city = input.strInput();
-        ui.printEnterType("number of bedrooms");
-        int bedrooms = input.intInput();
-        ui.printEnterType("number of bathrooms");
-        int bathrooms = input.intInput();
+
         ui.printEnterType("price");
         BigDecimal price = input.bigDecimalInput();
+
         ui.printEnterType("listing type (apartment, house, townhouse)");
         String[] inputsAllowed = {"apartment", "house", "townhouse"};
         String type = input.strInput(List.of(inputsAllowed), true);
 
-        if (Objects.equals(choice, "Y")) {
-            ui.printEnterType("unit number");
-            int unitNumber = input.intInput();
-            ui.printEnterType("number of floors");
-            int floors = input.intInput();
-            Listing listing = createListing.addListing(unitNumber, number, street, city,
-                    type, bedrooms, bathrooms, floors, price);
-            createListing.addListingToSeller(username, listing);
-            createListing.addListingToCreatedListings(username, listing);
+        ui.printEnterType("number of floors");
+        int floors = input.intInput();
+
+        ui.printEnterType("number of bedrooms");
+        int bedrooms = input.intInput();
+
+        ui.printEnterType("number of bathrooms");
+        int bathrooms = input.intInput();
+
+        Listing listing;
+        if (choice.equals("Y")) {
+            listing = createListing.addListing(unitNumber, number, street, city, type, bedrooms, bathrooms, floors, price);
         } else {
-            Listing listing = createListing.addListing(number, street, city,
-                    type, bedrooms, bathrooms, price);
-            createListing.addListingToSeller(username, listing);
-            createListing.addListingToCreatedListings(username, listing);
+            listing = createListing.addListing(number, street, city, type, bedrooms, bathrooms, price);
         }
+
+        createListing.addListingToSeller(username, listing);
+        createListing.addListingToCreatedListings(username, listing);
+
         ui.printListingCreatedSuccess();
     }
 

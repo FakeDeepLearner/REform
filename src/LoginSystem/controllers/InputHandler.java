@@ -23,7 +23,7 @@ public class InputHandler {
     public int intInput() {
         int input = 0;
         do {
-            String choice = sc.next();
+            String choice = sc.nextLine();
             try {
                 input = Integer.parseInt(choice);
 
@@ -44,7 +44,7 @@ public class InputHandler {
     public int intInput(List<Integer> allowedInputs) {
         int input = 0;
         do {
-            String choice = sc.next();
+            String choice = sc.nextLine();
             try {
                 input = Integer.parseInt(choice);
 
@@ -69,7 +69,7 @@ public class InputHandler {
     public int intInput(int min, int max) {
         int input = 0;
         do {
-            String choice = sc.next();
+            String choice = sc.nextLine();
             try {
                 input = Integer.parseInt(choice);
 
@@ -92,7 +92,7 @@ public class InputHandler {
     public BigDecimal bigDecimalInput() {
         double input = 0.0;
         do {
-            String choice = sc.next();
+            String choice = sc.nextLine();
             try {
                 input = Double.parseDouble(choice);
 
@@ -110,7 +110,7 @@ public class InputHandler {
      * @return an input String from the terminal
      */
     public String strInput() {
-        return sc.next();
+        return sc.nextLine();
     }
 
     /**
@@ -122,7 +122,7 @@ public class InputHandler {
     public String strInput(List<String> allowedInputs) {
         String input;
         do {
-            input = sc.next();
+            input = sc.nextLine();
 
             if (!allowedInputs.contains(input)) {
                 ui.printInvalidInput();
@@ -141,12 +141,12 @@ public class InputHandler {
      */
     public String strInput(List<String> allowedInputs, boolean isCaseInsensitive) {
         if (isCaseInsensitive) {
-            allowedInputs.replaceAll(String::toLowerCase);
+            allowedInputs = allowedInputs.stream().map(String::toLowerCase).collect(Collectors.toList());
         }
 
         String input;
         do {
-            input = isCaseInsensitive ? sc.next().toLowerCase() : sc.next();
+            input = isCaseInsensitive ? sc.nextLine().toLowerCase() : sc.nextLine();
 
             if (!allowedInputs.contains(input)) {
                 ui.printInvalidInput();
