@@ -327,6 +327,8 @@ public class LoggedInManager {
         Listing listingToRemove = createListing.getSellerListings(username).get(number - 1);
         createListing.deleteListing(username, listingToRemove);
         createListing.removeFromCreatedListings(username, listingToRemove);
+
+        ui.printDeleteListingSuccess();
     }
 
     /**
