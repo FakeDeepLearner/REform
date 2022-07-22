@@ -5,12 +5,13 @@ import RealEstate.entities.MessageContainer;
 import RealEstate.entities.Seller;
 import RealEstate.useCases.SendMessages;
 import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 public class SendMessagesTest {
 
     @Test
-    public void testSendingMessage(){
+    public void testSendingMessage() {
 
         Buyer sender = new Buyer("u1", "pw1");
         Seller receiver = new Seller("u2", "pw2");
@@ -23,7 +24,7 @@ public class SendMessagesTest {
         MessageContainer mc = new MessageContainer();
 
 
-        SendMessages sm = new SendMessages(mc,uc);
+        SendMessages sm = new SendMessages(mc, uc);
 
         sm.sendMessage("u1", "u2", "testContent");
 
@@ -32,7 +33,7 @@ public class SendMessagesTest {
     }
 
     @Test
-    public void testSendingMultipleMessages(){
+    public void testSendingMultipleMessages() {
 
         Buyer sender = new Buyer("u1", "pw1");
         Seller receiver = new Seller("u2", "pw2");
@@ -45,7 +46,7 @@ public class SendMessagesTest {
         MessageContainer mc = new MessageContainer();
 
 
-        SendMessages sm = new SendMessages(mc,uc);
+        SendMessages sm = new SendMessages(mc, uc);
 
         sm.sendMessage("u1", "u2", "testContent");
         sm.sendMessage("u1", "u2", "testContent2");
@@ -53,8 +54,6 @@ public class SendMessagesTest {
 
         System.out.println(sm.getMessageInbox("u2"));
 
-        // TODO: Messages are NOT showing in the chronological order
-        // TODO: Is is printing the message in the desired format? (commas seem to be off)
 
     }
 
@@ -80,9 +79,6 @@ public class SendMessagesTest {
 
         System.out.println(sm.getMessageOutbox("u1"));
 
-        // TODO: Messages are NOT showing in the chronological order
-
-        // TODO: Should we add the sent / received time of the message as well?
 
     }
 
