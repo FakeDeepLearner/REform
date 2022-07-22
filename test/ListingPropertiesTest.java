@@ -18,12 +18,9 @@ public class ListingPropertiesTest {
 
     CreateListing createListing = new CreateListing(lc,uc);
 
-
-
     Listing l1 = createListing.addListing(1,1,1,"ABC street","ABC city","APARTMENT",2,2,0,new BigDecimal(123456));
-
     Listing l2 = createListing.addListing(2,2,2,"ABC street","ABCD city","APARTMENT",2,2,0,new BigDecimal(12345));
-
+    Listing l3 = createListing.addListing(1,1,1,"ABC street","ABC city","APARTMENT",2,2,0,new BigDecimal(12345678));
     ListingProperties listingProperties = new ListingProperties(lc);
 
 

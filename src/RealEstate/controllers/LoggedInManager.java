@@ -400,7 +400,7 @@ public class LoggedInManager {
                 BigDecimal min = input.bigDecimalInput();
                 ui.printEnterType("maximum price");
                 BigDecimal max = input.bigDecimalInput();
-                ArrayList<String> listings = listingProperties.searchByPrice(min, max);
+                ArrayList<String> listings = listingProperties.searchByPrice(max, min);
                 ui.printFilteredListings(listings);
                 break;
             }

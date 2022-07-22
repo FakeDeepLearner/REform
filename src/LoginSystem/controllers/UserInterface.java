@@ -155,7 +155,7 @@ public class UserInterface {
     }
 
     public void printListingHasUnitNumber() {
-        System.out.println("Does this listing have a unit number? (Y/N) ");
+        System.out.println("Does this listing have a unit number? (Y/N). (Please input Y for now.)");
     }
 
     public void printMessageUserFail(String username) {
