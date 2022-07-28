@@ -29,7 +29,7 @@ public class CreateListing {
     }
 
     /**
-     * Add a listing into the ListingContainer.
+     * Add a listing without a unit number into the ListingContainer.
      * @param civicAddress the civic address
      * @param streetName the street name
      * @param city the city
@@ -37,7 +37,7 @@ public class CreateListing {
      * @param bedrooms the number of bedrooms
      * @param bathrooms the number of bathrooms
      * @param price the price of the property
-     * @return a listing object for the property
+     * @return a listing object created with the given attributes
      */
     public Listing addListing(int civicAddress, String streetName, String city, String type, int bedrooms,
                               int bathrooms, BigDecimal price) {
@@ -50,15 +50,17 @@ public class CreateListing {
     }
 
     /**
-     * Add a listing into the ListingContainer.
+     * Add a listing with a unit number into the ListingContainer.
+     * @param unitNumber the unit number of the listing
      * @param civicAddress the civic address
      * @param streetName the street name
      * @param city the city
      * @param type the type of the property. Must be in {APARTMENT, HOUSE, TOWNHOUSE}
      * @param bedrooms the number of bedrooms
      * @param bathrooms the number of bathrooms
+     * @param floors the number of floors
      * @param price the price of the property
-     * @return a listing object for the property
+     * @return a listing object created with the given attributes
      */
     public Listing addListing(int unitNumber, int civicAddress, String streetName, String city, String type, int bedrooms,
                               int bathrooms, int floors, BigDecimal price) {
@@ -71,19 +73,41 @@ public class CreateListing {
     }
 
     /**
-     * Add a listing into the ListingContainer.
+     * Add a listing with a known ID and a unit number into the ListingContainer.
+     * @param ID the ID of the listing
+     * @param unitNumber the unit number of the listing
      * @param civicAddress the civic address
      * @param streetName the street name
      * @param city the city
      * @param type the type of the property. Must be in {APARTMENT, HOUSE, TOWNHOUSE}
      * @param bedrooms the number of bedrooms
      * @param bathrooms the number of bathrooms
+     * @param floors the number of floors
      * @param price the price of the property
-     * @return a listing object for the property
+     * @return a listing object with the given attributes
      */
     public Listing addListing(int ID, int unitNumber, int civicAddress, String streetName, String city,
                               String type, int bedrooms, int bathrooms, int floors, BigDecimal price) {
         Listing listing = new Listing(ID, unitNumber, civicAddress, streetName, city, type, bedrooms, bathrooms, floors, price);
+        listings.put(ID, listing);
+        return listing;
+    }
+
+    /**
+     * Add a listing with a known ID and without a unit number into the ListingContainer
+     * @param ID the ID of the listing
+     * @param civicAddress the civic address number
+     * @param streetName the street name
+     * @param city the name of the city
+     * @param type the type of the property. Must be in {APARTMENT, HOUSE, TOWNHOUSE}
+     * @param bedrooms the number of bedrooms
+     * @param bathrooms the number of bathrooms
+     * @param price the price of the listing
+     * @return a listing object created with the given attributes
+     * */
+    public Listing addListing(int ID, int civicAddress, String streetName, String city, String type,
+                              int bedrooms, int bathrooms, BigDecimal price){
+        Listing listing = new Listing(ID, civicAddress, streetName, city, type, bedrooms, bathrooms, price);
         listings.put(ID, listing);
         return listing;
     }

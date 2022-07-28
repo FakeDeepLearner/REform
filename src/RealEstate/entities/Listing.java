@@ -28,6 +28,8 @@ public class Listing {
 
     private final ListingType type;
 
+    private final int numAttributes;
+
     /**
      * Creates a listing without a unit number
      *
@@ -47,7 +49,7 @@ public class Listing {
         this.streetName = streetName;
         this.city = city;
         if (isStringValidEnum(type)) {
-            this.type = Enum.valueOf(ListingType.class, type);
+            this.type = Enum.valueOf(ListingType.class, type.toUpperCase());
         } else {
             throw new IllegalArgumentException();
         }
@@ -58,6 +60,7 @@ public class Listing {
         unitNumber = null;
         floors = null;
         isSold = false;
+        numAttributes = 9;
     }
 
     /**
@@ -90,6 +93,7 @@ public class Listing {
         this.floors = floors;
         this.price = price;
         isSold = false;
+        numAttributes = 11;
     }
 
     /**
@@ -193,6 +197,13 @@ public class Listing {
         return isSold;
     }
 
+    /**
+     * @return the number of attributes of this listing.
+     * It can only be either 9 or 11.
+     * */
+    public int getNumAttributes() {
+        return numAttributes;
+    }
 
     /**
      * Sells a listing by updating its isSold status
