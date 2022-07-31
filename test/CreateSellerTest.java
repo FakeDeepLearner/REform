@@ -1,8 +1,7 @@
-import LoginSystem.entities.User;
-import LoginSystem.entities.UserContainer;
-import RealEstate.useCases.CreateBuyer;
+import entities.User;
+import entities.containers.UserContainer;
 
-import RealEstate.useCases.CreateSeller;
+import useCases.sellerUseCases.CreateSeller;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

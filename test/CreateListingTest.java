@@ -1,10 +1,10 @@
-import LoginSystem.entities.User;
-import LoginSystem.entities.UserContainer;
-import RealEstate.entities.Listing;
-import RealEstate.entities.ListingContainer;
+import entities.User;
+import entities.containers.UserContainer;
+import entities.Listing;
+import entities.containers.ListingContainer;
 
-import RealEstate.entities.Seller;
-import RealEstate.useCases.CreateListing;
+import entities.Seller;
+import useCases.listingUseCases.CreateListing;
 import org.junit.Test;
 
 import java.math.BigDecimal;

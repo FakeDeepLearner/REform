@@ -1,12 +1,9 @@
-import LoginSystem.entities.UserContainer;
-import RealEstate.entities.Buyer;
-import RealEstate.entities.Message;
-import RealEstate.entities.MessageContainer;
-import RealEstate.entities.Seller;
-import RealEstate.useCases.SendMessages;
+import entities.containers.UserContainer;
+import entities.Buyer;
+import entities.containers.MessageContainer;
+import entities.Seller;
+import useCases.messageUseCases.SendMessages;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class SendMessagesTest {
 

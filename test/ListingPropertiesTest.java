@@ -1,10 +1,10 @@
 
-import LoginSystem.entities.User;
-import LoginSystem.entities.UserContainer;
-import RealEstate.entities.Listing;
-import RealEstate.useCases.CreateListing;
-import RealEstate.useCases.ListingProperties;
-import RealEstate.entities.ListingContainer;
+import entities.User;
+import entities.containers.UserContainer;
+import entities.Listing;
+import useCases.listingUseCases.CreateListing;
+import useCases.listingUseCases.ListingProperties;
+import entities.containers.ListingContainer;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

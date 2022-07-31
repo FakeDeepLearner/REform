@@ -1,5 +1,5 @@
-import RealEstate.entities.ListingContainer;
-import RealEstate.useCases.GenerateUniqueID;
+import entities.containers.ListingContainer;
+import useCases.miscellaneous.GenerateUniqueID;
 import org.junit.*;
 
 import java.util.ArrayList;
