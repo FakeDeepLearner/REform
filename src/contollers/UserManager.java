@@ -1,5 +1,7 @@
 package contollers;
 
+import entities.User;
+import entities.containers.UserContainer;
 import exceptions.UserBannedException;
 import exceptions.UserNotFoundException;
 import exceptions.UsernameAlreadyExistsException;
@@ -12,21 +14,43 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class UserManager {
-    private final InputHandler inputHandler;
+    private final InputHandler input;
     private final UserInterface ui;
     private final UserFactory userFactory;
     private final AuthenticateUser auth;
     private final UpdateUserHistory history;
     private final UsernamePasswordFileEditor file;
 
-    public UserManager(InputHandler inputHandler, UserInterface ui, UserFactory userFactory, AuthenticateUser auth,
+    /**
+     * Constructor for UserManager
+     * @param userContainer stores the users of the program
+     */
+    public UserManager(UserContainer<String, User> userContainer) {
+        auth = new AuthenticateUser(userContainer);
+        history = new UpdateUserHistory(userContainer);
+        file = new UsernamePasswordFileEditor(auth, userContainer);
+
+        ui = new UserInterface();
+        input = new InputHandler(ui);
+        userFactory = new UserFactory(userContainer);
+    }
+
+    /**
+     * Constructor for UserManager
+     * @param userFactory creates new users
+     * @param auth is the user authenticator
+     * @param history updates the history of a user
+     * @param file stores the usernames and passwords of users
+     */
+    public UserManager(UserFactory userFactory, AuthenticateUser auth,
                        UpdateUserHistory history, UsernamePasswordFileEditor file) {
-        this.inputHandler = inputHandler;
-        this.ui = ui;
         this.userFactory = userFactory;
         this.auth = auth;
         this.history = history;
         this.file = file;
+
+        ui = new UserInterface();
+        input = new InputHandler(ui);
     }
 
     /**
@@ -38,10 +62,10 @@ public class UserManager {
         ArrayList<String> usernamePassword = new ArrayList<>();
 
         ui.printCreateUsernameInput();
-        usernamePassword.add(inputHandler.strInput());
+        usernamePassword.add(input.strInput());
 
         ui.printCreatePasswordInput();
-        usernamePassword.add(inputHandler.strInput());
+        usernamePassword.add(input.strInput());
 
         return usernamePassword;
     }

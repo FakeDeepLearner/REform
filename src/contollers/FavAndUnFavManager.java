@@ -1,8 +1,18 @@
 package contollers;
+import entities.User;
+import entities.containers.UserContainer;
 import useCases.listingUseCases.FavoriteListing;
 
-public class FavAndUnFavManager{
+public class FavAndUnFavManager {
     private final FavoriteListing favoriteListing;
+
+    /**
+     * Constructor for FavAndUnFavManager
+     * @param users are the users that can favourite listings
+     */
+    public FavAndUnFavManager(UserContainer<String, User> users) {
+        this.favoriteListing = new FavoriteListing(users);
+    }
 
     /**
      * Constructor for FavAndUnFavManager

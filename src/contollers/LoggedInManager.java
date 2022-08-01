@@ -1,5 +1,10 @@
 package contollers;
 
+import entities.Message;
+import entities.User;
+import entities.containers.ListingContainer;
+import entities.containers.MessageContainer;
+import entities.containers.UserContainer;
 import exceptions.UserCannotBeBannedException;
 import exceptions.UserNotFoundException;
 import useCases.userUseCases.AuthenticateUser;
@@ -34,35 +39,25 @@ public class LoggedInManager {
 
     /**
      * Constructor for LoggedInManager
-     *
-     * @param input             the input handler
-     * @param ui                the user interface
-     * @param auth              the user authenticator
-     * @param history           the use case that updates the user history
-     * @param restrict          the use case that restricts users
-     * @param userManager       the controller that manages user login
-     * @param file              the use case that edits the user history file
-     * @param sendMessages      the use case that sends messages
-     * @param listingProperties the use case that lists listings based on specific properties
-     * @param createListing     the use case that creates listings
-     * @param favAndUnFavManager the controller that controls listing favorites.
+     * @param users is the container that stores users of the program
+     * @param messages is the container that stores messages between users
+     * @param listings is the container that stores listings
      */
-    public LoggedInManager(InputHandler input, UserInterface ui, AuthenticateUser auth,
-                           UpdateUserHistory history, RestrictUser restrict,
-                           UserManager userManager, UsernamePasswordFileEditor file,
-                           SendMessages sendMessages, ListingProperties listingProperties,
-                           CreateListing createListing, FavAndUnFavManager favAndUnFavManager) {
-        this.input = input;
-        this.ui = ui;
-        this.auth = auth;
-        this.history = history;
-        this.restrict = restrict;
-        this.userManager = userManager;
-        this.file = file;
-        this.sendMessages = sendMessages;
-        this.listingProperties = listingProperties;
-        this.createListing = createListing;
-        this.favAndUnFavManager = favAndUnFavManager;
+    public LoggedInManager(UserContainer<String, User> users, MessageContainer<Integer, Message> messages,
+                           ListingContainer<Integer, Listing> listings) {
+
+        auth = new AuthenticateUser(users);
+        history = new UpdateUserHistory(users);
+        restrict = new RestrictUser(users);
+        file = new UsernamePasswordFileEditor(auth, users);
+        sendMessages = new SendMessages(messages, users);
+        listingProperties = new ListingProperties(listings);
+        createListing = new CreateListing(listings, users);
+        favAndUnFavManager = new FavAndUnFavManager(users);
+        userManager = new UserManager(users);
+
+        ui = new UserInterface();
+        input = new InputHandler(ui);
     }
 
     /**

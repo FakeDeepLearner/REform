@@ -13,7 +13,22 @@ public class UsernamePasswordFileEditor extends CsvEditor {
     private final AuthenticateUser auth;
     private final UserContainer<String, User> interfaceUsers;
 
-    // Constructors
+    /**
+     * Constructor for UsernamePasswordFileEditor
+     * @param interfaceUsers is the container that stores users of the program
+     */
+    public UsernamePasswordFileEditor(UserContainer<String, User> interfaceUsers) {
+        super(csvFilePath.getDatabasePath(), "UsernamePassword.csv");
+        this.interfaceUsers = interfaceUsers;
+
+        auth = new AuthenticateUser(interfaceUsers);
+    }
+
+    /**
+     * Constructor for UsernamePasswordFileEditor
+     * @param auth is the user authenticator
+     * @param interfaceUsers is the container that stores users of the program
+     */
     public UsernamePasswordFileEditor(AuthenticateUser auth, UserContainer<String, User> interfaceUsers) {
         super(csvFilePath.getDatabasePath(), "UsernamePassword.csv");
         this.auth = auth;

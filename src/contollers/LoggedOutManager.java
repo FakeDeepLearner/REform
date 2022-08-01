@@ -1,5 +1,7 @@
 package contollers;
 
+import entities.User;
+import entities.containers.UserContainer;
 import exceptions.ExitProgramException;
 
 import java.util.ArrayList;
@@ -12,14 +14,13 @@ public class LoggedOutManager {
     private final UserManager userManager;
 
     /**
-     * @param input is the class responsible to get input from the user
-     * @param ui is the class responsible for providing feedback to the user
-     * @param userManager is the controller responsible for handling user-related tasks
+     * Constructor for LoggedOutManager
+     * @param users is the container that stores users of the program
      */
-    public LoggedOutManager(InputHandler input, UserInterface ui, UserManager userManager) {
-        this.input = input;
-        this.ui = ui;
-        this.userManager = userManager;
+    public LoggedOutManager(UserContainer<String, User> users) {
+        userManager = new UserManager(users);
+        ui = new UserInterface();
+        input = new InputHandler(ui);
     }
 
     /**
