@@ -11,18 +11,19 @@ public abstract class NonAdminUser extends User implements Bannable {
 
     /**
      * Creates an instance of a non-admin user.
+     *
      * @param username this user's username.
      * @param password this user's password.
      */
-    public NonAdminUser(UserType type, String username, String password) {
-        super(type, username, password);
+    public NonAdminUser(String username, String password) {
+        super(username, password);
 
         outbox = new MessageContainer<>();
         inbox = new MessageContainer<>();
     }
 
-    public NonAdminUser(UserType type, String username, String password, ArrayList<String> loginHistory) {
-        super(type, username, password, loginHistory);
+    public NonAdminUser(String username, String password, ArrayList<String> loginHistory) {
+        super(username, password, loginHistory);
         outbox = new MessageContainer<>();
         inbox = new MessageContainer<>();
     }

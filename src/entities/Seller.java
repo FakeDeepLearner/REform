@@ -12,7 +12,7 @@ public class Seller extends NonAdminUser {
      * @param password      Password of the seller
      */
     public Seller(String username, String password) {
-        super(UserType.SELLER, username, password);
+        super(username, password);
         listings = new ArrayList<>();
     }
 
@@ -22,7 +22,7 @@ public class Seller extends NonAdminUser {
      * @param loginHistory  Login History of the seller
      */
     public Seller(String username, String password, ArrayList<String> loginHistory) {
-        super(UserType.SELLER, username, password, loginHistory);
+        super(username, password, loginHistory);
     }
 
     /**
@@ -35,7 +35,7 @@ public class Seller extends NonAdminUser {
     public Seller(String username, String password, ArrayList<String> loginHistory,
                   MessageContainer<Integer, Message> inbox,
                   MessageContainer<Integer, Message> outbox) {
-        super(UserType.SELLER, username, password, loginHistory);
+        super(username, password, loginHistory);
         this.inbox = inbox;
         this.outbox = outbox;
     }

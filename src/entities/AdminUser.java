@@ -10,7 +10,7 @@ public class AdminUser extends User {
      * @param password of the User
      */
     public AdminUser(String username, String password) {
-        super(UserType.ADMIN, username, password);
+        super(username, password);
         this.isAdmin = true;
     }
 
@@ -22,7 +22,7 @@ public class AdminUser extends User {
      * @param loginHistory of the User
      */
     public AdminUser(String username, String password, ArrayList<String> loginHistory) {
-        super(UserType.ADMIN, username, password, loginHistory);
+        super(username, password, loginHistory);
         this.isAdmin = true;
     }
 }

@@ -6,32 +6,27 @@ public abstract class User {
     private final String username;
     private final String password;
     private final ArrayList<String> loginHistory;
-    private final UserType type;
 
     protected Boolean isAdmin = false;
 
     private boolean isLoggedIn = false;
 
     /**
-     * @param type of the User
      * @param username of the User
      * @param password of the User
      */
-    protected User(UserType type, String username, String password) {
-        this.type = type;
+    protected User(String username, String password) {
         this.username = username;
         this.password = password;
         loginHistory = new ArrayList<>();
     }
 
     /**
-     * @param type of the User
-     * @param username of the User
-     * @param password of the User
+     * @param username     of the User
+     * @param password     of the User
      * @param loginHistory of the User
      */
-    protected User(UserType type, String username, String password, ArrayList<String> loginHistory) {
-        this.type = type;
+    protected User(String username, String password, ArrayList<String> loginHistory) {
         this.username = username;
         this.password = password;
         this.loginHistory = loginHistory;

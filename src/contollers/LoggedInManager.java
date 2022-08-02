@@ -34,8 +34,6 @@ public class LoggedInManager {
     private final ListingProperties listingProperties;
     private final CreateListing createListing;
 
-    private final FavAndUnFavManager favAndUnFavManager;
-
 
     /**
      * Constructor for LoggedInManager
@@ -45,7 +43,6 @@ public class LoggedInManager {
      */
     public LoggedInManager(UserContainer<String, User> users, MessageContainer<Integer, Message> messages,
                            ListingContainer<Integer, Listing> listings) {
-
         auth = new AuthenticateUser(users);
         history = new UpdateUserHistory(users);
         restrict = new RestrictUser(users);
@@ -53,7 +50,6 @@ public class LoggedInManager {
         sendMessages = new SendMessages(messages, users);
         listingProperties = new ListingProperties(listings);
         createListing = new CreateListing(listings, users);
-        favAndUnFavManager = new FavAndUnFavManager(users);
         userManager = new UserManager(users);
 
         ui = new UserInterface();

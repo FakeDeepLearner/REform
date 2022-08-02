@@ -13,7 +13,7 @@ public class Buyer extends NonAdminUser {
      * @param password Password of the buyer
      */
     public Buyer(String username, String password) {
-        super(UserType.BUYER, username, password);
+        super(username, password);
         this.favorites = new ArrayList<>();
 
     }
@@ -24,7 +24,7 @@ public class Buyer extends NonAdminUser {
      * @param favorites Arraylist of favourite listings IDs
      */
     public Buyer(String username, String password, ArrayList<Integer> favorites) {
-        super(UserType.BUYER, username, password);
+        super(username, password);
         this.favorites = favorites;
     }
 
@@ -37,7 +37,7 @@ public class Buyer extends NonAdminUser {
 
     public Buyer(String username, String password, ArrayList<String> loginHistory,
                  ArrayList<Integer> favorites) {
-        super(UserType.BUYER, username, password, loginHistory);
+        super(username, password, loginHistory);
         this.favorites = favorites;
     }
 
