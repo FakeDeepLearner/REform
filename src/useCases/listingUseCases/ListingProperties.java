@@ -27,12 +27,12 @@ public class ListingProperties {
      * @param property Predicate that indicates specific listing criteria
      * @return ArrayList of String containing the String representation of the Listing
      */
-    private ArrayList<String> searchByProperty(Predicate<Listing> property) {
-        ArrayList<String> listings = new ArrayList<>();
+    private ArrayList<Listing> searchByProperty(Predicate<Listing> property) {
+        ArrayList<Listing> listings = new ArrayList<>();
 
         for (Listing listing : listingContainer.values()) {
             if (property.test(listing) && !listing.getIsSold()) {
-                listings.add(listing.toString());
+                listings.add(listing);
             }
         }
         return listings;
@@ -44,7 +44,7 @@ public class ListingProperties {
      * @param streetName Street name to search
      * @return ArrayList of Strings containing the String representation of the Listing
      */
-    public ArrayList<String> searchByStreetName(String streetName) {
+    public ArrayList<Listing> searchByStreetName(String streetName) {
         Predicate<Listing> property = (listing) -> listing.getStreetName().equals(streetName);
         return searchByProperty(property);
     }
@@ -52,11 +52,11 @@ public class ListingProperties {
     /**
      * Search Listing by civic address
      *
-     * @param civicAdress civic address to search
+     * @param civicAddress civic address to search
      * @return ArrayList of Strings containing the String representation of the Listing
      */
-    public ArrayList<String> searchByCivicAddress(int civicAdress) {
-        Predicate<Listing> property = (listing) -> listing.getCivicAddress() == civicAdress;
+    public ArrayList<Listing> searchByCivicAddress(int civicAddress) {
+        Predicate<Listing> property = (listing) -> listing.getCivicAddress() == civicAddress;
         return searchByProperty(property);
     }
 
@@ -66,7 +66,7 @@ public class ListingProperties {
      * @param city Coty to Search
      * @return ArrayList of Strings containing the String representation of the Listing
      */
-    public ArrayList<String> searchByCity(String city) {
+    public ArrayList<Listing> searchByCity(String city) {
         Predicate<Listing> property = (listing) -> listing.getCity().equals(city);
         return searchByProperty(property);
     }
@@ -77,7 +77,7 @@ public class ListingProperties {
      * @param bedrooms Number of Bedrooms
      * @return ArrayList of Strings containing the String representation of the Listing
      */
-    public ArrayList<String> searchByBedrooms(int bedrooms) {
+    public ArrayList<Listing> searchByBedrooms(int bedrooms) {
         Predicate<Listing> property = (listing) -> listing.getBedrooms() == bedrooms;
         return searchByProperty(property);
     }
@@ -88,7 +88,7 @@ public class ListingProperties {
      * @param bathrooms Number of Bathrooms
      * @return ArrayList of Strings containing the String representation of the Listing
      */
-    public ArrayList<String> searchByBathrooms(int bathrooms) {
+    public ArrayList<Listing> searchByBathrooms(int bathrooms) {
         Predicate<Listing> property = (listing) -> listing.getBathrooms() == bathrooms;
         return searchByProperty(property);
     }
@@ -99,7 +99,7 @@ public class ListingProperties {
      * @param floors Number of floors
      * @return ArrayList of Strings containing the String representation of the Listing
      */
-    public ArrayList<String> searchByFloors(int floors) {
+    public ArrayList<Listing> searchByFloors(int floors) {
         Predicate<Listing> property = (listing) -> listing.getFloors() == floors;
         return searchByProperty(property);
     }
@@ -111,7 +111,7 @@ public class ListingProperties {
      * @param lowerLimit Lower limit of the price
      * @return ArrayList of Strings containing the String representation of the Listing
      */
-    public ArrayList<String> searchByPrice(BigDecimal upperLimit, BigDecimal lowerLimit) {
+    public ArrayList<Listing> searchByPrice(BigDecimal upperLimit, BigDecimal lowerLimit) {
         Predicate<Listing> property = (listing) -> upperLimit.compareTo(listing.getPrice()) >= 0 &&
                 lowerLimit.compareTo(listing.getPrice()) <= 0;
         return searchByProperty(property);
@@ -123,8 +123,36 @@ public class ListingProperties {
      * @param type Type of the property
      * @return ArrayList of Strings containing the String representation of the Listing
      */
-    public ArrayList<String> searchByListingType(String type) {
+    public ArrayList<Listing> searchByListingType(String type) {
         Predicate<Listing> property = (listing) -> listing.getType().equals(type.toUpperCase());
         return searchByProperty(property);
+    }
+
+    /**
+     * Search Listing by type of property
+     *
+     * @param listings arraylist of listings
+     * @return the string description of each listing
+     */
+    public ArrayList<String> getListingsStrings(ArrayList<Listing> listings){
+        ArrayList<String> listingStrings = new ArrayList<>();
+        for (Listing l : listings){
+            listingStrings.add(l.toString());
+        }
+        return listingStrings;
+    }
+
+    /**
+     * Search Listing by type of property
+     *
+     * @param listings arraylist of listings
+     * @return the ID of each listing
+     */
+    public ArrayList<Integer> getListingsID(ArrayList<Listing> listings){
+        ArrayList<Integer> listingsID = new ArrayList<>();
+        for (Listing l : listings){
+            listingsID.add(l.getId());
+        }
+        return listingsID;
     }
 }

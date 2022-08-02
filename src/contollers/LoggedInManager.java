@@ -34,6 +34,8 @@ public class LoggedInManager {
     private final ListingProperties listingProperties;
     private final CreateListing createListing;
 
+    private final FavAndUnFavManager favAndUnFavManager;
+
 
     /**
      * Constructor for LoggedInManager
@@ -43,6 +45,7 @@ public class LoggedInManager {
      */
     public LoggedInManager(UserContainer<String, User> users, MessageContainer<Integer, Message> messages,
                            ListingContainer<Integer, Listing> listings) {
+
         auth = new AuthenticateUser(users);
         history = new UpdateUserHistory(users);
         restrict = new RestrictUser(users);
@@ -50,6 +53,7 @@ public class LoggedInManager {
         sendMessages = new SendMessages(messages, users);
         listingProperties = new ListingProperties(listings);
         createListing = new CreateListing(listings, users);
+        favAndUnFavManager = new FavAndUnFavManager(users, listings);
         userManager = new UserManager(users);
 
         ui = new UserInterface();
@@ -84,32 +88,37 @@ public class LoggedInManager {
         ui.printBuyerLoginMenu();
 
         ArrayList<Integer> allowedInputs = new ArrayList<>();
-        Collections.addAll(allowedInputs, 1, 2, 3, 4, 5, 6);
+        Collections.addAll(allowedInputs, 1, 2, 3, 4, 5, 6, 7);
 
         int select = input.intInput(allowedInputs);
         switch (select) {
             case 1:
                 // View listings
-                searchProperties();
+                searchProperties(username);
                 break;
             case 2:
+                // View favourite listings
+                viewFavouriteListings(username);
+                checkDeleteFavouriteListing(username);
+                break;
+            case 3:
                 // Send message
                 messageUser(username);
                 break;
-            case 3:
+            case 4:
                 // View inbox
                 viewInbox(username);
                 break;
-            case 4:
+            case 5:
                 // View outbox
                 viewOutbox(username);
                 break;
-            case 5:
+            case 6:
                 // View login history
                 ArrayList<String> userHistory = history.getLoginHistory(username);
                 ui.printLoginHistory(userHistory);
                 break;
-            case 6:
+            case 7:
                 // Logout user
                 auth.logoutUser(username);
                 ui.printLogOutSuccess();
@@ -325,10 +334,49 @@ public class LoggedInManager {
         ui.printDeleteListingSuccess();
     }
 
+    private void checkAddListingToFavourites(String username, ArrayList<Listing> listings){
+        ArrayList<Integer> listingID = listingProperties.getListingsID(listings);
+
+        if(listingID.size() > 0) {
+            ui.printAddListingToFavourites();
+            ArrayList<String> allowedStrings = new ArrayList<>();
+            Collections.addAll(allowedStrings, "Y", "N");
+            String choice = input.strInput(allowedStrings);
+
+            if (choice.equals("Y")) {
+                ui.printEnterType("number of listing to add");
+                int number = input.intInput(1, listings.size());
+                favAndUnFavManager.addToBuyerFavorites(username, listingID.get(number - 1));
+                ui.printListingFavouriteSuccess();
+            }
+        }
+    }
+
+    private void checkDeleteFavouriteListing(String username){
+        ArrayList<Integer> listingIDs = favAndUnFavManager.getBuyerFavouritesID(username);
+
+        if(listingIDs.size() > 0){
+            ui.printDeleteListingFromFavourites();
+            ArrayList<String> allowedStrings = new ArrayList<>();
+            Collections.addAll(allowedStrings, "Y", "N");
+            String choice = input.strInput(allowedStrings);
+
+            if (choice.equals("Y")) {
+                ui.printEnterType("number of listing you want to remove");
+                int number = input.intInput(1, listingIDs.size());
+                favAndUnFavManager.removeFromBuyerFavorites(username, number - 1);
+                ui.printFavouriteRemovedSuccess();
+            }
+        }
+        else{
+            ui.printNoFavourites();
+        }
+    }
+
     /**
      * Displays available listings based on specific properties
      */
-    private void searchProperties() {
+    private void searchProperties(String username) {
         ui.printListingOptionsMenu();
 
         ArrayList<Integer> allowedInputs = new ArrayList<>();
@@ -340,8 +388,9 @@ public class LoggedInManager {
                 // Search by civic address
                 ui.printEnterType("civic address number");
                 int number = input.intInput();
-                ArrayList<String> listings = listingProperties.searchByCivicAddress(number);
-                ui.printFilteredListings(listings);
+                ArrayList<Listing> listings = listingProperties.searchByCivicAddress(number);
+                ui.printNumberedListings(listingProperties.getListingsStrings(listings));
+                checkAddListingToFavourites(username, listings);
                 break;
             }
 
@@ -349,8 +398,9 @@ public class LoggedInManager {
                 // Search by street name
                 ui.printEnterType("street name");
                 String street = input.strInput();
-                ArrayList<String> listings = listingProperties.searchByStreetName(street);
-                ui.printFilteredListings(listings);
+                ArrayList<Listing> listings = listingProperties.searchByStreetName(street);
+                ui.printNumberedListings(listingProperties.getListingsStrings(listings));
+                checkAddListingToFavourites(username, listings);
                 break;
             }
 
@@ -358,8 +408,9 @@ public class LoggedInManager {
                 // Search by city
                 ui.printEnterType("city");
                 String city = input.strInput();
-                ArrayList<String> listings = listingProperties.searchByCity(city);
-                ui.printFilteredListings(listings);
+                ArrayList<Listing> listings = listingProperties.searchByCity(city);
+                ui.printNumberedListings(listingProperties.getListingsStrings(listings));
+                checkAddListingToFavourites(username, listings);
                 break;
             }
 
@@ -367,8 +418,9 @@ public class LoggedInManager {
                 // Search by bedroom number
                 ui.printEnterType("number of bedrooms wanted");
                 int number = input.intInput();
-                ArrayList<String> listings = listingProperties.searchByBedrooms(number);
-                ui.printFilteredListings(listings);
+                ArrayList<Listing> listings = listingProperties.searchByBedrooms(number);
+                ui.printNumberedListings(listingProperties.getListingsStrings(listings));
+                checkAddListingToFavourites(username, listings);
                 break;
             }
 
@@ -376,8 +428,8 @@ public class LoggedInManager {
                 // Search by bathroom number
                 ui.printEnterType("number of bathrooms wanted");
                 int number = input.intInput();
-                ArrayList<String> listings = listingProperties.searchByBathrooms(number);
-                ui.printFilteredListings(listings);
+                ArrayList<Listing> listings = listingProperties.searchByBathrooms(number);
+                ui.printNumberedListings(listingProperties.getListingsStrings(listings));
                 break;
             }
 
@@ -385,8 +437,9 @@ public class LoggedInManager {
                 // Search by floor number
                 ui.printEnterType("number of floors wanted");
                 int number = input.intInput();
-                ArrayList<String> listings = listingProperties.searchByFloors(number);
-                ui.printFilteredListings(listings);
+                ArrayList<Listing> listings = listingProperties.searchByFloors(number);
+                ui.printNumberedListings(listingProperties.getListingsStrings(listings));
+                checkAddListingToFavourites(username, listings);
                 break;
             }
 
@@ -396,8 +449,9 @@ public class LoggedInManager {
                 BigDecimal min = input.bigDecimalInput();
                 ui.printEnterType("maximum price");
                 BigDecimal max = input.bigDecimalInput();
-                ArrayList<String> listings = listingProperties.searchByPrice(max, min);
-                ui.printFilteredListings(listings);
+                ArrayList<Listing> listings = listingProperties.searchByPrice(max, min);
+                ui.printNumberedListings(listingProperties.getListingsStrings(listings));
+                checkAddListingToFavourites(username, listings);
                 break;
             }
 
@@ -406,8 +460,9 @@ public class LoggedInManager {
                 ui.printEnterType("listing type (apartment, house, townhouse) wanted");
                 String[] inputsAllowed = {"apartment", "house", "townhouse"};
                 String type = input.strInput(List.of(inputsAllowed));
-                ArrayList<String> listings = listingProperties.searchByListingType(type);
-                ui.printFilteredListings(listings);
+                ArrayList<Listing> listings = listingProperties.searchByListingType(type);
+                ui.printNumberedListings(listingProperties.getListingsStrings(listings));
+                checkAddListingToFavourites(username, listings);
                 break;
             }
         }
@@ -429,6 +484,9 @@ public class LoggedInManager {
         ui.printMessages(sendMessages.getMessageOutbox(username));
     }
 
+    public void viewFavouriteListings(String username){
+        ui.printNumberedListings(favAndUnFavManager.getBuyerFavouritesString(username));
+    }
     /**
      * Presents admin with options to navigate through program
      *
