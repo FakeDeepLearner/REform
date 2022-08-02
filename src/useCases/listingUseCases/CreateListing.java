@@ -37,15 +37,16 @@ public class CreateListing {
      * @param type the type of the property. Must be in {APARTMENT, HOUSE, TOWNHOUSE}
      * @param bedrooms the number of bedrooms
      * @param bathrooms the number of bathrooms
+     * @param floors the number of floors
      * @param price the price of the property
+     * @param info additional information about the listing
      * @return a listing object created with the given attributes
      */
     public Listing addListing(int civicAddress, String streetName, String city, String type, int bedrooms,
-                              int bathrooms, BigDecimal price) {
+                              int bathrooms, int floors, BigDecimal price, String info) {
         GenerateUniqueID IDGenerator = new GenerateUniqueID(this.listings);
         int uniqueID = IDGenerator.getUniqueID();
-
-        Listing listing = new Listing(uniqueID, civicAddress, streetName, city, type, bedrooms, bathrooms, price);
+        Listing listing = new Listing(uniqueID, civicAddress, streetName, city, type, bedrooms, bathrooms, floors, price, info);
         listings.put(uniqueID, listing);
         return listing;
     }
@@ -59,16 +60,16 @@ public class CreateListing {
      * @param type the type of the property. Must be in {APARTMENT, HOUSE, TOWNHOUSE}
      * @param bedrooms the number of bedrooms
      * @param bathrooms the number of bathrooms
-     * @param floors the number of floors
      * @param price the price of the property
+     * @param info additional information about the listing
      * @return a listing object created with the given attributes
      */
     public Listing addListing(int unitNumber, int civicAddress, String streetName, String city, String type, int bedrooms,
-                              int bathrooms, int floors, BigDecimal price) {
+                              int bathrooms, BigDecimal price, String info) {
         GenerateUniqueID IDGenerator = new GenerateUniqueID(this.listings);
         int uniqueID = IDGenerator.getUniqueID();
         Listing listing = new Listing(uniqueID, unitNumber, civicAddress, streetName, city, type, bedrooms, bathrooms,
-                floors, price);
+                price, info);
         listings.put(uniqueID, listing);
         return listing;
     }
@@ -83,13 +84,13 @@ public class CreateListing {
      * @param type the type of the property. Must be in {APARTMENT, HOUSE, TOWNHOUSE}
      * @param bedrooms the number of bedrooms
      * @param bathrooms the number of bathrooms
-     * @param floors the number of floors
      * @param price the price of the property
+     * @param info additional information about the listing
      * @return a listing object with the given attributes
      */
-    public Listing addListing(int ID, int unitNumber, int civicAddress, String streetName, String city,
-                              String type, int bedrooms, int bathrooms, int floors, BigDecimal price) {
-        Listing listing = new Listing(ID, unitNumber, civicAddress, streetName, city, type, bedrooms, bathrooms, floors, price);
+    public Listing addListing(int ID, int unitNumber, int civicAddress, String streetName, String city, String type,
+                              int bedrooms, int bathrooms, BigDecimal price, String info) {
+        Listing listing = new Listing(ID, unitNumber, civicAddress, streetName, city, type, bedrooms, bathrooms, price, info);
         listings.put(ID, listing);
         return listing;
     }
@@ -103,12 +104,14 @@ public class CreateListing {
      * @param type the type of the property. Must be in {APARTMENT, HOUSE, TOWNHOUSE}
      * @param bedrooms the number of bedrooms
      * @param bathrooms the number of bathrooms
+     * @param floors the number of floors
      * @param price the price of the listing
+     * @param info additional information about the listing
      * @return a listing object created with the given attributes
      * */
-    public Listing addListing(int ID, int civicAddress, String streetName, String city, String type,
-                              int bedrooms, int bathrooms, BigDecimal price){
-        Listing listing = new Listing(ID, civicAddress, streetName, city, type, bedrooms, bathrooms, price);
+    public Listing addListing(int ID, int civicAddress, String streetName, String city, String type, int bedrooms,
+                              int bathrooms, int floors, BigDecimal price, String info){
+        Listing listing = new Listing(ID, civicAddress, streetName, city, type, bedrooms, bathrooms, floors, price, info);
         listings.put(ID, listing);
         return listing;
     }

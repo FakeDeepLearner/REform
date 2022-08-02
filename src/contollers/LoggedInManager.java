@@ -258,10 +258,10 @@ public class LoggedInManager {
         Collections.addAll(allowedStrings, "Y", "N");
         String choice = input.strInput(allowedStrings);
 
-        int unitNumber = 0;
+        int unitNumberFloors = 0;
         if (choice.equals("Y")) {
             ui.printEnterType("unit number");
-            unitNumber = input.intInput();
+            unitNumberFloors = input.intInput();
         }
 
         ui.printEnterType("civic address number");
@@ -280,8 +280,10 @@ public class LoggedInManager {
         String[] inputsAllowed = {"apartment", "house", "townhouse"};
         String type = input.strInput(List.of(inputsAllowed), true);
 
-        ui.printEnterType("number of floors");
-        int floors = input.intInput();
+        if (!choice.equals("Y")) {
+            ui.printEnterType("number of floors");
+            unitNumberFloors = input.intInput();
+        }
 
         ui.printEnterType("number of bedrooms");
         int bedrooms = input.intInput();
@@ -289,11 +291,15 @@ public class LoggedInManager {
         ui.printEnterType("number of bathrooms");
         int bathrooms = input.intInput();
 
+
+        ui.printEnterType("additional information about the listing");
+        String info = input.strInput();
+
         Listing listing;
         if (choice.equals("Y")) {
-            listing = createListing.addListing(unitNumber, number, street, city, type, bedrooms, bathrooms, floors, price);
+            listing = createListing.addListing(unitNumberFloors, number, street, city, type, bedrooms, bathrooms, price, info);
         } else {
-            listing = createListing.addListing(number, street, city, type, bedrooms, bathrooms, price);
+            listing = createListing.addListing(number, street, city, type, bedrooms, bathrooms, unitNumberFloors, price, info);
         }
 
         createListing.addListingToSeller(username, listing);

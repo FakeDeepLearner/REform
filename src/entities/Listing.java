@@ -17,7 +17,7 @@ public class Listing {
     private final int bathrooms;
     private final Integer floors;
     private BigDecimal price;
-
+    private String info;
     private boolean isSold;
 
     enum ListingType {
@@ -25,10 +25,9 @@ public class Listing {
         HOUSE,
         TOWNHOUSE
     }
-
     private final ListingType type;
 
-    private final int numAttributes;
+    private final boolean isUnit;
 
     /**
      * Creates a listing without a unit number
@@ -40,10 +39,12 @@ public class Listing {
      * @param type         the type of housing of the listing
      * @param bedrooms     the number of bedrooms in the listing
      * @param bathrooms    the number of bathrooms in the listing
+     * @param floors       the number of floors in the listing
      * @param price        the price of the listing
+     * @param info         additional information about the listing
      */
     public Listing(int id, int civicAddress, String streetName, String city, String type, int bedrooms, int bathrooms,
-                   BigDecimal price) {
+                   int floors, BigDecimal price, String info) {
         this.id = id;
         this.civicAddress = civicAddress;
         this.streetName = streetName;
@@ -55,12 +56,13 @@ public class Listing {
         }
         this.bedrooms = bedrooms;
         this.bathrooms = bathrooms;
+        this.floors = floors;
         this.price = price;
+        this.info = info;
 
         unitNumber = null;
-        floors = null;
         isSold = false;
-        numAttributes = 9;
+        isUnit = false;
     }
 
     /**
@@ -75,9 +77,10 @@ public class Listing {
      * @param bedrooms     the number of bedrooms in the listing
      * @param bathrooms    the number of bathrooms in the listing
      * @param price        the price of the listing
+     * @param info         additional information about the listing
      */
     public Listing(int id, int unitNumber, int civicAddress, String streetName, String city, String type, int bedrooms,
-                   int bathrooms, int floors, BigDecimal price) {
+                   int bathrooms, BigDecimal price, String info) {
         this.id = id;
         this.unitNumber = unitNumber;
         this.civicAddress = civicAddress;
@@ -90,10 +93,11 @@ public class Listing {
         }
         this.bedrooms = bedrooms;
         this.bathrooms = bathrooms;
-        this.floors = floors;
+        floors = null;
         this.price = price;
+        this.info = info;
         isSold = false;
-        numAttributes = 11;
+        isUnit = true;
     }
 
     /**
@@ -191,6 +195,13 @@ public class Listing {
     }
 
     /**
+     * @return additional information about the listing
+     */
+    public String getInfo() {
+        return info;
+    }
+
+    /**
      * @return the status of the listing
      */
     public boolean getIsSold() {
@@ -198,11 +209,10 @@ public class Listing {
     }
 
     /**
-     * @return the number of attributes of this listing.
-     * It can only be either 9 or 11.
-     * */
-    public int getNumAttributes() {
-        return numAttributes;
+     * @return whether the listing has a unit number
+     */
+    public boolean getIsUnit() {
+        return isUnit;
     }
 
     /**
@@ -217,17 +227,6 @@ public class Listing {
      */
     public String toString() {
         String address = (unitNumber == null ? "" : unitNumber + " - ") + civicAddress + " " + streetName + ", " + city;
-        return (isSold ? "SOLD" : "AVAILABLE") + " - " + address;
-    }
-
-    /**
-     * Public method to return a String of relevant information suited for CSV files.
-     *
-     * @return comma-separated string of the info
-     */
-    public String getListingInfos() {
-        return this.getId() + "," + this.getUnitNumber() + "," + this.getCivicAddress() + "," + this.getStreetName() +
-                "," + this.getCity() + "," + this.getBedrooms() + "," + this.getBathrooms() + "," + this.getFloors() +
-                "," + this.getPrice() + "," + this.getIsSold();
+        return (isSold ? "SOLD" : "AVAILABLE") + ": " + address + "\n" + info;
     }
 }

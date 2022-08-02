@@ -25,35 +25,29 @@ public class ListingsCSVController implements CsvInterface {
         String line;
         while((line = reader.readLine()) != null){
             String[] splitLine = line.split(",");
-            if (splitLine.length == 11) {
-                String username = splitLine[0];
-                int ID = Integer.parseInt(splitLine[1]);
-                int unitNumber = Integer.parseInt(splitLine[2]);
-                int civicAddress = Integer.parseInt(splitLine[3]);
-                String streetName = splitLine[4];
-                String city = splitLine[5];
-                String type = splitLine[6];
-                int bedrooms = Integer.parseInt(splitLine[7]);
-                int bathrooms = Integer.parseInt(splitLine[8]);
-                int floors = Integer.parseInt(splitLine[9]);
-                BigDecimal price = new BigDecimal(splitLine[10]);
-                Listing listing = createListing.addListing(ID, unitNumber, civicAddress, streetName, city, type, bedrooms,
-                        bathrooms, floors, price);
+
+            String username = splitLine[0];
+            int ID = Integer.parseInt(splitLine[1]);
+            int civicAddress = Integer.parseInt(splitLine[2]);
+            String streetName = splitLine[3];
+            String city = splitLine[4];
+            String type = splitLine[5];
+            int bedrooms = Integer.parseInt(splitLine[6]);
+            int bathrooms = Integer.parseInt(splitLine[7]);
+            BigDecimal price = new BigDecimal(splitLine[8]);
+            String info = splitLine[9];
+
+            boolean isUnit = Boolean.parseBoolean(splitLine[10]);
+            int unitNumberFloor = Integer.parseInt(splitLine[11]);
+            if (isUnit) {
+                Listing listing = createListing.addListing(ID, unitNumberFloor, civicAddress, streetName, city, type,
+                        bedrooms, bathrooms, price, info);
                 createListing.addListingToSeller(username, listing);
                 createListing.addListingToCreatedListings(username, listing);
             }
-            else if (splitLine.length == 9){
-                String username = splitLine[0];
-                int ID = Integer.parseInt(splitLine[1]);
-                int civicAddress = Integer.parseInt(splitLine[2]);
-                String streetName = splitLine[3];
-                String city = splitLine[4];
-                String type = splitLine[5];
-                int bedrooms = Integer.parseInt(splitLine[6]);
-                int bathrooms = Integer.parseInt(splitLine[7]);
-                BigDecimal price = new BigDecimal(splitLine[8]);
+            else {
                 Listing listing = createListing.addListing(ID, civicAddress, streetName, city, type, bedrooms,
-                        bathrooms, price);
+                        unitNumberFloor, bathrooms, price, info);
                 createListing.addListingToSeller(username, listing);
                 createListing.addListingToCreatedListings(username, listing);
             }
@@ -67,35 +61,29 @@ public class ListingsCSVController implements CsvInterface {
         HashMap<String, ArrayList<Listing>> createdListings = createListing.getCreatedListings();
         for (String username : createdListings.keySet()){
             for (Listing listing : createdListings.get(username)){
-                int numAttributes = listing.getNumAttributes();
-                if (numAttributes == 11) {
-                    int ID = listing.getId();
+                int ID = listing.getId();
+                int civicAddress = listing.getCivicAddress();
+                String streetName = listing.getStreetName();
+                String city = listing.getCity();
+                String type = listing.getType();
+                int bedrooms = listing.getBedrooms();
+                int bathrooms = listing.getBathrooms();
+                BigDecimal price = listing.getPrice();
+                String info = listing.getInfo();
+
+                boolean isUnit = listing.getIsUnit();
+                String lineToWrite;
+                if (isUnit) {
                     int unitNumber = listing.getUnitNumber();
-                    int civicAddress = listing.getCivicAddress();
-                    String streetName = listing.getStreetName();
-                    String city = listing.getCity();
-                    String type = listing.getType();
-                    int bedrooms = listing.getBedrooms();
-                    int bathrooms = listing.getBathrooms();
+                    lineToWrite = username + "," + ID + "," + civicAddress + "," + streetName + "," +  city + "," +
+                            type + "," + bedrooms + "," + bathrooms + "," + price + "," + info + "," + true + "," + unitNumber;
+                }
+                else {
                     int floors = listing.getFloors();
-                    BigDecimal price = listing.getPrice();
-                    String lineToWrite = username + "," + ID + "," + unitNumber + "," + civicAddress + "," + streetName +
-                            "," + city + "," + type + "," + bedrooms + "," + bathrooms + "," + floors + "," + price;
-                    writer.append(lineToWrite).append("\n");
+                    lineToWrite = username + "," + ID + "," + civicAddress + "," + streetName + "," + city + "," + type +
+                            "," + bedrooms + "," + bathrooms + "," + price + "," + info + "," + false + "," + floors;
                 }
-                else if (numAttributes == 9){
-                    int ID = listing.getId();
-                    int civicAddress = listing.getCivicAddress();
-                    String streetName = listing.getStreetName();
-                    String city = listing.getCity();
-                    String type = listing.getType();
-                    int bedrooms = listing.getBedrooms();
-                    int bathrooms = listing.getBathrooms();
-                    BigDecimal price = listing.getPrice();
-                    String lineToWrite = username + "," + ID + "," + civicAddress + "," + streetName +
-                            "," + city + "," + type + "," + bedrooms + "," + bathrooms + "," + price;
-                    writer.append(lineToWrite).append("\n");
-                }
+                writer.append(lineToWrite).append("\n");
             }
         }
         writer.close();

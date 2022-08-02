@@ -19,8 +19,7 @@ public class CreateListingTest {
 
         CreateListing createListing = new CreateListing(lc, uc);
 
-        createListing.addListing(1, "TestName", "TestCity",
-                "TOWNHOUSE", 2, 3, BigDecimal.valueOf(4.2));
+        createListing.addListing(1, "TestName", "TestCity", "TOWNHOUSE", 2, 3, 1, BigDecimal.valueOf(4.2), "test1");
 
         assertFalse(createListing.getListings().isEmpty());
     }
@@ -34,8 +33,7 @@ public class CreateListingTest {
         uc.put("s1", s);
 
         CreateListing listingCreator = new CreateListing(lc, uc);
-        Listing listing = new Listing(0, 1, "streetName", "city", "APARTMENT",
-                5, 5, BigDecimal.valueOf(5.0));
+        Listing listing = new Listing(0, 1, 22, "streetName", "city", "APARTMENT", 5, 5, BigDecimal.valueOf(5.0), "test1");
         listingCreator.addListingToSeller("s1", listing);
         assertEquals(1, s.getListings().size());
     }
@@ -45,8 +43,7 @@ public class CreateListingTest {
         ListingContainer<Integer, Listing> lc = new ListingContainer<>();
         UserContainer<String, User> uc = new UserContainer<>();
 
-        Listing listing = new Listing(0, 1, "streetName", "city", "APARTMENT",
-                5, 5, BigDecimal.valueOf(5.0));
+        Listing listing = new Listing(0, 1, 22, "streetName", "city", "APARTMENT", 5, 5, BigDecimal.valueOf(5.0), "test1");
         lc.put(0, listing);
 
         CreateListing listingCreator = new CreateListing(lc, uc);
@@ -58,8 +55,7 @@ public class CreateListingTest {
         ListingContainer<Integer, Listing> lc = new ListingContainer<>();
         UserContainer<String, User> uc = new UserContainer<>();
 
-        Listing listing = new Listing(0, 1, "streetName", "city", "APARTMENT",
-                5, 5, BigDecimal.valueOf(5.0));
+        Listing listing = new Listing(0, 1, 22, "streetName", "city", "APARTMENT", 5, 5, BigDecimal.valueOf(5.0), "test1");
         CreateListing listingCreator = new CreateListing(lc, uc);
 
         listingCreator.addListingToCreatedListings("l1", listing);
@@ -74,8 +70,7 @@ public class CreateListingTest {
         Seller s = new Seller("s1", "p1");
         uc.put("s1", s);
 
-        Listing listing = new Listing(0, 1, "streetName", "city", "APARTMENT",
-                5, 5, BigDecimal.valueOf(5.0));
+        Listing listing = new Listing(0, 1, 22, "streetName", "city", "APARTMENT", 5, 5, BigDecimal.valueOf(5.0), "test1");
         s.addListing(listing);
 
         CreateListing listingCreator = new CreateListing(lc, uc);
@@ -91,8 +86,7 @@ public class CreateListingTest {
         Seller s = new Seller("s1", "p1");
         uc.put("s1", s);
 
-        Listing listing = new Listing(0, 1, "streetName", "city", "APARTMENT",
-                5, 5, BigDecimal.valueOf(5.0));
+        Listing listing = new Listing(0, 1, 22, "streetName", "city", "APARTMENT", 5, 5, BigDecimal.valueOf(5.0), "test1");
         s.addListing(listing);
 
         CreateListing listingCreator = new CreateListing(lc, uc);
@@ -107,8 +101,7 @@ public class CreateListingTest {
 
         Seller s = new Seller("s1", "p1");
 
-        Listing listing = new Listing(0, 2, "streetName", "city", "APARTMENT",
-                5, 5, BigDecimal.valueOf(5.0));
+        Listing listing = new Listing(0, 1, 22, "streetName", "city", "APARTMENT", 5, 5, BigDecimal.valueOf(5.0), "test1");
         s.addListing(listing);
 
         lc.put(0, listing);
