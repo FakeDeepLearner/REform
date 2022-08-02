@@ -1,6 +1,8 @@
 package useCases.listingUseCases;
 
+import entities.Listing;
 import entities.User;
+import entities.containers.ListingContainer;
 import entities.containers.UserContainer;
 import entities.Buyer;
 
@@ -9,6 +11,7 @@ import java.util.HashMap;
 
 public class FavoriteListing {
     private final UserContainer<String, User> userContainer;
+    private final ListingContainer<Integer, Listing> listingContainer;
 
     private final HashMap<String, ArrayList<Integer>> generatedFavorites;
 
@@ -17,9 +20,11 @@ public class FavoriteListing {
      *
      * @param userContainer UserContainer object to be used
      */
-    public FavoriteListing(UserContainer<String, User> userContainer) {
+    public FavoriteListing(UserContainer<String, User> userContainer,
+                           ListingContainer<Integer, Listing> listingContainer) {
         this.userContainer = userContainer;
         this.generatedFavorites = new HashMap<>();
+        this.listingContainer = listingContainer;
     }
 
     /**
@@ -80,5 +85,27 @@ public class FavoriteListing {
         if (generatedFavorites.containsKey(username)) {
             generatedFavorites.get(username).remove(listingID);
         }
+    }
+
+    /**
+     * @param username the username to get the favourite listings of.
+     * @return the list of favourite listing IDs.
+     */
+    public ArrayList<Integer> getBuyerFavouritesID(String username){
+        Buyer buyer = userContainer.getBuyer(username);
+        return buyer.getFavorites();
+    }
+
+    /**
+     * @param username the username to get the favourite listings of.
+     * @return the list of favourite listing strings.
+     */
+    public ArrayList<String> getBuyerFavouritesString(String username){
+        Buyer buyer = userContainer.getBuyer(username);
+        ArrayList<String> listings = new ArrayList<>();
+        for(Integer id : buyer.getFavorites()){
+            listings.add(listingContainer.get(id).toString());
+        }
+        return listings;
     }
 }

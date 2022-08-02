@@ -2,10 +2,10 @@
 import entities.User;
 import entities.containers.UserContainer;
 import entities.Listing;
+import org.junit.jupiter.api.Test;
 import useCases.listingUseCases.CreateListing;
 import useCases.listingUseCases.ListingProperties;
 import entities.containers.ListingContainer;
-import org.junit.Test;
 import static org.junit.Assert.*;
 
 import java.math.BigDecimal;
@@ -26,29 +26,29 @@ public class ListingPropertiesTest {
 
     @Test()
     public void testSearchbyPrice() {
-        ArrayList<String> found1 = listingProperties.searchByPrice(new BigDecimal(123457), new BigDecimal(123455));
+        ArrayList<Listing> found1 = listingProperties.searchByPrice(new BigDecimal(123457), new BigDecimal(123455));
 
-        assertFalse(found1.contains(l3.toString()));
+        assertFalse(found1.contains(l3));
     }
 
     @Test()
     public void testSearchbyCity() {
-        ArrayList<String> found2 = listingProperties.searchByCity("ABCD city");
+        ArrayList<Listing> found2 = listingProperties.searchByCity("ABCD city");
 
-        assertTrue(found2.contains(l2.toString()));
+        assertTrue(found2.contains(l2));
     }
     @Test()
-    public void testSearchbycivicAdress() {
-        ArrayList<String> found3 = listingProperties.searchByCivicAddress(1);
+    public void testSearchbycivicAddress() {
+        ArrayList<Listing> found3 = listingProperties.searchByCivicAddress(1);
 
-        assertTrue(found3.contains(l1.toString()));
+        assertTrue(listingProperties.getListingsStrings(found3).contains(l1.toString()));
     }
     @Test()
     public void testSearchbyType() {
-        ArrayList<String> found4 = listingProperties.searchByListingType("APARTMENT");
+        ArrayList<Listing> found4 = listingProperties.searchByListingType("APARTMENT");
 
-        assertTrue(found4.contains(l1.toString()));
-        assertTrue(found4.contains(l2.toString()));
+        assertTrue(listingProperties.getListingsStrings(found4).contains(l1.toString()));
+        assertTrue(found4.contains(l2));
     }
 }
 

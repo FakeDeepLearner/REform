@@ -24,11 +24,12 @@ public class UserInterface {
 
     public void printBuyerLoginMenu(){
         System.out.println("Press 1 to view listings");
-        System.out.println("Press 2 to message user");
-        System.out.println("Press 3 to view inbox");
-        System.out.println("Press 4 to view outbox");
-        System.out.println("Press 5 to see your login history");
-        System.out.println("Press 6 to log out.");
+        System.out.println("Press 2 to view favourite listings");
+        System.out.println("Press 3 to message user");
+        System.out.println("Press 4 to view inbox");
+        System.out.println("Press 5 to view outbox");
+        System.out.println("Press 6 to see your login history");
+        System.out.println("Press 7 to log out.");
     }
 
     public void printSellerLoginMenu(){
@@ -131,6 +132,26 @@ public class UserInterface {
         for (int i = 0 ; i < listings.size() ; i++){
             System.out.println((i + 1) + ") " + listings.get(i));
         }
+    }
+
+    public void printAddListingToFavourites() {
+        System.out.println("Would you like to add any of the listings above to your favourites? (Y/N)");
+    }
+
+    public void printDeleteListingFromFavourites() {
+        System.out.println("Would you like to remove any of your favourite listings? (Y/N)");
+    }
+
+    public void printListingFavouriteSuccess() {
+        System.out.println("The listing was successfully added to your favourites. ");
+    }
+
+    public void printFavouriteRemovedSuccess() {
+        System.out.println("The listing was successfully removed from your favourites. ");
+    }
+
+    public void printNoFavourites() {
+        System.out.println("You currently have no favourite listings. ");
     }
 
     public void printDeleteUserSuccess(String username) {

@@ -43,7 +43,7 @@ public class StoreData {
         usernamePassword = new UsernamePasswordFileEditor(users);
         listingsCSVController = new ListingsCSVController(new CreateListing(listings, users));
         userMessagesCSVController = new UserMessagesCSVController(new SendMessages(messages, users));
-        usersAndFavoritesCSVController = new UsersAndFavoritesCSVController(new FavoriteListing(users));
+        usersAndFavoritesCSVController = new UsersAndFavoritesCSVController(new FavoriteListing(users, listings));
     }
 
     /**
