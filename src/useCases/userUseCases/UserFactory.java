@@ -1,13 +1,10 @@
 package useCases.userUseCases;
 
-import entities.User;
+import entities.*;
 import entities.containers.UserContainer;
 import exceptions.UserNotFoundException;
 import exceptions.UsernameAlreadyExistsException;
 import useCases.buyerUseCases.CreateBuyer;
-import entities.Buyer;
-import entities.Seller;
-import entities.UserType;
 import useCases.sellerUseCases.CreateSeller;
 import useCases.userUseCases.CreateUser;
 
@@ -104,5 +101,13 @@ public class UserFactory {
      */
     public HashMap<String, Seller> getCreatedSellers() {
         return createSeller.getCreatedSellers();
+    }
+
+    /**
+     * Method to get the created admins of createUser
+     * @return created admins of createUser
+     * */
+    public HashMap<String, AdminUser> getCreatedAdmins() {
+        return createUser.getCreatedAdmins();
     }
 }
