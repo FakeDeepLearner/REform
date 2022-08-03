@@ -46,7 +46,7 @@ public class ListingPropertiesTest {
     }
     @Test()
     public void testSearchbyType() {
-        ArrayList<String> found4 = listingProperties.searchByListingType("APARTMENT");
+        ArrayList<Listing> found4 = listingProperties.searchByListingType("APARTMENT");
 
         assertTrue(listingProperties.getListingsStrings(found4).contains(l1.toString()));
         assertTrue(found4.contains(l2));
