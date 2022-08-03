@@ -24,6 +24,7 @@ public class UsersAndFavoritesCSVController implements CsvInterface {
             String username = splitLine[0];
             int listingID = Integer.parseInt(splitLine[1]);
             favoriteListing.addListingToBuyerFavorites(username, listingID);
+            favoriteListing.addCreationToGeneratedFavorites(username, listingID);
         }
         reader.close();
     }
