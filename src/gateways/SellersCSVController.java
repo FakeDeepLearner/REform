@@ -1,6 +1,8 @@
 package gateways;
 
 import entities.Seller;
+import entities.User;
+import entities.containers.UserContainer;
 import useCases.CSVUseCases.DatabaseFilePath;
 import useCases.userUseCases.UserFactory;
 
@@ -8,12 +10,14 @@ import java.io.*;
 import java.util.HashMap;
 
 public class SellersCSVController implements CsvInterface {
+    private final UserContainer<String, User> users;
     private final UserFactory userFactory;
 
     private final static DatabaseFilePath filepath = new DatabaseFilePath("Sellers.csv");
 
-    public SellersCSVController(UserFactory userFactory){
+    public SellersCSVController(UserContainer<String, User> users, UserFactory userFactory){
         this.userFactory = userFactory;
+        this.users = users;
     }
 
 
@@ -33,7 +37,7 @@ public class SellersCSVController implements CsvInterface {
     @Override
     public void write() throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(filepath.getFilePath(), false));
-        HashMap<String, Seller> createdSellers = userFactory.getCreatedSellers();
+        HashMap<String, Seller> createdSellers = users.getAllSellers();
         for(String username : createdSellers.keySet()){
             writer.write(username + "," + createdSellers.get(username).getPassword() + "\n");
         }

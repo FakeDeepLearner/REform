@@ -37,11 +37,11 @@ public class StoreData {
                      ListingContainer<Integer, Listing> listings) {
         userFactory = new UserFactory(users);
 
-        buyersCSVController = new BuyersCSVController(userFactory);
-        sellersCSVController = new SellersCSVController(userFactory);
+        buyersCSVController = new BuyersCSVController(users, userFactory);
+        sellersCSVController = new SellersCSVController(users, userFactory);
         history = new UpdateUserHistory(users);
         usernamePassword = new UsernamePasswordFileEditor(users);
-        listingsCSVController = new ListingsCSVController(new CreateListing(listings, users));
+        listingsCSVController = new ListingsCSVController(users, new CreateListing(listings, users));
         userMessagesCSVController = new UserMessagesCSVController(new SendMessages(messages, users));
         usersAndFavoritesCSVController = new UsersAndFavoritesCSVController(new FavoriteListing(users, listings));
     }

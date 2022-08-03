@@ -24,6 +24,21 @@ public class UserContainer<String, User> extends Container<String, User> {
     }
 
     /**
+     * @return a container of all the buyers
+     */
+    public Container<String, Buyer> getAllBuyers() {
+        Container<String, Buyer> buyers = new UserContainer<>();
+        for (String username : keySet()) {
+            User u = get(username);
+            if (u instanceof Buyer) {
+                buyers.put(username, (Buyer) u);
+            }
+        }
+
+        return  buyers;
+    }
+
+    /**
      * @param key the key whose associated value is to be returned
      * @return the value associated with key
      * @throws BuyerNotFoundException if no Buyer is associated with key in the hashmap
@@ -37,6 +52,9 @@ public class UserContainer<String, User> extends Container<String, User> {
     }
 
 
+    /**
+     * @return a container of all the sellers
+     */
     public Container<String, Seller> getAllSellers() {
         Container<String, Seller> sellers = new UserContainer<>();
         for (String username : keySet()) {

@@ -9,14 +9,14 @@ import useCases.listingUseCases.CreateListing;
 
 import java.io.*;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
 
 public class ListingsCSVController implements CsvInterface {
+    private final UserContainer<String, User> users;
     private final CreateListing createListing;
     private final static DatabaseFilePath filepath = new DatabaseFilePath("Listings.csv");
 
-    public ListingsCSVController(CreateListing createListing) {
+    public ListingsCSVController(UserContainer<String, User> users, CreateListing createListing) {
+        this.users = users;
         this.createListing = createListing;
     }
 
@@ -56,45 +56,12 @@ public class ListingsCSVController implements CsvInterface {
         reader.close();
     }
 
-    public void write(UserContainer<String, User> users) throws IOException {
+    @Override
+    public void write() throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(filepath.getFilePath(), false));
         for (String username : users.getAllSellers().keySet()){
             Seller u = users.getSeller(username);
             for (Listing listing : u.getListings()) {
-                int ID = listing.getId();
-                int civicAddress = listing.getCivicAddress();
-                String streetName = listing.getStreetName();
-                String city = listing.getCity();
-                String type = listing.getType();
-                int bedrooms = listing.getBedrooms();
-                int bathrooms = listing.getBathrooms();
-                BigDecimal price = listing.getPrice();
-                String info = listing.getInfo();
-
-                boolean isUnit = listing.getIsUnit();
-                String lineToWrite;
-                if (isUnit) {
-                    int unitNumber = listing.getUnitNumber();
-                    lineToWrite = username + "," + ID + "," + civicAddress + "," + streetName + "," +  city + "," +
-                            type + "," + bedrooms + "," + bathrooms + "," + price + "," + info + "," + true + "," + unitNumber;
-                }
-                else {
-                    int floors = listing.getFloors();
-                    lineToWrite = username + "," + ID + "," + civicAddress + "," + streetName + "," + city + "," + type +
-                            "," + bedrooms + "," + bathrooms + "," + price + "," + info + "," + false + "," + floors;
-                }
-                writer.append(lineToWrite).append("\n");
-            }
-        }
-        writer.close();
-    }
-
-    @Override
-    public void write() throws IOException {
-        BufferedWriter writer = new BufferedWriter(new FileWriter(filepath.getFilePath(), false));
-        HashMap<String, ArrayList<Listing>> createdListings = createListing.getCreatedListings();
-        for (String username : createdListings.keySet()){
-            for (Listing listing : createdListings.get(username)){
                 int ID = listing.getId();
                 int civicAddress = listing.getCivicAddress();
                 String streetName = listing.getStreetName();
