@@ -9,7 +9,7 @@ public class csvFilePath {
 
     public csvFilePath(String filename){
         this.filePath = System.getProperty("user.dir") + File.separator +
-                "src" + File.separator + "LoginSystem" + File.separator + filename;
+                "src" + File.separator + "database" + File.separator + filename;
         this.fileName = filename;
     }
 
@@ -23,7 +23,7 @@ public class csvFilePath {
 
     public static String getDatabasePath() {
         return System.getProperty("user.dir") + File.separator +
-                "src" + File.separator + "LoginSystem" + File.separator;
+                "src" + File.separator + "database" + File.separator;
     }
 
     public String getFileName() {

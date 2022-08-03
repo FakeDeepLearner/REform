@@ -33,7 +33,7 @@ public class DatabaseFilePath {
      */
     public DatabaseFilePath(String filename) {
         this.filePath = System.getProperty("user.dir") + File.separator +
-                "src" + File.separator + "RealEstate" + File.separator + "database" + File.separator + filename;
+                "src" + File.separator + "database" + File.separator + filename;
     }
 
     /**
