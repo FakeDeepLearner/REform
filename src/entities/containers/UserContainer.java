@@ -36,6 +36,20 @@ public class UserContainer<String, User> extends Container<String, User> {
         }
     }
 
+
+    public Container<String, Seller> getAllSellers() {
+        Container<String, Seller> sellers = new UserContainer<>();
+        for (String username : keySet()) {
+            User u = get(username);
+            if (u instanceof Seller) {
+                sellers.put(username, (Seller) u);
+            }
+        }
+
+        return  sellers;
+    }
+
+
     /**
      * @param key the key whose associated value is to be returned
      * @return the value associated with key
@@ -63,6 +77,4 @@ public class UserContainer<String, User> extends Container<String, User> {
             throw new UserNotFoundException();
         }
     }
-
-
 }

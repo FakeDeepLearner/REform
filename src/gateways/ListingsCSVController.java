@@ -1,8 +1,11 @@
 package gateways;
 
 import entities.Listing;
-import useCases.listingUseCases.CreateListing;
+import entities.Seller;
+import entities.User;
+import entities.containers.UserContainer;
 import useCases.CSVUseCases.DatabaseFilePath;
+import useCases.listingUseCases.CreateListing;
 
 import java.io.*;
 import java.math.BigDecimal;
@@ -10,9 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ListingsCSVController implements CsvInterface {
-
     private final CreateListing createListing;
-
     private final static DatabaseFilePath filepath = new DatabaseFilePath("Listings.csv");
 
     public ListingsCSVController(CreateListing createListing) {
@@ -53,6 +54,39 @@ public class ListingsCSVController implements CsvInterface {
             }
         }
         reader.close();
+    }
+
+    public void write(UserContainer<String, User> users) throws IOException {
+        BufferedWriter writer = new BufferedWriter(new FileWriter(filepath.getFilePath(), false));
+        for (String username : users.getAllSellers().keySet()){
+            Seller u = users.getSeller(username);
+            for (Listing listing : u.getListings()) {
+                int ID = listing.getId();
+                int civicAddress = listing.getCivicAddress();
+                String streetName = listing.getStreetName();
+                String city = listing.getCity();
+                String type = listing.getType();
+                int bedrooms = listing.getBedrooms();
+                int bathrooms = listing.getBathrooms();
+                BigDecimal price = listing.getPrice();
+                String info = listing.getInfo();
+
+                boolean isUnit = listing.getIsUnit();
+                String lineToWrite;
+                if (isUnit) {
+                    int unitNumber = listing.getUnitNumber();
+                    lineToWrite = username + "," + ID + "," + civicAddress + "," + streetName + "," +  city + "," +
+                            type + "," + bedrooms + "," + bathrooms + "," + price + "," + info + "," + true + "," + unitNumber;
+                }
+                else {
+                    int floors = listing.getFloors();
+                    lineToWrite = username + "," + ID + "," + civicAddress + "," + streetName + "," + city + "," + type +
+                            "," + bedrooms + "," + bathrooms + "," + price + "," + info + "," + false + "," + floors;
+                }
+                writer.append(lineToWrite).append("\n");
+            }
+        }
+        writer.close();
     }
 
     @Override
