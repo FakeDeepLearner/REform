@@ -34,6 +34,19 @@ public class MessageChat {
 
     }
 
+    public void printChatHistory(String username1, String username2) {
+        System.out.println(String.format("Chat history between %s and %s", username1, username2));
+
+        MessageContainer relevantMessages = MessageChat.getMessagesBetweenUserNames(username1, username2, this.messageContainer);
+
+        SortedSet<Message> values = new TreeSet<>(relevantMessages.values());
+
+        for (Message m : values) {
+            System.out.println(m);
+        }
+
+    }
+
     private static MessageContainer getMessagesBetweenUsers(User u1, User u2, MessageContainer<Integer, Message> mc) {
         MessageContainer out = new MessageContainer();
 
@@ -46,6 +59,26 @@ public class MessageChat {
             User recipient = m.getRecipient();
 
             if (users.contains(sender) && users.contains(recipient)) {
+                out.put(m.getMessageID(), m);
+            }
+
+        }
+
+        return out;
+    }
+
+    private static MessageContainer getMessagesBetweenUserNames(String username1, String username2, MessageContainer<Integer, Message> mc) {
+        MessageContainer out = new MessageContainer();
+
+        ArrayList<String> usernames = new ArrayList<>();
+        usernames.add(username1);
+        usernames.add(username2);
+
+        for (Message m : mc.values()) {
+            String senderName = m.getSender().getUsername();
+            String recipientName = m.getRecipient().getUsername();
+
+            if (usernames.contains(senderName) && usernames.contains(recipientName)) {
                 out.put(m.getMessageID(), m);
             }
 
