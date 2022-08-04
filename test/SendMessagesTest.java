@@ -5,6 +5,8 @@ import entities.Seller;
 import useCases.messageUseCases.SendMessages;
 import org.junit.Test;
 
+import java.util.concurrent.TimeUnit;
+
 public class SendMessagesTest {
 
     @Test
@@ -30,7 +32,7 @@ public class SendMessagesTest {
     }
 
     @Test
-    public void testSendingMultipleMessages() {
+    public void testSendingMultipleMessages() throws InterruptedException {
 
         Buyer sender = new Buyer("u1", "pw1");
         Seller receiver = new Seller("u2", "pw2");
@@ -46,8 +48,11 @@ public class SendMessagesTest {
         SendMessages sm = new SendMessages(mc, uc);
 
         sm.sendMessage("u1", "u2", "testContent");
+        TimeUnit.SECONDS.sleep(1);
         sm.sendMessage("u1", "u2", "testContent2");
+        TimeUnit.SECONDS.sleep(1);
         sm.sendMessage("u1", "u2", "testContent3");
+
 
         System.out.println(sm.getMessageInbox("u2"));
 
@@ -55,7 +60,7 @@ public class SendMessagesTest {
     }
 
     @Test
-    public void testReceivingMultipleMessages() {
+    public void testReceivingMultipleMessages() throws InterruptedException {
 
         Buyer sender = new Buyer("u1", "pw1");
         Seller receiver = new Seller("u2", "pw2");
@@ -71,7 +76,9 @@ public class SendMessagesTest {
         SendMessages sm = new SendMessages(mc, uc);
 
         sm.sendMessage("u1", "u2", "testContent");
+        TimeUnit.SECONDS.sleep(1);
         sm.sendMessage("u1", "u2", "testContent2");
+        TimeUnit.SECONDS.sleep(1);
         sm.sendMessage("u1", "u2", "testContent3");
 
         System.out.println(sm.getMessageOutbox("u1"));
