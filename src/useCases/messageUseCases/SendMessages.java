@@ -8,6 +8,9 @@ import entities.containers.MessageContainer;
 import useCases.miscellaneous.GenerateUniqueID;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 
 public class SendMessages {
@@ -92,7 +95,10 @@ public class SendMessages {
     public ArrayList<String> getMessageInbox(String username) {
         ArrayList<String> messages = new ArrayList<>();
         NonAdminUser user = userContainer.getNonAdmin(username);
-        for (Message m : user.getInbox().values()) {
+
+        SortedSet<Message> values = new TreeSet<>(user.getInbox().values());
+
+        for (Message m : values) {
             messages.add(m.toString());
         }
         return messages;
@@ -107,7 +113,13 @@ public class SendMessages {
     public ArrayList<String> getMessageOutbox(String username) {
         ArrayList<String> messages = new ArrayList<>();
         NonAdminUser user = userContainer.getNonAdmin(username);
-        for (Message m : user.getOutbox().values()) {
+
+//        for (Message m : user.getOutbox().values()) {
+//            messages.add(m.toString());
+//        }
+        SortedSet<Message> values = new TreeSet<>(user.getOutbox().values());
+
+        for (Message m : values) {
             messages.add(m.toString());
         }
         return messages;
