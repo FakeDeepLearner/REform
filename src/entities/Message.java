@@ -96,8 +96,9 @@ public class Message implements Comparable<Message> {
 
     @Override
     public String toString() {
-        return "\n" + datetime.format(formatter) + "\n" + "Message from: " + sender.getUsername() + " with an ID of " + messageID.toString() + "\n"
-                + contents;
+        return "\n" + datetime.format(formatter) + "\n" + "Message from " + sender.getUsername() + " to " +
+                recipient.getUsername() + " (Message ID of " + messageID.toString() + ")" + "\n"
+                + contents + "\n";
     }
 
     @Override
