@@ -20,6 +20,8 @@ public class UserMessagesCSVController implements CsvInterface {
     /**
      * Reads the messages from the UserMessages.csv file
      */
+
+    //TODO: update to adapt the chatting feature
     public void read() {
         try {
             BufferedReader br = new BufferedReader(new FileReader(file.getFilePath()));
@@ -38,6 +40,8 @@ public class UserMessagesCSVController implements CsvInterface {
             e.printStackTrace();
         }
     }
+
+    //TODO: update to adapt the chatting feature
 
     /**
      * Rewrites the UserMessages.csv file to include old and new messages
