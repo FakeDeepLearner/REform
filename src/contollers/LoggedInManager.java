@@ -10,13 +10,11 @@ import exceptions.UserNotFoundException;
 import useCases.userUseCases.AuthenticateUser;
 import useCases.userUseCases.RestrictUser;
 import useCases.userUseCases.UpdateUserHistory;
-import useCases.CSVUseCases.UsernamePasswordFileEditor;
 import entities.Listing;
 import useCases.listingUseCases.CreateListing;
 import useCases.listingUseCases.ListingProperties;
 import useCases.messageUseCases.SendMessages;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,7 +27,6 @@ public class LoggedInManager {
     private final UpdateUserHistory history;
     private final RestrictUser restrict;
     private final UserManager userManager;
-    private final UsernamePasswordFileEditor file;
     private final SendMessages sendMessages;
     private final ListingProperties listingProperties;
     private final CreateListing createListing;
@@ -49,7 +46,6 @@ public class LoggedInManager {
         auth = new AuthenticateUser(users);
         history = new UpdateUserHistory(users);
         restrict = new RestrictUser(users);
-        file = new UsernamePasswordFileEditor(auth, users);
         sendMessages = new SendMessages(messages, users);
         listingProperties = new ListingProperties(listings);
         createListing = new CreateListing(listings, users);
@@ -219,11 +215,6 @@ public class LoggedInManager {
         String deleteUser = input.strInput();
         boolean deleted = restrict.deleteNonAdminUser(deleteUser);
         if (deleted) {
-            try {
-                file.createUsernamePasswordFile();
-            } catch (IOException e) {
-                ui.printArbitraryException(e);
-            }
 
             history.overwriteUserHistories();
             ui.printDeleteUserSuccess(deleteUser);

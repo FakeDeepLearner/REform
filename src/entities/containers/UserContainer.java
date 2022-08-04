@@ -1,5 +1,6 @@
 package entities.containers;
 
+import entities.AdminUser;
 import exceptions.UserNotFoundException;
 import entities.Buyer;
 import entities.Seller;
@@ -94,5 +95,16 @@ public class UserContainer<String, User> extends Container<String, User> {
         catch (IllegalArgumentException illegalArgumentException){
             throw new UserNotFoundException();
         }
+    }
+
+    public Container<String, AdminUser> getAllAdmins(){
+        Container<String, AdminUser> admins = new UserContainer<>();
+        for (String username : keySet()) {
+            User u = get(username);
+            if (u instanceof AdminUser) {
+                admins.put(username, (AdminUser) u);
+            }
+        }
+        return  admins;
     }
 }

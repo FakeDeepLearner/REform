@@ -7,10 +7,8 @@ import exceptions.UserNotFoundException;
 import exceptions.UsernameAlreadyExistsException;
 import useCases.userUseCases.AuthenticateUser;
 import useCases.userUseCases.UpdateUserHistory;
-import useCases.CSVUseCases.UsernamePasswordFileEditor;
 import useCases.userUseCases.UserFactory;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class UserManager {
@@ -19,7 +17,7 @@ public class UserManager {
     private final UserFactory userFactory;
     private final AuthenticateUser auth;
     private final UpdateUserHistory history;
-    private final UsernamePasswordFileEditor file;
+
 
     /**
      * Constructor for UserManager
@@ -28,7 +26,6 @@ public class UserManager {
     public UserManager(UserContainer<String, User> userContainer) {
         auth = new AuthenticateUser(userContainer);
         history = new UpdateUserHistory(userContainer);
-        file = new UsernamePasswordFileEditor(auth, userContainer);
 
         ui = new UserInterface();
         input = new InputHandler(ui);
@@ -43,11 +40,10 @@ public class UserManager {
      * @param file stores the usernames and passwords of users
      */
     public UserManager(UserFactory userFactory, AuthenticateUser auth,
-                       UpdateUserHistory history, UsernamePasswordFileEditor file) {
+                       UpdateUserHistory history) {
         this.userFactory = userFactory;
         this.auth = auth;
         this.history = history;
-        this.file = file;
 
         ui = new UserInterface();
         input = new InputHandler(ui);
@@ -85,12 +81,6 @@ public class UserManager {
         } catch (UsernameAlreadyExistsException e) {
             ui.printArbitraryException(e);
             return null;
-        }
-
-        try {
-            file.addUserInfo(usernamePassword.get(0), usernamePassword.get(1));
-        } catch (IOException e) {
-            ui.printArbitraryException(e);
         }
 
         ui.printSignUpSuccess();
