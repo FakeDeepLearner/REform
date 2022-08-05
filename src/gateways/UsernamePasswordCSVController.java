@@ -4,12 +4,13 @@ import entities.AdminUser;
 import entities.User;
 import entities.containers.UserContainer;
 import useCases.CSVUseCases.DatabaseFilePath;
+import useCases.DataInterface;
 import useCases.userUseCases.UserFactory;
 
 import java.io.*;
 import java.util.HashMap;
 
-public class UsernamePasswordCSVController implements CsvInterface{
+public class UsernamePasswordCSVController implements DataInterface {
 
     private final UserFactory userFactory;
 

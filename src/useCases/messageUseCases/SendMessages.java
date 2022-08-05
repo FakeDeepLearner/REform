@@ -5,8 +5,10 @@ import entities.User;
 import entities.containers.UserContainer;
 import entities.Message;
 import entities.containers.MessageContainer;
+import useCases.DataInterface;
 import useCases.miscellaneous.GenerateUniqueID;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.SortedSet;
@@ -17,6 +19,7 @@ public class SendMessages {
 
     private final MessageContainer<Integer, Message> messageContainer;
     private final UserContainer<String, User> userContainer;
+    public DataInterface i;
 
 
     /**
@@ -26,9 +29,18 @@ public class SendMessages {
      * @param userContainer    UserContainer
      */
     public SendMessages(MessageContainer<Integer, Message> messageContainer,
-                        UserContainer<String, User> userContainer) {
+                        UserContainer<String, User> userContainer, DataInterface i) {
         this.messageContainer = messageContainer;
         this.userContainer = userContainer;
+        this.i = i;
+    }
+
+    public void read() throws IOException {
+        i.read();
+    }
+
+    public void write() throws IOException {
+        i.write();
     }
 
     /**

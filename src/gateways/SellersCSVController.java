@@ -4,12 +4,13 @@ import entities.Seller;
 import entities.User;
 import entities.containers.UserContainer;
 import useCases.CSVUseCases.DatabaseFilePath;
+import useCases.DataInterface;
 import useCases.userUseCases.UserFactory;
 
 import java.io.*;
 import java.util.HashMap;
 
-public class SellersCSVController implements CsvInterface {
+public class SellersCSVController implements DataInterface {
     private final UserContainer<String, User> users;
     private final UserFactory userFactory;
 

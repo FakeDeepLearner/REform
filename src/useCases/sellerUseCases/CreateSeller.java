@@ -3,21 +3,33 @@ package useCases.sellerUseCases;
 import entities.User;
 import entities.containers.UserContainer;
 import entities.Seller;
+import useCases.DataInterface;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 public class CreateSeller {
     private final UserContainer<String, User> userContainer;
     private final HashMap<String, Seller> createdSellers;
+    public DataInterface i;
 
     /**
      * Constructor for the CreateSeller Class
      *
      * @param userContainer UserContainer Class
      */
-    public CreateSeller(UserContainer<String, User> userContainer) {
+    public CreateSeller(UserContainer<String, User> userContainer, DataInterface i) {
         this.userContainer = userContainer;
         createdSellers = new HashMap<>();
+        this.i = i;
+    }
+
+    public void read() throws IOException {
+        i.read();
+    }
+
+    public void write() throws IOException {
+        i.write();
     }
 
     /**

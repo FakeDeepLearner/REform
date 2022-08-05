@@ -1,7 +1,7 @@
-package gateways;
+package useCases;
 import java.io.IOException;
 
-public interface CsvInterface {
+public interface DataInterface {
 
     /**
      * Reads the associated csv file, and populates the necessary containers.

@@ -5,12 +5,13 @@ import entities.Seller;
 import entities.User;
 import entities.containers.UserContainer;
 import useCases.CSVUseCases.DatabaseFilePath;
+import useCases.DataInterface;
 import useCases.listingUseCases.CreateListing;
 
 import java.io.*;
 import java.math.BigDecimal;
 
-public class ListingsCSVController implements CsvInterface {
+public class ListingsCSVController implements DataInterface {
     private final UserContainer<String, User> users;
     private final CreateListing createListing;
     private final static DatabaseFilePath filepath = new DatabaseFilePath("Listings.csv");

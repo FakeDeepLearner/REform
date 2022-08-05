@@ -5,8 +5,10 @@ import entities.containers.UserContainer;
 import entities.Listing;
 import entities.containers.ListingContainer;
 import entities.Seller;
+import useCases.DataInterface;
 import useCases.miscellaneous.GenerateUniqueID;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,6 +17,7 @@ public class CreateListing {
     private final ListingContainer<Integer, Listing> listings;
     private final UserContainer<String, User> userContainer;
     private final HashMap<String, ArrayList<Listing>> createdListings;
+    public DataInterface i;
 
 
     /**
@@ -23,10 +26,19 @@ public class CreateListing {
      * @param userContainer the user container hashmap
      */
     public CreateListing(ListingContainer<Integer, Listing> listingsInterface,
-                         UserContainer<String, User> userContainer) {
+                         UserContainer<String, User> userContainer, DataInterface i) {
         listings = listingsInterface;
         this.userContainer = userContainer;
         createdListings = new HashMap<>();
+        this.i = i;
+    }
+
+    public void read() throws IOException {
+        i.read();
+    }
+
+    public void write() throws IOException {
+        i.write();
     }
 
     /**

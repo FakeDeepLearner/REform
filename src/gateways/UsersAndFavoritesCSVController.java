@@ -1,13 +1,14 @@
 package gateways;
 
 import useCases.CSVUseCases.DatabaseFilePath;
+import useCases.DataInterface;
 import useCases.listingUseCases.FavoriteListing;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class UsersAndFavoritesCSVController implements CsvInterface {
+public class UsersAndFavoritesCSVController implements DataInterface {
     final private static DatabaseFilePath filepath = new DatabaseFilePath("UsersAndFavorites.csv");
     final private FavoriteListing favoriteListing;
 

@@ -1,13 +1,14 @@
 package gateways;
 
 import useCases.CSVUseCases.DatabaseFilePath;
+import useCases.DataInterface;
 import useCases.messageUseCases.SendMessages;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class UserMessagesCSVController implements CsvInterface {
+public class UserMessagesCSVController implements DataInterface {
 
     private final DatabaseFilePath file;
     private final SendMessages sendMessages;

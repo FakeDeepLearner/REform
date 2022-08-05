@@ -3,6 +3,7 @@ package useCases.userUseCases;
 import entities.User;
 import entities.containers.UserContainer;
 import useCases.CSVUseCases.csvFilePath;
+import useCases.DataInterface;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -12,9 +13,19 @@ import java.util.Scanner;
 
 public class UpdateUserHistory {
     private final UserContainer<String, User> interfaceUsers;
+    public DataInterface i;
 
-    public UpdateUserHistory(UserContainer<String, User> interfaceUsers) {
+    public UpdateUserHistory(UserContainer<String, User> interfaceUsers, DataInterface i) {
         this.interfaceUsers = interfaceUsers;
+        this.i = i;
+    }
+
+    public void read() throws IOException {
+        i.read();
+    }
+
+    public void write() throws IOException {
+        i.write();
     }
 
     /**

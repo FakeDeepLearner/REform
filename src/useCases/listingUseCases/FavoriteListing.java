@@ -5,7 +5,9 @@ import entities.User;
 import entities.containers.ListingContainer;
 import entities.containers.UserContainer;
 import entities.Buyer;
+import useCases.DataInterface;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -14,6 +16,7 @@ public class FavoriteListing {
     private final ListingContainer<Integer, Listing> listingContainer;
 
     private final HashMap<String, ArrayList<Integer>> generatedFavorites;
+    public DataInterface i;
 
     /**
      * Create a FavoriteListing class
@@ -21,10 +24,19 @@ public class FavoriteListing {
      * @param userContainer UserContainer object to be used
      */
     public FavoriteListing(UserContainer<String, User> userContainer,
-                           ListingContainer<Integer, Listing> listingContainer) {
+                           ListingContainer<Integer, Listing> listingContainer, DataInterface i) {
         this.userContainer = userContainer;
         this.generatedFavorites = new HashMap<>();
         this.listingContainer = listingContainer;
+        this.i = i;
+    }
+
+    public void read() throws IOException {
+        i.read();
+    }
+
+    public void write() throws IOException {
+        i.write();
     }
 
     /**
