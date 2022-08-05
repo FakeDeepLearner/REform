@@ -78,6 +78,24 @@ public class SendMessages {
     }
 
     /**
+     * Add previously sent messages that have an id and require a datetime stamp to messageContainer
+     * @param senderUsername the username of the sender
+     * @param recipientUsername the username of the recipient
+     * @param id the id of the message being sent
+     * @param content the content of the message
+     * @param datetime the datetime stamp of the message in the format dd-MM-yyyy HH:mm:ss
+     */
+    public void addMessage(String senderUsername, String recipientUsername,
+                           int id, String content, String datetime) {
+        NonAdminUser sender = userContainer.getNonAdmin(senderUsername);
+        NonAdminUser recipient = userContainer.getNonAdmin(recipientUsername);
+
+        Message message = new Message(sender, recipient, id, content, datetime);
+        messageContainer.put(id, message);
+        sender.sendMessage(recipient, message);
+    }
+
+    /**
      * Creates a list containing all the messages in messageContainer in CSV format
      *
      * @return an ArrayList<String> containing all the messages
@@ -92,6 +110,8 @@ public class SendMessages {
                     m.getMessageID() +
                     "," +
                     m.getContents() +
+                    "," +
+                    m.getFormattedDateTime() +
                     "\n";
             messages.add(messageData);
         }

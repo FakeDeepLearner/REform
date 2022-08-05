@@ -21,8 +21,6 @@ public class UserMessagesCSVController implements DataInterface {
     /**
      * Reads the messages from the UserMessages.csv file
      */
-
-    //TODO: update to adapt the chatting feature
     public void read() {
         try {
             BufferedReader br = new BufferedReader(new FileReader(file.getFilePath()));
@@ -30,10 +28,10 @@ public class UserMessagesCSVController implements DataInterface {
 
             while ((line = br.readLine()) != null) {
                 ArrayList<String> contents = new ArrayList<>(Arrays.asList(line.split(",")));
-                String message = String.join(",", contents.subList(3, contents.size()));
+                String message = String.join(",", contents.subList(3, 4));
 
                 sendMessages.addMessage(contents.get(0), contents.get(1),
-                        Integer.parseInt(contents.get(2)), message);
+                        Integer.parseInt(contents.get(2)), message, contents.get(4));
             }
 
             br.close();
@@ -41,8 +39,6 @@ public class UserMessagesCSVController implements DataInterface {
             e.printStackTrace();
         }
     }
-
-    //TODO: update to adapt the chatting feature
 
     /**
      * Rewrites the UserMessages.csv file to include old and new messages
