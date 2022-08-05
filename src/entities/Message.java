@@ -3,7 +3,6 @@ package entities;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 
-
 public class Message implements Comparable<Message> {
     private final User sender;
     private final User recipient;

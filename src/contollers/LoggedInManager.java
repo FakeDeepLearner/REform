@@ -7,6 +7,7 @@ import entities.containers.MessageContainer;
 import entities.containers.UserContainer;
 import exceptions.UserCannotBeBannedException;
 import exceptions.UserNotFoundException;
+import useCases.messageUseCases.MessageChat;
 import useCases.userUseCases.AuthenticateUser;
 import useCases.userUseCases.RestrictUser;
 import useCases.userUseCases.UpdateUserHistory;
@@ -30,10 +31,10 @@ public class LoggedInManager {
     private final SendMessages sendMessages;
     private final ListingProperties listingProperties;
     private final CreateListing createListing;
-
     private final FavAndUnFavManager favAndUnFavManager;
+    private final MessageChat messageChat;
 
-
+    
     /**
      * Constructor for LoggedInManager
      * @param users is the container that stores users of the program
@@ -54,6 +55,7 @@ public class LoggedInManager {
 
         ui = new UserInterface();
         input = new InputHandler(ui);
+        messageChat = new MessageChat(messages);
     }
 
     /**
@@ -84,7 +86,7 @@ public class LoggedInManager {
         ui.printBuyerLoginMenu();
 
         ArrayList<Integer> allowedInputs = new ArrayList<>();
-        Collections.addAll(allowedInputs, 1, 2, 3, 4, 5, 6, 7);
+        Collections.addAll(allowedInputs, 1, 2, 3, 4, 5, 6, 7, 8);
 
         int select = input.intInput(allowedInputs);
         switch (select) {
@@ -115,6 +117,10 @@ public class LoggedInManager {
                 ui.printLoginHistory(userHistory);
                 break;
             case 7:
+                //View chat history
+                viewMessageChat(username);
+                break;
+            case 8:
                 // Logout user
                 auth.logoutUser(username);
                 ui.printLogOutSuccess();
@@ -134,7 +140,7 @@ public class LoggedInManager {
         ui.printSellerLoginMenu();
 
         ArrayList<Integer> allowedInputs = new ArrayList<>();
-        Collections.addAll(allowedInputs, 1, 2, 3, 4, 5, 6, 7, 8);
+        Collections.addAll(allowedInputs, 1, 2, 3, 4, 5, 6, 7, 8, 9);
 
         int select = input.intInput(allowedInputs);
         switch (select) {
@@ -168,6 +174,10 @@ public class LoggedInManager {
                 ui.printLoginHistory(userHistory);
                 break;
             case 8:
+                //View chat history
+                viewMessageChat(username);
+                break;
+            case 9:
                 // Logout user
                 auth.logoutUser(username);
                 ui.printLogOutSuccess();
@@ -459,6 +469,20 @@ public class LoggedInManager {
         }
     }
 
+    private void viewMessageChat(String username){
+        ui.printEnterType("the username of the user you want to see your message history with");
+        String otherUsername = input.strInput();
+        messageChat.printChatHistory(username, otherUsername);
+    }
+
+    private void viewMessageChatAdminVersion(){
+        ui.printEnterType("the first username");
+        String firstUsername = input.strInput();
+        ui.printEnterType("the second username");
+        String secondUsername = input.strInput();
+        messageChat.printChatHistory(firstUsername, secondUsername);
+    }
+
     /**
      * Displays the messages inbox of the logged-in user
      * @param username the username of the logged-in user
@@ -488,41 +512,36 @@ public class LoggedInManager {
         ui.printAdminLoginMenu();
 
         ArrayList<Integer> allowedInputs = new ArrayList<>();
-        Collections.addAll(allowedInputs, 1, 2, 3, 4, 5);
+        Collections.addAll(allowedInputs, 1, 2, 3, 4, 5, 6);
 
         int select = input.intInput(allowedInputs);
         switch (select) {
-            case 1: {
+            case 1:
                 // View login history
                 ArrayList<String> userHistory = history.getLoginHistory(username);
                 ui.printLoginHistory(userHistory);
                 break;
-            }
-
-            case 2: {
+            case 2:
                 // Create new admin user
                 userManager.createNewUser("ADMIN");
                 break;
-            }
-
-            case 3: {
+            case 3:
                 // Ban or unban user
                 updateUserBanStatus();
                 break;
-            }
-
-            case 4: {
+            case 4:
                 // Delete user
                 deleteUser();
                 break;
-            }
-
-            case 5: {
+            case 5:
+                //View chat history between 2 users
+                viewMessageChatAdminVersion();
+                break;
+            case 6:
                 // Logout user
                 auth.logoutUser(username);
                 ui.printLogOutSuccess();
                 return false;
-            }
         }
 
         return true;

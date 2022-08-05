@@ -19,7 +19,8 @@ public class UserInterface {
         System.out.println("Press 2 to create a user (this new user will be an admin)");
         System.out.println("Press 3 to ban or unban a user.");
         System.out.println("Press 4 to delete a user.");
-        System.out.println("Press 5 to log out.");
+        System.out.println("Press 5 to view the chat history of 2 users");
+        System.out.println("Press 6 to log out.");
     }
 
     public void printBuyerLoginMenu(){
@@ -29,7 +30,8 @@ public class UserInterface {
         System.out.println("Press 4 to view inbox");
         System.out.println("Press 5 to view outbox");
         System.out.println("Press 6 to see your login history");
-        System.out.println("Press 7 to log out.");
+        System.out.println("Press 7 to see your chat history with another user.");
+        System.out.println("Press 8 to log out.");
     }
 
     public void printSellerLoginMenu(){
@@ -40,7 +42,8 @@ public class UserInterface {
         System.out.println("Press 5 to create new listing");
         System.out.println("Press 6 to delete listing");
         System.out.println("Press 7 to see your login history");
-        System.out.println("Press 8 to log out.");
+        System.out.println("Press 8 to see your chat history with another user.");
+        System.out.println("Press 9 to log out.");
     }
 
     public void printListingOptionsMenu(){
