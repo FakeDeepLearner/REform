@@ -1,0 +1,35 @@
+(Design Document 4) A description about how our program follows the 7 principles of universal design
+
+Principle 1- Equitable Use:
+a) The input and menus work with a simple keyboard input and console output on display. This is the same for all users.
+Braille keyboards and windows output to speech can be used for blind users. Hence, Provide the same means of use for all
+users: identical whenever possible.
+
+Principle 2- Flexibility in Use:
+a)We give users the ability to list and buy properties classifying them as buyers and  sellers.Hence, we provide choice
+in methods of use.
+
+Principle 3- Simple and Intuitive Use:
+a) Our UI is very clean and easy to understand. We provide users with accurate error
+and exception messages. Consider a login to a banned user. In this case, they accurately receive the message
+"This user is currently banned, please try again later." Hence, we provide effective feedback during and after task
+completion.
+
+Principle 4: Perceptible Information:
+a) Our UI is made of clean menus, that differentiate each option clearly, For example once you login as a user there is
+a clear menu for options: Press 1 to see your login history, Press 2 to create a user, Press 3 to ban or unban a user,
+etc. Hence, we differentiate elements in ways that can be described.
+
+Principle 5- Tolerance for Error:
+a) We have made error and exception classes to catch most of these cases. A good example
+would be to consider if a user trys to create an account with a username that already exists, we catch this error and
+throw the following message "That username is taken, please enter another one". Hence, we provide warnings of hazards
+and errors.
+b) Accurately Handle search Results irrespective of Case (Case Insensitive search) for Listing Addresses.
+
+Principle 6- Low Physical Effort:
+a)(Todo)
+
+Principle 7- Size and Space for Approach and Use:
+a) The input and menus work with a simple keyboard input and console output on display. Hence, we make reach to all
+components comfortable for any seated or standing user.
