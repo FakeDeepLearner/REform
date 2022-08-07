@@ -3,7 +3,7 @@ package useCases.listingUseCases;
 import entities.containers.ListingContainer;
 import entities.Listing;
 
-import java.util.ArrayList;
+import java.util.*;
 import java.math.BigDecimal;
 import java.util.function.Predicate;
 
@@ -111,10 +111,20 @@ public class ListingProperties {
      * @param lowerLimit Lower limit of the price
      * @return ArrayList of Strings containing the String representation of the Listing
      */
-    public ArrayList<Listing> searchByPrice(BigDecimal upperLimit, BigDecimal lowerLimit) {
+    public ArrayList<Listing> searchByPrice(BigDecimal upperLimit, BigDecimal lowerLimit, int order) {
         Predicate<Listing> property = (listing) -> upperLimit.compareTo(listing.getPrice()) >= 0 &&
                 lowerLimit.compareTo(listing.getPrice()) <= 0;
-        return searchByProperty(property);
+        ArrayList<Listing> listings = searchByProperty(property);
+        Comparator<Listing> compareByPrice = (Listing l1, Listing l2) -> l1.getPrice().compareTo(l2.getPrice());
+        switch(order){
+            case 1:{
+                Collections.sort(listings, compareByPrice);
+            }
+            case 2:{
+                Collections.sort(listings, compareByPrice);
+            }
+        }
+        return listings;
     }
 
     /**

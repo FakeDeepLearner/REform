@@ -22,6 +22,7 @@ import useCases.messageUseCases.SendMessages;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -457,7 +458,11 @@ public class LoggedInManager {
                 BigDecimal min = input.bigDecimalInput();
                 ui.printEnterType("maximum price");
                 BigDecimal max = input.bigDecimalInput();
-                ArrayList<Listing> listings = listingProperties.searchByPrice(max, min);
+
+                ui.printEnterType("Sort By 1-Ascending 2-Descending");
+                ArrayList<Integer> allowedInputSort = new ArrayList<>(Arrays. asList(1, 2));
+                int order = input.intInput(allowedInputSort);
+                ArrayList<Listing> listings = listingProperties.searchByPrice(max, min, order);
                 ui.printNumberedListings(listingProperties.getListingsStrings(listings));
                 checkAddListingToFavourites(username, listings);
                 break;
