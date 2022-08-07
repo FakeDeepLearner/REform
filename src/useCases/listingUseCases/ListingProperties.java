@@ -3,6 +3,7 @@ package useCases.listingUseCases;
 import entities.containers.ListingContainer;
 import entities.Listing;
 
+import java.sql.SQLOutput;
 import java.util.*;
 import java.math.BigDecimal;
 import java.util.function.Predicate;
@@ -115,13 +116,15 @@ public class ListingProperties {
         Predicate<Listing> property = (listing) -> upperLimit.compareTo(listing.getPrice()) >= 0 &&
                 lowerLimit.compareTo(listing.getPrice()) <= 0;
         ArrayList<Listing> listings = searchByProperty(property);
-        Comparator<Listing> compareByPrice = (Listing l1, Listing l2) -> l1.getPrice().compareTo(l2.getPrice());
+        Comparator<Listing> compareByPrice = Comparator.comparing(Listing::getPrice);
+        listings.sort(compareByPrice);
         switch(order){
             case 1:{
-                Collections.sort(listings, compareByPrice);
+                break;
             }
             case 2:{
-                Collections.sort(listings, compareByPrice);
+                Collections.reverse(listings);
+                break;
             }
         }
         return listings;
