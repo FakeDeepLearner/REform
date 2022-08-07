@@ -18,7 +18,7 @@ public class UsernamePasswordFileEditor extends CsvEditor {
      * @param interfaceUsers is the container that stores users of the program
      */
     public UsernamePasswordFileEditor(UserContainer<String, User> interfaceUsers) {
-        super(csvFilePath.getDatabasePath(), "UsernamePassword.csv");
+        super(csvFilePath.getDatabasePath(), "Admin.csv");
         this.interfaceUsers = interfaceUsers;
 
         auth = new AuthenticateUser(interfaceUsers);
@@ -30,7 +30,7 @@ public class UsernamePasswordFileEditor extends CsvEditor {
      * @param interfaceUsers is the container that stores users of the program
      */
     public UsernamePasswordFileEditor(AuthenticateUser auth, UserContainer<String, User> interfaceUsers) {
-        super(csvFilePath.getDatabasePath(), "UsernamePassword.csv");
+        super(csvFilePath.getDatabasePath(), "Admin.csv");
         this.auth = auth;
         this.interfaceUsers = interfaceUsers;
     }
@@ -38,7 +38,7 @@ public class UsernamePasswordFileEditor extends CsvEditor {
 
     // Static method to add the first line as "Username","Password,IsAdmin"
     private static void addFirstLine() throws IOException {
-        FileWriter fw = new FileWriter(csvFilePath.getDatabasePath() + "UsernamePassword.csv");
+        FileWriter fw = new FileWriter(csvFilePath.getDatabasePath() + "Admin.csv");
         BufferedWriter output = new BufferedWriter(fw);
         output.write("Username,Password,IsAdmin");
         output.close();
@@ -52,7 +52,7 @@ public class UsernamePasswordFileEditor extends CsvEditor {
         ArrayList<String> array = UsernamePasswordFileEditor.reformatContainer(interfaceUsers);
 
         for (String line : array) {
-            super.addLine(csvFilePath.getDatabasePath() + "UsernamePassword.csv", line);
+            super.addLine(csvFilePath.getDatabasePath() + "Admin.csv", line);
         }
     }
 
@@ -81,14 +81,14 @@ public class UsernamePasswordFileEditor extends CsvEditor {
 
     public void addUserInfo(String username, String password) throws IOException {
         String info = username + "," + password + "," + auth.checkUserAdmin(username);
-        addLine(csvFilePath.getDatabasePath() + "UsernamePassword.csv", info);
+        addLine(csvFilePath.getDatabasePath() + "Admin.csv", info);
     }
 
 
     public ArrayList<ArrayList<String>> getUsersFromCSV() throws IOException {
         ArrayList<ArrayList<String>> outside = new ArrayList<>();
 
-        FileReader fw = new FileReader(csvFilePath.getDatabasePath() + "UsernamePassword.csv");
+        FileReader fw = new FileReader(csvFilePath.getDatabasePath() + "Admin.csv");
         return getArrayLists(outside, fw);
     }
 

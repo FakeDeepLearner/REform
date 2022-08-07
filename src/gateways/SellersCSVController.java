@@ -3,36 +3,19 @@ package gateways;
 import entities.Seller;
 import entities.User;
 import entities.containers.UserContainer;
-import useCases.CSVUseCases.DatabaseFilePath;
-import useCases.DataInterface;
-import useCases.userUseCases.UserFactory;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashMap;
 
-public class SellersCSVController implements DataInterface {
+public class SellersCSVController extends CSVController {
     private final UserContainer<String, User> users;
-    private final UserFactory userFactory;
 
-    private final static DatabaseFilePath filepath = new DatabaseFilePath("Sellers.csv");
+    public SellersCSVController(UserContainer<String, User> users){
+        super("Sellers.csv");
 
-    public SellersCSVController(UserContainer<String, User> users, UserFactory userFactory){
-        this.userFactory = userFactory;
         this.users = users;
-    }
-
-
-    @Override
-    public void read() throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(filepath.getFilePath()));
-        String line;
-        while((line = reader.readLine()) != null){
-            String[] splitLine = line.split(",");
-            String username = splitLine[0];
-            String password = splitLine[1];
-            userFactory.createUser("seller", username, password);
-        }
-        reader.close();
     }
 
     @Override

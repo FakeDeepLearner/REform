@@ -1,4 +1,4 @@
-package useCases.buyerUseCases;
+package useCases.userUseCases;
 
 import entities.User;
 import entities.containers.UserContainer;

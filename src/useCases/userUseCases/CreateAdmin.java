@@ -8,13 +8,13 @@ import useCases.DataInterface;
 import java.io.IOException;
 import java.util.HashMap;
 
-public class CreateUser {
+public class CreateAdmin {
     private final UserContainer<String, User> interfaceUsers;
     public DataInterface i;
 
     private final HashMap<String, AdminUser> createdAdmins;
 
-    public CreateUser(UserContainer<String, User> interface_users, DataInterface i) {
+    public CreateAdmin(UserContainer<String, User> interface_users, DataInterface i) {
         this.interfaceUsers = interface_users;
         createdAdmins = new UserContainer<>();
         this.i = i;

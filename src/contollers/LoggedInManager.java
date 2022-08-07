@@ -7,6 +7,9 @@ import entities.containers.MessageContainer;
 import entities.containers.UserContainer;
 import exceptions.UserCannotBeBannedException;
 import exceptions.UserNotFoundException;
+import gateways.HistoriesCSVController;
+import gateways.ListingsCSVController;
+import gateways.MessagesCSVController;
 import useCases.messageUseCases.MessageChat;
 import useCases.userUseCases.AuthenticateUser;
 import useCases.userUseCases.RestrictUser;
@@ -16,6 +19,7 @@ import useCases.listingUseCases.CreateListing;
 import useCases.listingUseCases.ListingProperties;
 import useCases.messageUseCases.SendMessages;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -45,11 +49,11 @@ public class LoggedInManager {
                            ListingContainer<Integer, Listing> listings) {
 
         auth = new AuthenticateUser(users);
-        history = new UpdateUserHistory(users);
+        history = new UpdateUserHistory(users, new HistoriesCSVController(users));
         restrict = new RestrictUser(users);
-        sendMessages = new SendMessages(messages, users);
+        sendMessages = new SendMessages(messages, users, new MessagesCSVController(messages));
         listingProperties = new ListingProperties(listings);
-        createListing = new CreateListing(listings, users);
+        createListing = new CreateListing(listings, users, new ListingsCSVController(users));
         favAndUnFavManager = new FavAndUnFavManager(users, listings);
         userManager = new UserManager(users);
 
@@ -225,8 +229,11 @@ public class LoggedInManager {
         String deleteUser = input.strInput();
         boolean deleted = restrict.deleteNonAdminUser(deleteUser);
         if (deleted) {
-
-            history.overwriteUserHistories();
+           try {
+               history.write();
+           } catch (IOException e) {
+               ui.printArbitraryException(e);
+            }
             ui.printDeleteUserSuccess(deleteUser);
         } else {
             ui.printDeleteUserFail(deleteUser);

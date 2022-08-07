@@ -6,7 +6,6 @@ import exceptions.UserBannedException;
 import exceptions.UserNotFoundException;
 import exceptions.UsernameAlreadyExistsException;
 import useCases.userUseCases.AuthenticateUser;
-import useCases.userUseCases.UpdateUserHistory;
 import useCases.userUseCases.UserFactory;
 
 import java.util.ArrayList;
@@ -16,34 +15,28 @@ public class UserManager {
     private final UserInterface ui;
     private final UserFactory userFactory;
     private final AuthenticateUser auth;
-    private final UpdateUserHistory history;
 
 
     /**
      * Constructor for UserManager
-     * @param userContainer stores the users of the program
+     * @param users stores the users of the program
      */
-    public UserManager(UserContainer<String, User> userContainer) {
-        auth = new AuthenticateUser(userContainer);
-        history = new UpdateUserHistory(userContainer);
+    public UserManager(UserContainer<String, User> users) {
+        auth = new AuthenticateUser(users);
 
         ui = new UserInterface();
         input = new InputHandler(ui);
-        userFactory = new UserFactory(userContainer);
+        userFactory = new UserFactory(users);
     }
 
     /**
      * Constructor for UserManager
      * @param userFactory creates new users
      * @param auth is the user authenticator
-     * @param history updates the history of a user
-     * @param file stores the usernames and passwords of users
      */
-    public UserManager(UserFactory userFactory, AuthenticateUser auth,
-                       UpdateUserHistory history) {
+    public UserManager(UserFactory userFactory, AuthenticateUser auth) {
         this.userFactory = userFactory;
         this.auth = auth;
-        this.history = history;
 
         ui = new UserInterface();
         input = new InputHandler(ui);
@@ -105,7 +98,6 @@ public class UserManager {
 
         if (isLoggedIn) {
             ui.printLoginSuccess();
-            history.writeUserHistory(usernamePassword.get(0), true);
 
             return usernamePassword.get(0);
         } else {

@@ -1,17 +1,15 @@
 package useCases.userUseCases;
 
-import entities.*;
+import entities.User;
+import entities.UserType;
 import entities.containers.UserContainer;
-import exceptions.UserNotFoundException;
 import exceptions.UsernameAlreadyExistsException;
-import useCases.buyerUseCases.CreateBuyer;
-import useCases.sellerUseCases.CreateSeller;
-import useCases.userUseCases.CreateUser;
-
-import java.util.HashMap;
+import gateways.AdminCSVController;
+import gateways.BuyersCSVController;
+import gateways.SellersCSVController;
 
 public class UserFactory {
-    private final CreateUser createUser;
+    private final CreateAdmin createAdmin;
     private final CreateBuyer createBuyer;
     private final CreateSeller createSeller;
     private final UserContainer<String, User> userContainer;
@@ -19,27 +17,27 @@ public class UserFactory {
     /**
      * Factory for creating users using default functions
      *
-     * @param userContainer is a hash map that relates usernames to a User objects
+     * @param users is a hash map that relates usernames to a User objects
      */
-    public UserFactory(UserContainer<String, User> userContainer) {
-        this.userContainer = userContainer;
+    public UserFactory(UserContainer<String, User> users) {
+        this.userContainer = users;
 
-        this.createUser = new CreateUser(userContainer);
-        this.createBuyer = new CreateBuyer(userContainer);
-        this.createSeller = new CreateSeller(userContainer);
+        this.createAdmin = new CreateAdmin(users, new AdminCSVController(users));
+        this.createBuyer = new CreateBuyer(users, new BuyersCSVController(users));
+        this.createSeller = new CreateSeller(users, new SellersCSVController(users));
     }
 
     /**
      * Factory for creating users
      *
-     * @param createUser    use case for creating an Admin
+     * @param createAdmin    use case for creating an Admin
      * @param createBuyer   use case for creating a Buyer
      * @param createSeller  use case for creating a Seller
      * @param userContainer is a hash map that relates usernames to a User objects
      */
-    public UserFactory(CreateUser createUser, CreateBuyer createBuyer, CreateSeller createSeller,
+    public UserFactory(CreateAdmin createAdmin, CreateBuyer createBuyer, CreateSeller createSeller,
                        UserContainer<String, User> userContainer) {
-        this.createUser = createUser;
+        this.createAdmin = createAdmin;
         this.createBuyer = createBuyer;
         this.createSeller = createSeller;
         this.userContainer = userContainer;
@@ -55,7 +53,7 @@ public class UserFactory {
         try {
             userContainer.get(username);
             return false;
-        } catch (UserNotFoundException e) {
+        } catch (IllegalArgumentException e) {
             return true;
         }
     }
@@ -71,7 +69,7 @@ public class UserFactory {
         if (uniqueUsernameExists(username)) {
             switch (userType) {
                 case ADMIN:
-                    createUser.createAdminUser(username, password);
+                    createAdmin.createAdminUser(username, password);
                     break;
                 case BUYER:
                     createBuyer.createNewBuyer(username, password);
@@ -83,31 +81,5 @@ public class UserFactory {
         } else {
             throw new UsernameAlreadyExistsException();
         }
-    }
-
-    /**
-     * Method to get the created buyers of createBuyer
-     *
-     * @return created buyers of createBuyer
-     */
-    public HashMap<String, Buyer> getCreatedBuyers() {
-        return createBuyer.getCreatedBuyers();
-    }
-
-    /**
-     * Method to get the created sellers of createSeller
-     *
-     * @return created sellers of createSeller
-     */
-    public HashMap<String, Seller> getCreatedSellers() {
-        return createSeller.getCreatedSellers();
-    }
-
-    /**
-     * Method to get the created admins of createUser
-     * @return created admins of createUser
-     * */
-    public HashMap<String, AdminUser> getCreatedAdmins() {
-        return createUser.getCreatedAdmins();
     }
 }

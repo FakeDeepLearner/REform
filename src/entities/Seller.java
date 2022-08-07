@@ -33,8 +33,7 @@ public class Seller extends NonAdminUser {
      * @param outbox        Message outbox of the seller
      */
     public Seller(String username, String password, ArrayList<String> loginHistory,
-                  MessageContainer<Integer, Message> inbox,
-                  MessageContainer<Integer, Message> outbox) {
+                  MessageContainer<Integer, Message> inbox, MessageContainer<Integer, Message> outbox) {
         super(username, password, loginHistory);
         this.inbox = inbox;
         this.outbox = outbox;

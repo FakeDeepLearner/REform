@@ -9,20 +9,6 @@ import exceptions.SellerNotFoundException;
 import entities.NonAdminUser;
 
 public class UserContainer<String, User> extends Container<String, User> {
-    /**
-     * @param key the key whose associated value is to be returned
-     * @return the value associated with key
-     * @throws UserNotFoundException if no User is associated with key in the hashmap
-     */
-    @Override
-    public User get(Object key) throws UserNotFoundException {
-        if(this.containsKey(key)){
-            return super.get(key);
-        }
-        else{
-            throw new UserNotFoundException();
-        }
-    }
 
     /**
      * @return a container of all the buyers

@@ -1,8 +1,8 @@
 package useCases.miscellaneous;
 
 import entities.Listing;
-import entities.containers.ListingContainer;
 import entities.Message;
+import entities.containers.ListingContainer;
 import entities.containers.MessageContainer;
 
 import java.util.ArrayList;

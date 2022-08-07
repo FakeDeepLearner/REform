@@ -1,9 +1,9 @@
 import contollers.ProgramController;
+import entities.Message;
 import entities.User;
 import entities.containers.UserContainer;
 import entities.Listing;
 import entities.containers.ListingContainer;
-import entities.Message;
 import entities.containers.MessageContainer;
 
 import java.io.IOException;

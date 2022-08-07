@@ -5,7 +5,6 @@ import entities.User;
 import entities.containers.MessageContainer;
 
 import java.util.ArrayList;
-import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -18,7 +17,7 @@ public class MessageChat {
     }
 
     public void printChatHistory(User u1, User u2) {
-        System.out.println(String.format("Chat history between %s and %s", u1.getUsername(), u2.getUsername()));
+        System.out.printf("Chat history between %s and %s%n", u1.getUsername(), u2.getUsername());
 
         MessageContainer<Integer, Message> relevantMessages = MessageChat.getMessagesBetweenUsers(u1, u2, this.messageContainer);
 
@@ -31,9 +30,10 @@ public class MessageChat {
     }
 
     public void printChatHistory(String username1, String username2) {
-        System.out.println(String.format("Chat history between %s and %s", username1, username2));
+        System.out.printf("Chat history between %s and %s%n", username1, username2);
 
-        MessageContainer<Integer, Message> relevantMessages = MessageChat.getMessagesBetweenUserNames(username1, username2, this.messageContainer);
+        MessageContainer<Integer, Message> relevantMessages = MessageChat.getMessagesBetweenUserNames(username1, username2,
+                this.messageContainer);
 
         SortedSet<Message> values = new TreeSet<>(relevantMessages.values());
 
@@ -63,7 +63,8 @@ public class MessageChat {
         return out;
     }
 
-    private static MessageContainer<Integer, Message> getMessagesBetweenUserNames(String username1, String username2, MessageContainer<Integer, Message> mc) {
+    private static MessageContainer<Integer, Message> getMessagesBetweenUserNames(String username1, String username2,
+                                                                                  MessageContainer<Integer, Message> mc) {
         MessageContainer<Integer, Message> out = new MessageContainer<>();
 
         ArrayList<String> usernames = new ArrayList<>();

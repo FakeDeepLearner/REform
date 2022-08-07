@@ -4,57 +4,19 @@ import entities.Listing;
 import entities.Seller;
 import entities.User;
 import entities.containers.UserContainer;
-import useCases.CSVUseCases.DatabaseFilePath;
-import useCases.DataInterface;
-import useCases.listingUseCases.CreateListing;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.math.BigDecimal;
 
-public class ListingsCSVController implements DataInterface {
+public class ListingsCSVController extends CSVController {
     private final UserContainer<String, User> users;
-    private final CreateListing createListing;
-    private final static DatabaseFilePath filepath = new DatabaseFilePath("Listings.csv");
 
-    public ListingsCSVController(UserContainer<String, User> users, CreateListing createListing) {
+    public ListingsCSVController(UserContainer<String, User> users) {
+        super("Listings.csv");
+
         this.users = users;
-        this.createListing = createListing;
-    }
-
-    @Override
-    public void read() throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(filepath.getFilePath()));
-        String line;
-        while((line = reader.readLine()) != null){
-            String[] splitLine = line.split(",");
-
-            String username = splitLine[0];
-            int ID = Integer.parseInt(splitLine[1]);
-            int civicAddress = Integer.parseInt(splitLine[2]);
-            String streetName = splitLine[3];
-            String city = splitLine[4];
-            String type = splitLine[5];
-            int bedrooms = Integer.parseInt(splitLine[6]);
-            int bathrooms = Integer.parseInt(splitLine[7]);
-            BigDecimal price = new BigDecimal(splitLine[8]);
-            String info = splitLine[9];
-
-            boolean isUnit = Boolean.parseBoolean(splitLine[10]);
-            int unitNumberFloor = Integer.parseInt(splitLine[11]);
-            if (isUnit) {
-                Listing listing = createListing.addListing(ID, unitNumberFloor, civicAddress, streetName, city, type,
-                        bedrooms, bathrooms, price, info);
-                createListing.addListingToSeller(username, listing);
-                createListing.addListingToCreatedListings(username, listing);
-            }
-            else {
-                Listing listing = createListing.addListing(ID, civicAddress, streetName, city, type, bedrooms,
-                        unitNumberFloor, bathrooms, price, info);
-                createListing.addListingToSeller(username, listing);
-                createListing.addListingToCreatedListings(username, listing);
-            }
-        }
-        reader.close();
     }
 
     @Override

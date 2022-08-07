@@ -10,7 +10,6 @@ import useCases.miscellaneous.GenerateUniqueID;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -28,8 +27,8 @@ public class SendMessages {
      * @param messageContainer MessageContainer
      * @param userContainer    UserContainer
      */
-    public SendMessages(MessageContainer<Integer, Message> messageContainer,
-                        UserContainer<String, User> userContainer, DataInterface i) {
+    public SendMessages(MessageContainer<Integer, Message> messageContainer, UserContainer<String, User> userContainer,
+                        DataInterface i) {
         this.messageContainer = messageContainer;
         this.userContainer = userContainer;
         this.i = i;
@@ -93,29 +92,6 @@ public class SendMessages {
         Message message = new Message(sender, recipient, id, content, datetime);
         messageContainer.put(id, message);
         sender.sendMessage(recipient, message);
-    }
-
-    /**
-     * Creates a list containing all the messages in messageContainer in CSV format
-     *
-     * @return an ArrayList<String> containing all the messages
-     */
-    public ArrayList<String> getMessageStrings() {
-        ArrayList<String> messages = new ArrayList<>();
-        for (Message m : messageContainer.values()) {
-            String messageData = m.getSender().getUsername() +
-                    "," +
-                    m.getRecipient().getUsername() +
-                    "," +
-                    m.getMessageID() +
-                    "," +
-                    m.getContents() +
-                    "," +
-                    m.getFormattedDateTime() +
-                    "\n";
-            messages.add(messageData);
-        }
-        return messages;
     }
 
     /**

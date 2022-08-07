@@ -1,9 +1,10 @@
 package contollers;
-import entities.Buyer;
+
 import entities.Listing;
 import entities.User;
 import entities.containers.ListingContainer;
 import entities.containers.UserContainer;
+import gateways.FavouritesCSVController;
 import useCases.listingUseCases.FavoriteListing;
 
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ public class FavAndUnFavManager {
      * @param users are the users that can favourite listings
      */
     public FavAndUnFavManager(UserContainer<String, User> users, ListingContainer<Integer, Listing> listingContainer) {
-        this.favoriteListing = new FavoriteListing(users, listingContainer);
+        this.favoriteListing = new FavoriteListing(users, listingContainer, new FavouritesCSVController(users));
     }
 
     /**
