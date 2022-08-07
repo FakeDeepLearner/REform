@@ -1,6 +1,7 @@
 import entities.User;
 import entities.containers.UserContainer;
-import useCases.buyerUseCases.CreateBuyer;
+import gateways.BuyersCSVController;
+import useCases.userUseCases.CreateBuyer;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -11,7 +12,7 @@ public class CreateBuyerTest {
     public void testCreatingABuyer() {
         UserContainer<String, User> uc = new UserContainer<>();
 
-        CreateBuyer createBuyer = new CreateBuyer(uc);
+        CreateBuyer createBuyer = new CreateBuyer(uc, new BuyersCSVController(uc));
         createBuyer.createNewBuyer("TestUserName", "TestPW");
 
         assertFalse(createBuyer.getUserContainer().isEmpty());

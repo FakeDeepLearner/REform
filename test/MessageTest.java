@@ -7,7 +7,6 @@ public class MessageTest {
 
     @Test
     public void testMessageDateTime() {
-
         Buyer sender = new Buyer("u1", "pw1");
         Seller receiver = new Seller("u2", "pw2");
 
@@ -16,7 +15,6 @@ public class MessageTest {
         Message m = new Message(sender, receiver, 123, "content", testString);
 
         System.out.println(m);
-
     }
 
 
