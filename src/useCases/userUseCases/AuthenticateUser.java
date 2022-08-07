@@ -26,7 +26,7 @@ public class AuthenticateUser {
         User u;
         try {
             u = interfaceUsers.get(username);
-        } catch (IllegalArgumentException e) {
+        } catch (UserNotFoundException e) {
             return false;
         }
 
