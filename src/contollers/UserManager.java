@@ -5,7 +5,9 @@ import entities.containers.UserContainer;
 import exceptions.UserBannedException;
 import exceptions.UserNotFoundException;
 import exceptions.UsernameAlreadyExistsException;
+import gateways.HistoriesCSVController;
 import useCases.userUseCases.AuthenticateUser;
+import useCases.userUseCases.UpdateUserHistory;
 import useCases.userUseCases.UserFactory;
 
 import java.util.ArrayList;
@@ -15,7 +17,7 @@ public class UserManager {
     private final UserInterface ui;
     private final UserFactory userFactory;
     private final AuthenticateUser auth;
-
+    private final UpdateUserHistory history;
 
     /**
      * Constructor for UserManager
@@ -23,23 +25,11 @@ public class UserManager {
      */
     public UserManager(UserContainer<String, User> users) {
         auth = new AuthenticateUser(users);
+        history = new UpdateUserHistory(users, new HistoriesCSVController(users));
 
         ui = new UserInterface();
         input = new InputHandler(ui);
         userFactory = new UserFactory(users);
-    }
-
-    /**
-     * Constructor for UserManager
-     * @param userFactory creates new users
-     * @param auth is the user authenticator
-     */
-    public UserManager(UserFactory userFactory, AuthenticateUser auth) {
-        this.userFactory = userFactory;
-        this.auth = auth;
-
-        ui = new UserInterface();
-        input = new InputHandler(ui);
     }
 
     /**
@@ -98,6 +88,7 @@ public class UserManager {
 
         if (isLoggedIn) {
             ui.printLoginSuccess();
+            history.addLoginHistory(usernamePassword.get(0));
 
             return usernamePassword.get(0);
         } else {

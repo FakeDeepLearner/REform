@@ -6,6 +6,7 @@ import useCases.DataInterface;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 public class UpdateUserHistory {
@@ -35,6 +36,11 @@ public class UpdateUserHistory {
     public ArrayList<String> getLoginHistory(String username) {
         User user = interfaceUsers.get(username);
         return user.getLoginHistory();
+    }
+
+    public void addLoginHistory(String username) {
+        User user = interfaceUsers.get(username);
+        user.addToLoginHistory((new Date()).toString());
     }
 
     public void addLoginHistory(String username, String newLogin) {
