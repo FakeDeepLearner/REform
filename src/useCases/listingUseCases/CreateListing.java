@@ -35,7 +35,36 @@ public class CreateListing {
     }
 
     public void read() throws IOException {
-        i.read();
+        for (String[] data : i.read()) {
+            String username = data[0];
+            int ID = Integer.parseInt(data[1]);
+            int civicAddress = Integer.parseInt(data[2]);
+            String streetName = data[3];
+            String city = data[4];
+            String type = data[5];
+            int bedrooms = Integer.parseInt(data[6]);
+            int bathrooms = Integer.parseInt(data[7]);
+            BigDecimal price = new BigDecimal(data[8]);
+            String info = data[9];
+
+            boolean isUnit = Boolean.parseBoolean(data[10]);
+            int unitNumberFloor = Integer.parseInt(data[11]);
+
+            Listing listing;
+
+            //Note that this implementation results in the listing id being different from the id in the listing container
+            if (isUnit) {
+                listing = addListing(ID, unitNumberFloor, civicAddress, streetName, city, type,
+                        bedrooms, bathrooms, price, info);
+            }
+            else {
+                listing = addListing(ID, civicAddress, streetName, city, type, bedrooms,
+                        unitNumberFloor, bathrooms, price, info);
+            }
+
+            addListingToSeller(username, listing);
+            addListingToCreatedListings(username, listing);
+        }
     }
 
     public void write() throws IOException {

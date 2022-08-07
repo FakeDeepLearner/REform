@@ -18,7 +18,9 @@ public class UpdateUserHistory {
     }
 
     public void read() throws IOException {
-        i.read();
+        for (String[] data : i.read()) {
+            addLoginHistory(data[0], data[1]);
+        }
     }
 
     public void write() throws IOException {

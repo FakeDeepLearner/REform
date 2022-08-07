@@ -25,7 +25,11 @@ public class CreateSeller {
     }
 
     public void read() throws IOException {
-        i.read();
+        UserFactory userFactory = new UserFactory(userContainer);
+
+        for (String[] data : i.read()) {
+            userFactory.createUser("seller", data[0], data[1]);
+        }
     }
 
     public void write() throws IOException {

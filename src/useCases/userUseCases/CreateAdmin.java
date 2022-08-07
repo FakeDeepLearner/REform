@@ -21,7 +21,11 @@ public class CreateAdmin {
     }
 
     public void read() throws IOException {
-        i.read();
+        UserFactory userFactory = new UserFactory(interfaceUsers);
+
+        for (String[] data : i.read()) {
+            userFactory.createUser("admin", data[0], data[1]);
+        }
     }
 
     public void write() throws IOException {

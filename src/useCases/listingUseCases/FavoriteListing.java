@@ -32,7 +32,10 @@ public class FavoriteListing {
     }
 
     public void read() throws IOException {
-        i.read();
+        for (String[] data : i.read()) {
+            addListingToBuyerFavorites(data[0], Integer.parseInt(data[1]));
+            addCreationToGeneratedFavorites(data[0], Integer.parseInt(data[1]));
+        }
     }
 
     public void write() throws IOException {

@@ -35,7 +35,9 @@ public class SendMessages {
     }
 
     public void read() throws IOException {
-        i.read();
+        for (String[] data : i.read()) {
+            addMessage(data[0], data[1], Integer.parseInt(data[2]), data[3], data[4]);
+        }
     }
 
     public void write() throws IOException {
