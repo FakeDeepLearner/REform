@@ -55,6 +55,7 @@ public class RestrictUser {
         User u = interfaceUsers.get(username);
         if (u instanceof Bannable) {
             interfaceUsers.remove(username);
+
             return true;
         } else {
             return false;

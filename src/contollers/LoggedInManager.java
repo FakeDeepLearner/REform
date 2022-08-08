@@ -228,13 +228,9 @@ public class LoggedInManager {
     private void deleteUser() {
         ui.printDeleteUsernameInput();
         String deleteUser = input.strInput();
+        sendMessages.clearMessages(deleteUser);
         boolean deleted = restrict.deleteNonAdminUser(deleteUser);
         if (deleted) {
-           try {
-               history.write();
-           } catch (IOException e) {
-               ui.printArbitraryException(e);
-            }
             ui.printDeleteUserSuccess(deleteUser);
         } else {
             ui.printDeleteUserFail(deleteUser);
