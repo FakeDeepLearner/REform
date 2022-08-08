@@ -96,12 +96,21 @@ public class SendMessages {
         sender.sendMessage(recipient, message);
     }
 
+    /**
+     * Clears all the messages sent to and received by user
+     *
+     * @param username the username of user to remove all messages to and from
+     */
     public void clearMessages(String username){
         NonAdminUser u = userContainer.getNonAdmin(username);
+        ArrayList<Integer> idsToRemove = new ArrayList<>();
         for(Integer i : messageContainer.keySet()){
             if (messageContainer.get(i).getRecipient() == u || messageContainer.get(i).getSender() == u){
-                messageContainer.remove(i);
+                idsToRemove.add(i);
             }
+        }
+        for(Integer i : idsToRemove){
+            messageContainer.remove(i);
         }
     }
 
