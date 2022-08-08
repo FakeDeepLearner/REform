@@ -60,7 +60,7 @@ public class Buyer extends NonAdminUser {
      * @param id ID of a listing to remove from the favorites
      */
     public void removeFavouriteListing(int id) {
-        favorites.remove((Integer) id);
+        favorites.remove(id);
     }
 
     /**

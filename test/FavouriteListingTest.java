@@ -28,7 +28,7 @@ public class FavouriteListingTest {
         assert !favourite.getBuyerFavouritesID(username).isEmpty();
         assert !favourite.getBuyerFavouritesString(username).isEmpty();
 
-        favourite.removeListingFromBuyerFavorites(username, id);
+        favourite.removeListingFromBuyerFavorites(username, 0);
 
         assert favourite.getBuyerFavouritesID(username).isEmpty();
         assert favourite.getBuyerFavouritesString(username).isEmpty();
