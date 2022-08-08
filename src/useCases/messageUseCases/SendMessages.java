@@ -96,6 +96,15 @@ public class SendMessages {
         sender.sendMessage(recipient, message);
     }
 
+    public void clearMessages(String username){
+        NonAdminUser u = userContainer.getNonAdmin(username);
+        for(Integer i : messageContainer.keySet()){
+            if (messageContainer.get(i).getRecipient() == u || messageContainer.get(i).getSender() == u){
+                messageContainer.remove(i);
+            }
+        }
+    }
+
     /**
      * Get the message inbox of a user
      *
