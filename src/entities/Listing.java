@@ -17,7 +17,7 @@ public class Listing {
     private final int bathrooms;
     private final Integer floors;
     private BigDecimal price;
-    private String info;
+    private final String info;
     private boolean isSold;
 
     enum ListingType {
