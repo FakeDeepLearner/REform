@@ -435,6 +435,7 @@ public class LoggedInManager {
                 int number = input.intInput();
                 ArrayList<Listing> listings = listingProperties.searchByBathrooms(number);
                 ui.printNumberedListings(listingProperties.getListingsStrings(listings));
+                checkAddListingToFavourites(username, listings);
                 break;
             }
 
