@@ -10,6 +10,16 @@ import entities.NonAdminUser;
 
 public class UserContainer<String, User> extends Container<String, User> {
 
+    @Override
+    public User get(Object key) throws IllegalArgumentException {
+        try{
+            return super.get(key);
+        }
+        catch (IllegalArgumentException e){
+            throw new UserNotFoundException();
+        }
+    }
+
     /**
      * @return a container of all the buyers
      */
