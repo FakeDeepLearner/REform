@@ -43,15 +43,6 @@ public class FavoriteListing {
     }
 
     /**
-     * Getter for generatedFavorites
-     *
-     * @return Generated Favorites
-     */
-    public HashMap<String, ArrayList<Integer>> getGeneratedFavorites() {
-        return generatedFavorites;
-    }
-
-    /**
      * Add a Listing object to a Buyer's Favorites
      *
      * @param username  Username of the Buyer

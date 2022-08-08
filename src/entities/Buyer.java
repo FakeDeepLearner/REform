@@ -1,7 +1,6 @@
 package entities;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Buyer extends NonAdminUser {
     private final ArrayList<Integer> favorites;
@@ -41,40 +40,6 @@ public class Buyer extends NonAdminUser {
         this.favorites = favorites;
     }
 
-    /**
-     * Create an offer message
-     *
-     * @param receiver Seller who will receive the offer
-     * @param message  Message of the offer
-     * @return A hashmap with the seller as the key and the message as the value
-     */
-    public HashMap<Seller, String> sendOfferMessage(Seller receiver, String message) {
-        HashMap<Seller, String> offer = new HashMap<>();
-        offer.put(receiver, message);
-
-        return offer;
-    }
-
-    /**
-     * Create an offer message with a price
-     *
-     * @param receiver Seller who will receive the message and the price offer
-     * @param message  Message of the offer
-     * @param price    Offered price
-     * @return Hashmap of the seller as the key and an ArrayList of message and price as the key
-     */
-    public HashMap<Object, ArrayList<Object>> sendOfferMessageWithPrice(Seller receiver, String message, double price) {
-        HashMap<Object, ArrayList<Object>> offer = new HashMap<>();
-
-        ArrayList<Object> messageAndPrice = new ArrayList<>();
-        messageAndPrice.add(message);
-        messageAndPrice.add(price);
-
-        offer.put(receiver, messageAndPrice);
-
-        return offer;
-    }
-
     // Getters and setters
 
     /**
@@ -95,7 +60,7 @@ public class Buyer extends NonAdminUser {
      * @param id ID of a listing to remove from the favorites
      */
     public void removeFavouriteListing(int id) {
-        favorites.remove(id);
+        favorites.remove((Integer) id);
     }
 
     /**
