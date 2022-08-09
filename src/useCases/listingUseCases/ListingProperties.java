@@ -101,7 +101,7 @@ public class ListingProperties {
      * @return ArrayList of Strings containing the String representation of the Listing
      */
     public ArrayList<Listing> searchByFloors(int floors) {
-        Predicate<Listing> property = (listing) -> listing.getFloors() == floors;
+        Predicate<Listing> property = (listing) -> !listing.getIsUnit() && listing.getFloors() == floors;
         return searchByProperty(property);
     }
 

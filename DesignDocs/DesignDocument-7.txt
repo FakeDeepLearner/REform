@@ -1,4 +1,4 @@
-(Design Document 4) A description about how our program follows the 7 principles of universal design
+(Design Document 7) A description about how our program follows the 7 principles of universal design
 
 Principle 1- Equitable Use:
 a) The input and menus work with a simple keyboard input and console output on display. This is the same for all users.
