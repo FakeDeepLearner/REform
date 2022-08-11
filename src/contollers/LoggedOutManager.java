@@ -27,7 +27,7 @@ public class LoggedOutManager {
      * Implements the menu for a user that is logged out
      *
      * @return the username and password associated with a logged-in user
-     * @throws ExitProgramException when the user wants to quit the progran
+     * @throws ExitProgramException when the user wants to quit the program
      */
     public String menuSelector() throws ExitProgramException {
         ui.printWelcomeMessage();
@@ -70,16 +70,10 @@ public class LoggedOutManager {
         ArrayList<Integer> allowedInputs = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5));
         int menuSelect = input.intInput(allowedInputs);
 
-        ArrayList<String> usernamePassword = new ArrayList<>();
-        switch (menuSelect) {
-            case 1:
-                usernamePassword = userManager.createNewUser("BUYER");
-                break;
-            case 2:
-                usernamePassword = userManager.createNewUser("SELLER");
-                break;
-        }
-
-        return usernamePassword;
+        return switch (menuSelect) {
+            case 1 -> userManager.createNewUser("BUYER");
+            case 2 -> userManager.createNewUser("SELLER");
+            default -> new ArrayList<>();
+        };
     }
 }

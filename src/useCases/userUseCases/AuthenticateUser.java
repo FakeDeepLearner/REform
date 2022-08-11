@@ -8,6 +8,8 @@ import exceptions.UserBannedException;
 import exceptions.UserNotFoundException;
 import exceptions.SellerNotFoundException;
 
+
+//TODO: Class can be a record
 public class AuthenticateUser {
     private final UserContainer<String, User> interfaceUsers;
 
@@ -52,18 +54,16 @@ public class AuthenticateUser {
      * Logs specified entities.User u out.
      *
      * @param username the username of the User instance to log out.
-     * @return true when the user is successfully logged out.
      */
-    public boolean logoutUser(String username) {
+    public void logoutUser(String username) {
         User u;
         try {
             u = interfaceUsers.get(username);
         } catch (UserNotFoundException e) {
-            return false;
+            return;
         }
 
         u.setIsLoggedIn(false);
-        return true;
     }
 
     /**

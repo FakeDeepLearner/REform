@@ -19,7 +19,6 @@ import useCases.listingUseCases.CreateListing;
 import useCases.listingUseCases.ListingProperties;
 import useCases.messageUseCases.SendMessages;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -95,41 +94,37 @@ public class LoggedInManager {
 
         int select = input.intInput(allowedInputs);
         switch (select) {
-            case 1:
+            case 1 ->
                 // View listings
-                searchProperties(username);
-                break;
-            case 2:
+                    searchProperties(username);
+            case 2 -> {
                 // View favourite listings
                 viewFavouriteListings(username);
                 checkDeleteFavouriteListing(username);
-                break;
-            case 3:
+            }
+            case 3 ->
                 // Send message
-                messageUser(username);
-                break;
-            case 4:
+                    messageUser(username);
+            case 4 ->
                 // View inbox
-                viewInbox(username);
-                break;
-            case 5:
+                    viewInbox(username);
+            case 5 ->
                 // View outbox
-                viewOutbox(username);
-                break;
-            case 6:
+                    viewOutbox(username);
+            case 6 -> {
                 // View login history
                 ArrayList<String> userHistory = history.getLoginHistory(username);
                 ui.printLoginHistory(userHistory);
-                break;
-            case 7:
+            }
+            case 7 ->
                 //View chat history
-                viewMessageChat(username);
-                break;
-            case 8:
+                    viewMessageChat(username);
+            case 8 -> {
                 // Logout user
                 auth.logoutUser(username);
                 ui.printLogOutSuccess();
                 return false;
+            }
         }
 
         return true;
@@ -149,44 +144,38 @@ public class LoggedInManager {
 
         int select = input.intInput(allowedInputs);
         switch (select) {
-            case 1:
+            case 1 ->
                 // View posted listings
-                ui.printFilteredListings(createListing.getSellerListingsStrings(username));
-                break;
-            case 2:
+                    ui.printFilteredListings(createListing.getSellerListingsStrings(username));
+            case 2 ->
                 // Message user
-                messageUser(username);
-                break;
-            case 3:
+                    messageUser(username);
+            case 3 ->
                 // View inbox
-                viewInbox(username);
-                break;
-            case 4:
+                    viewInbox(username);
+            case 4 ->
                 // View outbox
-                viewOutbox(username);
-                break;
-            case 5:
+                    viewOutbox(username);
+            case 5 ->
                 // Create listing
-                createNewListing(username);
-                break;
-            case 6:
+                    createNewListing(username);
+            case 6 ->
                 // Delete listing
-                deleteListing(username);
-                break;
-            case 7:
+                    deleteListing(username);
+            case 7 -> {
                 // View login history
                 ArrayList<String> userHistory = history.getLoginHistory(username);
                 ui.printLoginHistory(userHistory);
-                break;
-            case 8:
+            }
+            case 8 ->
                 //View chat history
-                viewMessageChat(username);
-                break;
-            case 9:
+                    viewMessageChat(username);
+            case 9 -> {
                 // Logout user
                 auth.logoutUser(username);
                 ui.printLogOutSuccess();
                 return false;
+            }
         }
 
         return true;
@@ -389,67 +378,55 @@ public class LoggedInManager {
 
         int select = input.intInput(allowedInputs);
         switch (select) {
-            case 1: {
+            case 1 -> {
                 // Search by civic address
                 ui.printEnterType("civic address number");
                 int number = input.intInput();
                 ArrayList<Listing> listings = listingProperties.searchByCivicAddress(number);
                 ui.printNumberedListings(listingProperties.getListingsStrings(listings));
                 checkAddListingToFavourites(username, listings);
-                break;
             }
-
-            case 2: {
+            case 2 -> {
                 // Search by street name
                 ui.printEnterType("street name");
                 String street = input.strInput();
                 ArrayList<Listing> listings = listingProperties.searchByStreetName(street);
                 ui.printNumberedListings(listingProperties.getListingsStrings(listings));
                 checkAddListingToFavourites(username, listings);
-                break;
             }
-
-            case 3: {
+            case 3 -> {
                 // Search by city
                 ui.printEnterType("city");
                 String city = input.strInput();
                 ArrayList<Listing> listings = listingProperties.searchByCity(city);
                 ui.printNumberedListings(listingProperties.getListingsStrings(listings));
                 checkAddListingToFavourites(username, listings);
-                break;
             }
-
-            case 4: {
+            case 4 -> {
                 // Search by bedroom number
                 ui.printEnterType("number of bedrooms wanted");
                 int number = input.intInput();
                 ArrayList<Listing> listings = listingProperties.searchByBedrooms(number);
                 ui.printNumberedListings(listingProperties.getListingsStrings(listings));
                 checkAddListingToFavourites(username, listings);
-                break;
             }
-
-            case 5: {
+            case 5 -> {
                 // Search by bathroom number
                 ui.printEnterType("number of bathrooms wanted");
                 int number = input.intInput();
                 ArrayList<Listing> listings = listingProperties.searchByBathrooms(number);
                 ui.printNumberedListings(listingProperties.getListingsStrings(listings));
                 checkAddListingToFavourites(username, listings);
-                break;
             }
-
-            case 6: {
+            case 6 -> {
                 // Search by floor number
                 ui.printEnterType("number of floors wanted");
                 int number = input.intInput();
                 ArrayList<Listing> listings = listingProperties.searchByFloors(number);
                 ui.printNumberedListings(listingProperties.getListingsStrings(listings));
                 checkAddListingToFavourites(username, listings);
-                break;
             }
-
-            case 7: {
+            case 7 -> {
                 // Search by price
                 ui.printEnterType("minimum price");
                 BigDecimal min = input.bigDecimalInput();
@@ -457,15 +434,13 @@ public class LoggedInManager {
                 BigDecimal max = input.bigDecimalInput();
 
                 ui.printEnterType("Sort By 1-Ascending 2-Descending");
-                ArrayList<Integer> allowedInputSort = new ArrayList<>(Arrays. asList(1, 2));
+                ArrayList<Integer> allowedInputSort = new ArrayList<>(Arrays.asList(1, 2));
                 int order = input.intInput(allowedInputSort);
                 ArrayList<Listing> listings = listingProperties.searchByPrice(max, min, order);
                 ui.printNumberedListings(listingProperties.getListingsStrings(listings));
                 checkAddListingToFavourites(username, listings);
-                break;
             }
-
-            case 8: {
+            case 8 -> {
                 // Search by listing type
                 ui.printEnterType("listing type (apartment, house, townhouse) wanted");
                 String[] inputsAllowed = {"apartment", "house", "townhouse"};
@@ -473,7 +448,6 @@ public class LoggedInManager {
                 ArrayList<Listing> listings = listingProperties.searchByListingType(type);
                 ui.printNumberedListings(listingProperties.getListingsStrings(listings));
                 checkAddListingToFavourites(username, listings);
-                break;
             }
         }
     }
@@ -525,32 +499,29 @@ public class LoggedInManager {
 
         int select = input.intInput(allowedInputs);
         switch (select) {
-            case 1:
+            case 1 -> {
                 // View login history
                 ArrayList<String> userHistory = history.getLoginHistory(username);
                 ui.printLoginHistory(userHistory);
-                break;
-            case 2:
+            }
+            case 2 ->
                 // Create new admin user
-                userManager.createNewUser("ADMIN");
-                break;
-            case 3:
+                    userManager.createNewUser("ADMIN");
+            case 3 ->
                 // Ban or unban user
-                updateUserBanStatus();
-                break;
-            case 4:
+                    updateUserBanStatus();
+            case 4 ->
                 // Delete user
-                deleteUser();
-                break;
-            case 5:
+                    deleteUser();
+            case 5 ->
                 //View chat history between 2 users
-                viewMessageChatAdminVersion();
-                break;
-            case 6:
+                    viewMessageChatAdminVersion();
+            case 6 -> {
                 // Logout user
                 auth.logoutUser(username);
                 ui.printLogOutSuccess();
                 return false;
+            }
         }
 
         return true;

@@ -23,6 +23,7 @@ public class AuthenticateUserTest {
             assert users.get("a1").isLoggedIn();
 
         } catch(UserBannedException e) {
+            //TODO: Warning from IntelliJ
             System.out.println(e);
         }
     }

@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-
+//TODO: IntelliJ warning
 public class SendMessages {
 
     private final MessageContainer<Integer, Message> messageContainer;
@@ -80,11 +80,12 @@ public class SendMessages {
 
     /**
      * Add previously sent messages that have an id and require a datetime stamp to messageContainer
-     * @param senderUsername the username of the sender
+     *
+     * @param senderUsername    the username of the sender
      * @param recipientUsername the username of the recipient
-     * @param id the id of the message being sent
-     * @param content the content of the message
-     * @param datetime the datetime stamp of the message in the format dd-MM-yyyy HH:mm:ss
+     * @param id                the id of the message being sent
+     * @param content           the content of the message
+     * @param datetime          the datetime stamp of the message in the format dd-MM-yyyy HH:mm:ss
      */
     public void addMessage(String senderUsername, String recipientUsername,
                            int id, String content, String datetime) {
@@ -101,15 +102,15 @@ public class SendMessages {
      *
      * @param username the username of user to remove all messages to and from
      */
-    public void clearMessages(String username){
+    public void clearMessages(String username) {
         NonAdminUser u = userContainer.getNonAdmin(username);
         ArrayList<Integer> idsToRemove = new ArrayList<>();
-        for(Integer i : messageContainer.keySet()){
-            if (messageContainer.get(i).getRecipient() == u || messageContainer.get(i).getSender() == u){
+        for (Integer i : messageContainer.keySet()) {
+            if (messageContainer.get(i).getRecipient() == u || messageContainer.get(i).getSender() == u) {
                 idsToRemove.add(i);
             }
         }
-        for(Integer i : idsToRemove){
+        for (Integer i : idsToRemove) {
             messageContainer.remove(i);
         }
     }

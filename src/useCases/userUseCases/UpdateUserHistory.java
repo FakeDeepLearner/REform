@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
-
+// TODO: Class can be a record
 public class UpdateUserHistory {
     private final UserContainer<String, User> interfaceUsers;
     public final DataInterface i;
