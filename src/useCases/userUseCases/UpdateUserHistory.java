@@ -11,7 +11,7 @@ import java.util.Date;
 
 public class UpdateUserHistory {
     private final UserContainer<String, User> interfaceUsers;
-    public DataInterface i;
+    public final DataInterface i;
 
     public UpdateUserHistory(UserContainer<String, User> interfaceUsers, DataInterface i) {
         this.interfaceUsers = interfaceUsers;

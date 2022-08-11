@@ -17,29 +17,6 @@ public class Buyer extends NonAdminUser {
 
     }
 
-    /**
-     * @param username  Username of the buyer
-     * @param password  Password of the buyer
-     * @param favorites Arraylist of favourite listings IDs
-     */
-    public Buyer(String username, String password, ArrayList<Integer> favorites) {
-        super(username, password);
-        this.favorites = favorites;
-    }
-
-    /**
-     * @param username     Username of the buyer
-     * @param password     Password of the buyer
-     * @param loginHistory Arraylist of the login history of the buyer
-     * @param favorites    Arraylist of favourite listings IDs
-     */
-
-    public Buyer(String username, String password, ArrayList<String> loginHistory,
-                 ArrayList<Integer> favorites) {
-        super(username, password, loginHistory);
-        this.favorites = favorites;
-    }
-
     // Getters and setters
 
     /**

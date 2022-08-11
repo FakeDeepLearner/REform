@@ -1,14 +1,16 @@
 package useCases.listingUseCases;
 
-import entities.containers.ListingContainer;
 import entities.Listing;
+import entities.containers.ListingContainer;
 
-import java.sql.SQLOutput;
-import java.util.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 
+// TODO: Class can be a record
 public class ListingProperties {
 
     private final ListingContainer<Integer, Listing> listingContainer;

@@ -18,7 +18,7 @@ public class SendMessages {
 
     private final MessageContainer<Integer, Message> messageContainer;
     private final UserContainer<String, User> userContainer;
-    public DataInterface i;
+    public final DataInterface i;
 
 
     /**
@@ -142,9 +142,6 @@ public class SendMessages {
         ArrayList<String> messages = new ArrayList<>();
         NonAdminUser user = userContainer.getNonAdmin(username);
 
-//        for (Message m : user.getOutbox().values()) {
-//            messages.add(m.toString());
-//        }
         SortedSet<Message> values = new TreeSet<>(user.getOutbox().values());
 
         for (Message m : values) {

@@ -28,22 +28,6 @@ public class UserFactory {
     }
 
     /**
-     * Factory for creating users
-     *
-     * @param createAdmin    use case for creating an Admin
-     * @param createBuyer   use case for creating a Buyer
-     * @param createSeller  use case for creating a Seller
-     * @param userContainer is a hash map that relates usernames to a User objects
-     */
-    public UserFactory(CreateAdmin createAdmin, CreateBuyer createBuyer, CreateSeller createSeller,
-                       UserContainer<String, User> userContainer) {
-        this.createAdmin = createAdmin;
-        this.createBuyer = createBuyer;
-        this.createSeller = createSeller;
-        this.userContainer = userContainer;
-    }
-
-    /**
      * Checks whether a given username already is associated with a User object
      *
      * @param username to be queried

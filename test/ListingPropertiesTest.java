@@ -13,15 +13,15 @@ import java.util.ArrayList;
 
 
 public class ListingPropertiesTest {
-    ListingContainer<Integer, Listing> lc = new ListingContainer<>();
-    UserContainer<String, User> uc = new UserContainer<>();
+    final ListingContainer<Integer, Listing> lc = new ListingContainer<>();
+    final UserContainer<String, User> uc = new UserContainer<>();
 
-    CreateListing createListing = new CreateListing(lc, uc, new ListingsCSVController(uc));
+    final CreateListing createListing = new CreateListing(lc, uc, new ListingsCSVController(uc));
 
-    Listing l1 = createListing.addListing(1,1,1,"ABC street","ABC city","APARTMENT",2,2,new BigDecimal(123456), "test1");
-    Listing l2 = createListing.addListing(2,2,"ABC street","ABCD city","APARTMENT",2,2,1,new BigDecimal(12345), "test2");
-    Listing l3 = createListing.addListing(3,1,1,"ABC street","ABC city","APARTMENT",2,2,new BigDecimal(12345678), "test3");
-    ListingProperties listingProperties = new ListingProperties(lc);
+    final Listing l1 = createListing.addListing(1,1,1,"ABC street","ABC city","APARTMENT",2,2,new BigDecimal(123456), "test1");
+    final Listing l2 = createListing.addListing(2,2,"ABC street","ABCD city","APARTMENT",2,2,1,new BigDecimal(12345), "test2");
+    final Listing l3 = createListing.addListing(3,1,1,"ABC street","ABC city","APARTMENT",2,2,new BigDecimal(12345678), "test3");
+    final ListingProperties listingProperties = new ListingProperties(lc);
 
 
     @Test()

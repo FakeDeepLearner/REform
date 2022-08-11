@@ -10,7 +10,7 @@ import java.util.HashMap;
 
 public class CreateAdmin {
     private final UserContainer<String, User> interfaceUsers;
-    public DataInterface i;
+    public final DataInterface i;
 
     private final HashMap<String, AdminUser> createdAdmins;
 
@@ -38,7 +38,4 @@ public class CreateAdmin {
         createdAdmins.put(username, user);
     }
 
-    public HashMap<String, AdminUser> getCreatedAdmins() {
-        return createdAdmins;
-    }
 }

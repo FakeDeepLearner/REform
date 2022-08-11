@@ -83,9 +83,6 @@ public class Message implements Comparable<Message> {
         return sender;
     }
 
-    public LocalDateTime getDatetime() {
-        return datetime;
-    }
 
     /**
      * Format and print all the information about this message

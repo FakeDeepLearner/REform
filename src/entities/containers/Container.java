@@ -32,13 +32,4 @@ public abstract class Container<K, V> extends HashMap<K, V> {
         return str.toString();
     }
 
-    /**
-     * @param key the key whose associated value's string representation is desired
-     * @return the string representation of the value associated with key
-     */
-    public String getInfo(K key) {
-        V value = get(key);
-
-        return value.toString();
-    }
 }

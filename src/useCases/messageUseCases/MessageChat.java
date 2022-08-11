@@ -84,5 +84,4 @@ public class MessageChat {
         return out;
     }
 
-
 }

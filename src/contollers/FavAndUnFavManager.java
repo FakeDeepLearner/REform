@@ -21,22 +21,6 @@ public class FavAndUnFavManager {
     }
 
     /**
-     * Constructor for FavAndUnFavManager
-     * @param favoriteListing the favourite listing
-     */
-    public FavAndUnFavManager(FavoriteListing favoriteListing) {
-        this.favoriteListing = favoriteListing;
-    }
-
-    /**
-     * Getter for favouriteListing
-     * @return favouriteListing
-     */
-    public FavoriteListing getFavoriteListing() {
-        return favoriteListing;
-    }
-
-    /**
      * Add a listing to the buyer's favourites
      * @param username the username of the buyer
      * @param listingID the id of the listing to be favourite'd

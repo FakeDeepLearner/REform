@@ -45,13 +45,4 @@ public class DatabaseFilePath {
         return filePath;
     }
 
-    /**
-     * Static method to return the path of the database directory.
-     *
-     * @return The directory path of the database
-     */
-    public static String getDatabasePath() {
-        return System.getProperty("user.dir") + File.separator +
-                "src" + File.separator + "RealEstate" + File.separator + "database" + File.separator;
-    }
 }

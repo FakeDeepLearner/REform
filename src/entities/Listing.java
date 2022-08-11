@@ -16,9 +16,9 @@ public class Listing {
     private final int bedrooms;
     private final int bathrooms;
     private final Integer floors;
-    private BigDecimal price;
+    private final BigDecimal price;
     private final String info;
-    private boolean isSold;
+    private final boolean isSold;
 
     enum ListingType {
         APARTMENT,
@@ -181,13 +181,6 @@ public class Listing {
     }
 
     /**
-     * @param price the new price to be set
-     */
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
-    /**
      * @return the price of the listing
      */
     public BigDecimal getPrice() {
@@ -213,13 +206,6 @@ public class Listing {
      */
     public boolean getIsUnit() {
         return isUnit;
-    }
-
-    /**
-     * Sells a listing by updating its isSold status
-     */
-    public void sell() {
-        isSold = true;
     }
 
     /**

@@ -78,11 +78,4 @@ public class Seller extends NonAdminUser {
         return builder.toString();
     }
 
-    /**
-     *
-     * @return String representation of seller's listings
-     */
-    public String listingsAsString(){
-        return listings.toString();
-    }
 }

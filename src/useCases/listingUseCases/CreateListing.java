@@ -18,7 +18,7 @@ public class CreateListing {
     private final UserContainer<String, User> userContainer;
     private final HashMap<String, ArrayList<Listing>> createdListings;
 
-    public DataInterface i;
+    public final DataInterface i;
 
 
     /**

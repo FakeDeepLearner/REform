@@ -11,7 +11,7 @@ import java.util.HashMap;
 public class CreateSeller {
     private final UserContainer<String, User> userContainer;
     private final HashMap<String, Seller> createdSellers;
-    public DataInterface i;
+    public final DataInterface i;
 
     /**
      * Constructor for the CreateSeller Class

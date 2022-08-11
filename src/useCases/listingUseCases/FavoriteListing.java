@@ -16,7 +16,7 @@ public class FavoriteListing {
     private final ListingContainer<Integer, Listing> listingContainer;
 
     private final HashMap<String, ArrayList<Integer>> generatedFavorites;
-    public DataInterface i;
+    public final DataInterface i;
 
     /**
      * Create a FavoriteListing class

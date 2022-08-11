@@ -12,7 +12,7 @@ public class CreateBuyer {
     private final UserContainer<String, User> userContainer;
 
     private final HashMap<String, Buyer> createdBuyers;
-    public DataInterface i;
+    public final DataInterface i;
 
     /**
      * Initialize the CreateBuyer Class
