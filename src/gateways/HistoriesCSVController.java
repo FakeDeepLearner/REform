@@ -2,7 +2,6 @@ package gateways;
 
 import entities.User;
 import entities.containers.UserContainer;
-import useCases.CSVUseCases.csvFilePath;
 
 import java.io.*;
 
@@ -17,7 +16,7 @@ public class HistoriesCSVController extends CSVController {
 
     @Override
     public void write() throws IOException {
-        BufferedWriter bw = new BufferedWriter(new FileWriter(csvFilePath.getDatabasePath() + "Histories.csv", false));
+        BufferedWriter bw = new BufferedWriter(new FileWriter(filepath.getFilePath(), false));
 
         for (String username : users.keySet()) {
             for (String loginHistory : users.get(username).getLoginHistory()) {
