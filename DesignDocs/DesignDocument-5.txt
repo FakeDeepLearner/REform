@@ -1,0 +1,11 @@
+All design pattern(s) you implemented (why and how, commit hashes if possible)
+
+Used the Dependency Injection design pattern to avoid circular dependencies in the gateway classes.
+
+Used Factory to create appropriate type of User
+
+Created a ProgramController class to behave like a Builder (although it is not exactly a builder) in order to simplify the Main class.  
+
+
+My contribution to Phase 2 was creating MessageChat class to implement chat feature. This also required adding Comparable and DateTime variable to the Listing class. Other minor contributions are adding unit tests, fixing bugs in the sendMessages class, and fixing the IntelliJ warnings for the final submission. - Andrew
+
