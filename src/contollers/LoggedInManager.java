@@ -19,7 +19,6 @@ import useCases.listingUseCases.CreateListing;
 import useCases.listingUseCases.ListingProperties;
 import useCases.messageUseCases.SendMessages;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;

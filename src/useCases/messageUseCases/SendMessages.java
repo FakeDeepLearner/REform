@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-//TODO: IntelliJ warning
 public class SendMessages {
 
     private final MessageContainer<Integer, Message> messageContainer;

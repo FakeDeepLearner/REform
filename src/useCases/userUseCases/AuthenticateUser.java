@@ -9,7 +9,6 @@ import exceptions.UserNotFoundException;
 import exceptions.SellerNotFoundException;
 
 
-//TODO: Class can be a record
 public class AuthenticateUser {
     private final UserContainer<String, User> interfaceUsers;
 

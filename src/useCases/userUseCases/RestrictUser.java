@@ -7,7 +7,6 @@ import entities.containers.UserContainer;
 import exceptions.UserCannotBeBannedException;
 
 
-// TODO: IntelliJ suggests this class can be a record
 public class RestrictUser {
     private final UserContainer<String, User> interfaceUsers;
 

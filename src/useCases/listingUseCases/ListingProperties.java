@@ -9,8 +9,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.function.Predicate;
 
-
-// TODO: Class can be a record
 public class ListingProperties {
 
     private final ListingContainer<Integer, Listing> listingContainer;
