@@ -33,12 +33,18 @@ public class SendMessages {
         this.i = i;
     }
 
+    /**
+     * Read data from csv files
+     */
     public void read() throws IOException {
         for (String[] data : i.read()) {
             addMessage(data[0], data[1], Integer.parseInt(data[2]), data[3], data[4]);
         }
     }
 
+    /**
+     * Write data to csv files
+     */
     public void write() throws IOException {
         i.write();
     }

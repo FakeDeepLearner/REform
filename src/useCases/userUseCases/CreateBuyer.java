@@ -25,6 +25,9 @@ public class CreateBuyer {
         this.i = i;
     }
 
+    /**
+     * Read data from csv files
+     */
     public void read() throws IOException {
         UserFactory userFactory = new UserFactory(userContainer);
 
@@ -33,6 +36,9 @@ public class CreateBuyer {
         }
     }
 
+    /**
+     * Write data to csv files
+     */
     public void write() throws IOException {
         i.write();
     }

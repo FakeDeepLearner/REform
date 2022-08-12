@@ -31,6 +31,9 @@ public class FavoriteListing {
         this.i = i;
     }
 
+    /**
+     * Read data from csv files
+     */
     public void read() throws IOException {
         for (String[] data : i.read()) {
             addListingToBuyerFavorites(data[0], Integer.parseInt(data[1]));
@@ -38,6 +41,9 @@ public class FavoriteListing {
         }
     }
 
+    /**
+     * Write data to csv files
+     */
     public void write() throws IOException {
         i.write();
     }

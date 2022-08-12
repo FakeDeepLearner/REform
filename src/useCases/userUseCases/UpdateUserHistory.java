@@ -17,12 +17,18 @@ public class UpdateUserHistory {
         this.i = i;
     }
 
+    /**
+     * Read data from csv files
+     */
     public void read() throws IOException {
         for (String[] data : i.read()) {
             addLoginHistory(data[0], data[1]);
         }
     }
 
+    /**
+     * Write data to csv files
+     */
     public void write() throws IOException {
         i.write();
     }

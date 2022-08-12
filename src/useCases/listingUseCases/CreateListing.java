@@ -34,6 +34,9 @@ public class CreateListing {
         this.i = i;
     }
 
+    /**
+     * Read data from csv files
+     */
     public void read() throws IOException {
         for (String[] data : i.read()) {
             String username = data[0];
@@ -67,6 +70,9 @@ public class CreateListing {
         }
     }
 
+    /**
+     * Write data to csv files
+     */
     public void write() throws IOException {
         i.write();
     }

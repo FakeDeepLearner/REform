@@ -16,6 +16,9 @@ public class CreateAdmin {
         this.i = i;
     }
 
+    /**
+     * Read data from csv files
+     */
     public void read() throws IOException {
         UserFactory userFactory = new UserFactory(interfaceUsers);
 
@@ -24,6 +27,9 @@ public class CreateAdmin {
         }
     }
 
+    /**
+     * Write data to csv files
+     */
     public void write() throws IOException {
         i.write();
     }
