@@ -3,7 +3,7 @@ import entities.containers.MessageContainer;
 
 import java.util.ArrayList;
 
-public class Seller extends NonAdminUser {
+public non-sealed class Seller extends NonAdminUser {
     private ArrayList<Listing> listings;
 
     /**

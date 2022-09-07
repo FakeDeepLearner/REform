@@ -2,7 +2,7 @@ package entities;
 
 import java.util.ArrayList;
 
-public class Buyer extends NonAdminUser {
+public non-sealed class Buyer extends NonAdminUser{
     private final ArrayList<Integer> favorites;
 
     /**

@@ -2,7 +2,7 @@ package entities.containers;
 
 import exceptions.ListingNotFoundException;
 
-public class ListingContainer<Integer, Listing> extends Container<Integer, Listing> {
+public non-sealed class ListingContainer<Integer, Listing> extends Container<Integer, Listing> {
     /**
      * @param key the key whose associated value is to be returned
      * @return the value associated with key

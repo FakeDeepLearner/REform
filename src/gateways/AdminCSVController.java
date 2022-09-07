@@ -7,7 +7,7 @@ import entities.containers.UserContainer;
 import java.io.*;
 import java.util.HashMap;
 
-public class AdminCSVController extends CSVController {
+public non-sealed class AdminCSVController extends CSVController {
     private final UserContainer<String, User> users;
 
     public AdminCSVController(UserContainer<String, User> users) {

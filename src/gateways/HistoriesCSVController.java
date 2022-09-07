@@ -5,7 +5,7 @@ import entities.containers.UserContainer;
 
 import java.io.*;
 
-public class HistoriesCSVController extends CSVController {
+public non-sealed class HistoriesCSVController extends CSVController {
     private final UserContainer<String, User> users;
 
     public HistoriesCSVController(UserContainer<String, User> users) {

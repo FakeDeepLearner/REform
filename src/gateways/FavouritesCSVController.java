@@ -8,7 +8,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class FavouritesCSVController extends CSVController {
+public non-sealed class FavouritesCSVController extends CSVController {
     final private UserContainer<String, User> users;
 
     public FavouritesCSVController(UserContainer<String, User> users){

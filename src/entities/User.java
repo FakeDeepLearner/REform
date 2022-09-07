@@ -1,8 +1,9 @@
 package entities;
-
 import java.util.ArrayList;
 
-public abstract class User {
+public abstract sealed class User
+permits AdminUser, NonAdminUser
+{
     private final String username;
     private final String password;
     private final ArrayList<String> loginHistory;

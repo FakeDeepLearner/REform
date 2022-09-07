@@ -9,7 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 
-public class SellersCSVController extends CSVController {
+public non-sealed class SellersCSVController extends CSVController {
     private final UserContainer<String, User> users;
 
     public SellersCSVController(UserContainer<String, User> users){

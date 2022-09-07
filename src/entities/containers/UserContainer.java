@@ -8,7 +8,7 @@ import exceptions.BuyerNotFoundException;
 import exceptions.SellerNotFoundException;
 import entities.NonAdminUser;
 
-public class UserContainer<String, User> extends Container<String, User> {
+public non-sealed class UserContainer<String, User> extends Container<String, User> {
 
     @Override
     public User get(Object key) throws IllegalArgumentException {

@@ -2,7 +2,9 @@ package entities.containers;
 
 import java.util.HashMap;
 
-public abstract class Container<K, V> extends HashMap<K, V> {
+public abstract sealed class Container<K, V> extends HashMap<K, V>
+permits ListingContainer, MessageContainer, UserContainer
+{
     /**
      * @param key the key whose associated value is to be returned
      * @return the value associated with key

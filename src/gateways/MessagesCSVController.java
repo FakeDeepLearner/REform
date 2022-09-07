@@ -7,7 +7,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class MessagesCSVController extends CSVController {
+public non-sealed class MessagesCSVController extends CSVController {
 
     private final MessageContainer<Integer, Message> messages;
 

@@ -4,7 +4,11 @@ import entities.containers.MessageContainer;
 
 import java.util.ArrayList;
 
-public abstract class NonAdminUser extends User implements Bannable {
+public abstract sealed class NonAdminUser
+extends User
+implements Bannable
+permits Buyer, Seller
+{
     private boolean isBanned = false;
     protected MessageContainer<Integer, Message> outbox;
     protected MessageContainer<Integer, Message> inbox;

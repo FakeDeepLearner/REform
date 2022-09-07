@@ -1,6 +1,6 @@
 package entities;
 
-public class AdminUser extends User {
+public non-sealed class AdminUser extends User {
     /**
      * Creates an instance of an AdminUser
      *

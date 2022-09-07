@@ -10,7 +10,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.math.BigDecimal;
 
-public class ListingsCSVController extends CSVController {
+public non-sealed class ListingsCSVController extends CSVController {
     private final UserContainer<String, User> users;
 
     public ListingsCSVController(UserContainer<String, User> users) {

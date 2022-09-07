@@ -2,7 +2,7 @@ package entities.containers;
 
 import exceptions.MessageNotFoundException;
 
-public class MessageContainer<Integer, Message> extends Container<Integer, Message> {
+public non-sealed class MessageContainer<Integer, Message> extends Container<Integer, Message> {
     /**
      * @param key the key whose associated value is to be returned
      * @return the value associated with key

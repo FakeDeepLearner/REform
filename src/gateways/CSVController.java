@@ -7,7 +7,10 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class CSVController implements DataInterface {
+public abstract sealed class CSVController implements DataInterface
+permits AdminCSVController, BuyersCSVController, FavouritesCSVController, HistoriesCSVController,
+ListingsCSVController, MessagesCSVController, SellersCSVController
+{
     protected final DatabaseFilePath filepath;
 
     public CSVController(String fileName) {
