@@ -16,7 +16,7 @@ public class Listing {
     private final int bedrooms;
     private final int bathrooms;
     private final Integer floors;
-    private final BigDecimal price;
+    private BigDecimal price;
     private final String info;
     private final boolean isSold;
 
@@ -185,6 +185,14 @@ public class Listing {
      */
     public BigDecimal getPrice() {
         return price;
+    }
+
+    /**
+     * Set the price of the listing.
+     * @param price the new price
+     * */
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 
     /**

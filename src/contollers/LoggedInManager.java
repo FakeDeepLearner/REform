@@ -10,6 +10,7 @@ import exceptions.UserNotFoundException;
 import gateways.HistoriesCSVController;
 import gateways.ListingsCSVController;
 import gateways.MessagesCSVController;
+import useCases.listingUseCases.UpdatePrice;
 import useCases.messageUseCases.MessageChat;
 import useCases.userUseCases.AuthenticateUser;
 import useCases.userUseCases.RestrictUser;
@@ -37,6 +38,7 @@ public class LoggedInManager {
     private final CreateListing createListing;
     private final FavAndUnFavManager favAndUnFavManager;
     private final MessageChat messageChat;
+    private final UpdatePrice updatePrice;
 
 
     /**
@@ -60,6 +62,7 @@ public class LoggedInManager {
         ui = new UserInterface();
         input = new InputHandler(ui);
         messageChat = new MessageChat(messages);
+        updatePrice = new UpdatePrice(listings);
     }
 
     /**
@@ -144,7 +147,7 @@ public class LoggedInManager {
         ui.printSellerLoginMenu();
 
         ArrayList<Integer> allowedInputs = new ArrayList<>();
-        Collections.addAll(allowedInputs, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+        Collections.addAll(allowedInputs, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 
         int select = input.intInput(allowedInputs);
         switch (select) {
@@ -153,35 +156,38 @@ public class LoggedInManager {
                 ui.printFilteredListings(createListing.getSellerListingsStrings(username));
                 break;
             case 2:
+                updateListingPrice(username);
+                break;
+            case 3:
                 // Message user
                 messageUser(username);
                 break;
-            case 3:
+            case 4:
                 // View inbox
                 viewInbox(username);
                 break;
-            case 4:
+            case 5:
                 // View outbox
                 viewOutbox(username);
                 break;
-            case 5:
+            case 6:
                 // Create listing
                 createNewListing(username);
                 break;
-            case 6:
+            case 7:
                 // Delete listing
                 deleteListing(username);
                 break;
-            case 7:
+            case 8:
                 // View login history
                 ArrayList<String> userHistory = history.getLoginHistory(username);
                 ui.printLoginHistory(userHistory);
                 break;
-            case 8:
+            case 9:
                 //View chat history
                 viewMessageChat(username);
                 break;
-            case 9:
+            case 10:
                 // Logout user
                 auth.logoutUser(username);
                 ui.printLogOutSuccess();
@@ -490,6 +496,19 @@ public class LoggedInManager {
         String secondUsername = input.strInput();
         messageChat.printChatHistory(firstUsername, secondUsername);
     }
+
+    private void updateListingPrice(String username){
+        ArrayList<String> printedListings = createListing.getSellerListingsStrings(username);
+        ArrayList<Listing> listings = createListing.getSellerListings(username);
+        ui.printNumberedListings(printedListings);
+        ui.printEnterType("the number of the listing that you wish to modify.");
+        int number = input.intInput(1, printedListings.size());
+        ui.printEnterType("the new price");
+        BigDecimal newPrice = BigDecimal.valueOf(input.intInput());
+        Integer listingID = listings.get(number - 1).getId();
+        updatePrice.changePrice(listingID, newPrice);
+    }
+
 
     /**
      * Displays the messages inbox of the logged-in user
