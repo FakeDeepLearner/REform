@@ -1,8 +1,8 @@
-package useCases;
+package gateways;
 import java.io.IOException;
 import java.util.List;
 
-public interface DataInterface {
+public sealed interface DataInterface permits CSVController {
 
     /**
      * Reads the associated csv file, and populates the necessary containers.

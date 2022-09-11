@@ -3,7 +3,7 @@ package useCases.userUseCases;
 import entities.User;
 import entities.containers.UserContainer;
 import entities.Buyer;
-import useCases.DataInterface;
+import gateways.DataInterface;
 
 import java.io.IOException;
 import java.util.HashMap;

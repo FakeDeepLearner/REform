@@ -1,7 +1,6 @@
 package gateways;
 
 import useCases.CSVUseCases.DatabaseFilePath;
-import useCases.DataInterface;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -9,7 +8,7 @@ import java.util.List;
 
 public abstract sealed class CSVController implements DataInterface
 permits AdminCSVController, BuyersCSVController, FavouritesCSVController, HistoriesCSVController,
-ListingsCSVController, MessagesCSVController, SellersCSVController
+ListingsCSVController, MessagesCSVController, SellersCSVController, ReportsCSVController
 {
     protected final DatabaseFilePath filepath;
 

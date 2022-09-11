@@ -5,7 +5,7 @@ import entities.containers.UserContainer;
 import entities.Listing;
 import entities.containers.ListingContainer;
 import entities.Seller;
-import useCases.DataInterface;
+import gateways.DataInterface;
 import useCases.miscellaneous.GenerateUniqueID;
 
 import java.io.IOException;

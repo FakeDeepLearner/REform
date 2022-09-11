@@ -1,17 +1,21 @@
 package contollers;
 
 import entities.Message;
+import entities.ReportMessage;
 import entities.User;
 import entities.containers.ListingContainer;
 import entities.containers.MessageContainer;
+import entities.containers.ReportContainer;
 import entities.containers.UserContainer;
 import exceptions.UserCannotBeBannedException;
 import exceptions.UserNotFoundException;
 import gateways.HistoriesCSVController;
 import gateways.ListingsCSVController;
 import gateways.MessagesCSVController;
+import gateways.ReportsCSVController;
 import useCases.listingUseCases.UpdatePrice;
 import useCases.messageUseCases.MessageChat;
+import useCases.messageUseCases.SendReportMessage;
 import useCases.userUseCases.AuthenticateUser;
 import useCases.userUseCases.RestrictUser;
 import useCases.userUseCases.UpdateUserHistory;
@@ -39,7 +43,7 @@ public class LoggedInManager {
     private final FavAndUnFavManager favAndUnFavManager;
     private final MessageChat messageChat;
     private final UpdatePrice updatePrice;
-
+    private final SendReportMessage sendReportMessage;
 
     /**
      * Constructor for LoggedInManager
@@ -48,7 +52,7 @@ public class LoggedInManager {
      * @param listings is the container that stores listings
      */
     public LoggedInManager(UserContainer<String, User> users, MessageContainer<Integer, Message> messages,
-                           ListingContainer<Integer, Listing> listings) {
+                           ListingContainer<Integer, Listing> listings, ReportContainer<ReportMessage, Integer> reports) {
 
         auth = new AuthenticateUser(users);
         history = new UpdateUserHistory(users, new HistoriesCSVController(users));
@@ -63,6 +67,7 @@ public class LoggedInManager {
         input = new InputHandler(ui);
         messageChat = new MessageChat(messages);
         updatePrice = new UpdatePrice(listings);
+        sendReportMessage = new SendReportMessage(users, messages, reports, new ReportsCSVController(reports));
     }
 
     /**
@@ -93,7 +98,7 @@ public class LoggedInManager {
         ui.printBuyerLoginMenu();
 
         ArrayList<Integer> allowedInputs = new ArrayList<>();
-        Collections.addAll(allowedInputs, 1, 2, 3, 4, 5, 6, 7, 8);
+        Collections.addAll(allowedInputs, 1, 2, 3, 4, 5, 6, 7, 8, 9);
 
         int select = input.intInput(allowedInputs);
         switch (select) {
@@ -119,15 +124,18 @@ public class LoggedInManager {
                 viewOutbox(username);
                 break;
             case 6:
+                reportUser(username);
+                break;
+            case 7:
                 // View login history
                 ArrayList<String> userHistory = history.getLoginHistory(username);
                 ui.printLoginHistory(userHistory);
                 break;
-            case 7:
+            case 8:
                 //View chat history
                 viewMessageChat(username);
                 break;
-            case 8:
+            case 9:
                 // Logout user
                 auth.logoutUser(username);
                 ui.printLogOutSuccess();
@@ -147,7 +155,7 @@ public class LoggedInManager {
         ui.printSellerLoginMenu();
 
         ArrayList<Integer> allowedInputs = new ArrayList<>();
-        Collections.addAll(allowedInputs, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+        Collections.addAll(allowedInputs, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11);
 
         int select = input.intInput(allowedInputs);
         switch (select) {
@@ -171,23 +179,26 @@ public class LoggedInManager {
                 viewOutbox(username);
                 break;
             case 6:
+                reportUser(username);
+                break;
+            case 7:
                 // Create listing
                 createNewListing(username);
                 break;
-            case 7:
+            case 8:
                 // Delete listing
                 deleteListing(username);
                 break;
-            case 8:
+            case 9:
                 // View login history
                 ArrayList<String> userHistory = history.getLoginHistory(username);
                 ui.printLoginHistory(userHistory);
                 break;
-            case 9:
+            case 10:
                 //View chat history
                 viewMessageChat(username);
                 break;
-            case 10:
+            case 11:
                 // Logout user
                 auth.logoutUser(username);
                 ui.printLogOutSuccess();
@@ -264,6 +275,15 @@ public class LoggedInManager {
         } else {
             ui.printMessageUserFail(recipient);
         }
+    }
+
+    private void reportUser(String username){
+        ui.printEnterType("the username of the user you wish to report");
+        String reportedUsername = input.strInput();
+        ui.printEnterType("a report message");
+        String reportMessage = input.strInput();
+        sendReportMessage.sendReportFrom(username, reportedUsername, reportMessage);
+        ui.printReportSuccess();
     }
 
     /**
@@ -539,7 +559,7 @@ public class LoggedInManager {
         ui.printAdminLoginMenu();
 
         ArrayList<Integer> allowedInputs = new ArrayList<>();
-        Collections.addAll(allowedInputs, 1, 2, 3, 4, 5, 6);
+        Collections.addAll(allowedInputs, 1, 2, 3, 4, 5, 6, 7, 8);
 
         int select = input.intInput(allowedInputs);
         switch (select) {
@@ -553,18 +573,24 @@ public class LoggedInManager {
                 userManager.createNewUser("ADMIN");
                 break;
             case 3:
+                viewInbox(username);
+                break;
+            case 4:
+                viewOutbox(username);
+                break;
+            case 5:
                 // Ban or unban user
                 updateUserBanStatus();
                 break;
-            case 4:
+            case 6:
                 // Delete user
                 deleteUser();
                 break;
-            case 5:
+            case 7:
                 //View chat history between 2 users
                 viewMessageChatAdminVersion();
                 break;
-            case 6:
+            case 8:
                 // Logout user
                 auth.logoutUser(username);
                 ui.printLogOutSuccess();

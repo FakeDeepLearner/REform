@@ -5,7 +5,7 @@ import entities.User;
 import entities.containers.ListingContainer;
 import entities.containers.UserContainer;
 import entities.Buyer;
-import useCases.DataInterface;
+import gateways.DataInterface;
 
 import java.io.IOException;
 import java.util.ArrayList;

@@ -8,8 +8,9 @@ public class Message implements Comparable<Message> {
     private final User recipient;
     private final Integer messageID;
     private final String contents;
-    private final LocalDateTime datetime;
-    private final DateTimeFormatter formatter;
+    protected final LocalDateTime datetime;
+
+    protected final DateTimeFormatter formatter;
 
 
     /**

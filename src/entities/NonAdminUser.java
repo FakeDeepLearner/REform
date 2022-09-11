@@ -10,8 +10,6 @@ implements Bannable
 permits Buyer, Seller
 {
     private boolean isBanned = false;
-    protected MessageContainer<Integer, Message> outbox;
-    protected MessageContainer<Integer, Message> inbox;
 
     /**
      * Creates an instance of a non-admin user.
@@ -21,15 +19,10 @@ permits Buyer, Seller
      */
     public NonAdminUser(String username, String password) {
         super(username, password);
-
-        outbox = new MessageContainer<>();
-        inbox = new MessageContainer<>();
     }
 
     public NonAdminUser(String username, String password, ArrayList<String> loginHistory) {
         super(username, password, loginHistory);
-        outbox = new MessageContainer<>();
-        inbox = new MessageContainer<>();
     }
 
     /**
@@ -56,18 +49,5 @@ permits Buyer, Seller
     public boolean unbanUser() {
         isBanned = false;
         return true;
-    }
-
-    public MessageContainer<Integer, Message> getOutbox() {
-        return outbox;
-    }
-
-    public MessageContainer<Integer, Message> getInbox() {
-        return inbox;
-    }
-
-    public void sendMessage(NonAdminUser nonAdminUser, Message message) {
-        nonAdminUser.inbox.put(message.getMessageID(), message);
-        this.outbox.put(message.getMessageID(), message);
     }
 }

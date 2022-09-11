@@ -101,6 +101,6 @@ public non-sealed class UserContainer<String, User> extends Container<String, Us
                 admins.put(username, (AdminUser) u);
             }
         }
-        return  admins;
+        return admins;
     }
 }

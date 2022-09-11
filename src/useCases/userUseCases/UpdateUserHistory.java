@@ -2,7 +2,7 @@ package useCases.userUseCases;
 
 import entities.User;
 import entities.containers.UserContainer;
-import useCases.DataInterface;
+import gateways.DataInterface;
 
 import java.io.IOException;
 import java.util.ArrayList;

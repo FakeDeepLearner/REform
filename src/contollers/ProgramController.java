@@ -2,9 +2,11 @@ package contollers;
 
 import entities.Listing;
 import entities.Message;
+import entities.ReportMessage;
 import entities.User;
 import entities.containers.ListingContainer;
 import entities.containers.MessageContainer;
+import entities.containers.ReportContainer;
 import entities.containers.UserContainer;
 import exceptions.ExitProgramException;
 import useCases.miscellaneous.StoreData;
@@ -24,10 +26,10 @@ public class ProgramController {
      * @param listings is the container that stores listings
      */
     public ProgramController(UserContainer<String, User> users, MessageContainer<Integer, Message> messages,
-                             ListingContainer<Integer, Listing> listings) {
+                             ListingContainer<Integer, Listing> listings, ReportContainer<ReportMessage, Integer> reports) {
         loggedOutManager = new LoggedOutManager(users);
-        loggedInManager = new LoggedInManager(users, messages, listings);
-        storeUsers = new StoreData(users, messages, listings);
+        loggedInManager = new LoggedInManager(users, messages, listings, reports);
+        storeUsers = new StoreData(users, messages, listings, reports);
     }
 
     /**

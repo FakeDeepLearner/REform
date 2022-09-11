@@ -5,7 +5,7 @@ import entities.User;
 import entities.containers.UserContainer;
 import entities.Message;
 import entities.containers.MessageContainer;
-import useCases.DataInterface;
+import gateways.DataInterface;
 import useCases.miscellaneous.GenerateUniqueID;
 
 import java.io.IOException;
@@ -15,9 +15,9 @@ import java.util.TreeSet;
 
 public class SendMessages {
 
-    private final MessageContainer<Integer, Message> messageContainer;
-    private final UserContainer<String, User> userContainer;
-    public final DataInterface i;
+    protected final MessageContainer<Integer, Message> messageContainer;
+    protected final UserContainer<String, User> userContainer;
+    protected final DataInterface i;
 
 
     /**
@@ -128,7 +128,7 @@ public class SendMessages {
      */
     public ArrayList<String> getMessageInbox(String username) {
         ArrayList<String> messages = new ArrayList<>();
-        NonAdminUser user = userContainer.getNonAdmin(username);
+        User user = userContainer.get(username);
 
         SortedSet<Message> values = new TreeSet<>(user.getInbox().values());
 
@@ -146,7 +146,7 @@ public class SendMessages {
      */
     public ArrayList<String> getMessageOutbox(String username) {
         ArrayList<String> messages = new ArrayList<>();
-        NonAdminUser user = userContainer.getNonAdmin(username);
+        User user = userContainer.get(username);
 
         SortedSet<Message> values = new TreeSet<>(user.getOutbox().values());
 

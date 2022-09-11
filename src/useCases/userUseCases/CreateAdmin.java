@@ -3,7 +3,7 @@ package useCases.userUseCases;
 import entities.AdminUser;
 import entities.User;
 import entities.containers.UserContainer;
-import useCases.DataInterface;
+import gateways.DataInterface;
 
 import java.io.IOException;
 

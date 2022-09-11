@@ -1,4 +1,6 @@
 package entities;
+import entities.containers.MessageContainer;
+
 import java.util.ArrayList;
 
 public abstract sealed class User
@@ -7,10 +9,10 @@ permits AdminUser, NonAdminUser
     private final String username;
     private final String password;
     private final ArrayList<String> loginHistory;
-
     protected Boolean isAdmin = false;
-
     private boolean isLoggedIn = false;
+    protected MessageContainer<Integer, Message> outbox;
+    protected MessageContainer<Integer, Message> inbox;
 
     /**
      * @param username of the User
@@ -20,6 +22,8 @@ permits AdminUser, NonAdminUser
         this.username = username;
         this.password = password;
         loginHistory = new ArrayList<>();
+        outbox = new MessageContainer<>();
+        inbox = new MessageContainer<>();
     }
 
     /**
@@ -31,6 +35,8 @@ permits AdminUser, NonAdminUser
         this.username = username;
         this.password = password;
         this.loginHistory = loginHistory;
+        outbox = new MessageContainer<>();
+        inbox = new MessageContainer<>();
     }
 
     /**
@@ -80,5 +86,18 @@ permits AdminUser, NonAdminUser
      */
     public void setIsLoggedIn(boolean bool) {
         isLoggedIn = bool;
+    }
+
+    public MessageContainer<Integer, Message> getOutbox() {
+        return outbox;
+    }
+
+    public MessageContainer<Integer, Message> getInbox() {
+        return inbox;
+    }
+
+    public void sendMessage(User user, Message message) {
+        user.inbox.put(message.getMessageID(), message);
+        this.outbox.put(message.getMessageID(), message);
     }
 }
