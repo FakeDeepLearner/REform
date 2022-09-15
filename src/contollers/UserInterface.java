@@ -1,6 +1,7 @@
 package contollers;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class UserInterface {
     public void printWelcomeMessage() {
@@ -22,7 +23,8 @@ public class UserInterface {
         System.out.println("Press 5 to ban or unban a user.");
         System.out.println("Press 6 to delete a user.");
         System.out.println("Press 7 to view the chat history of 2 users");
-        System.out.println("Press 8 to log out.");
+        System.out.println("Press 8 to view the listings of a seller.");
+        System.out.println("Press 9 to log out.");
     }
 
     public void printBuyerLoginMenu(){
@@ -128,7 +130,7 @@ public class UserInterface {
         System.out.println(userHistory);
     }
 
-    public void printFilteredListings(ArrayList<String> listings) {
+    public void printFilteredListings(List<String> listings) {
         System.out.println(listings);
     }
 
@@ -136,7 +138,7 @@ public class UserInterface {
         System.out.println(messages);
     }
 
-    public void printNumberedListings(ArrayList<String> listings) {
+    public void printNumberedListings(List<String> listings) {
         for (int i = 0 ; i < listings.size() ; i++){
             System.out.println((i + 1) + ") " + listings.get(i));
         }
@@ -193,7 +195,6 @@ public class UserInterface {
     public void printReportSuccess(){
         System.out.println("User has been reported to all admins, the report will be reviewed soon.");
     }
-
 
     public void printInvalidInput() {
         System.out.println("Please enter a valid input.");

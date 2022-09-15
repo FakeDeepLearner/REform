@@ -221,6 +221,6 @@ public class Listing {
      */
     public String toString() {
         String address = (unitNumber == null ? "" : unitNumber + " - ") + civicAddress + " " + streetName + ", " + city;
-        return (isSold ? "SOLD" : "AVAILABLE") + ": " + address + "\n" + info;
+        return (isSold ? "SOLD" : "AVAILABLE") + ": " + address + "\n" + info + "\n" + price;
     }
 }

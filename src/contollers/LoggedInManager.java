@@ -8,12 +8,14 @@ import entities.containers.MessageContainer;
 import entities.containers.ReportContainer;
 import entities.containers.UserContainer;
 import exceptions.UserCannotBeBannedException;
+import exceptions.UserIsNotASellerException;
 import exceptions.UserNotFoundException;
 import gateways.HistoriesCSVController;
 import gateways.ListingsCSVController;
 import gateways.MessagesCSVController;
 import gateways.ReportsCSVController;
 import useCases.listingUseCases.UpdatePrice;
+import useCases.listingUseCases.ViewListings;
 import useCases.messageUseCases.MessageChat;
 import useCases.messageUseCases.SendReportMessage;
 import useCases.userUseCases.AuthenticateUser;
@@ -44,6 +46,7 @@ public class LoggedInManager {
     private final MessageChat messageChat;
     private final UpdatePrice updatePrice;
     private final SendReportMessage sendReportMessage;
+    private final ViewListings viewListings;
 
     /**
      * Constructor for LoggedInManager
@@ -68,6 +71,7 @@ public class LoggedInManager {
         messageChat = new MessageChat(messages);
         updatePrice = new UpdatePrice(listings);
         sendReportMessage = new SendReportMessage(users, messages, reports, new ReportsCSVController(reports));
+        viewListings = new ViewListings(users);
     }
 
     /**
@@ -161,7 +165,7 @@ public class LoggedInManager {
         switch (select) {
             case 1:
                 // View posted listings
-                ui.printFilteredListings(createListing.getSellerListingsStrings(username));
+                ui.printFilteredListings(viewListings.getSellerListingsStrings(username));
                 break;
             case 2:
                 updateListingPrice(username);
@@ -353,11 +357,11 @@ public class LoggedInManager {
      * @param username the username of the logged-in user
      */
     private void deleteListing(String username) {
-        ArrayList<String> listingStrings = createListing.getSellerListingsStrings(username);
+        List<String> listingStrings = viewListings.getSellerListingsStrings(username);
         ui.printNumberedListings(listingStrings);
         ui.printEnterType("number of property to delete");
         int number = input.intInput(1, listingStrings.size());
-        Listing listingToRemove = createListing.getSellerListings(username).get(number - 1);
+        Listing listingToRemove = viewListings.getSellerListings(username).get(number - 1);
         createListing.deleteListing(username, listingToRemove);
         createListing.removeFromCreatedListings(username, listingToRemove);
 
@@ -518,8 +522,8 @@ public class LoggedInManager {
     }
 
     private void updateListingPrice(String username){
-        ArrayList<String> printedListings = createListing.getSellerListingsStrings(username);
-        ArrayList<Listing> listings = createListing.getSellerListings(username);
+        List<String> printedListings = viewListings.getSellerListingsStrings(username);
+        List<Listing> listings = viewListings.getSellerListings(username);
         ui.printNumberedListings(printedListings);
         ui.printEnterType("the number of the listing that you wish to modify.");
         int number = input.intInput(1, printedListings.size());
@@ -527,6 +531,19 @@ public class LoggedInManager {
         BigDecimal newPrice = BigDecimal.valueOf(input.intInput());
         Integer listingID = listings.get(number - 1).getId();
         updatePrice.changePrice(listingID, newPrice);
+    }
+
+    private void displaySellerListings(){
+        ui.printEnterType("the seller you want to see the listings of");
+        String username = input.strInput();
+        try{
+            List<String> printedListings =  viewListings.getSellerListingsStrings(username);
+            ui.printNumberedListings(printedListings);
+        }
+        catch (UserIsNotASellerException exception){
+            ui.printArbitraryException(exception);
+            displaySellerListings();
+        }
     }
 
 
@@ -559,7 +576,7 @@ public class LoggedInManager {
         ui.printAdminLoginMenu();
 
         ArrayList<Integer> allowedInputs = new ArrayList<>();
-        Collections.addAll(allowedInputs, 1, 2, 3, 4, 5, 6, 7, 8);
+        Collections.addAll(allowedInputs, 1, 2, 3, 4, 5, 6, 7, 8, 9);
 
         int select = input.intInput(allowedInputs);
         switch (select) {
@@ -591,6 +608,9 @@ public class LoggedInManager {
                 viewMessageChatAdminVersion();
                 break;
             case 8:
+                displaySellerListings();
+                break;
+            case 9:
                 // Logout user
                 auth.logoutUser(username);
                 ui.printLogOutSuccess();

@@ -64,38 +64,6 @@ public class CreateListingTest {
     }
 
     @Test
-    public void testGetSellerListingsStrings() {
-        ListingContainer<Integer, Listing> lc = new ListingContainer<>();
-        UserContainer<String, User> uc = new UserContainer<>();
-
-        Seller s = new Seller("s1", "p1");
-        uc.put("s1", s);
-
-        Listing listing = new Listing(0, 1, 22, "streetName", "city", "APARTMENT", 5, 5, BigDecimal.valueOf(5.0), "test1");
-        s.addListing(listing);
-
-        CreateListing listingCreator = new CreateListing(lc, uc, new ListingsCSVController(uc));
-
-        assertEquals(1, listingCreator.getSellerListingsStrings("s1").size());
-    }
-
-    @Test
-    public void testGetSellerListings() {
-        ListingContainer<Integer, Listing> lc = new ListingContainer<>();
-        UserContainer<String, User> uc = new UserContainer<>();
-
-        Seller s = new Seller("s1", "p1");
-        uc.put("s1", s);
-
-        Listing listing = new Listing(0, 1, 22, "streetName", "city", "APARTMENT", 5, 5, BigDecimal.valueOf(5.0), "test1");
-        s.addListing(listing);
-
-        CreateListing listingCreator = new CreateListing(lc, uc, new ListingsCSVController(uc));
-
-        assertEquals(1, listingCreator.getSellerListings("s1").size());
-    }
-
-    @Test
     public void testDeleteListing() {
         ListingContainer<Integer, Listing> lc = new ListingContainer<>();
         UserContainer<String, User> uc = new UserContainer<>();

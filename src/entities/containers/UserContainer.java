@@ -1,12 +1,13 @@
 package entities.containers;
 
-import entities.AdminUser;
+import entities.*;
+import exceptions.UserIsNotASellerException;
 import exceptions.UserNotFoundException;
-import entities.Buyer;
-import entities.Seller;
 import exceptions.BuyerNotFoundException;
 import exceptions.SellerNotFoundException;
-import entities.NonAdminUser;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public non-sealed class UserContainer<String, User> extends Container<String, User> {
 
@@ -103,4 +104,20 @@ public non-sealed class UserContainer<String, User> extends Container<String, Us
         }
         return admins;
     }
+
+    public List<Listing> getSellerListings(String username){
+        Seller seller = getSeller(username);
+        return seller.getListings();
+    }
+
+    public List<java.lang.String> getSellerListingStrings(String username){
+        ArrayList<java.lang.String> listings = new ArrayList<>();
+        Seller u = getSeller(username);
+        for (Listing l : u.getListings()) {
+            listings.add(l.toString());
+        }
+        return listings;
+    }
+
+
 }

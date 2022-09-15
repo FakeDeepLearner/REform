@@ -211,34 +211,9 @@ public class CreateListing {
      * @param listing the listing to be removed from the hashmap
      */
     public void removeFromCreatedListings(String username, Listing listing) {
-
         if (createdListings.containsKey(username)) {
             createdListings.get(username).remove(listing);
         }
-    }
-
-    /**
-     * Get a seller's listings
-     * @param username the username of the seller
-     * @return an arraylist of the string representations of the listings
-     */
-    public ArrayList<String> getSellerListingsStrings(String username){
-        ArrayList<String> listings = new ArrayList<>();
-        Seller u = userContainer.getSeller(username);
-        for (Listing l : u.getListings()){
-            listings.add(l.toString());
-        }
-        return listings;
-    }
-
-    /**
-     * Get an arraylist of a seller's listings
-     * @param username the username of the seller
-     * @return an arraylist of listings for this seller
-     */
-    public ArrayList<Listing> getSellerListings(String username){
-        Seller u = userContainer.getSeller(username);
-        return u.getListings();
     }
 
     /**
