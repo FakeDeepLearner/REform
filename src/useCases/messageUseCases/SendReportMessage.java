@@ -38,18 +38,18 @@ public class SendReportMessage{
         User reportedUser = userContainer.get(reportedUsername);
         Container<String, AdminUser> allAdmins = userContainer.getAllAdmins();
         Integer messageID = generateUniqueID.getUniqueID();
-        sendMessageToAllAdmins(contents, reportingUser, reportedUser, allAdmins, messageID);
+        sendMessageToAllAdminsFromProgram(contents, reportingUser, reportedUser, allAdmins, messageID);
     }
 
-    private void sendReportFrom(String reportingUsername, String reportedUsername, String contents, Integer messageID){
+    private void sendReportFrom(String reportingUsername, String reportedUsername, String contents, Integer messageID,
+                                String datetime){
         User reportingUser = userContainer.get(reportingUsername);
         User reportedUser = userContainer.get(reportedUsername);
         Container<String, AdminUser> allAdmins = userContainer.getAllAdmins();
-        sendMessageToAllAdmins(contents, reportingUser, reportedUser, allAdmins, messageID);
+        sendMessageToAllAdminsWithDatetime(contents, reportingUser, reportedUser, allAdmins, messageID, datetime);
     }
 
-    //TODO: Fix the bug of some admins not getting all the reports
-    private void sendMessageToAllAdmins (String contents, User reportingUser, User reportedUser,
+    private void sendMessageToAllAdminsFromProgram (String contents, User reportingUser, User reportedUser,
                                         Container<String, AdminUser> allAdmins, Integer messageID) {
         for(String s : allAdmins.keySet()){
             AdminUser admin = allAdmins.get(s);
@@ -61,6 +61,18 @@ public class SendReportMessage{
         }
     }
 
+    private void sendMessageToAllAdminsWithDatetime(String contents, User reportingUser, User reportedUser,
+                                                    Container<String, AdminUser> allAdmins, Integer messageID,
+                                                    String datetime){
+        for(String s : allAdmins.keySet()){
+            AdminUser admin = allAdmins.get(s);
+            ReportMessage reportMessage = new ReportMessage(reportingUser, admin, messageID, contents, datetime, reportedUser);
+            reportingUser.sendMessage(admin, reportMessage);
+            if (!reportContainer.containsValue(messageID)) {
+                reportContainer.put(reportMessage, messageID);
+            }
+        }
+    }
 
     public void read() throws IOException {
         for (String[] line : i.read()){
@@ -68,7 +80,8 @@ public class SendReportMessage{
             String reportedUsername = line[1];
             String messageContents = line[2];
             Integer messageID = Integer.parseInt(line[3]);
-            sendReportFrom(reportingUsername, reportedUsername, messageContents, messageID);
+            String datetime = line[4];
+            sendReportFrom(reportingUsername, reportedUsername, messageContents, messageID, datetime);
         }
     }
 

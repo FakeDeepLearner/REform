@@ -4,12 +4,13 @@ public class ReportMessage extends Message{
     private boolean resolved;
     private final User reportedUser;
     /**
-     * Create a report message message
+     * Create a report message
      *
      * @param sender    the sender of the message
      * @param recipient the recipient of the message
      * @param messageID the id of the message
      * @param contents  the contents of the message
+     * @param reportedUser the user that is being reported. Note that the reported user doesn't receive the message
      */
     public ReportMessage(User sender, User recipient, Integer messageID, String contents, User reportedUser) {
         super(sender, recipient, messageID, contents);
