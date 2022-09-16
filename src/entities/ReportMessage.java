@@ -1,6 +1,6 @@
 package entities;
 
-public class ReportMessage extends Message{
+public non-sealed class ReportMessage extends Message{
     private boolean resolved;
     private final User reportedUser;
     /**
