@@ -54,7 +54,7 @@ public class SendReportMessage{
         for(String s : allAdmins.keySet()){
             AdminUser admin = allAdmins.get(s);
             ReportMessage reportMessage = new ReportMessage(reportingUser, admin, messageID, contents, reportedUser);
-            reportingUser.sendMessage(admin, reportMessage);
+            reportMessage.send();
             if (!reportContainer.containsValue(messageID)) {
                 reportContainer.put(reportMessage, messageID);
             }
@@ -67,7 +67,7 @@ public class SendReportMessage{
         for(String s : allAdmins.keySet()){
             AdminUser admin = allAdmins.get(s);
             ReportMessage reportMessage = new ReportMessage(reportingUser, admin, messageID, contents, datetime, reportedUser);
-            reportingUser.sendMessage(admin, reportMessage);
+            reportMessage.send();
             if (!reportContainer.containsValue(messageID)) {
                 reportContainer.put(reportMessage, messageID);
             }

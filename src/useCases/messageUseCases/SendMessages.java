@@ -2,6 +2,7 @@ package useCases.messageUseCases;
 
 import entities.NonAdminUser;
 import entities.User;
+import entities.UserType;
 import entities.containers.UserContainer;
 import entities.Message;
 import entities.containers.MessageContainer;
@@ -75,12 +76,12 @@ public class SendMessages {
      */
     public void addMessage(String senderUsername, String recipientUsername,
                            int id, String content) {
-        NonAdminUser sender = userContainer.getNonAdmin(senderUsername);
-        NonAdminUser recipient = userContainer.getNonAdmin(recipientUsername);
+        User sender = userContainer.get(senderUsername);
+        User recipient = userContainer.get(recipientUsername);
 
         Message message = new Message(sender, recipient, id, content);
         messageContainer.put(id, message);
-        sender.sendMessage(recipient, message);
+        message.send();
     }
 
     /**
@@ -94,12 +95,12 @@ public class SendMessages {
      */
     public void addMessage(String senderUsername, String recipientUsername,
                            int id, String content, String datetime) {
-        NonAdminUser sender = userContainer.getNonAdmin(senderUsername);
-        NonAdminUser recipient = userContainer.getNonAdmin(recipientUsername);
+        User sender = userContainer.get(senderUsername);
+        User recipient = userContainer.get(recipientUsername);
 
         Message message = new Message(sender, recipient, id, content, datetime);
         messageContainer.put(id, message);
-        sender.sendMessage(recipient, message);
+        message.send();
     }
 
     /**

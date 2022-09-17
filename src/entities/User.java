@@ -96,8 +96,11 @@ permits AdminUser, NonAdminUser
         return inbox;
     }
 
-    public void sendMessage(User user, Message message) {
-        user.inbox.put(message.getMessageID(), message);
-        this.outbox.put(message.getMessageID(), message);
+    public void addToInbox(Integer messageID, Message message){
+        inbox.put(messageID, message);
+    }
+
+    public void addToOutbox(Integer messageID, Message message){
+        outbox.put(messageID, message);
     }
 }

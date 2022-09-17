@@ -43,4 +43,9 @@ public non-sealed class ReportMessage extends Message{
                 getReportedUser().getUsername() + " (Message ID of " + getMessageID().toString() + ")" + "\n"
                 + "The report message is:" + "\n" + getContents() + "\n";
     }
+
+    @Override
+    public void send() {
+        getRecipient().addToInbox(getMessageID(), this);
+    }
 }

@@ -106,4 +106,9 @@ public sealed class Message implements Comparable<Message> permits ReportMessage
     public String getFormattedDateTime(){
         return this.datetime.format(formatter);
     }
+
+    public void send(){
+        sender.addToOutbox(messageID, this);
+        recipient.addToInbox(messageID, this);
+    }
 }
