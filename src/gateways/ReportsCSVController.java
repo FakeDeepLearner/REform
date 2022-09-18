@@ -20,7 +20,8 @@ public non-sealed class ReportsCSVController extends CSVController {
         BufferedWriter writer = new BufferedWriter(new FileWriter(filepath.getFilePath(), false));
         for(ReportMessage message : reports.keySet()){
             String lineToWrite = message.getSender().getUsername() + "," + message.getReportedUser().getUsername() +
-                    "," + message.getContents() + "," + message.getMessageID() + "," + message.getFormattedDateTime();
+                    "," + message.getContents() + "," + message.getMessageID() + "," + message.getFormattedDateTime() +
+                    "," + String.valueOf(message.isResolved()).toUpperCase();
             writer.write(lineToWrite + "\n");
         }
         writer.close();

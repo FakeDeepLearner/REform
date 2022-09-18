@@ -42,11 +42,11 @@ public class SendReportMessage{
     }
 
     private void sendReportFrom(String reportingUsername, String reportedUsername, String contents, Integer messageID,
-                                String datetime){
+                                String datetime, boolean resolved){
         User reportingUser = userContainer.get(reportingUsername);
         User reportedUser = userContainer.get(reportedUsername);
         Container<String, AdminUser> allAdmins = userContainer.getAllAdmins();
-        sendMessageToAllAdminsWithDatetime(contents, reportingUser, reportedUser, allAdmins, messageID, datetime);
+        sendMessageToAllAdminsWithDatetime(contents, reportingUser, reportedUser, allAdmins, messageID, datetime, resolved);
     }
 
     private void sendMessageToAllAdminsFromProgram (String contents, User reportingUser, User reportedUser,
@@ -63,10 +63,11 @@ public class SendReportMessage{
 
     private void sendMessageToAllAdminsWithDatetime(String contents, User reportingUser, User reportedUser,
                                                     Container<String, AdminUser> allAdmins, Integer messageID,
-                                                    String datetime){
+                                                    String datetime, boolean resolved){
         for(String s : allAdmins.keySet()){
             AdminUser admin = allAdmins.get(s);
-            ReportMessage reportMessage = new ReportMessage(reportingUser, admin, messageID, contents, datetime, reportedUser);
+            ReportMessage reportMessage = new ReportMessage(reportingUser, admin, messageID,
+                    contents, datetime, reportedUser, resolved);
             reportMessage.send();
             if (!reportContainer.containsValue(messageID)) {
                 reportContainer.put(reportMessage, messageID);
@@ -81,7 +82,8 @@ public class SendReportMessage{
             String messageContents = line[2];
             Integer messageID = Integer.parseInt(line[3]);
             String datetime = line[4];
-            sendReportFrom(reportingUsername, reportedUsername, messageContents, messageID, datetime);
+            boolean resolved = Boolean.parseBoolean(line[5]);
+            sendReportFrom(reportingUsername, reportedUsername, messageContents, messageID, datetime, resolved);
         }
     }
 

@@ -16,15 +16,13 @@ import gateways.MessagesCSVController;
 import gateways.ReportsCSVController;
 import useCases.listingUseCases.UpdatePrice;
 import useCases.listingUseCases.ViewListings;
-import useCases.messageUseCases.MessageChat;
-import useCases.messageUseCases.SendReportMessage;
+import useCases.messageUseCases.*;
 import useCases.userUseCases.AuthenticateUser;
 import useCases.userUseCases.RestrictUser;
 import useCases.userUseCases.UpdateUserHistory;
 import entities.Listing;
 import useCases.listingUseCases.CreateListing;
 import useCases.listingUseCases.ListingProperties;
-import useCases.messageUseCases.SendMessages;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -47,6 +45,8 @@ public class LoggedInManager {
     private final UpdatePrice updatePrice;
     private final SendReportMessage sendReportMessage;
     private final ViewListings viewListings;
+    private final OpenAndCloseReports openAndCloseReports;
+    private final ViewMessages viewMessages;
 
     /**
      * Constructor for LoggedInManager
@@ -72,6 +72,8 @@ public class LoggedInManager {
         updatePrice = new UpdatePrice(listings);
         sendReportMessage = new SendReportMessage(users, messages, reports, new ReportsCSVController(reports));
         viewListings = new ViewListings(users);
+        openAndCloseReports = new OpenAndCloseReports();
+        viewMessages = new ViewMessages(users);
     }
 
     /**
@@ -546,6 +548,23 @@ public class LoggedInManager {
         }
     }
 
+    private void changeReportStatus(String username){
+        List<String> adminReportsStrings = viewMessages.getAdminReportsStrings(username);
+        List<ReportMessage> adminReports = viewMessages.getAdminReports(username);
+        ui.printNumberedMessages(adminReportsStrings);
+        ui.printEnterType("the number of the message you want to change the status of.");
+        ui.printReportStatusChangeDisclaimer();
+        int number = input.intInput(1, adminReportsStrings.size());
+        ReportMessage messageToUpdate = adminReports.get(number - 1);
+        if(messageToUpdate.isResolved()){
+            openAndCloseReports.openReport(messageToUpdate);
+        }
+        else{
+            openAndCloseReports.closeReport(messageToUpdate);
+        }
+        ui.printReportStatusChangeSuccess();
+    }
+
 
     /**
      * Displays the messages inbox of the logged-in user
@@ -576,7 +595,7 @@ public class LoggedInManager {
         ui.printAdminLoginMenu();
 
         ArrayList<Integer> allowedInputs = new ArrayList<>();
-        Collections.addAll(allowedInputs, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+        Collections.addAll(allowedInputs, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 
         int select = input.intInput(allowedInputs);
         switch (select) {
@@ -611,6 +630,9 @@ public class LoggedInManager {
                 displaySellerListings();
                 break;
             case 9:
+                changeReportStatus(username);
+                break;
+            case 10:
                 // Logout user
                 auth.logoutUser(username);
                 ui.printLogOutSuccess();

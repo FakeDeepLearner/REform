@@ -24,7 +24,8 @@ public class UserInterface {
         System.out.println("Press 6 to delete a user.");
         System.out.println("Press 7 to view the chat history of 2 users");
         System.out.println("Press 8 to view the listings of a seller.");
-        System.out.println("Press 9 to log out.");
+        System.out.println("Press 9 to close or reopen a report.");
+        System.out.println("Press 10 to log out.");
     }
 
     public void printBuyerLoginMenu(){
@@ -134,8 +135,14 @@ public class UserInterface {
         System.out.println(listings);
     }
 
-    public void printMessages(ArrayList<String> messages) {
+    public void printMessages(List<String> messages) {
         System.out.println(messages);
+    }
+
+    public void printNumberedMessages(List<String> messages){
+        for(int i = 0; i < messages.size(); i++){
+            System.out.println((i + 1) + ") " + messages.get(i));
+        }
     }
 
     public void printNumberedListings(List<String> listings) {
@@ -190,6 +197,15 @@ public class UserInterface {
 
     public void printMessageSentSuccess() {
         System.out.println("Message was successfully sent.");
+    }
+
+    public void printReportStatusChangeDisclaimer(){
+        System.out.println("If the message is not resolved, (PENDING), it will be resolved (RESOLVED), and vice versa." +
+                "The message will not be removed from your inbox.");
+    }
+
+    public void printReportStatusChangeSuccess(){
+        System.out.println("Report status successfully changed, returning to main menu.");
     }
 
     public void printReportSuccess(){

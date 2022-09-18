@@ -1,10 +1,7 @@
 package entities.containers;
 
 import entities.*;
-import exceptions.UserIsNotASellerException;
-import exceptions.UserNotFoundException;
-import exceptions.BuyerNotFoundException;
-import exceptions.SellerNotFoundException;
+import exceptions.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -103,6 +100,15 @@ public non-sealed class UserContainer<String, User> extends Container<String, Us
             }
         }
         return admins;
+    }
+
+    public AdminUser getAdmin(Object key){
+        try{
+            return (AdminUser) super.get(key);
+        }
+        catch (IllegalArgumentException | ClassCastException e){
+            throw new AdminNotFoundException();
+        }
     }
 
     public List<Listing> getSellerListings(String username){

@@ -18,14 +18,27 @@ public non-sealed class ReportMessage extends Message{
         this.reportedUser = reportedUser;
     }
 
+    /*
     public ReportMessage(User sender, User recipient, Integer messageID, String contents, String datetime, User reportedUser) {
         super(sender, recipient, messageID, contents, datetime);
         resolved = false;
         this.reportedUser = reportedUser;
     }
+    */
 
-    public void resolve() {
+    public ReportMessage(User sender, User recipient, Integer messageID, String contents,
+                         String datetime, User reportedUser, boolean resolved) {
+        super(sender, recipient, messageID, contents, datetime);
+        this.resolved = resolved;
+        this.reportedUser = reportedUser;
+    }
+
+    public void close() {
         resolved = true;
+    }
+
+    public void open(){
+        resolved = false;
     }
 
     public boolean isResolved() {
@@ -38,7 +51,14 @@ public non-sealed class ReportMessage extends Message{
 
     @Override
     public String toString() {
-        return "\n" + "REPORT MESSAGE" + "\n" + datetime.format(formatter) + "\n" +
+        String strToAdd;
+        if(resolved){
+            strToAdd = "(RESOLVED)";
+        }
+        else{
+            strToAdd = "(PENDING)";
+        }
+        return "\n" + "REPORT MESSAGE" + strToAdd + "\n" + datetime.format(formatter) + "\n" +
                 getSender().getUsername() + " reported " +
                 getReportedUser().getUsername() + " (Message ID of " + getMessageID().toString() + ")" + "\n"
                 + "The report message is:" + "\n" + getContents() + "\n";
