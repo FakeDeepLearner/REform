@@ -98,26 +98,4 @@ public class FavoriteListing {
             generatedFavorites.get(username).remove(listingID);
         }
     }
-
-    /**
-     * @param username the username to get the favourite listings of.
-     * @return the list of favourite listing IDs.
-     */
-    public ArrayList<Integer> getBuyerFavouritesID(String username){
-        Buyer buyer = userContainer.getBuyer(username);
-        return buyer.getFavorites();
-    }
-
-    /**
-     * @param username the username to get the favourite listings of.
-     * @return the list of favourite listing strings.
-     */
-    public ArrayList<String> getBuyerFavouritesString(String username){
-        Buyer buyer = userContainer.getBuyer(username);
-        ArrayList<String> listings = new ArrayList<>();
-        for(Integer id : buyer.getFavorites()){
-            listings.add(listingContainer.get(id).toString());
-        }
-        return listings;
-    }
 }

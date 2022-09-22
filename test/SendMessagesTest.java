@@ -7,6 +7,7 @@ import entities.Seller;
 import gateways.MessagesCSVController;
 import useCases.messageUseCases.SendMessages;
 import org.junit.Test;
+import useCases.messageUseCases.ViewMessages;
 
 import java.util.concurrent.TimeUnit;
 
@@ -23,10 +24,11 @@ public class SendMessagesTest {
         uc.put("u2", receiver);
 
         SendMessages sm = new SendMessages(mc, uc, new MessagesCSVController(mc));
+        ViewMessages viewMessages = new ViewMessages(uc);
 
         sm.sendMessage("u1", "u2", "testContent");
 
-        System.out.println(sm.getMessageInbox("u2"));
+        System.out.println(viewMessages.getMessageInbox("u2"));
     }
 
     @Test
@@ -41,6 +43,7 @@ public class SendMessagesTest {
         uc.put("u2", receiver);
 
         SendMessages sm = new SendMessages(mc, uc, new MessagesCSVController(mc));
+        ViewMessages viewMessages = new ViewMessages(uc);
 
         sm.sendMessage("u1", "u2", "testContent");
         TimeUnit.SECONDS.sleep(1);
@@ -48,7 +51,7 @@ public class SendMessagesTest {
         TimeUnit.SECONDS.sleep(1);
         sm.sendMessage("u1", "u2", "testContent3");
 
-        System.out.println(sm.getMessageInbox("u2"));
+        System.out.println(viewMessages.getMessageInbox("u2"));
     }
 
     @Test
@@ -63,6 +66,7 @@ public class SendMessagesTest {
         uc.put("u2", receiver);
 
         SendMessages sm = new SendMessages(mc, uc, new MessagesCSVController(mc));
+        ViewMessages viewMessages = new ViewMessages(uc);
 
         sm.sendMessage("u1", "u2", "testContent");
         TimeUnit.SECONDS.sleep(1);
@@ -70,7 +74,7 @@ public class SendMessagesTest {
         TimeUnit.SECONDS.sleep(1);
         sm.sendMessage("u1", "u2", "testContent3");
 
-        System.out.println(sm.getMessageOutbox("u1"));
+        System.out.println(viewMessages.getMessageOutbox("u1"));
     }
 
 }

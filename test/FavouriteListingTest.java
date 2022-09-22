@@ -5,6 +5,7 @@ import entities.containers.UserContainer;
 import gateways.FavouritesCSVController;
 import org.junit.Test;
 import useCases.listingUseCases.FavoriteListing;
+import useCases.listingUseCases.ViewListings;
 import useCases.userUseCases.UserFactory;
 
 import java.math.BigDecimal;
@@ -23,14 +24,15 @@ public class FavouriteListingTest {
         listings.put(id, l1);
 
         FavoriteListing favourite = new FavoriteListing(users, listings, new FavouritesCSVController(users));
+        ViewListings viewListings = new ViewListings(users, listings);
         favourite.addListingToBuyerFavorites(username, id);
 
-        assert !favourite.getBuyerFavouritesID(username).isEmpty();
-        assert !favourite.getBuyerFavouritesString(username).isEmpty();
+        assert !viewListings.getBuyerFavouritesID(username).isEmpty();
+        assert !viewListings.getBuyerFavouritesString(username).isEmpty();
 
         favourite.removeListingFromBuyerFavorites(username, 0);
 
-        assert favourite.getBuyerFavouritesID(username).isEmpty();
-        assert favourite.getBuyerFavouritesString(username).isEmpty();
+        assert viewListings.getBuyerFavouritesID(username).isEmpty();
+        assert viewListings.getBuyerFavouritesString(username).isEmpty();
     }
 }

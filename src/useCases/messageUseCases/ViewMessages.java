@@ -8,6 +8,8 @@ import entities.containers.UserContainer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 public class ViewMessages {
     private final UserContainer<String, User> users;
@@ -37,6 +39,44 @@ public class ViewMessages {
         }
         return reports;
     }
+
+    /**
+     * Get the message inbox of a user
+     *
+     * @param username Username of the user
+     * @return ArrayList of String containing the messages
+     */
+    public ArrayList<String> getMessageInbox(String username) {
+        ArrayList<String> messages = new ArrayList<>();
+        User user = users.get(username);
+
+        SortedSet<Message> values = new TreeSet<>(user.getInbox().values());
+
+        for (Message m : values) {
+            messages.add(m.toString());
+        }
+        return messages;
+    }
+
+    /**
+     * Get the message outbox of a user
+     *
+     * @param username Username of the user
+     * @return ArrayList of String containing the messages
+     */
+    public ArrayList<String> getMessageOutbox(String username) {
+        ArrayList<String> messages = new ArrayList<>();
+        User user = users.get(username);
+
+        SortedSet<Message> values = new TreeSet<>(user.getOutbox().values());
+
+        for (Message m : values) {
+            messages.add(m.toString());
+        }
+        return messages;
+    }
+
+
 
 
 }

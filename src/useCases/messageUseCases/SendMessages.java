@@ -120,41 +120,4 @@ public class SendMessages {
             messageContainer.remove(i);
         }
     }
-
-    /**
-     * Get the message inbox of a user
-     *
-     * @param username Username of the user
-     * @return ArrayList of String containing the messages
-     */
-    public ArrayList<String> getMessageInbox(String username) {
-        ArrayList<String> messages = new ArrayList<>();
-        User user = userContainer.get(username);
-
-        SortedSet<Message> values = new TreeSet<>(user.getInbox().values());
-
-        for (Message m : values) {
-            messages.add(m.toString());
-        }
-        return messages;
-    }
-
-    /**
-     * Get the message outbox of a user
-     *
-     * @param username Username of the user
-     * @return ArrayList of String containing the messages
-     */
-    public ArrayList<String> getMessageOutbox(String username) {
-        ArrayList<String> messages = new ArrayList<>();
-        User user = userContainer.get(username);
-
-        SortedSet<Message> values = new TreeSet<>(user.getOutbox().values());
-
-        for (Message m : values) {
-            messages.add(m.toString());
-        }
-        return messages;
-    }
-
 }

@@ -1,3 +1,2 @@
-1) Move all the code that allows the viewing of listings and messages into ViewListings and ViewMessages respectively.
-2) Add an option for admins to be able to remove a resolved report from their inbox. It will be removed from the inboxes
+1) Add an option for admins to be able to remove a resolved report from their inbox. It will be removed from the inboxes
 of all other admins.

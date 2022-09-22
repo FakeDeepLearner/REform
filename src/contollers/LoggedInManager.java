@@ -71,7 +71,7 @@ public class LoggedInManager {
         messageChat = new MessageChat(messages);
         updatePrice = new UpdatePrice(listings);
         sendReportMessage = new SendReportMessage(users, messages, reports, new ReportsCSVController(reports));
-        viewListings = new ViewListings(users);
+        viewListings = new ViewListings(users, listings);
         openAndCloseReports = new OpenAndCloseReports();
         viewMessages = new ViewMessages(users);
     }
@@ -389,7 +389,7 @@ public class LoggedInManager {
     }
 
     private void checkDeleteFavouriteListing(String username){
-        ArrayList<Integer> listingIDs = favAndUnFavManager.getBuyerFavouritesID(username);
+        List<Integer> listingIDs = favAndUnFavManager.getBuyerFavouritesID(username);
 
         if(listingIDs.size() > 0){
             ui.printDeleteListingFromFavourites();
@@ -571,7 +571,7 @@ public class LoggedInManager {
      * @param username the username of the logged-in user
      */
     public void viewInbox(String username) {
-        ui.printMessages(sendMessages.getMessageInbox(username));
+        ui.printMessages(viewMessages.getMessageInbox(username));
     }
 
     /**
@@ -579,7 +579,7 @@ public class LoggedInManager {
      * @param username the username of the logged-in user
      */
     public void viewOutbox(String username) {
-        ui.printMessages(sendMessages.getMessageOutbox(username));
+        ui.printMessages(viewMessages.getMessageOutbox(username));
     }
 
     public void viewFavouriteListings(String username){

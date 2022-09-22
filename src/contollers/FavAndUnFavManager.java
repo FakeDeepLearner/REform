@@ -6,11 +6,14 @@ import entities.containers.ListingContainer;
 import entities.containers.UserContainer;
 import gateways.FavouritesCSVController;
 import useCases.listingUseCases.FavoriteListing;
+import useCases.listingUseCases.ViewListings;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class FavAndUnFavManager {
     private final FavoriteListing favoriteListing;
+    private final ViewListings viewListings;
 
     /**
      * Constructor for FavAndUnFavManager
@@ -18,6 +21,7 @@ public class FavAndUnFavManager {
      */
     public FavAndUnFavManager(UserContainer<String, User> users, ListingContainer<Integer, Listing> listingContainer) {
         this.favoriteListing = new FavoriteListing(users, listingContainer, new FavouritesCSVController(users));
+        this.viewListings = new ViewListings(users, listingContainer);
     }
 
     /**
@@ -45,16 +49,16 @@ public class FavAndUnFavManager {
      * @param username the username to get the favourite listings of.
      * @return the list of favourite listing IDs.
      */
-    public ArrayList<Integer> getBuyerFavouritesID(String username){
-        return favoriteListing.getBuyerFavouritesID(username);
+    public List<Integer> getBuyerFavouritesID(String username){
+        return viewListings.getBuyerFavouritesID(username);
     }
 
     /**
      * @param username the username to get the favourite listings of.
      * @return the list of favourite listing strings.
      */
-    public ArrayList<String> getBuyerFavouritesString(String username){
-        return favoriteListing.getBuyerFavouritesString(username);
+    public List<String> getBuyerFavouritesString(String username){
+        return viewListings.getBuyerFavouritesString(username);
     }
 
 }
