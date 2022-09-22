@@ -1,12 +1,15 @@
 ###Version
+
 To run this project, you need at least Java 17, to have access to sealed types.
 
 ###Running the project
+
 In order to run this project, clone this repository to your favorite editor, IntelliJ recommended, and simply run
 Main.java. Then, follow the prompts on the screen.
 **IMPORTANT NOTE: DO NOT PUT COMMAS (,) IN ANY OF YOUR INPUTS, OTHERWISE THE PROGRAM WILL NOT WORK**
 
 #What the project is
+
 REform, originally a course project for CSC207 at the University of Toronto, is a real estate platform where sellers can
 make and modify their listings (and of course view them); and buyers can favorite listings (and view their favorites),
 filter properties from their price, number of bedrooms, etc....
