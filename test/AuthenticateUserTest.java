@@ -1,4 +1,4 @@
-import entities.User;
+import entities.users.User;
 import entities.containers.UserContainer;
 import exceptions.UserBannedException;
 import org.junit.Test;

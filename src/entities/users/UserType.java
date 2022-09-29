@@ -1,4 +1,4 @@
-package entities;
+package entities.users;
 
 public enum UserType{
     ADMIN,

@@ -1,8 +1,8 @@
-package entities;
+package entities.users;
 
 import java.util.ArrayList;
 
-public non-sealed class Buyer extends NonAdminUser{
+public non-sealed class Buyer extends NonAdminUser {
     private final ArrayList<Integer> favorites;
 
     /**

@@ -1,5 +1,8 @@
-package entities;
+package entities.users;
+import entities.Listing;
+import entities.Message;
 import entities.containers.MessageContainer;
+import entities.users.NonAdminUser;
 
 import java.util.ArrayList;
 

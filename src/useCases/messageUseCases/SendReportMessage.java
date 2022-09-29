@@ -1,9 +1,9 @@
 package useCases.messageUseCases;
 
-import entities.AdminUser;
+import entities.users.AdminUser;
 import entities.Message;
 import entities.ReportMessage;
-import entities.User;
+import entities.users.User;
 import entities.containers.Container;
 import entities.containers.MessageContainer;
 import entities.containers.ReportContainer;

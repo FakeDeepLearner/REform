@@ -1,6 +1,4 @@
-package entities;
-
-import entities.containers.MessageContainer;
+package entities.users;
 
 import java.util.ArrayList;
 

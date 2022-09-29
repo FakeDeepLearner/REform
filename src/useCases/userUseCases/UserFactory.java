@@ -1,7 +1,7 @@
 package useCases.userUseCases;
 
-import entities.User;
-import entities.UserType;
+import entities.users.User;
+import entities.users.UserType;
 import entities.containers.UserContainer;
 import exceptions.UsernameAlreadyExistsException;
 import gateways.AdminCSVController;
