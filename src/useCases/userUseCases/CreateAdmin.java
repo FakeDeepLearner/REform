@@ -1,7 +1,7 @@
 package useCases.userUseCases;
 
-import entities.AdminUser;
-import entities.User;
+import entities.users.AdminUser;
+import entities.users.User;
 import entities.containers.UserContainer;
 import gateways.DataInterface;
 

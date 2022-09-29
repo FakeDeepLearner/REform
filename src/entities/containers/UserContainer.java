@@ -1,6 +1,10 @@
 package entities.containers;
 
 import entities.*;
+import entities.users.AdminUser;
+import entities.users.Buyer;
+import entities.users.NonAdminUser;
+import entities.users.Seller;
 import exceptions.*;
 
 import java.util.ArrayList;

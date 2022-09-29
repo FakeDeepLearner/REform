@@ -1,8 +1,8 @@
 package useCases.userUseCases;
 
-import entities.Bannable;
-import entities.NonAdminUser;
-import entities.User;
+import entities.users.Bannable;
+import entities.users.NonAdminUser;
+import entities.users.User;
 import entities.containers.UserContainer;
 import exceptions.UserCannotBeBannedException;
 
@@ -15,10 +15,10 @@ public class RestrictUser {
     }
 
     /**
-     * Temporarily bans entities.User if they are an entities.NonAdminUser.
+     * Temporarily bans entities.users.User if they are an entities.users.NonAdminUser.
      *
-     * @param username of the entities.User to be banned.
-     * @return true if the entities.User is successfully banned.
+     * @param username of the entities.users.User to be banned.
+     * @return true if the entities.users.User is successfully banned.
      */
     public boolean banNonAdminUser(String username) {
         User u = interfaceUsers.get(username);
@@ -31,10 +31,10 @@ public class RestrictUser {
     }
 
     /**
-     * Unbans entities.User if they are an entities.NonAdminUser.
+     * Unbans entities.users.User if they are an entities.users.NonAdminUser.
      *
-     * @param username of the entities.User to be unbanned.
-     * @return true if the entities.User is successfully unbanned.
+     * @param username of the entities.users.User to be unbanned.
+     * @return true if the entities.users.User is successfully unbanned.
      */
     public boolean unbanNonAdminUser(String username) {
         User u = interfaceUsers.get(username);
@@ -47,10 +47,10 @@ public class RestrictUser {
     }
 
     /**
-     * Deletes the entities.User if they are an entities.NonAdminUser.
+     * Deletes the entities.users.User if they are an entities.users.NonAdminUser.
      *
-     * @param username of the entities.User to be deleted.
-     * @return true if the entities.User is successfully deleted.
+     * @param username of the entities.users.User to be deleted.
+     * @return true if the entities.users.User is successfully deleted.
      */
     public boolean deleteNonAdminUser(String username) {
         User u = interfaceUsers.get(username);

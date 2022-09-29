@@ -1,7 +1,7 @@
 package gateways;
 
-import entities.Seller;
-import entities.User;
+import entities.users.Seller;
+import entities.users.User;
 import entities.containers.UserContainer;
 
 import java.io.BufferedWriter;

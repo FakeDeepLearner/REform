@@ -1,8 +1,8 @@
 package useCases.userUseCases;
 
-import entities.User;
+import entities.users.User;
 import entities.containers.UserContainer;
-import entities.Seller;
+import entities.users.Seller;
 import gateways.DataInterface;
 
 import java.io.IOException;

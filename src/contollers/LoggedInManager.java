@@ -2,7 +2,7 @@ package contollers;
 
 import entities.Message;
 import entities.ReportMessage;
-import entities.User;
+import entities.users.User;
 import entities.containers.ListingContainer;
 import entities.containers.MessageContainer;
 import entities.containers.ReportContainer;

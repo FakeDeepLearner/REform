@@ -1,6 +1,6 @@
 package useCases.userUseCases;
 
-import entities.User;
+import entities.users.User;
 import entities.containers.UserContainer;
 import gateways.DataInterface;
 

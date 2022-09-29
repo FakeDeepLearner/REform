@@ -1,9 +1,9 @@
-import entities.User;
+import entities.users.User;
 import entities.containers.ListingContainer;
 import entities.containers.UserContainer;
 import entities.Listing;
 
-import entities.Seller;
+import entities.users.Seller;
 import org.junit.Test;
 import useCases.listingUseCases.ViewListings;
 

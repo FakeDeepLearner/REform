@@ -1,10 +1,10 @@
 package useCases.listingUseCases;
 
-import entities.User;
+import entities.users.User;
 import entities.containers.UserContainer;
 import entities.Listing;
 import entities.containers.ListingContainer;
-import entities.Seller;
+import entities.users.Seller;
 import gateways.DataInterface;
 import useCases.miscellaneous.GenerateUniqueID;
 

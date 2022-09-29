@@ -1,8 +1,7 @@
 package useCases.messageUseCases;
 
-import entities.NonAdminUser;
-import entities.User;
-import entities.UserType;
+import entities.users.NonAdminUser;
+import entities.users.User;
 import entities.containers.UserContainer;
 import entities.Message;
 import entities.containers.MessageContainer;
@@ -11,8 +10,6 @@ import useCases.miscellaneous.GenerateUniqueID;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.SortedSet;
-import java.util.TreeSet;
 
 public class SendMessages {
 

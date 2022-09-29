@@ -1,8 +1,8 @@
 package useCases.userUseCases;
 
-import entities.Bannable;
-import entities.NonAdminUser;
-import entities.User;
+import entities.users.Bannable;
+import entities.users.NonAdminUser;
+import entities.users.User;
 import entities.containers.UserContainer;
 import exceptions.UserBannedException;
 import exceptions.UserNotFoundException;
@@ -50,7 +50,7 @@ public class AuthenticateUser {
     }
 
     /**
-     * Logs specified entities.User u out.
+     * Logs specified entities.users.User u out.
      *
      * @param username the username of the User instance to log out.
      */

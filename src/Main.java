@@ -1,7 +1,7 @@
 import contollers.ProgramController;
 import entities.Message;
 import entities.ReportMessage;
-import entities.User;
+import entities.users.User;
 import entities.containers.ReportContainer;
 import entities.containers.UserContainer;
 import entities.Listing;

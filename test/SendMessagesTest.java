@@ -1,9 +1,9 @@
 import entities.Message;
-import entities.User;
+import entities.users.User;
 import entities.containers.UserContainer;
-import entities.Buyer;
+import entities.users.Buyer;
 import entities.containers.MessageContainer;
-import entities.Seller;
+import entities.users.Seller;
 import gateways.MessagesCSVController;
 import useCases.messageUseCases.SendMessages;
 import org.junit.Test;

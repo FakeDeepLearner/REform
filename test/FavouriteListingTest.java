@@ -1,5 +1,5 @@
 import entities.Listing;
-import entities.User;
+import entities.users.User;
 import entities.containers.ListingContainer;
 import entities.containers.UserContainer;
 import gateways.FavouritesCSVController;

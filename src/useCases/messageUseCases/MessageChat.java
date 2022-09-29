@@ -1,7 +1,7 @@
 package useCases.messageUseCases;
 
 import entities.Message;
-import entities.User;
+import entities.users.User;
 import entities.containers.MessageContainer;
 
 import java.util.ArrayList;

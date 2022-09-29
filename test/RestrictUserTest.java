@@ -1,4 +1,4 @@
-import entities.User;
+import entities.users.User;
 import entities.containers.UserContainer;
 import org.junit.Test;
 import useCases.userUseCases.RestrictUser;

@@ -1,9 +1,9 @@
-import entities.User;
+import entities.users.User;
 import entities.containers.UserContainer;
 import entities.Listing;
 import entities.containers.ListingContainer;
 
-import entities.Seller;
+import entities.users.Seller;
 import gateways.ListingsCSVController;
 import useCases.listingUseCases.CreateListing;
 import org.junit.Test;

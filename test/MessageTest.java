@@ -1,6 +1,6 @@
 import entities.Message;
-import entities.Buyer;
-import entities.Seller;
+import entities.users.Buyer;
+import entities.users.Seller;
 import org.junit.Test;
 
 public class MessageTest {

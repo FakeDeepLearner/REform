@@ -1,14 +1,13 @@
 package contollers;
 
 import entities.Listing;
-import entities.User;
+import entities.users.User;
 import entities.containers.ListingContainer;
 import entities.containers.UserContainer;
 import gateways.FavouritesCSVController;
 import useCases.listingUseCases.FavoriteListing;
 import useCases.listingUseCases.ViewListings;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class FavAndUnFavManager {
