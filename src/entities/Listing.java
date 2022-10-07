@@ -9,15 +9,15 @@ public class Listing {
      * https://www.canadapost-postescanada.ca/cpc/en/support/articles/addressing-guidelines/civic-address.page
      */
     // Integer class used to allow for variable to be assigned a null value
-    private final Integer unitNumber;
-    private final int civicAddress;
-    private final String streetName;
-    private final String city;
-    private final int bedrooms;
-    private final int bathrooms;
-    private final Integer floors;
+    private Integer unitNumber;
+    private int civicAddress;
+    private String streetName;
+    private String city;
+    private int bedrooms;
+    private int bathrooms;
+    private Integer floors;
     private BigDecimal price;
-    private final String info;
+    private String info;
     private final boolean isSold;
 
     enum ListingType {
@@ -214,6 +214,38 @@ public class Listing {
      */
     public boolean getIsUnit() {
         return isUnit;
+    }
+
+    public void setBathrooms(int bathrooms) {
+        this.bathrooms = bathrooms;
+    }
+
+    public void setBedrooms(int bedrooms) {
+        this.bedrooms = bedrooms;
+    }
+
+    public void setCivicAddress(int civicAddress) {
+        this.civicAddress = civicAddress;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setFloors(Integer floors) {
+        this.floors = floors;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
+    }
+
+    public void setStreetName(String streetName) {
+        this.streetName = streetName;
+    }
+
+    public void setUnitNumber(Integer unitNumber) {
+        this.unitNumber = unitNumber;
     }
 
     /**

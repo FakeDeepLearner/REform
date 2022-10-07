@@ -32,7 +32,7 @@ public class LoggedOutManager {
     public String menuSelector() throws ExitProgramException {
         ui.printWelcomeMessage();
 
-        ArrayList<Integer> allowedInputs = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5));
+        ArrayList<Integer> allowedInputs = new ArrayList<>(Arrays.asList(1, 2, 3, 4));
         int menuSelect = input.intInput(allowedInputs);
 
         ArrayList<String> usernamePassword = new ArrayList<>();
@@ -67,7 +67,7 @@ public class LoggedOutManager {
     private ArrayList<String> createMenuSelector() {
         ui.printCreateUserMenu();
 
-        ArrayList<Integer> allowedInputs = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5));
+        ArrayList<Integer> allowedInputs = new ArrayList<>(Arrays.asList(1, 2));
         int menuSelect = input.intInput(allowedInputs);
 
         ArrayList<String> usernamePassword = new ArrayList<>();
