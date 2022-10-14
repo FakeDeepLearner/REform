@@ -3,6 +3,7 @@ package useCases.listingUseCases.updates;
 import entities.Listing;
 import entities.ListingEditable;
 import entities.containers.ListingContainer;
+import exceptions.ModificationErrorException;
 
 public non-sealed class UpdateFloors extends UpdateListing{
 
@@ -13,6 +14,11 @@ public non-sealed class UpdateFloors extends UpdateListing{
     @Override
     public void update(Integer ID, Object data) {
         Listing listing = listings.get(ID);
-        listing.setFloors((Integer) data);
+        try {
+            listing.setFloors((Integer) data);
+        }
+        catch(ClassCastException | NullPointerException e){
+            throw new ModificationErrorException();
+        }
     }
 }

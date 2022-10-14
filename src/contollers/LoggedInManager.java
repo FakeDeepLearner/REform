@@ -7,6 +7,7 @@ import entities.containers.ListingContainer;
 import entities.containers.MessageContainer;
 import entities.containers.ReportContainer;
 import entities.containers.UserContainer;
+import exceptions.ModificationErrorException;
 import exceptions.UserCannotBeBannedException;
 import exceptions.UserIsNotASellerException;
 import exceptions.UserNotFoundException;
@@ -46,6 +47,7 @@ public class LoggedInManager {
     private final ViewListings viewListings;
     private final OpenAndCloseReports openAndCloseReports;
     private final ViewMessages viewMessages;
+    private final ListingUpdateManager listingUpdateManager;
 
     /**
      * Constructor for LoggedInManager
@@ -72,6 +74,7 @@ public class LoggedInManager {
         viewListings = new ViewListings(users, listings);
         openAndCloseReports = new OpenAndCloseReports();
         viewMessages = new ViewMessages(users);
+        listingUpdateManager = new ListingUpdateManager(listings);
     }
 
     /**
@@ -159,7 +162,7 @@ public class LoggedInManager {
         ui.printSellerLoginMenu();
 
         ArrayList<Integer> allowedInputs = new ArrayList<>();
-        Collections.addAll(allowedInputs, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+        Collections.addAll(allowedInputs, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11);
 
         int select = input.intInput(allowedInputs);
         switch (select) {
@@ -168,38 +171,41 @@ public class LoggedInManager {
                 ui.printFilteredListings(viewListings.getSellerListingsStrings(username));
                 break;
             case 2:
+                updateUserListing(username);
+                break;
+            case 3:
                 // Message user
                 messageUser(username);
                 break;
-            case 3:
+            case 4:
                 // View inbox
                 viewInbox(username);
                 break;
-            case 4:
+            case 5:
                 // View outbox
                 viewOutbox(username);
                 break;
-            case 5:
+            case 6:
                 reportUser(username);
                 break;
-            case 6:
+            case 7:
                 // Create listing
                 createNewListing(username);
                 break;
-            case 7:
+            case 8:
                 // Delete listing
                 deleteListing(username);
                 break;
-            case 8:
+            case 9:
                 // View login history
                 ArrayList<String> userHistory = history.getLoginHistory(username);
                 ui.printLoginHistory(userHistory);
                 break;
-            case 9:
+            case 10:
                 //View chat history
                 viewMessageChat(username);
                 break;
-            case 10:
+            case 11:
                 // Logout user
                 auth.logoutUser(username);
                 ui.printLogOutSuccess();
@@ -547,6 +553,161 @@ public class LoggedInManager {
         }
         ui.printReportStatusChangeSuccess();
     }
+
+    private void updateUserListing(String username){
+        List<Listing> sellerListings = viewListings.getSellerListings(username);
+        List<String> sellerListingStrings = viewListings.getSellerListingsStrings(username);
+        ui.printNumberedListings(sellerListingStrings);
+        ui.printEnterType("the number of the listing you want to modify");
+        int numListing = input.intInput(1, sellerListings.size());
+        Integer listingID = sellerListings.get(numListing - 1).getId();
+        updateListingNextStep(listingID);
+        ui.printListingUpdateSuccess();
+    }
+
+    private void updateListingNextStep(Integer listingID){
+        ui.printUpdateListingMenu();
+        int updateInput = input.intInput(1, 9);
+        switch (updateInput){
+            case 1:
+                try{
+                    updateListingBathrooms(listingID);
+                }
+                catch (ModificationErrorException exception){
+                    ui.printArbitraryException(exception);
+                    updateListingBathrooms(listingID);
+                }
+                break;
+            case 2:
+                try{
+                    updateListingBedrooms(listingID);
+                }
+                catch (ModificationErrorException exception){
+                    ui.printArbitraryException(exception);
+                    updateListingBedrooms(listingID);
+                }
+                break;
+            case 3:
+                try{
+                    updateListingCity(listingID);
+                }
+                catch (ModificationErrorException exception){
+                    ui.printArbitraryException(exception);
+                    updateListingCity(listingID);
+                }
+                break;
+            case 4:
+                try{
+                    updateCivicAddress(listingID);
+                }
+                catch (ModificationErrorException exception){
+                    ui.printArbitraryException(exception);
+                    updateCivicAddress(listingID);
+                }
+                break;
+            case 5:
+                try{
+                    updateListingDescription(listingID);
+                }
+                catch (ModificationErrorException exception){
+                    ui.printArbitraryException(exception);
+                    updateListingDescription(listingID);
+                }
+                break;
+            case 6:
+                try{
+                    updateListingFloors(listingID);
+                }
+                catch (ModificationErrorException exception){
+                    ui.printArbitraryException(exception);
+                    updateListingFloors(listingID);
+                }
+                break;
+            case 7:
+                try{
+                    updateListingPrice(listingID);
+                }
+                catch (ModificationErrorException exception){
+                    ui.printArbitraryException(exception);
+                    updateListingPrice(listingID);
+                }
+                break;
+            case 8:
+                try{
+                    updateListingStreet(listingID);
+                }
+                catch (ModificationErrorException exception){
+                    ui.printArbitraryException(exception);
+                    updateListingStreet(listingID);
+                }
+                break;
+            case 9:
+                try{
+                    updateUnitNumber(listingID);
+                }
+                catch (ModificationErrorException exception){
+                    ui.printArbitraryException(exception);
+                    updateUnitNumber(listingID);
+                }
+                break;
+        }
+
+    }
+
+    private void updateListingBathrooms(Integer listingID){
+        ui.printEnterType("the new number of bathrooms");
+        Integer newBathroomNum = input.intInput();
+        listingUpdateManager.updateListingAttribute("bathroom", listingID, newBathroomNum);
+    }
+
+    private void updateListingBedrooms(Integer listingID){
+        ui.printEnterType("the new number of bedrooms");
+        Integer newBedroomNum = input.intInput();
+        listingUpdateManager.updateListingAttribute("bedrooms", listingID, newBedroomNum);
+    }
+
+    private void updateListingCity(Integer listingID){
+        ui.printEnterType("the new city");
+        String newCity = input.strInput();
+        listingUpdateManager.updateListingAttribute("city", listingID, newCity);
+    }
+
+    private void updateCivicAddress(Integer listingID){
+        ui.printEnterType("the new civic address");
+        Integer newCivicAddress = input.intInput();
+        listingUpdateManager.updateListingAttribute("civic_address", listingID, newCivicAddress);
+    }
+
+    private void updateListingDescription(Integer listingID){
+        ui.printEnterType("the new description");
+        String newDesc = input.strInput();
+        listingUpdateManager.updateListingAttribute("description", listingID, newDesc);
+    }
+
+    private void updateListingFloors(Integer listingID){
+        ui.printEnterType("the new number of floors");
+        Integer newFloorNum = input.intInput();
+        listingUpdateManager.updateListingAttribute("floors", listingID, newFloorNum);
+    }
+
+    private void updateListingPrice(Integer listingID){
+        ui.printEnterType("the new price");
+        BigDecimal newPrice = BigDecimal.valueOf(input.intInput());
+        listingUpdateManager.updateListingAttribute("price", listingID, newPrice);
+    }
+
+    private void updateListingStreet(Integer listingID){
+        ui.printEnterType("the new street");
+        String newStreet = input.strInput();
+        listingUpdateManager.updateListingAttribute("street", listingID, newStreet);
+    }
+
+    private void updateUnitNumber(Integer listingID){
+        ui.printEnterType("the new unit number");
+        Integer newUnitNum = input.intInput();
+        listingUpdateManager.updateListingAttribute("unit_number", listingID, newUnitNum);
+    }
+
 
 
     /**

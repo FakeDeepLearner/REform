@@ -42,15 +42,28 @@ public class UserInterface {
 
     public void printSellerLoginMenu(){
         System.out.println("Press 1 to view your listings");
-        System.out.println("Press 2 to message user");
-        System.out.println("Press 3 to view your inbox");
-        System.out.println("Press 4 to view your outbox");
-        System.out.println("Press 5 to report a user.");
-        System.out.println("Press 6 to create new listing");
-        System.out.println("Press 7 to delete listing");
-        System.out.println("Press 8 to see your login history");
-        System.out.println("Press 9 to see your chat history with another user.");
-        System.out.println("Press 10 to log out.");
+        System.out.println("Press 2 to modify your listings.");
+        System.out.println("Press 3 to message user");
+        System.out.println("Press 4 to view your inbox");
+        System.out.println("Press 5 to view your outbox");
+        System.out.println("Press 6 to report a user.");
+        System.out.println("Press 7 to create new listing");
+        System.out.println("Press 8 to delete listing");
+        System.out.println("Press 9 to see your login history");
+        System.out.println("Press 10 to see your chat history with another user.");
+        System.out.println("Press 11 to log out.");
+    }
+
+    public void printUpdateListingMenu(){
+        System.out.println("Press 1 to update the number of bathrooms.");
+        System.out.println("Press 2 to update the number of bedrooms.");
+        System.out.println("Press 3 to update the city.");
+        System.out.println("Press 4 to update the civic address.");
+        System.out.println("Press 5 to update the description.");
+        System.out.println("Press 6 to update the number of floors.");
+        System.out.println("Press 7 to update the price.");
+        System.out.println("Press 8 to update the street.");
+        System.out.println("Press 9 to update the unit number.");
     }
 
     public void printListingOptionsMenu(){
@@ -184,6 +197,10 @@ public class UserInterface {
 
     public void printListingCreatedSuccess() {
         System.out.println("Listing was successfully created.");
+    }
+
+    public void printListingUpdateSuccess(){
+        System.out.println("Listing successfully updated.");
     }
 
     public void printListingHasUnitNumber() {
