@@ -87,6 +87,14 @@ public class UserInterface {
         }
     }
 
+    public void printReportRemovalConfirmation(){
+        System.out.println("Do you want this report to be removed from all admin inboxes?(Y/N)");
+    }
+
+    public void printReportRemovalSuccess(){
+        System.out.println("Report successfully removed.");
+    }
+
     public void printEnterType(String type) {
         System.out.println("Enter " + type + ": ");
     }

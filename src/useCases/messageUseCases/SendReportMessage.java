@@ -75,6 +75,10 @@ public class SendReportMessage{
         }
     }
 
+    public void removeReportMessage(ReportMessage message){
+        reportContainer.remove(message);
+    }
+
     public void read() throws IOException {
         for (String[] line : i.read()){
             String reportingUsername = line[0];

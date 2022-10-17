@@ -26,10 +26,8 @@ import useCases.listingUseCases.CreateListing;
 import useCases.listingUseCases.ListingProperties;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class LoggedInManager {
     private final InputHandler input;
@@ -48,6 +46,8 @@ public class LoggedInManager {
     private final OpenAndCloseReports openAndCloseReports;
     private final ViewMessages viewMessages;
     private final ListingUpdateManager listingUpdateManager;
+
+    private ReportChangeState changeState;
 
     /**
      * Constructor for LoggedInManager
@@ -75,6 +75,7 @@ public class LoggedInManager {
         openAndCloseReports = new OpenAndCloseReports();
         viewMessages = new ViewMessages(users);
         listingUpdateManager = new ListingUpdateManager(listings);
+        changeState = ReportChangeState.NEUTRAL;
     }
 
     /**
@@ -550,8 +551,18 @@ public class LoggedInManager {
         }
         else{
             openAndCloseReports.closeReport(messageToUpdate);
+            checkReportRemoval(messageToUpdate);
         }
         ui.printReportStatusChangeSuccess();
+    }
+
+    private void checkReportRemoval(ReportMessage message){
+        ui.printReportRemovalConfirmation();
+        String confirmation = input.strInput(Arrays.asList("Y", "N"), false);
+        if(confirmation.equals("Y")){
+            sendReportMessage.removeReportMessage(message);
+            ui.printReportRemovalSuccess();
+        }
     }
 
     private void updateUserListing(String username){
