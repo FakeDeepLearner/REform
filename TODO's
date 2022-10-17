@@ -1,4 +1,2 @@
-1) Add an option for admins to be able to remove a resolved report from their inbox. It will be removed from the inboxes
-of all other admins.
-2) Add a notification for admins to notify them that they still have reports to look at when they log in.
-3) Test the new all-modification feature more thoroughly.
+1) Add a notification for admins to notify them that they still have reports to look at when they log in.
+2) Fix a bug that prevents reports from changing their state to RESOLVED, if the admin chooses not to remove the report.
