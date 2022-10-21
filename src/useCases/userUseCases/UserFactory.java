@@ -42,6 +42,10 @@ public class UserFactory {
         }
     }
 
+    public User getUser(String username){
+        return userContainer.get(username);
+    }
+
     /**
      * @param type     of user to be created
      * @param username of the user to be created

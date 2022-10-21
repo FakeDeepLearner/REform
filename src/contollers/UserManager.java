@@ -1,5 +1,6 @@
 package contollers;
 
+import entities.users.AdminUser;
 import entities.users.User;
 import entities.containers.UserContainer;
 import exceptions.UserBannedException;
@@ -96,5 +97,9 @@ public class UserManager {
         }
 
         return null;
+    }
+
+    public User getUser(String username){
+        return userFactory.getUser(username);
     }
 }

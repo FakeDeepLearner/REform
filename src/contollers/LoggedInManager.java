@@ -2,6 +2,7 @@ package contollers;
 
 import entities.Message;
 import entities.ReportMessage;
+import entities.users.AdminUser;
 import entities.users.User;
 import entities.containers.ListingContainer;
 import entities.containers.MessageContainer;
@@ -748,6 +749,10 @@ public class LoggedInManager {
      */
     public boolean adminScreen(String username) {
         ui.printAdminLoginMenu();
+        AdminUser user = (AdminUser) userManager.getUser(username);
+        if(user.isNotify()){
+            ui.printAdminInboxNotification();
+        }
 
         ArrayList<Integer> allowedInputs = new ArrayList<>();
         Collections.addAll(allowedInputs, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
