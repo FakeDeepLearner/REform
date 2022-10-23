@@ -1,3 +1,1 @@
-1) Add a notification for admins to notify them that they still have open reports to look at when they log in. (Implementation
-done, needs bug fixing or another implementation)
-2) Start separating the larger classes, mainly LoggedInManager, into smaller classes.
+1) Start separating the larger classes, mainly LoggedInManager, into smaller classes.
