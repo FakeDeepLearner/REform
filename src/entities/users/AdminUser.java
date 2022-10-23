@@ -4,7 +4,6 @@ import entities.Message;
 import entities.ReportMessage;
 
 public non-sealed class AdminUser extends User {
-    private final boolean notify;
 
     /**
      * Creates an instance of an AdminUser
@@ -15,22 +14,18 @@ public non-sealed class AdminUser extends User {
     public AdminUser(String username, String password) {
         super(username, password);
         this.isAdmin = true;
-        notify = inboxContainsOpenReports();
     }
 
     private boolean inboxContainsOpenReports(){
         for (Message message : inbox.values()) {
-            if (message instanceof ReportMessage report) {
-                boolean isResolved = report.isResolved();
-                if (!isResolved) {
-                    return true;
-                }
+            if (message instanceof ReportMessage report && !(report.isResolved())) {
+                return true;
             }
         }
         return false;
     }
 
     public boolean isNotify() {
-        return notify;
+        return inboxContainsOpenReports();
     }
 }
