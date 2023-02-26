@@ -16,7 +16,6 @@ import gateways.HistoriesCSVController;
 import gateways.ListingsCSVController;
 import gateways.MessagesCSVController;
 import gateways.ReportsCSVController;
-import useCases.listingUseCases.updates.UpdatePrice;
 import useCases.listingUseCases.ViewListings;
 import useCases.messageUseCases.*;
 import useCases.userUseCases.AuthenticateUser;
@@ -28,7 +27,6 @@ import useCases.listingUseCases.ListingProperties;
 
 import java.math.BigDecimal;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class LoggedInManager {
     private final InputHandler input;
@@ -47,8 +45,6 @@ public class LoggedInManager {
     private final OpenAndCloseReports openAndCloseReports;
     private final ViewMessages viewMessages;
     private final ListingUpdateManager listingUpdateManager;
-
-    private ReportChangeState changeState;
 
     /**
      * Constructor for LoggedInManager
@@ -76,7 +72,6 @@ public class LoggedInManager {
         openAndCloseReports = new OpenAndCloseReports();
         viewMessages = new ViewMessages(users);
         listingUpdateManager = new ListingUpdateManager(listings);
-        changeState = ReportChangeState.NEUTRAL;
     }
 
     /**
@@ -720,8 +715,6 @@ public class LoggedInManager {
         listingUpdateManager.updateListingAttribute("unit_number", listingID, newUnitNum);
     }
 
-
-
     /**
      * Displays the messages inbox of the logged-in user
      * @param username the username of the logged-in user
@@ -753,7 +746,6 @@ public class LoggedInManager {
         if(user.isNotify()){
             ui.printAdminInboxNotification();
         }
-
         ArrayList<Integer> allowedInputs = new ArrayList<>();
         Collections.addAll(allowedInputs, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 
