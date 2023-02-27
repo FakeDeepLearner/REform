@@ -3,6 +3,7 @@ package useCases.listingUseCases;
 import entities.users.User;
 import entities.containers.UserContainer;
 import entities.users.Buyer;
+import exceptions.ListingAlreadyFavouritedException;
 import gateways.DataInterface;
 
 import java.io.IOException;
@@ -47,6 +48,9 @@ public class FavoriteListing {
         Buyer buyer = userContainer.getBuyer(username);
         if (!buyer.getFavorites().contains(listingID)) {
             buyer.addFavouriteListing(listingID);
+        }
+        else{
+            throw new ListingAlreadyFavouritedException();
         }
 
     }

@@ -8,10 +8,7 @@ import entities.containers.ListingContainer;
 import entities.containers.MessageContainer;
 import entities.containers.ReportContainer;
 import entities.containers.UserContainer;
-import exceptions.ModificationErrorException;
-import exceptions.UserCannotBeBannedException;
-import exceptions.UserIsNotASellerException;
-import exceptions.UserNotFoundException;
+import exceptions.*;
 import gateways.HistoriesCSVController;
 import gateways.ListingsCSVController;
 import gateways.MessagesCSVController;
@@ -380,8 +377,13 @@ public class LoggedInManager {
             if (choice.equals("Y")) {
                 ui.printEnterType("number of listing to add");
                 int number = input.intInput(1, listings.size());
-                favAndUnFavManager.addToBuyerFavorites(username, listingID.get(number - 1));
-                ui.printListingFavouriteSuccess();
+                try {
+                    favAndUnFavManager.addToBuyerFavorites(username, listingID.get(number - 1));
+                    ui.printListingFavouriteSuccess();
+                }
+                catch(ListingAlreadyFavouritedException exception){
+                    ui.printArbitraryException(exception);
+                }
             }
         }
     }

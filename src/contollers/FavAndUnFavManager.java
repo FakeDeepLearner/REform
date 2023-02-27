@@ -4,6 +4,7 @@ import entities.Listing;
 import entities.users.User;
 import entities.containers.ListingContainer;
 import entities.containers.UserContainer;
+import exceptions.ListingAlreadyFavouritedException;
 import gateways.FavouritesCSVController;
 import useCases.listingUseCases.FavoriteListing;
 import useCases.listingUseCases.ViewListings;
@@ -30,7 +31,6 @@ public class FavAndUnFavManager {
      */
     public void addToBuyerFavorites(String username, int listingID) {
         favoriteListing.addListingToBuyerFavorites(username, listingID);
-
     }
 
     /**
