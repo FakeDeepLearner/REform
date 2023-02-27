@@ -47,7 +47,7 @@ public class StoreData {
 
         createListing = new CreateListing(listings, users, listingsCSVController);
         sendMessages = new SendMessages(messages, users, messagesCSVController);
-        favoriteListing = new FavoriteListing(users, listings, favouritesCSVController);
+        favoriteListing = new FavoriteListing(users, favouritesCSVController);
         history = new UpdateUserHistory(users, historiesCSVController);
         createBuyer = new CreateBuyer(users, buyersCSVController);
         createSeller = new CreateSeller(users, sellersCSVController);

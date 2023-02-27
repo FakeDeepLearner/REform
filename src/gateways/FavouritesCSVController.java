@@ -19,13 +19,14 @@ public non-sealed class FavouritesCSVController extends CSVController {
 
     @Override
     public void write() throws IOException {
-        BufferedWriter writer = new BufferedWriter(new FileWriter(filepath.getFilePath(), true));
+        BufferedWriter writer = new BufferedWriter(new FileWriter(filepath.getFilePath(), false));
 
         for (String username : users.getAllBuyers().keySet()) {
-            Buyer u = (Buyer) users.get(username);
+            Buyer u = users.getBuyer(username);
             for (Integer id : u.getFavorites()) {
+                String lineToWrite = username + "," + id + "\n";
 
-                writer.write(username + "," + id + "\n");
+                writer.write(lineToWrite);
             }
         }
 

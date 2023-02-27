@@ -23,7 +23,7 @@ public class FavouriteListingTest {
         Listing l1 = new Listing(id, 1, "St. George St.", "Toronto", "HOUSE", 1, 1, 1, new BigDecimal("10000.50"), "test");
         listings.put(id, l1);
 
-        FavoriteListing favourite = new FavoriteListing(users, listings, new FavouritesCSVController(users));
+        FavoriteListing favourite = new FavoriteListing(users, new FavouritesCSVController(users));
         ViewListings viewListings = new ViewListings(users, listings);
         favourite.addListingToBuyerFavorites(username, id);
 

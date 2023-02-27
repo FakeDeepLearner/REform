@@ -19,7 +19,7 @@ public class FavAndUnFavManager {
      * @param users are the users that can favourite listings
      */
     public FavAndUnFavManager(UserContainer<String, User> users, ListingContainer<Integer, Listing> listingContainer) {
-        this.favoriteListing = new FavoriteListing(users, listingContainer, new FavouritesCSVController(users));
+        this.favoriteListing = new FavoriteListing(users, new FavouritesCSVController(users));
         this.viewListings = new ViewListings(users, listingContainer);
     }
 
@@ -30,7 +30,6 @@ public class FavAndUnFavManager {
      */
     public void addToBuyerFavorites(String username, int listingID) {
         favoriteListing.addListingToBuyerFavorites(username, listingID);
-        favoriteListing.addCreationToGeneratedFavorites(username, listingID);
 
     }
 
@@ -41,7 +40,6 @@ public class FavAndUnFavManager {
      */
     public void removeFromBuyerFavorites(String username, int listingID) {
         favoriteListing.removeListingFromBuyerFavorites(username, listingID);
-        favoriteListing.removeFromGeneratedFavorites(username, listingID);
     }
 
     /**

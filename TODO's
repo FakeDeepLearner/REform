@@ -1,3 +1,2 @@
 1) Start separating the larger classes, mainly LoggedInManager, into smaller classes.
-2) Fix a bug that causes favorite listings to not be removed
-3) Remove the ability to favorite the same listing more than once.
+2) Remove the ability to favorite the same listing more than once.
