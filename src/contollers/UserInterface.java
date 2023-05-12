@@ -33,15 +33,16 @@ public class UserInterface {
     }
 
     public void printBuyerLoginMenu(){
-        System.out.println("Press 1 to view listings");
-        System.out.println("Press 2 to view favourite listings");
-        System.out.println("Press 3 to message user");
-        System.out.println("Press 4 to view your inbox");
-        System.out.println("Press 5 to view your outbox");
-        System.out.println("Press 6 to report a user.");
-        System.out.println("Press 7 to see your login history");
-        System.out.println("Press 8 to see your chat history with another user.");
-        System.out.println("Press 9 to log out.");
+        System.out.println("Press 1 to filter through available listings");
+        System.out.println("Press 2 to view all available listings");
+        System.out.println("Press 3 to view your favourite listings");
+        System.out.println("Press 4 to message user");
+        System.out.println("Press 5 to view your inbox");
+        System.out.println("Press 6 to view your outbox");
+        System.out.println("Press 7 to report a user.");
+        System.out.println("Press 8 to see your login history");
+        System.out.println("Press 9 to see your chat history with another user.");
+        System.out.println("Press 10 to log out.");
     }
 
     public void printSellerLoginMenu(){

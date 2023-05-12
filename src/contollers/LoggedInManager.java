@@ -99,7 +99,7 @@ public class LoggedInManager {
         ui.printBuyerLoginMenu();
 
         ArrayList<Integer> allowedInputs = new ArrayList<>();
-        Collections.addAll(allowedInputs, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+        Collections.addAll(allowedInputs, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 
         int select = input.intInput(allowedInputs);
         switch (select) {
@@ -108,35 +108,38 @@ public class LoggedInManager {
                 searchProperties(username);
                 break;
             case 2:
+                viewAllListings();
+                break;
+            case 3:
                 // View favourite listings
                 viewFavouriteListings(username);
                 checkDeleteFavouriteListing(username);
                 break;
-            case 3:
+            case 4:
                 // Send message
                 messageUser(username);
                 break;
-            case 4:
+            case 5:
                 // View inbox
                 viewInbox(username);
                 break;
-            case 5:
+            case 6:
                 // View outbox
                 viewOutbox(username);
                 break;
-            case 6:
+            case 7:
                 reportUser(username);
                 break;
-            case 7:
+            case 8:
                 // View login history
                 ArrayList<String> userHistory = history.getLoginHistory(username);
                 ui.printLoginHistory(userHistory);
                 break;
-            case 8:
+            case 9:
                 //View chat history
                 viewMessageChat(username);
                 break;
-            case 9:
+            case 10:
                 // Logout user
                 auth.logoutUser(username);
                 ui.printLogOutSuccess();
@@ -735,6 +738,11 @@ public class LoggedInManager {
 
     public void viewFavouriteListings(String username){
         ui.printNumberedListings(favAndUnFavManager.getBuyerFavouritesString(username));
+    }
+
+
+    public void viewAllListings(){
+        ui.printNumberedListings(viewListings.getAllListings());
     }
     /**
      * Presents admin with options to navigate through program

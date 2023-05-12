@@ -61,4 +61,16 @@ public class ViewListings {
         return favListings;
     }
 
+    public List<String> getAllListings(){
+        ArrayList<String> allListings = new ArrayList<>();
+        for(Listing listing : listings.values()){
+            boolean isListingSold = listing.getIsSold();
+            if(!isListingSold) {
+                allListings.add(listing.toString() + "\n\n--------");
+            }
+
+        }
+        return allListings;
+    }
+
 }
