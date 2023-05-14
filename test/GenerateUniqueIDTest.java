@@ -13,7 +13,8 @@ public class GenerateUniqueIDTest {
     @Test
     public void testGenerateUniqueID() {
         ListingContainer<Integer, Listing> l = new ListingContainer<>();
-        l.put(2, new Listing(2, 16, 225, "St. George St.", "Toronto", "HOUSE", 1, 1, new BigDecimal("100.00"), "test"));
+        l.put(2, new Listing(2, 16, 225, "St. George St.", "Toronto",
+                "HOUSE", 1, 1, new BigDecimal("100.00"), "test", false));
         GenerateUniqueID a = new GenerateUniqueID(l);
 
         a.setMinID(1);

@@ -34,7 +34,8 @@ public class CreateListingTest {
         uc.put("s1", s);
 
         CreateListing listingCreator = new CreateListing(lc, uc, new ListingsCSVController(uc));
-        Listing listing = new Listing(0, 1, 22, "streetName", "city", "APARTMENT", 5, 5, BigDecimal.valueOf(5.0), "test1");
+        Listing listing = new Listing(0, 1, 22, "streetName",
+                "city", "APARTMENT", 5, 5, BigDecimal.valueOf(5.0), "test1", false);
         listingCreator.addListingToSeller("s1", listing);
         assertEquals(1, s.getListings().size());
     }
@@ -44,7 +45,8 @@ public class CreateListingTest {
         ListingContainer<Integer, Listing> lc = new ListingContainer<>();
         UserContainer<String, User> uc = new UserContainer<>();
 
-        Listing listing = new Listing(0, 1, 22, "streetName", "city", "APARTMENT", 5, 5, BigDecimal.valueOf(5.0), "test1");
+        Listing listing = new Listing(0, 1, 22, "streetName", "city", "APARTMENT",
+                5, 5, BigDecimal.valueOf(5.0), "test1", false);
         lc.put(0, listing);
 
         CreateListing listingCreator = new CreateListing(lc, uc, new ListingsCSVController(uc));
@@ -56,7 +58,8 @@ public class CreateListingTest {
         ListingContainer<Integer, Listing> lc = new ListingContainer<>();
         UserContainer<String, User> uc = new UserContainer<>();
 
-        Listing listing = new Listing(0, 1, 22, "streetName", "city", "APARTMENT", 5, 5, BigDecimal.valueOf(5.0), "test1");
+        Listing listing = new Listing(0, 1, 22, "streetName", "city",
+                "APARTMENT", 5, 5, BigDecimal.valueOf(5.0), "test1", false);
         CreateListing listingCreator = new CreateListing(lc, uc, new ListingsCSVController(uc));
 
         listingCreator.addListingToCreatedListings("l1", listing);
@@ -70,7 +73,8 @@ public class CreateListingTest {
 
         Seller s = new Seller("s1", "p1");
 
-        Listing listing = new Listing(0, 1, 22, "streetName", "city", "APARTMENT", 5, 5, BigDecimal.valueOf(5.0), "test1");
+        Listing listing = new Listing(0, 1, 22, "streetName", "city",
+                "APARTMENT", 5, 5, BigDecimal.valueOf(5.0), "test1", false);
         s.addListing(listing);
 
         lc.put(0, listing);

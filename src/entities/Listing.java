@@ -18,7 +18,7 @@ public class Listing {
     private Integer floors;
     private BigDecimal price;
     private String info;
-    private final boolean isSold;
+    private boolean isSold;
 
     enum ListingType {
         APARTMENT,
@@ -44,7 +44,7 @@ public class Listing {
      * @param info         additional information about the listing
      */
     public Listing(int id, int civicAddress, String streetName, String city, String type, int bedrooms, int bathrooms,
-                   int floors, BigDecimal price, String info) {
+                   int floors, BigDecimal price, String info, boolean isSold) {
         this.id = id;
         this.civicAddress = civicAddress;
         this.streetName = streetName;
@@ -61,7 +61,7 @@ public class Listing {
         this.info = info;
 
         unitNumber = null;
-        isSold = false;
+        this.isSold = isSold;
         isUnit = false;
     }
 
@@ -80,7 +80,7 @@ public class Listing {
      * @param info         additional information about the listing
      */
     public Listing(int id, int unitNumber, int civicAddress, String streetName, String city, String type, int bedrooms,
-                   int bathrooms, BigDecimal price, String info) {
+                   int bathrooms, BigDecimal price, String info, boolean isSold) {
         this.id = id;
         this.unitNumber = unitNumber;
         this.civicAddress = civicAddress;
@@ -96,7 +96,7 @@ public class Listing {
         floors = null;
         this.price = price;
         this.info = info;
-        isSold = false;
+        this.isSold = isSold;
         isUnit = true;
     }
 
@@ -246,6 +246,10 @@ public class Listing {
 
     public void setUnitNumber(Integer unitNumber) {
         this.unitNumber = unitNumber;
+    }
+
+    public void setSold(boolean sold) {
+        isSold = sold;
     }
 
     /**

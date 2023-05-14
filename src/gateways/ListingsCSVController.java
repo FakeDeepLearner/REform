@@ -34,18 +34,22 @@ public non-sealed class ListingsCSVController extends CSVController {
                 int bathrooms = listing.getBathrooms();
                 BigDecimal price = listing.getPrice();
                 String info = listing.getInfo();
-
+                boolean isSold = listing.getIsSold();
                 boolean isUnit = listing.getIsUnit();
                 String lineToWrite;
+                String soldStatus = isSold ? "SOLD" : "AVAILABLE";
+
                 if (isUnit) {
                     int unitNumber = listing.getUnitNumber();
                     lineToWrite = username + "," + ID + "," + civicAddress + "," + streetName + "," +  city + "," +
-                            type + "," + bedrooms + "," + bathrooms + "," + price + "," + info + "," + true + "," + unitNumber;
+                            type + "," + bedrooms + "," + bathrooms + "," + price + "," + info + "," + true + "," + unitNumber
+                    + "," + soldStatus;
                 }
                 else {
                     int floors = listing.getFloors();
                     lineToWrite = username + "," + ID + "," + civicAddress + "," + streetName + "," + city + "," + type +
-                            "," + bedrooms + "," + bathrooms + "," + price + "," + info + "," + false + "," + floors;
+                            "," + bedrooms + "," + bathrooms + "," + price + "," + info + "," + false + "," + floors +
+                            "," + soldStatus;
                 }
                 writer.append(lineToWrite).append("\n");
             }

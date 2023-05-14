@@ -41,7 +41,7 @@ public class LoggedInManager {
     private final ViewListings viewListings;
     private final OpenAndCloseReports openAndCloseReports;
     private final ViewMessages viewMessages;
-    private final ListingUpdateManager listingUpdateManager;
+    private final ListingUpdateAndSellManager listingUpdateAndSellManager;
 
     /**
      * Constructor for LoggedInManager
@@ -68,7 +68,7 @@ public class LoggedInManager {
         viewListings = new ViewListings(users, listings);
         openAndCloseReports = new OpenAndCloseReports();
         viewMessages = new ViewMessages(users);
-        listingUpdateManager = new ListingUpdateManager(listings);
+        listingUpdateAndSellManager = new ListingUpdateAndSellManager(listings);
     }
 
     /**
@@ -159,50 +159,53 @@ public class LoggedInManager {
         ui.printSellerLoginMenu();
 
         ArrayList<Integer> allowedInputs = new ArrayList<>();
-        Collections.addAll(allowedInputs, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11);
+        Collections.addAll(allowedInputs, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
 
         int select = input.intInput(allowedInputs);
         switch (select) {
             case 1:
                 // View posted listings
-                ui.printFilteredListings(viewListings.getSellerListingsStrings(username));
+                ui.printNumberedListings(viewListings.getSellerListingsStrings(username));
                 break;
             case 2:
                 updateUserListing(username);
                 break;
             case 3:
+                updateListingAvailability(username);
+                break;
+            case 4:
                 // Message user
                 messageUser(username);
                 break;
-            case 4:
+            case 5:
                 // View inbox
                 viewInbox(username);
                 break;
-            case 5:
+            case 6:
                 // View outbox
                 viewOutbox(username);
                 break;
-            case 6:
+            case 7:
                 reportUser(username);
                 break;
-            case 7:
+            case 8:
                 // Create listing
                 createNewListing(username);
                 break;
-            case 8:
+            case 9:
                 // Delete listing
                 deleteListing(username);
                 break;
-            case 9:
+            case 10:
                 // View login history
                 ArrayList<String> userHistory = history.getLoginHistory(username);
                 ui.printLoginHistory(userHistory);
                 break;
-            case 10:
+            case 11:
                 //View chat history
                 viewMessageChat(username);
                 break;
-            case 11:
+            case 12:
                 // Logout user
                 auth.logoutUser(username);
                 ui.printLogOutSuccess();
@@ -669,62 +672,62 @@ public class LoggedInManager {
     private void updateListingBathrooms(Integer listingID){
         ui.printEnterType("the new number of bathrooms");
         Integer newBathroomNum = input.intInput();
-        listingUpdateManager.updateListingAttribute("bathroom", listingID, newBathroomNum);
+        listingUpdateAndSellManager.updateListingAttribute("bathroom", listingID, newBathroomNum);
     }
 
     private void updateListingBedrooms(Integer listingID){
         ui.printEnterType("the new number of bedrooms");
         Integer newBedroomNum = input.intInput();
-        listingUpdateManager.updateListingAttribute("bedrooms", listingID, newBedroomNum);
+        listingUpdateAndSellManager.updateListingAttribute("bedrooms", listingID, newBedroomNum);
     }
 
     private void updateListingCity(Integer listingID){
         ui.printEnterType("the new city");
         String newCity = input.strInput();
-        listingUpdateManager.updateListingAttribute("city", listingID, newCity);
+        listingUpdateAndSellManager.updateListingAttribute("city", listingID, newCity);
     }
 
     private void updateCivicAddress(Integer listingID){
         ui.printEnterType("the new civic address");
         Integer newCivicAddress = input.intInput();
-        listingUpdateManager.updateListingAttribute("civic_address", listingID, newCivicAddress);
+        listingUpdateAndSellManager.updateListingAttribute("civic_address", listingID, newCivicAddress);
     }
 
     private void updateListingDescription(Integer listingID){
         ui.printEnterType("the new description");
         String newDesc = input.strInput();
-        listingUpdateManager.updateListingAttribute("description", listingID, newDesc);
+        listingUpdateAndSellManager.updateListingAttribute("description", listingID, newDesc);
     }
 
     private void updateListingFloors(Integer listingID){
         ui.printEnterType("the new number of floors");
         Integer newFloorNum = input.intInput();
-        listingUpdateManager.updateListingAttribute("floors", listingID, newFloorNum);
+        listingUpdateAndSellManager.updateListingAttribute("floors", listingID, newFloorNum);
     }
 
     private void updateListingPrice(Integer listingID){
         ui.printEnterType("the new price");
         BigDecimal newPrice = BigDecimal.valueOf(input.intInput());
-        listingUpdateManager.updateListingAttribute("price", listingID, newPrice);
+        listingUpdateAndSellManager.updateListingAttribute("price", listingID, newPrice);
     }
 
     private void updateListingStreet(Integer listingID){
         ui.printEnterType("the new street");
         String newStreet = input.strInput();
-        listingUpdateManager.updateListingAttribute("street", listingID, newStreet);
+        listingUpdateAndSellManager.updateListingAttribute("street", listingID, newStreet);
     }
 
     private void updateUnitNumber(Integer listingID){
         ui.printEnterType("the new unit number");
         Integer newUnitNum = input.intInput();
-        listingUpdateManager.updateListingAttribute("unit_number", listingID, newUnitNum);
+        listingUpdateAndSellManager.updateListingAttribute("unit_number", listingID, newUnitNum);
     }
 
     /**
      * Displays the messages inbox of the logged-in user
      * @param username the username of the logged-in user
      */
-    public void viewInbox(String username) {
+    private void viewInbox(String username) {
         ui.printMessages(viewMessages.getMessageInbox(username));
     }
 
@@ -732,17 +735,32 @@ public class LoggedInManager {
      * Displays the messages outbox of the logged-in user
      * @param username the username of the logged-in user
      */
-    public void viewOutbox(String username) {
+    private void viewOutbox(String username) {
         ui.printMessages(viewMessages.getMessageOutbox(username));
     }
 
-    public void viewFavouriteListings(String username){
+    private void viewFavouriteListings(String username){
         ui.printNumberedListings(favAndUnFavManager.getBuyerFavouritesString(username));
     }
 
 
-    public void viewAllListings(){
+    private void viewAllListings(){
         ui.printNumberedListings(viewListings.getAllListings());
+    }
+
+
+    private void updateListingAvailability(String username){
+        List<Listing> allListingsOfUser = viewListings.getSellerListings(username);
+        List<String> listingsInStringForm = viewListings.getSellerListingsStrings(username);
+        ui.printNumberedListings(listingsInStringForm);
+        ui.printEnterType("the number of listing you want to change the availability of " +
+                "(it will automatically be swapped");
+        int listingCount = allListingsOfUser.size();
+        int userInput = input.intInput(1, listingCount);
+        Integer listingID = allListingsOfUser.get(userInput - 1).getId();
+        listingUpdateAndSellManager.updateListingStatus(listingID);
+        ui.printListingAvailabilityUpdateSuccess();
+
     }
     /**
      * Presents admin with options to navigate through program

@@ -48,15 +48,16 @@ public class UserInterface {
     public void printSellerLoginMenu(){
         System.out.println("Press 1 to view your listings");
         System.out.println("Press 2 to modify your listings.");
-        System.out.println("Press 3 to message user");
-        System.out.println("Press 4 to view your inbox");
-        System.out.println("Press 5 to view your outbox");
-        System.out.println("Press 6 to report a user.");
-        System.out.println("Press 7 to create new listing");
-        System.out.println("Press 8 to delete listing");
-        System.out.println("Press 9 to see your login history");
-        System.out.println("Press 10 to see your chat history with another user.");
-        System.out.println("Press 11 to log out.");
+        System.out.println("Press 3 to change the availability of your listings");
+        System.out.println("Press 4 to message user");
+        System.out.println("Press 5 to view your inbox");
+        System.out.println("Press 6 to view your outbox");
+        System.out.println("Press 7 to report a user.");
+        System.out.println("Press 8 to create new listing");
+        System.out.println("Press 9 to delete listing");
+        System.out.println("Press 10 to see your login history");
+        System.out.println("Press 11 to see your chat history with another user.");
+        System.out.println("Press 12 to log out.");
     }
 
     public void printUpdateListingMenu(){
@@ -156,10 +157,6 @@ public class UserInterface {
         System.out.println(userHistory);
     }
 
-    public void printFilteredListings(List<String> listings) {
-        System.out.println(listings);
-    }
-
     public void printMessages(List<String> messages) {
         System.out.println(messages);
     }
@@ -239,6 +236,10 @@ public class UserInterface {
 
     public void printReportSuccess(){
         System.out.println("User has been reported to all admins, the report will be reviewed soon.");
+    }
+
+    public void printListingAvailabilityUpdateSuccess(){
+        System.out.println("The availability of the listing has been successfully updated");
     }
 
     public void printInvalidInput() {

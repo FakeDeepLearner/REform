@@ -20,7 +20,8 @@ public class FavouriteListingTest {
         String username = "b1";
         userFactory.createUser("BUYER", username, "p1");
         int id = 1;
-        Listing l1 = new Listing(id, 1, "St. George St.", "Toronto", "HOUSE", 1, 1, 1, new BigDecimal("10000.50"), "test");
+        Listing l1 = new Listing(id, 1, "St. George St.", "Toronto", "HOUSE",
+                1, 1, 1, new BigDecimal("10000.50"), "test", false);
         listings.put(id, l1);
 
         FavoriteListing favourite = new FavoriteListing(users, new FavouritesCSVController(users));

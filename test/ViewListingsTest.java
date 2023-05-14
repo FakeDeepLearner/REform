@@ -20,7 +20,8 @@ public class ViewListingsTest {
         Seller s = new Seller("s1", "p1");
         uc.put("s1", s);
 
-        Listing listing = new Listing(0, 1, 22, "streetName", "city", "APARTMENT", 5, 5, BigDecimal.valueOf(5.0), "test1");
+        Listing listing = new Listing(0, 1, 22, "streetName", "city",
+                "APARTMENT", 5, 5, BigDecimal.valueOf(5.0), "test1", false);
         s.addListing(listing);
 
         ViewListings listingViewer = new ViewListings(uc, listings);
@@ -36,7 +37,8 @@ public class ViewListingsTest {
         Seller s = new Seller("s1", "p1");
         uc.put("s1", s);
 
-        Listing listing = new Listing(0, 1, 22, "streetName", "city", "APARTMENT", 5, 5, BigDecimal.valueOf(5.0), "test1");
+        Listing listing = new Listing(0, 1, 22, "streetName", "city",
+                "APARTMENT", 5, 5, BigDecimal.valueOf(5.0), "test1", false);
         s.addListing(listing);
 
         ViewListings listingViewer = new ViewListings(uc, listings);

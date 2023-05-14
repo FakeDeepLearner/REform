@@ -52,17 +52,18 @@ public class CreateListing {
 
             boolean isUnit = Boolean.parseBoolean(data[10]);
             int unitNumberFloor = Integer.parseInt(data[11]);
-
+            String soldString = data[12];
+            boolean isSold = (soldString.equals("SOLD"));
             Listing listing;
 
             //Note that this implementation results in the listing id being different from the id in the listing container
             if (isUnit) {
                 listing = addListing(ID, unitNumberFloor, civicAddress, streetName, city, type,
-                        bedrooms, bathrooms, price, info);
+                        bedrooms, bathrooms, price, info, isSold);
             }
             else {
                 listing = addListing(ID, civicAddress, streetName, city, type, bedrooms,
-                        unitNumberFloor, bathrooms, price, info);
+                        unitNumberFloor, bathrooms, price, info, isSold);
             }
 
             addListingToSeller(username, listing);
@@ -94,7 +95,8 @@ public class CreateListing {
                               int bathrooms, int floors, BigDecimal price, String info) {
         GenerateUniqueID IDGenerator = new GenerateUniqueID(this.listings);
         int uniqueID = IDGenerator.getUniqueID();
-        Listing listing = new Listing(uniqueID, civicAddress, streetName, city, type, bedrooms, bathrooms, floors, price, info);
+        Listing listing = new Listing(uniqueID, civicAddress, streetName, city, type,
+                bedrooms, bathrooms, floors, price, info, false);
         listings.put(uniqueID, listing);
         return listing;
     }
@@ -117,7 +119,7 @@ public class CreateListing {
         GenerateUniqueID IDGenerator = new GenerateUniqueID(this.listings);
         int uniqueID = IDGenerator.getUniqueID();
         Listing listing = new Listing(uniqueID, unitNumber, civicAddress, streetName, city, type, bedrooms, bathrooms,
-                price, info);
+                price, info, false);
         listings.put(uniqueID, listing);
         return listing;
     }
@@ -137,8 +139,9 @@ public class CreateListing {
      * @return a listing object with the given attributes
      */
     public Listing addListing(int ID, int unitNumber, int civicAddress, String streetName, String city, String type,
-                              int bedrooms, int bathrooms, BigDecimal price, String info) {
-        Listing listing = new Listing(ID, unitNumber, civicAddress, streetName, city, type, bedrooms, bathrooms, price, info);
+                              int bedrooms, int bathrooms, BigDecimal price, String info, boolean isSold) {
+        Listing listing = new Listing(ID, unitNumber, civicAddress, streetName,
+                city, type, bedrooms, bathrooms, price, info, isSold);
         listings.put(ID, listing);
         return listing;
     }
@@ -158,8 +161,9 @@ public class CreateListing {
      * @return a listing object created with the given attributes
      * */
     public Listing addListing(int ID, int civicAddress, String streetName, String city, String type, int bedrooms,
-                              int bathrooms, int floors, BigDecimal price, String info){
-        Listing listing = new Listing(ID, civicAddress, streetName, city, type, bedrooms, bathrooms, floors, price, info);
+                              int bathrooms, int floors, BigDecimal price, String info, boolean isSold){
+        Listing listing = new Listing(ID, civicAddress, streetName, city, type,
+                bedrooms, bathrooms, floors, price, info, isSold);
         listings.put(ID, listing);
         return listing;
     }

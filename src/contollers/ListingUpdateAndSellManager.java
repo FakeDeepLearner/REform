@@ -3,15 +3,20 @@ package contollers;
 import entities.Listing;
 import entities.ListingEditable;
 import entities.containers.ListingContainer;
+import useCases.listingUseCases.UpdateListingAvailability;
 import useCases.listingUseCases.updates.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListingUpdateManager {
+public class ListingUpdateAndSellManager {
     private final List<UpdateListing> updateListingList = new ArrayList<>();
 
-    public ListingUpdateManager(ListingContainer<Integer, Listing> listings){
+    private final ListingContainer<Integer, Listing> listings;
+    private final UpdateListingAvailability updateListingAvailability;
+
+    public ListingUpdateAndSellManager(ListingContainer<Integer, Listing> listings){
+        this.listings = listings;
 
         updateListingList.add(new UpdateBathrooms(listings));
         updateListingList.add(new UpdateBedrooms(listings));
@@ -22,6 +27,7 @@ public class ListingUpdateManager {
         updateListingList.add(new UpdatePrice(listings));
         updateListingList.add(new UpdateStreet(listings));
         updateListingList.add(new UpdateUnitNumber(listings));
+        this.updateListingAvailability = new UpdateListingAvailability();
     }
 
     public void updateListingAttribute(String updateType, Integer ID, Object newData){
@@ -32,4 +38,15 @@ public class ListingUpdateManager {
             }
         }
     }
+
+    public void updateListingStatus(Integer listingID){
+        Listing listing = listings.get(listingID);
+        if(listing.getIsSold()){
+            updateListingAvailability.markListingAsAvailable(listing);
+        }
+        else{
+            updateListingAvailability.markListingAsSold(listing);
+        }
+    }
+
 }
